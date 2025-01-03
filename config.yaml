@@ -1,4 +1,4 @@
-baseURL: https://netwithalex.netlify.app/
+baseURL: https://netwithalex.blog
 languageCode: en-US
 title: NetWithAlex
 theme: PaperMod
@@ -19,7 +19,7 @@ params:
     - name: "email"
       url: "netwithalex@gmail.com"
   defaultTheme: auto
-  disableThemeToggle: true
+  disableThemeToggle: false
   showShareButtons: false
   showReadingTime: true
   showToc: true
