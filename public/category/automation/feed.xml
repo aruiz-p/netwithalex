@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Automation on NetWithAlex</title>
+    <link>http://localhost:1313/category/automation/</link>
+    <description>Recent content in Automation on NetWithAlex</description>
+    <generator>Hugo -- 0.140.2</generator>
+    <language>en-US</language>
+    <lastBuildDate>Fri, 15 Mar 2024 18:06:34 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/category/automation/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tracking SD-WAN incidents with Service Now</title>
+      <link>http://localhost:1313/tracking-sd-wan-incidents-with-service-now/</link>
+      <pubDate>Fri, 15 Mar 2024 18:06:34 +0000</pubDate>
+      <guid>http://localhost:1313/tracking-sd-wan-incidents-with-service-now/</guid>
+      <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
+&lt;p&gt;As networks evolve to provide better user experience and new technologies to manage the network are introduced, maintaining everything running smoothly has become increasingly difficult. One of the critical responsibilities of the operations team is tracking problems happening all over the network. Identifying them is just the beginning, then they need to be logged and driven to resolution. Multiply the amount of actions per incident and you have enough to keep your IT team busy all day long!&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

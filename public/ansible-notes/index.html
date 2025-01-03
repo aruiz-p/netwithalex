@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Ansible Notes | NetWithAlex</title>
+<meta name="keywords" content="">
+<meta name="description" content="Introduction
+This post is part of DEVNET DevOps (300-910) – Blueprint
+Ansible is an open-source automation tool used for configuration management, application deployment and task automation. Although it can be used for a lot of purposes, we are particularly interested on network automation related tasks.
+There are a lot of resources to learn Ansible online, these notes should serve only as guidance, but you are encouraged to go deeper at your own pace.">
+<meta name="author" content="alex">
+<link rel="canonical" href="http://localhost:1313/ansible-notes/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/ansible-notes/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <div class="logo-switches">
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://netwithalex.blog" title="Home">
+                    <span>Home</span>&nbsp;
+                    <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                        <path d="M15 3h6v6"></path>
+                        <path d="M10 14L21 3"></path>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/posts/" title="Blogs">
+                    <span>Blogs</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="About me.">
+                    <span>About me.</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="🔍">
+                    <span>🔍</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Ansible Notes
+    </h1>
+    <div class="post-meta"><span title='2024-05-19 13:49:53 +0000 +0000'>May 19, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;alex
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#introduction" aria-label="Introduction">Introduction</a></li>
+                <li>
+                    <a href="#key-features" aria-label="Key Features">Key Features</a></li>
+                <li>
+                    <a href="#components" aria-label="Components">Components</a></li>
+                <li>
+                    <a href="#requirements-to-use-ansible" aria-label="Requirements to Use Ansible">Requirements to Use Ansible</a></li>
+                <li>
+                    <a href="#inventory-file" aria-label="Inventory File">Inventory File</a></li>
+                <li>
+                    <a href="#playbook" aria-label="Playbook">Playbook</a><ul>
+                        
+                <li>
+                    <a href="#structure" aria-label="Structure">Structure</a></li></ul>
+                </li>
+                <li>
+                    <a href="#practical-examples" aria-label="Practical Examples">Practical Examples</a></li>
+                <li>
+                    <a href="#back-to-blueprintstudy-devops-blueprint" aria-label="Back to BluePrint">Back to BluePrint</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h3 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h3>
+<p><a href="/study-devops-blueprint/"><em>This post is part of DEVNET DevOps (300-910) – Blueprint</em></a></p>
+<p>Ansible is an open-source automation tool used for configuration management, application deployment and task automation. Although it can be used for a lot of purposes, we are particularly interested on network automation related tasks.</p>
+<p>There are a lot of resources to learn Ansible online, these notes should serve only as guidance, but you are encouraged to go deeper at your own pace.</p>
+<h3 id="key-features">Key Features<a hidden class="anchor" aria-hidden="true" href="#key-features">#</a></h3>
+<ul>
+<li><strong>Agentless:</strong> Ansible doesn&rsquo;t require agents to be installed on managed nodes, making it lightweight and easy to deploy.</li>
+<li><strong>YAML-based:</strong> Ansible playbooks and configuration files are written in YAML, human-readable and easy to understand.</li>
+<li><strong>Idempotent:</strong> Ansible ensures that the desired state of the system is maintained, making it safe to run multiple times.</li>
+</ul>
+<h3 id="components">Components<a hidden class="anchor" aria-hidden="true" href="#components">#</a></h3>
+<ul>
+<li><strong>Control Node</strong>: The machine where Ansible is installed and from which automation is initiated.</li>
+<li><strong>Managed Nodes</strong>: The machines managed by Ansible. Ansible connects to managed nodes via SSH (Linux) or WinRM (Windows) to execute tasks.</li>
+<li><strong>Inventory</strong>: A list of managed nodes that Ansible will manage.</li>
+<li><strong>Playbooks</strong>: YAML files containing a set of tasks to be executed on managed nodes.</li>
+<li><strong>Modules</strong>: Units of code that Ansible executes on managed nodes to perform tasks.</li>
+</ul>
+<h3 id="requirements-to-use-ansible">Requirements to Use Ansible<a hidden class="anchor" aria-hidden="true" href="#requirements-to-use-ansible">#</a></h3>
+<ul>
+<li><strong>Control Node requirements</strong>
+<ul>
+<li>Ansible requires python to be installed</li>
+<li>Can be installed with yum, apt or pip</li>
+<li>Most commonly installed on Linux or macOS</li>
+</ul>
+</li>
+</ul>
+<h3 id="inventory-file">Inventory File<a hidden class="anchor" aria-hidden="true" href="#inventory-file">#</a></h3>
+<ul>
+<li>Text file containing a list of managed nodes that Ansible can connect to and manage in this case our network devices.</li>
+<li>It can be in INI or YAML format</li>
+<li>You can group nodes together and define variables. See multiple examples <a href="https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html">here</a></li>
+</ul>
+<h3 id="playbook">Playbook<a hidden class="anchor" aria-hidden="true" href="#playbook">#</a></h3>
+<p>YAML files that define a set of tasks to be executed on managed nodes. They are the heart of Ansible automation.</p>
+<h4 id="structure">Structure<a hidden class="anchor" aria-hidden="true" href="#structure">#</a></h4>
+<ul>
+<li><strong>Hosts</strong>: Specifies the target hosts or groups (inventory)</li>
+<li><strong>Tasks</strong>: Contains a list of tasks to be executed on managed nodes.</li>
+<li><strong>Variables</strong>: Defines variables used within the playbook.</li>
+</ul>
+<p>Playbooks use modules to interact with the managed modes . I recommend getting familiar with some <a href="https://docs.ansible.com/ansible/latest/collections/cisco/index.html">Cisco modules</a></p>
+<h3 id="practical-examples">Practical Examples<a hidden class="anchor" aria-hidden="true" href="#practical-examples">#</a></h3>
+<p>You can find some practical examples on the following <a href="https://github.com/aruiz-p/NetWithAlex-Ansible/tree/main">GitHub</a> repository.</p>
+<h3 id="back-to-blueprintstudy-devops-blueprint"><a href="/study-devops-blueprint/">Back to BluePrint</a><a hidden class="anchor" aria-hidden="true" href="#back-to-blueprintstudy-devops-blueprint">#</a></h3>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">NetWithAlex</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
