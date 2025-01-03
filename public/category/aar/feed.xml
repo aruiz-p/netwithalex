@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Aar on NetWithAlex</title>
-    <link>https://netwithalex.netlify.app/category/aar/</link>
+    <link>http://localhost:1313/category/aar/</link>
     <description>Recent content in Aar on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 11 Feb 2024 12:11:06 +0000</lastBuildDate>
-    <atom:link href="https://netwithalex.netlify.app/category/aar/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/category/aar/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Simplifying AAR: 3/3 Fallback to best path</title>
-      <link>https://netwithalex.netlify.app/simplifying-aar-3-3-fallback-to-best-path/</link>
+      <link>http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/</link>
       <pubDate>Sun, 11 Feb 2024 12:11:06 +0000</pubDate>
-      <guid>https://netwithalex.netlify.app/simplifying-aar-3-3-fallback-to-best-path/</guid>
+      <guid>http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;For the final post of this series, let&amp;rsquo;s explore the remaining option to handle traffic when SLA is not met: &lt;em&gt;Fallback to best path&lt;/em&gt;. It was introduced on 20.5/17.5 and it provides more flexibility and enhanced path selection compared to the other options. Let&amp;rsquo;s understand why it was created.&lt;/p&gt;
 &lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;
-&lt;p&gt;With the &lt;a href=&#34;https://netwithalex.netlify.app/demystifying-aar-understanding-different-scenarios/&#34;&gt;previous methods&lt;/a&gt;, traffic would either:&lt;/p&gt;
+&lt;p&gt;With the &lt;a href=&#34;http://localhost:1313/demystifying-aar-understanding-different-scenarios/&#34;&gt;previous methods&lt;/a&gt;, traffic would either:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Be dropped - Rarely used, specific use cases that apply to a small amount of environments.&lt;/li&gt;
 &lt;li&gt;Be load balanced on the available paths - Widely used, however traffic could be using the worst performing path.&lt;/li&gt;
@@ -25,19 +25,19 @@
     </item>
     <item>
       <title>Simplifying AAR:  1/3 The Foundations</title>
-      <link>https://netwithalex.netlify.app/demystifying-aar-1-3-the-foundations/</link>
+      <link>http://localhost:1313/demystifying-aar-1-3-the-foundations/</link>
       <pubDate>Wed, 07 Feb 2024 16:25:27 +0000</pubDate>
-      <guid>https://netwithalex.netlify.app/demystifying-aar-1-3-the-foundations/</guid>
+      <guid>http://localhost:1313/demystifying-aar-1-3-the-foundations/</guid>
       <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;Think about routing technologies out there, most of them got really good at reacting to link failures and power outages with protocols like OSPF LFA/FRR, EIGRP feasible successor, BGP PIC, etc. However, they fall short when it comes to addressing issues like network performance degradation during brownouts caused by factors such as power fluctuations or link congestion. These scenarios introduce new challenges for which traditional routing protocols lack adequate tools. This is where Application Aware Routing comes to save the day.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Simplifying AAR: 2/3 Understanding different scenarios</title>
-      <link>https://netwithalex.netlify.app/demystifying-aar-understanding-different-scenarios/</link>
+      <link>http://localhost:1313/demystifying-aar-understanding-different-scenarios/</link>
       <pubDate>Thu, 01 Feb 2024 20:27:37 +0000</pubDate>
-      <guid>https://netwithalex.netlify.app/demystifying-aar-understanding-different-scenarios/</guid>
+      <guid>http://localhost:1313/demystifying-aar-understanding-different-scenarios/</guid>
       <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
-&lt;p&gt;Welcome back to the second installment of my series on Application Aware Routing (AAR). In my &lt;a href=&#34;https://netwithalex.netlify.app/demystifying-aar-1-3-the-foundations/&#34;&gt;previous post&lt;/a&gt;, we discussed the essential concepts of Bidirectional Forwarding Detection (BFD) and Service Level Agreements (SLAs), laying the foundation for understanding how AAR optimizes network performance based on application requirements. We also briefly touched on tha AAR configuration with a simple example.&lt;/p&gt;
+&lt;p&gt;Welcome back to the second installment of my series on Application Aware Routing (AAR). In my &lt;a href=&#34;http://localhost:1313/demystifying-aar-1-3-the-foundations/&#34;&gt;previous post&lt;/a&gt;, we discussed the essential concepts of Bidirectional Forwarding Detection (BFD) and Service Level Agreements (SLAs), laying the foundation for understanding how AAR optimizes network performance based on application requirements. We also briefly touched on tha AAR configuration with a simple example.&lt;/p&gt;
 &lt;p&gt;Now, we continue by digging deeper on different AAR configurations, more specifically we will concentrate on &lt;em&gt;Strict/Drop&lt;/em&gt; and &lt;em&gt;Backup SLA Preferred Color&lt;/em&gt; behaviors.&lt;/p&gt;</description>
     </item>
   </channel>

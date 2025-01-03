@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Sdwan on NetWithAlex</title>
-    <link>https://netwithalex.netlify.app/tag/sdwan/</link>
+    <link>http://localhost:1313/tag/sdwan/</link>
     <description>Recent content in Sdwan on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en-US</language>
     <lastBuildDate>Wed, 10 Jul 2024 18:51:08 +0000</lastBuildDate>
-    <atom:link href="https://netwithalex.netlify.app/tag/sdwan/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tag/sdwan/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Building my first SD-WAN AI Assistant with LangChain</title>
-      <link>https://netwithalex.netlify.app/building-my-first-sd-wan-ai-assistant-with-langchain/</link>
+      <link>http://localhost:1313/building-my-first-sd-wan-ai-assistant-with-langchain/</link>
       <pubDate>Wed, 10 Jul 2024 18:51:08 +0000</pubDate>
-      <guid>https://netwithalex.netlify.app/building-my-first-sd-wan-ai-assistant-with-langchain/</guid>
+      <guid>http://localhost:1313/building-my-first-sd-wan-ai-assistant-with-langchain/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;It has been a while since I wanted to hop on to the LLM train and learn how to use one of the popular frameworks. A few months back, I saw a great &lt;a href=&#34;https://www.ciscolive.com/on-demand/on-demand-library.html?search=jesus&amp;amp;search=jesus#/session/1707505627331001pilj&#34;&gt;Cisco Live presentation&lt;/a&gt; by my good friend Jesus, and it gave me the determination I needed to finally dive deeper into the topic.&lt;/p&gt;
-&lt;p&gt;Since then, I have been doing research and thinking about a nice use case for me to put as objective of my learning process. After considering different options, I decided to build an SD-WAN AI assistant that could help me troubleshoot an SD-WAN issue. Taking advantage of the available tools, I decided that my assistant would be an expert on the &lt;a href=&#34;https://netwithalex.netlify.app/network-wide-path-insights-an-introduction/&#34;&gt;Net&lt;/a&gt; &lt;a href=&#34;https://netwithalex.netlify.app/network-wide-path-insights-an-introduction/&#34;&gt;work Wide Path Insights&lt;/a&gt; functionality.&lt;/p&gt;</description>
+&lt;p&gt;Since then, I have been doing research and thinking about a nice use case for me to put as objective of my learning process. After considering different options, I decided to build an SD-WAN AI assistant that could help me troubleshoot an SD-WAN issue. Taking advantage of the available tools, I decided that my assistant would be an expert on the &lt;a href=&#34;http://localhost:1313/network-wide-path-insights-an-introduction/&#34;&gt;Net&lt;/a&gt; &lt;a href=&#34;http://localhost:1313/network-wide-path-insights-an-introduction/&#34;&gt;work Wide Path Insights&lt;/a&gt; functionality.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -2,44 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Home on NetWithAlex</title>
-    <link>https://netwithalex.netlify.app/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content in Home on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 28 Jul 2024 14:56:45 +0000</lastBuildDate>
-    <atom:link href="https://netwithalex.netlify.app/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Improving my SD-WAN Assistant - Multiple agents</title>
-      <link>https://netwithalex.netlify.app/improving-my-sd-wan-assistant-multiple-agents/</link>
+      <link>http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
        <guid isPermaLink="false">https://netwithalex.blog/?p=749</guid> 
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;In my &lt;a href=&#34;https://netwithalex.netlify.app/building-my-first-sd-wan-ai-assistant-with-langchain/&#34;&gt;last post&lt;/a&gt;, I created a Cisco SD-WAN assistant to help me run NWPI traces and troubleshoot the network. The interaction with the assistant required the user to answer questions until receiving information about a particular flow and potential problems. In this post my goal is to use multiple agents and see if I can get to the same conclusion with less human interaction. Repository can be found &lt;a href=&#34;https://github.com/aruiz-p/sdwan-langgraph&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In my &lt;a href=&#34;http://localhost:1313/building-my-first-sd-wan-ai-assistant-with-langchain/&#34;&gt;last post&lt;/a&gt;, I created a Cisco SD-WAN assistant to help me run NWPI traces and troubleshoot the network. The interaction with the assistant required the user to answer questions until receiving information about a particular flow and potential problems. In this post my goal is to use multiple agents and see if I can get to the same conclusion with less human interaction. Repository can be found &lt;a href=&#34;https://github.com/aruiz-p/sdwan-langgraph&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;getting-started&#34;&gt;Getting Started&lt;/h2&gt;
 &lt;p&gt;To achieve this, I will use &lt;a href=&#34;https://langchain-ai.github.io/langgraph/&#34;&gt;LangGraph&lt;/a&gt; officially defined as:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Building my first SD-WAN AI Assistant with LangChain</title>
-      <link>https://netwithalex.netlify.app/building-my-first-sd-wan-ai-assistant-with-langchain/</link>
+      <link>http://localhost:1313/building-my-first-sd-wan-ai-assistant-with-langchain/</link>
       <pubDate>Wed, 10 Jul 2024 18:51:08 +0000</pubDate>
        <guid isPermaLink="false">https://netwithalex.blog/?p=714</guid> 
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;It has been a while since I wanted to hop on to the LLM train and learn how to use one of the popular frameworks. A few months back, I saw a great &lt;a href=&#34;https://www.ciscolive.com/on-demand/on-demand-library.html?search=jesus&amp;amp;search=jesus#/session/1707505627331001pilj&#34;&gt;Cisco Live presentation&lt;/a&gt; by my good friend Jesus, and it gave me the determination I needed to finally dive deeper into the topic.&lt;/p&gt;
-&lt;p&gt;Since then, I have been doing research and thinking about a nice use case for me to put as objective of my learning process. After considering different options, I decided to build an SD-WAN AI assistant that could help me troubleshoot an SD-WAN issue. Taking advantage of the available tools, I decided that my assistant would be an expert on the &lt;a href=&#34;https://netwithalex.netlify.app/network-wide-path-insights-an-introduction/&#34;&gt;Net&lt;/a&gt; &lt;a href=&#34;https://netwithalex.netlify.app/network-wide-path-insights-an-introduction/&#34;&gt;work Wide Path Insights&lt;/a&gt; functionality.&lt;/p&gt;</description>
+&lt;p&gt;Since then, I have been doing research and thinking about a nice use case for me to put as objective of my learning process. After considering different options, I decided to build an SD-WAN AI assistant that could help me troubleshoot an SD-WAN issue. Taking advantage of the available tools, I decided that my assistant would be an expert on the &lt;a href=&#34;http://localhost:1313/network-wide-path-insights-an-introduction/&#34;&gt;Net&lt;/a&gt; &lt;a href=&#34;http://localhost:1313/network-wide-path-insights-an-introduction/&#34;&gt;work Wide Path Insights&lt;/a&gt; functionality.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Ansible Notes</title>
-      <link>https://netwithalex.netlify.app/ansible-notes/</link>
+      <link>http://localhost:1313/ansible-notes/</link>
       <pubDate>Sun, 19 May 2024 13:49:53 +0000</pubDate>
        <guid isPermaLink="false">https://netwithalex.blog/?p=704</guid> 
       <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;https://netwithalex.netlify.app/study-devops-blueprint/&#34;&gt;&lt;em&gt;This post is part of DEVNET DevOps (300-910) – Blueprint&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/study-devops-blueprint/&#34;&gt;&lt;em&gt;This post is part of DEVNET DevOps (300-910) – Blueprint&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Ansible is an open-source automation tool used for configuration management, application deployment and task automation. Although it can be used for a lot of purposes, we are particularly interested on network automation related tasks.&lt;/p&gt;
 &lt;p&gt;There are a lot of resources to learn Ansible online, these notes should serve only as guidance, but you are encouraged to go deeper at your own pace.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Docker - Safety practices</title>
-      <link>https://netwithalex.netlify.app/docker-safety-practices/</link>
+      <link>http://localhost:1313/docker-safety-practices/</link>
       <pubDate>Sun, 21 Apr 2024 12:49:34 +0000</pubDate>
        <guid isPermaLink="false">https://netwithalex.blog/?p=686</guid> 
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
@@ -50,7 +50,7 @@
     </item>
     <item>
       <title>CI/CD Deployment Strategies</title>
-      <link>https://netwithalex.netlify.app/ci-cd-deployment-strategies/</link>
+      <link>http://localhost:1313/ci-cd-deployment-strategies/</link>
       <pubDate>Sun, 21 Apr 2024 12:03:50 +0000</pubDate>
        <guid isPermaLink="false">https://netwithalex.blog/?p=687</guid> 
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
@@ -61,7 +61,7 @@
     </item>
     <item>
       <title>Docker Golden Images</title>
-      <link>https://netwithalex.netlify.app/docker-golden-images/</link>
+      <link>http://localhost:1313/docker-golden-images/</link>
       <pubDate>Sat, 06 Apr 2024 10:45:40 +0000</pubDate>
        <guid isPermaLink="false">https://netwithalex.blog/?p=679</guid> 
       <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
@@ -70,7 +70,7 @@
     </item>
     <item>
       <title>Dockerfile</title>
-      <link>https://netwithalex.netlify.app/dockerfile/</link>
+      <link>http://localhost:1313/dockerfile/</link>
       <pubDate>Sat, 06 Apr 2024 08:47:03 +0000</pubDate>
        <guid isPermaLink="false">https://netwithalex.blog/?p=673</guid> 
       <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
@@ -107,7 +107,7 @@ CMD&lt;/p&gt;</description>
     </item>
     <item>
       <title>Tracking SD-WAN incidents with Service Now</title>
-      <link>https://netwithalex.netlify.app/tracking-sd-wan-incidents-with-service-now/</link>
+      <link>http://localhost:1313/tracking-sd-wan-incidents-with-service-now/</link>
       <pubDate>Fri, 15 Mar 2024 18:06:34 +0000</pubDate>
        <guid isPermaLink="false">https://netwithalex.blog/?p=602</guid> 
       <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
@@ -115,7 +115,7 @@ CMD&lt;/p&gt;</description>
     </item>
     <item>
       <title>A New Chapter: SD-Routing&#39;s Revolution in Network Management</title>
-      <link>https://netwithalex.netlify.app/a-new-chapter-sd-routings-revolution-in-network-management/</link>
+      <link>http://localhost:1313/a-new-chapter-sd-routings-revolution-in-network-management/</link>
       <pubDate>Sat, 24 Feb 2024 12:06:47 +0000</pubDate>
        <guid isPermaLink="false">https://netwithalex.blog/?p=541</guid> 
       <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
@@ -124,13 +124,13 @@ CMD&lt;/p&gt;</description>
     </item>
     <item>
       <title>Simplifying AAR: 3/3 Fallback to best path</title>
-      <link>https://netwithalex.netlify.app/simplifying-aar-3-3-fallback-to-best-path/</link>
+      <link>http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/</link>
       <pubDate>Sun, 11 Feb 2024 12:11:06 +0000</pubDate>
        <guid isPermaLink="false">https://netwithalex.blog/?p=509</guid> 
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;For the final post of this series, let&amp;rsquo;s explore the remaining option to handle traffic when SLA is not met: &lt;em&gt;Fallback to best path&lt;/em&gt;. It was introduced on 20.5/17.5 and it provides more flexibility and enhanced path selection compared to the other options. Let&amp;rsquo;s understand why it was created.&lt;/p&gt;
 &lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;
-&lt;p&gt;With the &lt;a href=&#34;https://netwithalex.netlify.app/demystifying-aar-understanding-different-scenarios/&#34;&gt;previous methods&lt;/a&gt;, traffic would either:&lt;/p&gt;
+&lt;p&gt;With the &lt;a href=&#34;http://localhost:1313/demystifying-aar-understanding-different-scenarios/&#34;&gt;previous methods&lt;/a&gt;, traffic would either:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Be dropped - Rarely used, specific use cases that apply to a small amount of environments.&lt;/li&gt;
 &lt;li&gt;Be load balanced on the available paths - Widely used, however traffic could be using the worst performing path.&lt;/li&gt;
@@ -139,7 +139,7 @@ CMD&lt;/p&gt;</description>
     </item>
     <item>
       <title>Simplifying AAR:  1/3 The Foundations</title>
-      <link>https://netwithalex.netlify.app/demystifying-aar-1-3-the-foundations/</link>
+      <link>http://localhost:1313/demystifying-aar-1-3-the-foundations/</link>
       <pubDate>Wed, 07 Feb 2024 16:25:27 +0000</pubDate>
        <guid isPermaLink="false">https://netwithalex.blog/?p=471</guid> 
       <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
@@ -147,16 +147,16 @@ CMD&lt;/p&gt;</description>
     </item>
     <item>
       <title>Simplifying AAR: 2/3 Understanding different scenarios</title>
-      <link>https://netwithalex.netlify.app/demystifying-aar-understanding-different-scenarios/</link>
+      <link>http://localhost:1313/demystifying-aar-understanding-different-scenarios/</link>
       <pubDate>Thu, 01 Feb 2024 20:27:37 +0000</pubDate>
        <guid isPermaLink="false">https://netwithalex.blog/?p=349</guid> 
       <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
-&lt;p&gt;Welcome back to the second installment of my series on Application Aware Routing (AAR). In my &lt;a href=&#34;https://netwithalex.netlify.app/demystifying-aar-1-3-the-foundations/&#34;&gt;previous post&lt;/a&gt;, we discussed the essential concepts of Bidirectional Forwarding Detection (BFD) and Service Level Agreements (SLAs), laying the foundation for understanding how AAR optimizes network performance based on application requirements. We also briefly touched on tha AAR configuration with a simple example.&lt;/p&gt;
+&lt;p&gt;Welcome back to the second installment of my series on Application Aware Routing (AAR). In my &lt;a href=&#34;http://localhost:1313/demystifying-aar-1-3-the-foundations/&#34;&gt;previous post&lt;/a&gt;, we discussed the essential concepts of Bidirectional Forwarding Detection (BFD) and Service Level Agreements (SLAs), laying the foundation for understanding how AAR optimizes network performance based on application requirements. We also briefly touched on tha AAR configuration with a simple example.&lt;/p&gt;
 &lt;p&gt;Now, we continue by digging deeper on different AAR configurations, more specifically we will concentrate on &lt;em&gt;Strict/Drop&lt;/em&gt; and &lt;em&gt;Backup SLA Preferred Color&lt;/em&gt; behaviors.&lt;/p&gt;</description>
     </item>
     <item>
       <title>What On Earth Is Happening On The Network? NWPI!</title>
-      <link>https://netwithalex.netlify.app/network-wide-path-insights-an-introduction/</link>
+      <link>http://localhost:1313/network-wide-path-insights-an-introduction/</link>
       <pubDate>Thu, 25 Jan 2024 20:34:14 +0000</pubDate>
        <guid isPermaLink="false">https://netwithalex.blog/?p=260</guid> 
       <description>&lt;h3 id=&#34;motivation-the-typical-crisis-scenario&#34;&gt;&lt;strong&gt;Motivation:&lt;/strong&gt; &lt;strong&gt;The typical crisis scenario&lt;/strong&gt;&lt;/h3&gt;
@@ -165,27 +165,27 @@ CMD&lt;/p&gt;</description>
     </item>
     <item>
       <title>CI Tools</title>
-      <link>https://netwithalex.netlify.app/ci-tools/</link>
+      <link>http://localhost:1313/ci-tools/</link>
       <pubDate>Thu, 18 Jan 2024 19:46:23 +0000</pubDate>
        <guid isPermaLink="false">https://netwithalex.blog/?p=103</guid> 
       <description>&lt;h2 id=&#34;describe-characteristics-and-concepts-of-build-deploy-tools-such-as-jenkins-drone-or-travis-ci&#34;&gt;Describe characteristics and concepts of build /deploy tools such as Jenkins, Drone, or Travis CI&lt;/h2&gt;
-&lt;p&gt;In the &lt;a href=&#34;https://netwithalex.netlify.app/devops-ci-cd-pipeline/&#34;&gt;last post&lt;/a&gt; we talked about the concepts of CI/CD, emphasizing the importance of the &lt;strong&gt;&lt;em&gt;build&lt;/em&gt;&lt;/strong&gt; phase as part of Continuous Integration process. It is now time to dig deeper on the following CI tools: Jenkins, Drone, Travis and GitLab.&lt;/p&gt;
+&lt;p&gt;In the &lt;a href=&#34;http://localhost:1313/devops-ci-cd-pipeline/&#34;&gt;last post&lt;/a&gt; we talked about the concepts of CI/CD, emphasizing the importance of the &lt;strong&gt;&lt;em&gt;build&lt;/em&gt;&lt;/strong&gt; phase as part of Continuous Integration process. It is now time to dig deeper on the following CI tools: Jenkins, Drone, Travis and GitLab.&lt;/p&gt;
 &lt;h3 id=&#34;jenkins&#34;&gt;Jenkins&lt;/h3&gt;
 &lt;p&gt;Jenkins is a &lt;strong&gt;&lt;em&gt;free&lt;/em&gt;&lt;/strong&gt; automation server (open source) designed to automate parts of the software development process, most notably the building, testing, and deployment of code changes. It is Java based, has a large community and has been out there for a while.&lt;/p&gt;</description>
     </item>
     <item>
       <title>1.0 CI/CD Pipeline</title>
-      <link>https://netwithalex.netlify.app/devops-ci-cd-pipeline/</link>
+      <link>http://localhost:1313/devops-ci-cd-pipeline/</link>
       <pubDate>Wed, 17 Jan 2024 12:12:31 +0000</pubDate>
        <guid isPermaLink="false">https://netwithalex.blog/?p=81</guid> 
       <description>&lt;h3 id=&#34;cicd-concepts&#34;&gt;CI/CD concepts&lt;/h3&gt;
 &lt;p&gt;Continuous Integration/continuous delivery/deployment is a methodology to develop solutions. The idea is to automate as much as possible to move quickly and optimize the development process. The NetDevOps pipeline includes a building phase which we are going to focus on to better understand the concept of Continuous Integration.&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://netwithalex.netlify.app/wp-content/uploads/2024/01/Screenshot-2024-01-18-at-18.45.53.png&#34;&gt;NetDevOps pipeline&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;http://localhost:1313/wp-content/uploads/2024/01/Screenshot-2024-01-18-at-18.45.53.png&#34;&gt;NetDevOps pipeline&lt;/p&gt;
 &lt;p&gt;In &lt;strong&gt;Continuous Integration (CI)&lt;/strong&gt;, a crucial idea is the frequent uploading of code into the code base, often multiple times a day. This involves the constant merging of developer work with the code base, and the early identification of issues through the use of testing.&lt;/p&gt;</description>
     </item>
     <item>
       <title>About me.</title>
-      <link>https://netwithalex.netlify.app/about/</link>
+      <link>http://localhost:1313/about/</link>
       <pubDate>Wed, 10 Jan 2024 18:58:35 +0000</pubDate>
        <guid isPermaLink="false">https://netwithalex.blog/about/</guid> 
       <description>&lt;div style=&#34;display: flex; align-items: center;&#34;&gt;
@@ -219,22 +219,22 @@ Thanks for being here. Hope you find my blog useful and entertaining. Let&#39;s 
 
     &lt;/div&gt;
     &lt;div style=&#34;flex: 1;&#34;&gt;
-      &lt;img src=&#34;https://netwithalex.netlify.app/wp-content/uploads/2024/01/IMG_8522-e1704915321848.jpeg&#34; alt=&#34;Example Image&#34; style=&#34;max-width: 100%; height: auto;border: 5px solid transparent;border-radius: 20px;&#34;&gt;
+      &lt;img src=&#34;http://localhost:1313/wp-content/uploads/2024/01/IMG_8522-e1704915321848.jpeg&#34; alt=&#34;Example Image&#34; style=&#34;max-width: 100%; height: auto;border: 5px solid transparent;border-radius: 20px;&#34;&gt;
     &lt;/div&gt;
   &lt;/div&gt;</description>
     </item>
     <item>
       <title>DEVNET DevOps (300-910) - Blueprint</title>
-      <link>https://netwithalex.netlify.app/study-devops-blueprint/</link>
+      <link>http://localhost:1313/study-devops-blueprint/</link>
       <pubDate>Wed, 10 Jan 2024 18:46:45 +0000</pubDate>
        <guid isPermaLink="false">http://box2326/cgi/addon_GT.cgi?s=GT::WP::Install::Cpanel&#43;%28czqojqmy%29&#43;-&#43;127.0.0.1&#43;%5Bnocaller%5D/?p=1</guid> 
-      <description>&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://netwithalex.netlify.app/devops-ci-cd-pipeline/&#34;&gt;20% 1.0 CI/CD Pipeline&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;http://localhost:1313/devops-ci-cd-pipeline/&#34;&gt;20% 1.0 CI/CD Pipeline&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://netwithalex.netlify.app/ci-tools/&#34;&gt;1.1 Describe characteristics and concepts of build /deploy tools such as Jenkins, Drone, or Travis CI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/ci-tools/&#34;&gt;1.1 Describe characteristics and concepts of build /deploy tools such as Jenkins, Drone, or Travis CI&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;1.2 Identify the sequence, components, and integrations to implement a CI/CD pipeline for a given scenario&lt;/li&gt;
 &lt;li&gt;1.3 Troubleshoot issues with a CI/CD pipeline such as code-based failures, pipeline issues, and tool incompatibility&lt;/li&gt;
 &lt;li&gt;1.4 Identify tests to integrate into a CI/CD pipeline for a given scenario&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://netwithalex.netlify.app/ci-cd-deployment-strategies/&#34;&gt;1.5 Identify release deployment strategy (canary, rollbacks, and blue/green) for a given scenario&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/ci-cd-deployment-strategies/&#34;&gt;1.5 Identify release deployment strategy (canary, rollbacks, and blue/green) for a given scenario&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;1.6 Diagnose code dependency management issues including API, tool chain, and libraries&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;15% 2.0 Packaging and Delivery of Applications&lt;/strong&gt;&lt;/p&gt;</description>

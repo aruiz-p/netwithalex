@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Dockerfile | NetWithAlex</title>
 <meta name="keywords" content="">
 <meta name="description" content="Introduction
@@ -39,16 +39,16 @@ RUN
 LABEL
 CMD">
 <meta name="author" content="alex">
-<link rel="canonical" href="https://netwithalex.netlify.app/dockerfile/">
+<link rel="canonical" href="http://localhost:1313/dockerfile/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://netwithalex.netlify.app/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://netwithalex.netlify.app/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://netwithalex.netlify.app/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://netwithalex.netlify.app/apple-touch-icon.png">
-<link rel="mask-icon" href="https://netwithalex.netlify.app/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://netwithalex.netlify.app/dockerfile/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/dockerfile/">
 <noscript>
     <style>
         #theme-toggle,
@@ -85,105 +85,7 @@ CMD">
         }
 
     </style>
-</noscript><meta property="og:url" content="https://netwithalex.netlify.app/dockerfile/">
-  <meta property="og:site_name" content="NetWithAlex">
-  <meta property="og:title" content="Dockerfile">
-  <meta property="og:description" content="Introduction Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. This page describes the commands you can use in a Dockerfile.
-Docker runs instructions in a Dockerfile in order. A Dockerfile must begin with a FROM instruction.
-Example # Use the official Python image as the base image FROM python:3.9-slim # Set the working directory inside the container WORKDIR /app # Copy the Python script from the host machine into the container COPY my_script.py . # Run the Python script when the container starts CMD [&#34;python&#34;, &#34;my_script.py&#34;] FROM python:3.9-slim : Specifies that our image will be based on the official Python image with version 3.9, using the slim variant. WORKDIR /app : Sets the working directory inside the container to /app. Later instructions will be executed in this directory. COPY my_script.py . : Copies a file named my_script.py from the host machine into the /app directory of the container. The . refers to the current directory in the Docker context, which will typically be the directory containing the Dockerfile. CMD [&#34;python&#34;, &#34;my_script.py&#34;] : Specifies the default command to run when a container based on this image starts. In this case, it runs the Python interpreter ( python) with the my_script.py script as an argument. Table of Instructions FROM ENV COPY EXPOSE ADD WORKDIR RUN LABEL CMD">
-  <meta property="og:locale" content="en-US">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-04-06T08:47:03+00:00">
-    <meta property="article:modified_time" content="2024-04-06T08:47:03+00:00">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dockerfile">
-<meta name="twitter:description" content="Introduction
-Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. This page describes the commands you can use in a Dockerfile.
-Docker runs instructions in a Dockerfile in order. A Dockerfile must begin with a FROM instruction.
-Example
-# Use the official Python image as the base image
-FROM python:3.9-slim
-
-# Set the working directory inside the container
-WORKDIR /app
-
-# Copy the Python script from the host machine into the container
-COPY my_script.py .
-
-# Run the Python script when the container starts
-CMD [&#34;python&#34;, &#34;my_script.py&#34;]
-
-FROM python:3.9-slim : Specifies that our image will be based on the official Python image with version 3.9, using the slim variant.
-WORKDIR /app : Sets the working directory inside the container to /app. Later instructions will be executed in this directory.
-COPY my_script.py . : Copies a file named my_script.py from the host machine into the /app directory of the container. The . refers to the current directory in the Docker context, which will typically be the directory containing the Dockerfile.
-CMD [&quot;python&quot;, &quot;my_script.py&quot;] : Specifies the default command to run when a container based on this image starts. In this case, it runs the Python interpreter ( python) with the my_script.py script as an argument.
-
-Table of Instructions
-FROM
-ENV
-COPY
-EXPOSE
-ADD
-WORKDIR
-RUN
-LABEL
-CMD">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://netwithalex.netlify.app/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Dockerfile",
-      "item": "https://netwithalex.netlify.app/dockerfile/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Dockerfile",
-  "name": "Dockerfile",
-  "description": "Introduction Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. This page describes the commands you can use in a Dockerfile.\nDocker runs instructions in a Dockerfile in order. A Dockerfile must begin with a FROM instruction.\nExample # Use the official Python image as the base image FROM python:3.9-slim # Set the working directory inside the container WORKDIR /app # Copy the Python script from the host machine into the container COPY my_script.py . # Run the Python script when the container starts CMD [\u0026#34;python\u0026#34;, \u0026#34;my_script.py\u0026#34;] FROM python:3.9-slim : Specifies that our image will be based on the official Python image with version 3.9, using the slim variant. WORKDIR /app : Sets the working directory inside the container to /app. Later instructions will be executed in this directory. COPY my_script.py . : Copies a file named my_script.py from the host machine into the /app directory of the container. The . refers to the current directory in the Docker context, which will typically be the directory containing the Dockerfile. CMD [\u0026quot;python\u0026quot;, \u0026quot;my_script.py\u0026quot;] : Specifies the default command to run when a container based on this image starts. In this case, it runs the Python interpreter ( python) with the my_script.py script as an argument. Table of Instructions FROM ENV COPY EXPOSE ADD WORKDIR RUN LABEL CMD\n",
-  "keywords": [
-    
-  ],
-  "articleBody": "Introduction Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. This page describes the commands you can use in a Dockerfile.\nDocker runs instructions in a Dockerfile in order. A Dockerfile must begin with a FROM instruction.\nExample # Use the official Python image as the base image FROM python:3.9-slim # Set the working directory inside the container WORKDIR /app # Copy the Python script from the host machine into the container COPY my_script.py . # Run the Python script when the container starts CMD [\"python\", \"my_script.py\"] FROM python:3.9-slim : Specifies that our image will be based on the official Python image with version 3.9, using the slim variant. WORKDIR /app : Sets the working directory inside the container to /app. Later instructions will be executed in this directory. COPY my_script.py . : Copies a file named my_script.py from the host machine into the /app directory of the container. The . refers to the current directory in the Docker context, which will typically be the directory containing the Dockerfile. CMD [\"python\", \"my_script.py\"] : Specifies the default command to run when a container based on this image starts. In this case, it runs the Python interpreter ( python) with the my_script.py script as an argument. Table of Instructions FROM ENV COPY EXPOSE ADD WORKDIR RUN LABEL CMD\nInstructions in detail FROM\nSpecifies the base image to build the container. Every Dockerfile must start with a FROM instruction.\nFROM [--platform=] [:] [AS ] ADD\nSpecifies the origin of a local file or URL and transfers the associated files to the designated destination directory. If the source is compressed, like a .tar file, the ADD instruction will automatically extract the contents after the copy operation is finished.\nADD [OPTIONS] ... RUN\nExecutes shell commands within the image during the build process. This is typically used for tasks like package installation, environment setup, etc. Common commands include ‘apt install’ and ‘pip install’ for Python packages.\nRUN [OPTIONS] ... WORKDIR\nSets the working directory for any subsequent RUN, CMD, ENTRYPOINT, COPY, and ADD instructions. It’s better to use absolute paths instead of relative ones (../)\nWORKDIR /path/to/workdir EXPOSE\nFunctions as a type of documentation instruction that you can use to indicate the ports that will be used for the container. Default protocol is TCP, but you can define UDP as well.\nEXPOSE [/...] CMD\nSpecifies the command to run when a container is started from the image. Can be overridden at runtime. You can only use it once.\nCMD command param1 param2 ENTRYPOINT\nSets a main command that will always be executed when the container starts up.\nENTRYPOINT command param1 param2 ENV\nSets environment variables in the image.\nENV = ... VOLUME\nCreates a mount point and marks it as externally mounted. Used for persisting data outside the container.\nVOLUME [\"/data\"] USER\nSets the username or UID to use when running the container.\nUSER [:] Additional references Official Dockerfile documentation - Check this page for further details of the commands.\nGo back to Blueprint ",
-  "wordCount" : "529",
-  "inLanguage": "en",
-  "datePublished": "2024-04-06T08:47:03Z",
-  "dateModified": "2024-04-06T08:47:03Z",
-  "author":{
-    "@type": "Person",
-    "name": "alex"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://netwithalex.netlify.app/dockerfile/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "NetWithAlex",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://netwithalex.netlify.app/favicon.ico"
-    }
-  }
-}
-</script>
+</noscript>
 </head>
 
 <body class="" id="top">
@@ -197,7 +99,7 @@ CMD">
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://netwithalex.netlify.app/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <a href="http://localhost:1313/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
             <div class="logo-switches">
             </div>
         </div>
@@ -214,17 +116,17 @@ CMD">
                 </a>
             </li>
             <li>
-                <a href="https://netwithalex.netlify.app/posts/" title="Blogs">
+                <a href="http://localhost:1313/posts/" title="Blogs">
                     <span>Blogs</span>
                 </a>
             </li>
             <li>
-                <a href="https://netwithalex.netlify.app/about/" title="About me.">
+                <a href="http://localhost:1313/about/" title="About me.">
                     <span>About me.</span>
                 </a>
             </li>
             <li>
-                <a href="https://netwithalex.netlify.app/search/" title="🔍">
+                <a href="http://localhost:1313/search/" title="🔍">
                     <span>🔍</span>
                 </a>
             </li>
@@ -235,7 +137,7 @@ CMD">
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://netwithalex.netlify.app/">Home</a>&nbsp;»&nbsp;<a href="https://netwithalex.netlify.app/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
       Dockerfile
     </h1>
@@ -344,7 +246,7 @@ CMD</p>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="https://netwithalex.netlify.app/">NetWithAlex</a></span> · 
+        <span>&copy; 2025 <a href="http://localhost:1313/">NetWithAlex</a></span> · 
 
     <span>
         Powered by

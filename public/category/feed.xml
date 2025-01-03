@@ -2,80 +2,80 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Category on NetWithAlex</title>
-    <link>https://netwithalex.netlify.app/category/</link>
+    <link>http://localhost:1313/category/</link>
     <description>Recent content in Category on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 28 Jul 2024 14:56:45 +0000</lastBuildDate>
-    <atom:link href="https://netwithalex.netlify.app/category/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/category/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ai</title>
-      <link>https://netwithalex.netlify.app/category/ai/</link>
+      <link>http://localhost:1313/category/ai/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>https://netwithalex.netlify.app/category/ai/</guid>
+      <guid>http://localhost:1313/category/ai/</guid>
       <description></description>
     </item>
     <item>
       <title>Sd-Wan</title>
-      <link>https://netwithalex.netlify.app/category/sd-wan/</link>
+      <link>http://localhost:1313/category/sd-wan/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>https://netwithalex.netlify.app/category/sd-wan/</guid>
+      <guid>http://localhost:1313/category/sd-wan/</guid>
       <description></description>
     </item>
     <item>
       <title>Devnet</title>
-      <link>https://netwithalex.netlify.app/category/devnet/</link>
+      <link>http://localhost:1313/category/devnet/</link>
       <pubDate>Sun, 19 May 2024 13:49:53 +0000</pubDate>
-      <guid>https://netwithalex.netlify.app/category/devnet/</guid>
+      <guid>http://localhost:1313/category/devnet/</guid>
       <description></description>
     </item>
     <item>
       <title>Study-Material</title>
-      <link>https://netwithalex.netlify.app/category/study-material/</link>
+      <link>http://localhost:1313/category/study-material/</link>
       <pubDate>Sun, 19 May 2024 13:49:53 +0000</pubDate>
-      <guid>https://netwithalex.netlify.app/category/study-material/</guid>
+      <guid>http://localhost:1313/category/study-material/</guid>
       <description></description>
     </item>
     <item>
       <title>Automation</title>
-      <link>https://netwithalex.netlify.app/category/automation/</link>
+      <link>http://localhost:1313/category/automation/</link>
       <pubDate>Fri, 15 Mar 2024 18:06:34 +0000</pubDate>
-      <guid>https://netwithalex.netlify.app/category/automation/</guid>
+      <guid>http://localhost:1313/category/automation/</guid>
       <description></description>
     </item>
     <item>
       <title>Sd-Routing</title>
-      <link>https://netwithalex.netlify.app/category/sd-routing/</link>
+      <link>http://localhost:1313/category/sd-routing/</link>
       <pubDate>Sat, 24 Feb 2024 12:06:47 +0000</pubDate>
-      <guid>https://netwithalex.netlify.app/category/sd-routing/</guid>
+      <guid>http://localhost:1313/category/sd-routing/</guid>
       <description></description>
     </item>
     <item>
       <title>Aar</title>
-      <link>https://netwithalex.netlify.app/category/aar/</link>
+      <link>http://localhost:1313/category/aar/</link>
       <pubDate>Sun, 11 Feb 2024 12:11:06 +0000</pubDate>
-      <guid>https://netwithalex.netlify.app/category/aar/</guid>
+      <guid>http://localhost:1313/category/aar/</guid>
       <description></description>
     </item>
     <item>
       <title>Policies</title>
-      <link>https://netwithalex.netlify.app/category/policies/</link>
+      <link>http://localhost:1313/category/policies/</link>
       <pubDate>Sun, 11 Feb 2024 12:11:06 +0000</pubDate>
-      <guid>https://netwithalex.netlify.app/category/policies/</guid>
+      <guid>http://localhost:1313/category/policies/</guid>
       <description></description>
     </item>
     <item>
       <title>Troubleshooting</title>
-      <link>https://netwithalex.netlify.app/category/troubleshooting/</link>
+      <link>http://localhost:1313/category/troubleshooting/</link>
       <pubDate>Thu, 25 Jan 2024 20:34:14 +0000</pubDate>
-      <guid>https://netwithalex.netlify.app/category/troubleshooting/</guid>
+      <guid>http://localhost:1313/category/troubleshooting/</guid>
       <description></description>
     </item>
     <item>
       <title>Visibility</title>
-      <link>https://netwithalex.netlify.app/category/visibility/</link>
+      <link>http://localhost:1313/category/visibility/</link>
       <pubDate>Thu, 25 Jan 2024 20:34:14 +0000</pubDate>
-      <guid>https://netwithalex.netlify.app/category/visibility/</guid>
+      <guid>http://localhost:1313/category/visibility/</guid>
       <description></description>
     </item>
   </channel>

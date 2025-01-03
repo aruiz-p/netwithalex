@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Automation on NetWithAlex</title>
-    <link>https://netwithalex.netlify.app/tag/automation/</link>
+    <link>http://localhost:1313/tag/automation/</link>
     <description>Recent content in Automation on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en-US</language>
     <lastBuildDate>Wed, 10 Jan 2024 18:46:45 +0000</lastBuildDate>
-    <atom:link href="https://netwithalex.netlify.app/tag/automation/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tag/automation/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DEVNET DevOps (300-910) - Blueprint</title>
-      <link>https://netwithalex.netlify.app/study-devops-blueprint/</link>
+      <link>http://localhost:1313/study-devops-blueprint/</link>
       <pubDate>Wed, 10 Jan 2024 18:46:45 +0000</pubDate>
-      <guid>https://netwithalex.netlify.app/study-devops-blueprint/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://netwithalex.netlify.app/devops-ci-cd-pipeline/&#34;&gt;20% 1.0 CI/CD Pipeline&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+      <guid>http://localhost:1313/study-devops-blueprint/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;http://localhost:1313/devops-ci-cd-pipeline/&#34;&gt;20% 1.0 CI/CD Pipeline&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://netwithalex.netlify.app/ci-tools/&#34;&gt;1.1 Describe characteristics and concepts of build /deploy tools such as Jenkins, Drone, or Travis CI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/ci-tools/&#34;&gt;1.1 Describe characteristics and concepts of build /deploy tools such as Jenkins, Drone, or Travis CI&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;1.2 Identify the sequence, components, and integrations to implement a CI/CD pipeline for a given scenario&lt;/li&gt;
 &lt;li&gt;1.3 Troubleshoot issues with a CI/CD pipeline such as code-based failures, pipeline issues, and tool incompatibility&lt;/li&gt;
 &lt;li&gt;1.4 Identify tests to integrate into a CI/CD pipeline for a given scenario&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://netwithalex.netlify.app/ci-cd-deployment-strategies/&#34;&gt;1.5 Identify release deployment strategy (canary, rollbacks, and blue/green) for a given scenario&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:1313/ci-cd-deployment-strategies/&#34;&gt;1.5 Identify release deployment strategy (canary, rollbacks, and blue/green) for a given scenario&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;1.6 Diagnose code dependency management issues including API, tool chain, and libraries&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;15% 2.0 Packaging and Delivery of Applications&lt;/strong&gt;&lt;/p&gt;</description>
