@@ -1,0 +1,64 @@
+baseURL: https://stellar-sunburst-c0615b.netlify.app/
+languageCode: en-US
+title: NetWithAlex
+theme: PaperMod
+taxonomies:
+  category: category
+  tag: tag
+params:
+  homeInfoParams:
+    title: Hey, I'm Alex 👋
+    content: >
+      NetWithAlex is my space on the web where I share my passion for networking and technology 🚀. 
+      Here you'll find interesting and useful resources explained in a simple way to help you learn clearly and practically.<br><br>
+      💬 Do you have questions or ideas? Feel free to reach out—I’d like to hear from you!
+
+  socialIcons: 
+    - name: Linkedin
+      url: "https://www.linkedin.com/in/alexruizs/"
+    - name: "email"
+      url: "netwithalex@gmail.com"
+  defaultTheme: auto
+  disableThemeToggle: true
+  showShareButtons: false
+  showReadingTime: true
+  showToc: true
+  tocOpen: true
+  showBreadCrumbs: true
+  showCodeCopyButtons: true
+  comments: true
+  hideFooter: false
+  assets:
+    favicon: /favicon.ico
+    disableHLJS: true
+markup:
+  highlight:
+    codeFences: true
+    guessSyntax: true
+    style: monokai
+  goldmark:
+    renderer:
+      unsafe: true
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+outputFormats:
+  RSS:
+    mediaType: application/rss+xml
+    baseName: feed
+menu:
+  main:
+    - name: Home
+      url: https://netwithalex.blog
+      weight: 1
+    - name: Blogs
+      url: /posts/
+      weight: 2
+    - name: About me.
+      url: /about/
+      weight: 3
+    - name: "\U0001F50D"
+      url: /search/
+      weight: 4
