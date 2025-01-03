@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Pages on NetWithAlex</title>
-    <link>http://localhost:1313/pages/</link>
+    <link>https://netwithalex.netlify.app/pages/</link>
     <description>Recent content in Pages on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en-US</language>
     <lastBuildDate>Wed, 10 Jan 2024 18:58:35 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/pages/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://netwithalex.netlify.app/pages/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About me.</title>
-      <link>http://localhost:1313/about/</link>
+      <link>https://netwithalex.netlify.app/about/</link>
       <pubDate>Wed, 10 Jan 2024 18:58:35 +0000</pubDate>
-      <guid>http://localhost:1313/about/</guid>
+      <guid>https://netwithalex.netlify.app/about/</guid>
       <description>&lt;div style=&#34;display: flex; align-items: center;&#34;&gt;
     &lt;div style=&#34;flex: 1; padding-right: 20px;font-size: 17px;&#34;&gt;
         &lt;div style=&#34;line-height: 1; margin-bottom: 1em; &#34;&gt;&lt;/div&gt;
@@ -44,7 +44,7 @@ Thanks for being here. Hope you find my blog useful and entertaining. Let&#39;s 
 
     &lt;/div&gt;
     &lt;div style=&#34;flex: 1;&#34;&gt;
-      &lt;img src=&#34;http://localhost:1313/wp-content/uploads/2024/01/IMG_8522-e1704915321848.jpeg&#34; alt=&#34;Example Image&#34; style=&#34;max-width: 100%; height: auto;border: 5px solid transparent;border-radius: 20px;&#34;&gt;
+      &lt;img src=&#34;https://netwithalex.netlify.app/wp-content/uploads/2024/01/IMG_8522-e1704915321848.jpeg&#34; alt=&#34;Example Image&#34; style=&#34;max-width: 100%; height: auto;border: 5px solid transparent;border-radius: 20px;&#34;&gt;
     &lt;/div&gt;
   &lt;/div&gt;</description>
     </item>

@@ -2,80 +2,80 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tag on NetWithAlex</title>
-    <link>http://localhost:1313/tag/</link>
+    <link>https://netwithalex.netlify.app/tag/</link>
     <description>Recent content in Tag on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 28 Jul 2024 14:56:45 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tag/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://netwithalex.netlify.app/tag/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Genai</title>
-      <link>http://localhost:1313/tag/genai/</link>
+      <link>https://netwithalex.netlify.app/tag/genai/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:1313/tag/genai/</guid>
+      <guid>https://netwithalex.netlify.app/tag/genai/</guid>
       <description></description>
     </item>
     <item>
       <title>Langchain</title>
-      <link>http://localhost:1313/tag/langchain/</link>
+      <link>https://netwithalex.netlify.app/tag/langchain/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:1313/tag/langchain/</guid>
+      <guid>https://netwithalex.netlify.app/tag/langchain/</guid>
       <description></description>
     </item>
     <item>
       <title>Langgraph</title>
-      <link>http://localhost:1313/tag/langgraph/</link>
+      <link>https://netwithalex.netlify.app/tag/langgraph/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:1313/tag/langgraph/</guid>
+      <guid>https://netwithalex.netlify.app/tag/langgraph/</guid>
       <description></description>
     </item>
     <item>
       <title>Llm</title>
-      <link>http://localhost:1313/tag/llm/</link>
+      <link>https://netwithalex.netlify.app/tag/llm/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:1313/tag/llm/</guid>
+      <guid>https://netwithalex.netlify.app/tag/llm/</guid>
       <description></description>
     </item>
     <item>
       <title>Openai</title>
-      <link>http://localhost:1313/tag/openai/</link>
+      <link>https://netwithalex.netlify.app/tag/openai/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:1313/tag/openai/</guid>
+      <guid>https://netwithalex.netlify.app/tag/openai/</guid>
       <description></description>
     </item>
     <item>
       <title>Slm</title>
-      <link>http://localhost:1313/tag/slm/</link>
+      <link>https://netwithalex.netlify.app/tag/slm/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:1313/tag/slm/</guid>
+      <guid>https://netwithalex.netlify.app/tag/slm/</guid>
       <description></description>
     </item>
     <item>
       <title>Sdwan</title>
-      <link>http://localhost:1313/tag/sdwan/</link>
+      <link>https://netwithalex.netlify.app/tag/sdwan/</link>
       <pubDate>Wed, 10 Jul 2024 18:51:08 +0000</pubDate>
-      <guid>http://localhost:1313/tag/sdwan/</guid>
+      <guid>https://netwithalex.netlify.app/tag/sdwan/</guid>
       <description></description>
     </item>
     <item>
       <title>Webex</title>
-      <link>http://localhost:1313/tag/webex/</link>
+      <link>https://netwithalex.netlify.app/tag/webex/</link>
       <pubDate>Wed, 10 Jul 2024 18:51:08 +0000</pubDate>
-      <guid>http://localhost:1313/tag/webex/</guid>
+      <guid>https://netwithalex.netlify.app/tag/webex/</guid>
       <description></description>
     </item>
     <item>
       <title>Automation</title>
-      <link>http://localhost:1313/tag/automation/</link>
+      <link>https://netwithalex.netlify.app/tag/automation/</link>
       <pubDate>Wed, 10 Jan 2024 18:46:45 +0000</pubDate>
-      <guid>http://localhost:1313/tag/automation/</guid>
+      <guid>https://netwithalex.netlify.app/tag/automation/</guid>
       <description></description>
     </item>
     <item>
       <title>Devops</title>
-      <link>http://localhost:1313/tag/devops/</link>
+      <link>https://netwithalex.netlify.app/tag/devops/</link>
       <pubDate>Wed, 10 Jan 2024 18:46:45 +0000</pubDate>
-      <guid>http://localhost:1313/tag/devops/</guid>
+      <guid>https://netwithalex.netlify.app/tag/devops/</guid>
       <description></description>
     </item>
   </channel>

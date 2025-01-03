@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Simplifying AAR: 3/3 Fallback to best path | NetWithAlex</title>
 <meta name="keywords" content="">
 <meta name="description" content="Introduction
@@ -17,16 +17,16 @@ Be load balanced on the available paths - Widely used, however traffic could be 
 
 Take the following example">
 <meta name="author" content="alex">
-<link rel="canonical" href="http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/">
+<link rel="canonical" href="https://netwithalex.netlify.app/simplifying-aar-3-3-fallback-to-best-path/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://netwithalex.netlify.app/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://netwithalex.netlify.app/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://netwithalex.netlify.app/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://netwithalex.netlify.app/apple-touch-icon.png">
+<link rel="mask-icon" href="https://netwithalex.netlify.app/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/">
+<link rel="alternate" hreflang="en" href="https://netwithalex.netlify.app/simplifying-aar-3-3-fallback-to-best-path/">
 <noscript>
     <style>
         #theme-toggle,
@@ -63,7 +63,83 @@ Take the following example">
         }
 
     </style>
-</noscript>
+</noscript><meta property="og:url" content="https://netwithalex.netlify.app/simplifying-aar-3-3-fallback-to-best-path/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="Simplifying AAR: 3/3 Fallback to best path">
+  <meta property="og:description" content="Introduction For the final post of this series, let’s explore the remaining option to handle traffic when SLA is not met: Fallback to best path. It was introduced on 20.5/17.5 and it provides more flexibility and enhanced path selection compared to the other options. Let’s understand why it was created.
+Motivation With the previous methods, traffic would either:
+Be dropped - Rarely used, specific use cases that apply to a small amount of environments. Be load balanced on the available paths - Widely used, however traffic could be using the worst performing path. Take the following example">
+  <meta property="og:locale" content="en-US">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-02-11T12:11:06+00:00">
+    <meta property="article:modified_time" content="2024-02-11T12:11:06+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Simplifying AAR: 3/3 Fallback to best path">
+<meta name="twitter:description" content="Introduction
+For the final post of this series, let&rsquo;s explore the remaining option to handle traffic when SLA is not met: Fallback to best path. It was introduced on 20.5/17.5 and it provides more flexibility and enhanced path selection compared to the other options. Let&rsquo;s understand why it was created.
+Motivation
+With the previous methods, traffic would either:
+
+Be dropped - Rarely used, specific use cases that apply to a small amount of environments.
+Be load balanced on the available paths - Widely used, however traffic could be using the worst performing path.
+
+Take the following example">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://netwithalex.netlify.app/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Simplifying AAR: 3/3 Fallback to best path",
+      "item": "https://netwithalex.netlify.app/simplifying-aar-3-3-fallback-to-best-path/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Simplifying AAR: 3/3 Fallback to best path",
+  "name": "Simplifying AAR: 3\/3 Fallback to best path",
+  "description": "Introduction For the final post of this series, let\u0026rsquo;s explore the remaining option to handle traffic when SLA is not met: Fallback to best path. It was introduced on 20.5/17.5 and it provides more flexibility and enhanced path selection compared to the other options. Let\u0026rsquo;s understand why it was created.\nMotivation With the previous methods, traffic would either:\nBe dropped - Rarely used, specific use cases that apply to a small amount of environments. Be load balanced on the available paths - Widely used, however traffic could be using the worst performing path. Take the following example\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introduction For the final post of this series, let’s explore the remaining option to handle traffic when SLA is not met: Fallback to best path. It was introduced on 20.5/17.5 and it provides more flexibility and enhanced path selection compared to the other options. Let’s understand why it was created.\nMotivation With the previous methods, traffic would either:\nBe dropped - Rarely used, specific use cases that apply to a small amount of environments. Be load balanced on the available paths - Widely used, however traffic could be using the worst performing path. Take the following example\nTunnel 2 is clearly having the worst performance, however with the load balance method, traffic could still use it based on the hashing algorithm. How do we overcome this situation? You probably guessed it: Fallback to best path\nFallback to Best Path Let’s see how the documentation describes it:\nWhen the data traffic does not meet any of the SLA class requirements, this feature allows you to select the best tunnel path criteria sequence using the Fallback Best Tunnel.\nCisco SD-WAN Manager uses best of worst (BOW) to find a best tunnel when no tunnel meets any of the SLA class requirements.\nhttps://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html\nBest of Worst Let’s see how BOW works with the following example:\nThe SLA latency requirement is set to 8. None of the tunnels satisfy it, but Tunnel 1 is the closest one, making it the best of worse with a latency of 10.\nThe criteria(s) to choose the BOW is extremely flexible, in this example we used latency, other options could be:\nlatency - Only latency jitter - Only jitter loss - Only loss latency/jitter - First latency, if they are equal, then jitter latency/loss - First latency, if they are equal, then loss jitter/latency - First jitter, if they are equal, then latency . . . loss/jitter/latency - First loss, then jitter, then latency Variance Let’s go a step further, Tunnel 3 is also very close to the 8 ms latency, it wouldn’t be a bad idea to send traffic also on that tunnel. How do we achieve this? Well, we can implement a variance to accommodate small variations when choosing the best paths.\nContinuing with this example, let’s take a look at the BOW selection with a variance of 5 ms.\nBOW range = (best latency, best latency + variance) BOW range = (10, 15) The best latency across tunnels is 10 (Tunnel 1), notice this is not the latency configured on the SLA. With this variance, if any other tunnel has a latency between 10 - 15, it will also be chosen to send traffic. In our example, Tunnel 3 satisfies the condition, so now Tunnel 1 and Tunnel 3 will be used as Fallback Tunnels.\nAs you can see, Tunnel 2 is no longer considered. Great!\nConfiguration SLA Class To use this method, the first thing we need to do is modify our sla-class to indicate that it should look for the best performing path when SLA is not met. Our configuration looks like this:\nsla-class Custom-SLA loss 1 latency 250 jitter 100 fallback-best-tunnel criteria loss loss-variance 2 Notice we selected the Criteria to be Loss and a variance of 2. Variance is an optional parameter.\nAAR Policy Next, on the AAR policy we specify the action when SLA is not met: Fallback to Best path\nsequence 1 match source-ip 172.16.10.0/24 destination-ip 172.16.20.0/24 action sla-class Custom-SLA no sla-class strict sla-class preferred-color mpls sla-class fallback-to-best-path Let’s keep the same dynamic and build a diagram:\nScenarios Using the same topology let’s explore some situations\nMPLS compliant, Biz-internet/Private1 non-compliant I will initiate traffic from Branch10 -\u003e Branch 20 and capture it with NWPI. MPLS has perfect KPI metrics (0, 0, 0)\nNotice how fallback to best path is set to no and traffic is matching the SLA and preferred color. Let’s also see the following verification command from BR10.\nBR10#show sdwan tunnel sla \u003c. . .\u003e tunnel sla-class 1 sla-name Custom-SLA sla-loss 1 sla-latency 250 sla-jitter 100 FALLBACK REMOTE T SLA SLA SRC DST SYSTEM LOCAL T REMOTE MEAN MEAN MEAN CLASS CLASS PROTO SRC IP DST IP PORT PORT IP COLOR COLOR LOSS LATENCY JITTER INDEX SLA CLASS NAME INDEX --------------------------------------------------------------------------------------------------------------------------------------------- gre 21.1.10.2 21.1.20.2 0 0 1.1.0.20 mpls mpls 0 0 0 0,1 __all_tunnels__, Custom-SLA None gre 21.1.10.2 31.1.20.2 0 0 1.1.0.20 mpls biz-internet 0 0 0 0,1 __all_tunnels__, Custom-SLA None gre 21.1.10.2 41.1.20.2 0 0 1.1.0.20 mpls private1 0 0 0 0,1 __all_tunnels__, Custom-SLA None Some comments about this output:\nThe fact that we see tunnels listed under Custom-SLA, tells us that there are tunnels meeting the loss, latency and jitter. This is expected as our MPLS is having perfect metrics. See that this sla-class has a numeric identifier of 1 - tunnel sla-class 1. You will see reference to this number shortly. Fallback SLA class index is set to none, this mean that these tunnels are not being used as fallback tunnels, this will become clear in a second. MPLS/Biz-inernet/Private1 non-compliant but meeting variance Now that we have no transports meeting the SLA, let’s check how NWPI will show it:\nNotice that now NWPI is indicating that Fallback to Best Path is in use.\nPrivate1 was chosen to send this particular flow, but are there any other tunnels that could be used? Let’s check BR10 again.\nBR10# show sdwan tunnel sla tunnel sla-class 0 sla-name __all_tunnels__ sla-loss 0 sla-latency 0 sla-jitter 0 FALLBACK REMOTE SLA SLA SRC DST SYSTEM T LOCAL T REMOTE MEAN MEAN MEAN CLASS CLASS PROTO SRC IP DST IP PORT PORT IP COLOR COLOR LOSS LATENCY JITTER INDEX SLA CLASS NAME INDEX ---------------------------------------------------------------------------------------------------------------------------------------- gre 21.1.10.2 21.1.20.2 0 0 1.1.0.20 mpls mpls 18 0 0 0 __all_tunnels__ None gre 21.1.10.2 31.1.20.2 0 0 1.1.0.20 mpls biz-internet 9 0 0 0 __all_tunnels__ None gre 21.1.10.2 41.1.20.2 0 0 1.1.0.20 mpls private1 11 0 0 0 __all_tunnels__ None gre 31.1.10.2 21.1.20.2 0 0 1.1.0.20 biz-internet mpls 4 0 0 0 __all_tunnels__ 1 gre 31.1.10.2 31.1.20.2 0 0 1.1.0.20 biz-internet biz-internet 2 0 0 0 __all_tunnels__ 1 gre 31.1.10.2 41.1.20.2 0 0 1.1.0.20 biz-internet private1 4 0 0 0 __all_tunnels__ 1 gre 41.1.10.2 21.1.20.2 0 0 1.1.0.20 private1 mpls 3 0 0 0 __all_tunnels__ 1 gre 41.1.10.2 31.1.20.2 0 0 1.1.0.20 private1 biz-internet 6 0 0 0 __all_tunnels__ None gre 41.1.10.2 41.1.20.2 0 0 1.1.0.20 private1 private1 3 0 0 0 __all_tunnels__ 1 tunnel sla-class 1 sla-name Custom-SLA sla-loss 1 sla-latency 250 sla-jitter 100 BR10# Comments about this output:\nThere are no tunnels meeting our Custom-SLA Even if MPLS is the preferred color, it is not considered because it doesn’t meet the loss variance range. There are 5 tunnels that satisfy the variance. Notice how some tunnels have Fallback SLA class index set to 1, meaning that they are serving as fallback for sla-class 1 (Custom-SLA). In this case the BOW is biz-internet - biz-internet tunnel with a mean loss of 2. The variance is set to 2, so BOW range is 2-4. Tunnels satisfying the BOW range, will be used to forward traffic as well. Depending on the load-balance hash, different tunnels will be chosen\nBR10#show sdwan policy service-path vpn 10 interface GigabitEthernet 3 source-ip 172.16.10.2 dest-ip 172.16.20.2 protocol 6 dest-port 22 Next Hop: GRE Source: 31.1.10.2 Destination: 21.1.20.2 Local Color: biz-internet Remote Color: mpls Remote System IP: 1.1.0.20 BR10#show sdwan policy service-path vpn 10 interface GigabitEthernet 3 source-ip 172.16.10.56 dest-ip 172.16.20.2 protocol 6 dest-port 24 Next Hop: GRE Source: 31.1.10.2 Destination: 41.1.20.2 Local Color: biz-internet Remote Color: private1 Remote System IP: 1.1.0.20 We can see two different tunnels biz-internet - mpls and biz-internet - private\nLatency out of compliance So far we have been playing only with loss, because the fallback criteria was set to loss. Let’s see what happens when a different criteria goes out of compliance. I will set the latency of the SLA to 15 ms. .\nBR10#show sdwan policy from-vsmart from-vsmart sla-class Custom-SLA loss 1 latency 15 jitter 100 fallback-best-tunnel criteria loss loss-variance 2 After introducing some latency, we see something interesting:\nBR10#show sdwan tunnel sla tunnel sla-class 0 sla-name __all_tunnels__ sla-loss 0 sla-latency 0 sla-jitter 0 FALLBACK REMOTE SLA SLA SRC DST SYSTEM T LOCAL T REMOTE MEAN MEAN MEAN CLASS CLASS PROTO SRC IP DST IP PORT PORT IP COLOR COLOR LOSS LATENCY JITTER INDEX SLA CLASS NAME INDEX ---------------------------------------------------------------------------------------------------------------------------------------- gre 21.1.10.2 21.1.20.2 0 0 1.1.0.20 mpls mpls 0 20 1 0 __all_tunnels__ 1 gre 21.1.10.2 31.1.20.2 0 0 1.1.0.20 mpls biz-internet 0 20 1 0 __all_tunnels__ 1 gre 21.1.10.2 41.1.20.2 0 0 1.1.0.20 mpls private1 0 20 0 0 __all_tunnels__ 1 gre 31.1.10.2 21.1.20.2 0 0 1.1.0.20 biz-internet mpls 0 21 2 0 __all_tunnels__ 1 gre 31.1.10.2 31.1.20.2 0 0 1.1.0.20 biz-internet biz-internet 0 21 2 0 __all_tunnels__ 1 gre 31.1.10.2 41.1.20.2 0 0 1.1.0.20 biz-internet private1 0 21 2 0 __all_tunnels__ 1 gre 41.1.10.2 21.1.20.2 0 0 1.1.0.20 private1 mpls 0 16 1 0 __all_tunnels__ 1 gre 41.1.10.2 31.1.20.2 0 0 1.1.0.20 private1 biz-internet 0 16 0 0 __all_tunnels__ 1 gre 41.1.10.2 41.1.20.2 0 0 1.1.0.20 private1 private1 0 16 0 0 __all_tunnels__ 1 tunnel sla-class 1 sla-name Custom-SLA sla-loss 1 sla-latency 15 sla-jitter 100 BR10# All of the tunnels are used as fallback tunnels because all of them have 0% loss! Is this the ideal situation? This is arguable, maybe for some types of traffic it’s fine, but for others you probably want to have a second or third criteria to pick the best fallback tunnels.\nMultiple BOW criteria For the last test, let’s see what happens when we select multiple criteria to select the BOW. I will add latency to the SLA criteria.\nBR10#show sdwan policy from-vsmart from-vsmart sla-class Custom-SLA loss 1 latency 15 jitter 100 fallback-best-tunnel criteria loss latency loss-variance 2 What we expect is that if any of the KPIs go out of compliance, the BOW will be decided based on:\nLowest mean loss. If there is a tie, then Lowest latency Let’s verify\nBR10#show sdwan tunnel sla tunnel sla-class 0 sla-name __all_tunnels__ sla-loss 0 sla-latency 0 sla-jitter 0 FALLBACK REMOTE SLA SLA SRC DST SYSTEM T LOCAL T REMOTE MEAN MEAN MEAN CLASS CLASS PROTO SRC IP DST IP PORT PORT IP COLOR COLOR LOSS LATENCY JITTER INDEX SLA CLASS NAME INDEX ---------------------------------------------------------------------------------------------------------------------------------------- gre 21.1.10.2 21.1.20.2 0 0 1.1.0.20 mpls mpls 0 20 1 0 __all_tunnels__ None gre 21.1.10.2 31.1.20.2 0 0 1.1.0.20 mpls biz-internet 0 20 1 0 __all_tunnels__ None gre 21.1.10.2 41.1.20.2 0 0 1.1.0.20 mpls private1 0 20 1 0 __all_tunnels__ None gre 31.1.10.2 21.1.20.2 0 0 1.1.0.20 biz-internet mpls 0 20 1 0 __all_tunnels__ None gre 31.1.10.2 31.1.20.2 0 0 1.1.0.20 biz-internet biz-internet 0 20 1 0 __all_tunnels__ None gre 31.1.10.2 41.1.20.2 0 0 1.1.0.20 biz-internet private1 0 21 1 0 __all_tunnels__ None gre 41.1.10.2 21.1.20.2 0 0 1.1.0.20 private1 mpls 0 16 0 0 __all_tunnels__ 1 gre 41.1.10.2 31.1.20.2 0 0 1.1.0.20 private1 biz-internet 0 16 0 0 __all_tunnels__ 1 gre 41.1.10.2 41.1.20.2 0 0 1.1.0.20 private1 private1 0 16 0 0 __all_tunnels__ 1 tunnel sla-class 1 sla-name Custom-SLA sla-loss 1 sla-latency 15 sla-jitter 100 BR10# It’s clear that the loss wasn’t used to come up with the BOW, otherwise we would see all the tunnels acting as fallback for SLA Class index 1. Instead, tunnels with lowest latency were selected. Notice that I could have added a latency variance to include other tunnels with similar numbers.\nConclusion Through the last three posts, we have witnessed AAR being a critical SD-WAN functionality to protect the SLA of our applications. I hope that after explaining and verifying different scenarios, you now have a better understanding and feel more confident to try AAR within your SD-WAN infrastructure.. The configuration guide is very complete, so get familiar with it and use it when you need it.\nLet me know your thoughts in the comments.\nSee you soon!\n",
+  "wordCount" : "1979",
+  "inLanguage": "en",
+  "datePublished": "2024-02-11T12:11:06Z",
+  "dateModified": "2024-02-11T12:11:06Z",
+  "author":{
+    "@type": "Person",
+    "name": "alex"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://netwithalex.netlify.app/simplifying-aar-3-3-fallback-to-best-path/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://netwithalex.netlify.app/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
@@ -77,7 +153,7 @@ Take the following example">
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <a href="https://netwithalex.netlify.app/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
             <div class="logo-switches">
             </div>
         </div>
@@ -94,17 +170,17 @@ Take the following example">
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/posts/" title="Blogs">
+                <a href="https://netwithalex.netlify.app/posts/" title="Blogs">
                     <span>Blogs</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/about/" title="About me.">
+                <a href="https://netwithalex.netlify.app/about/" title="About me.">
                     <span>About me.</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="🔍">
+                <a href="https://netwithalex.netlify.app/search/" title="🔍">
                     <span>🔍</span>
                 </a>
             </li>
@@ -115,7 +191,7 @@ Take the following example">
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://netwithalex.netlify.app/">Home</a>&nbsp;»&nbsp;<a href="https://netwithalex.netlify.app/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
       Simplifying AAR: 3/3 Fallback to best path
     </h1>
@@ -418,7 +494,7 @@ Take the following example">
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="http://localhost:1313/">NetWithAlex</a></span> · 
+        <span>&copy; 2025 <a href="https://netwithalex.netlify.app/">NetWithAlex</a></span> · 
 
     <span>
         Powered by
