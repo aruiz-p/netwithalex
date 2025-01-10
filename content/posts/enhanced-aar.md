@@ -5,6 +5,7 @@ category:
   - networking
 date: "2025-01-05T14:20:31+00:00"
 title: Enhanced Application Aware Routing
+draft: true
 url: /enhanced-aar/
 
 ---
