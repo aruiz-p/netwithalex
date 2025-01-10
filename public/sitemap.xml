@@ -2,10 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/category/ai/</loc>
-    <lastmod>2024-07-28T14:56:45+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/category/</loc>
+    <lastmod>2025-01-05T14:20:31+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/enhanced-aar/</loc>
+    <lastmod>2025-01-05T14:20:31+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/category/networking/</loc>
+    <lastmod>2025-01-05T14:20:31+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/</loc>
+    <lastmod>2025-01-05T14:20:31+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/category/sdwan/</loc>
+    <lastmod>2025-01-05T14:20:31+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/category/ai/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tag/genai/</loc>
@@ -24,9 +36,6 @@
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tag/openai/</loc>
-    <lastmod>2024-07-28T14:56:45+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/category/sd-wan/</loc>

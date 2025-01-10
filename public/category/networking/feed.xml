@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Networking on NetWithAlex</title>
+    <link>http://localhost:1313/category/networking/</link>
+    <description>Recent content in Networking on NetWithAlex</description>
+    <generator>Hugo -- 0.140.2</generator>
+    <language>en-US</language>
+    <lastBuildDate>Sun, 05 Jan 2025 14:20:31 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/category/networking/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Enhanced Application Aware Routing</title>
+      <link>http://localhost:1313/enhanced-aar/</link>
+      <pubDate>Sun, 05 Jan 2025 14:20:31 +0000</pubDate>
+      <guid>http://localhost:1313/enhanced-aar/</guid>
+      <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
+&lt;p&gt;In my previous &lt;a href=&#34;http://localhost:1313/demystifying-aar-1-3-the-foundations&#34;&gt;series of posts&lt;/a&gt;, I talked in depth about Application Aware Routing (AAR), a technology used to direct traffic through best performing paths. AAR is a core functionality of SD-WAN and has been around for years. Naturally, new ideas to improve it came around and gave birth to a revamped implementation which Cisco called &lt;strong&gt;&lt;em&gt;Enhanced&lt;/em&gt;&lt;/strong&gt; Application Aware Routing (EAAR). Let´s take a look to it.&lt;/p&gt;
+&lt;h3 id=&#34;aar-limitations&#34;&gt;AAR Limitations&lt;/h3&gt;
+&lt;p&gt;Before diving into EAAR, let&amp;rsquo;s understand why it was created.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

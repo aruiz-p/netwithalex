@@ -29,7 +29,8 @@ params:
   comments: true
   hideFooter: false
   assets:
-    favicon: /favicon.ico
+    ffavicon: "/assets/favicon.ico"
+    favicon16x16: assets/favicon.ico
     disableHLJS: true
 markup:
   highlight:
