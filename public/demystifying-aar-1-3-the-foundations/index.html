@@ -4,7 +4,7 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Simplifying AAR:  1/3 The Foundations | NetWithAlex</title>
 <meta name="keywords" content="">
 <meta name="description" content="Introduction
@@ -56,7 +56,74 @@ Think about routing technologies out there, most of them got really good at reac
         }
 
     </style>
-</noscript>
+</noscript><meta property="og:url" content="http://localhost:1313/demystifying-aar-1-3-the-foundations/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="Simplifying AAR:  1/3 The Foundations">
+  <meta property="og:description" content="Introduction Think about routing technologies out there, most of them got really good at reacting to link failures and power outages with protocols like OSPF LFA/FRR, EIGRP feasible successor, BGP PIC, etc. However, they fall short when it comes to addressing issues like network performance degradation during brownouts caused by factors such as power fluctuations or link congestion. These scenarios introduce new challenges for which traditional routing protocols lack adequate tools. This is where Application Aware Routing comes to save the day.">
+  <meta property="og:locale" content="en-US">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-02-07T16:25:27+00:00">
+    <meta property="article:modified_time" content="2024-02-07T16:25:27+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Simplifying AAR:  1/3 The Foundations">
+<meta name="twitter:description" content="Introduction
+Think about routing technologies out there, most of them got really good at reacting to link failures and power outages with protocols like OSPF LFA/FRR, EIGRP feasible successor, BGP PIC, etc. However, they fall short when it comes to addressing issues like network performance degradation during brownouts caused by factors such as power fluctuations or link congestion. These scenarios introduce new challenges for which traditional routing protocols lack adequate tools. This is where Application Aware Routing comes to save the day.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Simplifying AAR:  1/3 The Foundations",
+      "item": "http://localhost:1313/demystifying-aar-1-3-the-foundations/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Simplifying AAR:  1/3 The Foundations",
+  "name": "Simplifying AAR:  1\/3 The Foundations",
+  "description": "Introduction Think about routing technologies out there, most of them got really good at reacting to link failures and power outages with protocols like OSPF LFA/FRR, EIGRP feasible successor, BGP PIC, etc. However, they fall short when it comes to addressing issues like network performance degradation during brownouts caused by factors such as power fluctuations or link congestion. These scenarios introduce new challenges for which traditional routing protocols lack adequate tools. This is where Application Aware Routing comes to save the day.\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introduction Think about routing technologies out there, most of them got really good at reacting to link failures and power outages with protocols like OSPF LFA/FRR, EIGRP feasible successor, BGP PIC, etc. However, they fall short when it comes to addressing issues like network performance degradation during brownouts caused by factors such as power fluctuations or link congestion. These scenarios introduce new challenges for which traditional routing protocols lack adequate tools. This is where Application Aware Routing comes to save the day.\nDespite causing some confusion among customers and SD-WAN learners, AAR represents a fundamental advantage of the technology. In this series, we will go through the basics, to understand key principles and behaviors that will enable us to study different scenarios. We will leverage NWPI to better understand how things are working, if you are not familiar with NWPI, I recommend you read this post I wrote about it.\nAAR in 5 lines Using IPSec tunnels formed between WAN Edges, BFD packets will be sent across them to measure the loss, latency and jitter (KPIs).\nUsers can define SLAs for different types of traffic (voice, web, video, etc.) and configure AAR policies to ensure traffic is sent through paths that satisfy the SLA.\nIf, at any point in time, the path is no longer satisfying the SLA, it will be automatically routed to a path that does.\nSimple, right?\nSLAs Service Level Agreement refers to the amount of loss, latency and jitter that an application can handle and still perform. The definition needs to be correct and realistic for the type of traffic and environment.\nExample, if we are defining the SLA for voice, we should know what are the acceptable loss, latency and jitter values. If our voice SLA looks something like this:\nLoss - 5% Latency - 350 ms Jitter - 200 ms It’s very likely that calls will not have good quality.\nHaving these values would be much better:\nLoss - 1% Latency - 150 ms Jitter - 50 ms Also, consider the nature of the environment when doing these definitions, there are places where providers could be less reliable, traffic could travel long distances, types of transport (satellite vs fiber), etc. You can use SD-WAM Manager’s historical KPIs data to build a baseline.\nSLA definition will look like this:\nsla-class Custom-SLA loss 1 latency 250 jitter 100 BFD Bidirectional Forwarding Detection protocol is used to quickly detect faults between two network devices. In SD-WAN, it is also used to measure loss, latency and jitter. The parameters we use to configure BFD will dictate how fast SD-WAN will detect and react to network problems.\nHello interval This interval represent how often a BFD echo packet will be sent. It is configured on a per color basis in milliseconds; the default is 1000 ms. This packet will go to the peer wan edge and back, this is how KPIs will be measured for each packet.\nsdwan interface GigabitEthernetX tunnel-interface color mpls hello-interval 1000 \u003c\u003c\u003c Each router model has a defined tunnel scale (number of tunnels it can form). Changing the hello interval below 1s lowers the tunnel scale. Keep this in mind to avoid potential problems related to exceeding hardware capacity.\nApp route poll interval As the wan edge continues to send packets, the poll interval is the timer that will help organize the packets in buckets. These buckets will be used to calculate tunnel statistics. It’s configured on a per box basis (same for all colors).\nLet’s say we have a poll interval of 4000 ms. Every 4 seconds a new bucket is built, this bucket will have its own index. Default poll interval is 600,000 ms (10 minutes).\nTo configure the poll interval\nbfd app-route poll-interval 60000 The average loss, latency and jitter will be calculated for each poll interval. We can check this directly on SD-WAN Manager -\u003e Monitor -\u003e Real Time -\u003e App Route Statistics\nApp route multiplier To configure the multiplier\nbfd app-route multiplier 3 The multiplier will indicate the amount of buckets that will be used to calculate the tunnel statistics that will make the traffic steer when network conditions worsen. For the illustration, a multiplier of 3 is used. By default the multiplier is set to 6.\nNotice each bucket contains 4 packets\nhello interval (s) x Poll interval (s)\nIn the real world, 4 packets would be too low. If we take all default values, we would end up with a bucket of 600 packets. Check the AAR Deployment Guide for more details and options.\nAfter filling up all the buckets, tunnel statistics will be calculated.\nWe can visualize the buckets and the mean calculations. Notice the values are the same for all the buckets. Don’t get confused with the avg loss, latency and jitter columns shown before.\nThis mechanism acts like a sliding window that will discard the oldest bucket to make room for the new one, recalculating tunnel statistics every poll interval.\nConfiguring AAR policy Now that we have a better understanding about SLAs and BFD, we can create the rules that will govern the behavior of our AAR policy. This is how it will look on SD-WAN Manager.\nThis is probably the simplest form we can configure. Google Apps traffic will be matched and transports matching our Custom-SLA will be used indiscriminately. In other words, if we have 3 different transports and all of them meet the SLA, traffic will be load balanced across them.\nWhat if we want traffic to prefer one of the transports? Well, we can specify a Preferred Color as below:\nIn this sequence, voice apps are matched, and transports’ SLA should match Bussiness-Critical. MPLS will be preferred if it meets the SLA. The action when SLA is not met is set to Load Balance between available colors.\nAt a first glance, this looks very simple, but there are some details we need to know if we want to fully understand how traffic will behave under different circumstances.\nI invite you to read my next post where we will go through some scenarios to get a clear picture. See you there!\n",
+  "wordCount" : "1019",
+  "inLanguage": "en",
+  "datePublished": "2024-02-07T16:25:27Z",
+  "dateModified": "2024-02-07T16:25:27Z",
+  "author":{
+    "@type": "Person",
+    "name": "alex"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/demystifying-aar-1-3-the-foundations/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">

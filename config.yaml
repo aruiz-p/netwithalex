@@ -18,6 +18,7 @@ params:
       url: "https://www.linkedin.com/in/alexruizs/"
     - name: "email"
       url: "mailto:netwithalex@gmail.com"
+  env: "production"
   defaultTheme: auto
   disableThemeToggle: false
   showShareButtons: false

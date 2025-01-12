@@ -4,7 +4,7 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>CI Tools | NetWithAlex</title>
 <meta name="keywords" content="">
 <meta name="description" content="Describe characteristics and concepts of build /deploy tools such as Jenkins, Drone, or Travis CI
@@ -58,7 +58,77 @@ Jenkins is a free automation server (open source) designed to automate parts of 
         }
 
     </style>
-</noscript>
+</noscript><meta property="og:url" content="http://localhost:1313/ci-tools/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="CI Tools">
+  <meta property="og:description" content="Describe characteristics and concepts of build /deploy tools such as Jenkins, Drone, or Travis CI In the last post we talked about the concepts of CI/CD, emphasizing the importance of the build phase as part of Continuous Integration process. It is now time to dig deeper on the following CI tools: Jenkins, Drone, Travis and GitLab.
+Jenkins Jenkins is a free automation server (open source) designed to automate parts of the software development process, most notably the building, testing, and deployment of code changes. It is Java based, has a large community and has been out there for a while.">
+  <meta property="og:locale" content="en-US">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-01-18T19:46:23+00:00">
+    <meta property="article:modified_time" content="2024-01-18T19:46:23+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CI Tools">
+<meta name="twitter:description" content="Describe characteristics and concepts of build /deploy tools such as Jenkins, Drone, or Travis CI
+In the last post we talked about the concepts of CI/CD, emphasizing the importance of the build phase as part of Continuous Integration process. It is now time to dig deeper on the following CI tools: Jenkins, Drone, Travis and GitLab.
+Jenkins
+Jenkins is a free automation server (open source) designed to automate parts of the software development process, most notably the building, testing, and deployment of code changes. It is Java based, has a large community and has been out there for a while.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "CI Tools",
+      "item": "http://localhost:1313/ci-tools/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "CI Tools",
+  "name": "CI Tools",
+  "description": "Describe characteristics and concepts of build /deploy tools such as Jenkins, Drone, or Travis CI In the last post we talked about the concepts of CI/CD, emphasizing the importance of the build phase as part of Continuous Integration process. It is now time to dig deeper on the following CI tools: Jenkins, Drone, Travis and GitLab.\nJenkins Jenkins is a free automation server (open source) designed to automate parts of the software development process, most notably the building, testing, and deployment of code changes. It is Java based, has a large community and has been out there for a while.\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "Describe characteristics and concepts of build /deploy tools such as Jenkins, Drone, or Travis CI In the last post we talked about the concepts of CI/CD, emphasizing the importance of the build phase as part of Continuous Integration process. It is now time to dig deeper on the following CI tools: Jenkins, Drone, Travis and GitLab.\nJenkins Jenkins is a free automation server (open source) designed to automate parts of the software development process, most notably the building, testing, and deployment of code changes. It is Java based, has a large community and has been out there for a while.\nOffering modeLanguage/StructureRootURLVM/Container(self-managed)GroovyJenkinsfilehttps://www.jenkins.io/\nIts pipeline is maintained in Groovy format and processed as Groovy script. This is the file Jenkins will look for by default\nHere is an example to understand the structure:\npipeline { agent any stages { stage('Checkout') { steps { \u003c...\u003e } } stage('Build') { steps { \u003c...\u003e } } stage('Test') { steps { \u003c...\u003e } } stage('Deploy') { steps { \u003c...\u003e } } } post{ \u003c...\u003e } } ``stages - 4 (checkout, build, test and deploy) steps - actions to execute on each of the stages post - Sections containing actions to execute based on the result of the pipeline (success, failure, always) Visit this page to learn more about the Pipeline\nJenkins also offers a User Interface for Pipeline visualization called Blue Ocean\nhttps://www.jenkins.io/blog/2016/05/26/introducing-blue-ocean/\nThe idea behind it is to improve the developer experience - make it easier to understand the Pipeline, make changes and monitor status and issues arise.\nDrone Built on a container technology. Feature set can be augmented through plug-ins that can work with source control technologies (GitHub, Bitbucket, GitLab, etc).\nTwo versions available - Free for Open Source and cloud service (not free).\nOffering modeLanguage/StructureRootURLSaaS/Container(self-managed)YAML.drone.ymlhttps://www.drone.io/\nIt is written in Go and uses the following .drone.yml structure:\nkind: pipeline name: example steps: - name: install image: node:14 commands: - npm install - name: test image: node:14 commands: - npm test - name: deploy image: alpine commands: - echo \"Deploying the application\" # Include deployment commands or scripts here kind - indicate this is a pipeline config (other values could be docker, kubernetes, secret) name - name of the pipeline steps - indicate individual sections of the pipeline. Each step has its own name, Docker image and commands to execute. Drones GUI will allow you\nCheck out this video by Harness to get familiar with Drone and the GUI.\nVisit Drone.io to learn more about this tool, plug-ins and to check the documentation.\nTravis CI Integrates very well with Github.com API. Offered as Software-as-a-Service and Open Source projects can be tested for free. VM/Container options are available as well.\nOffering modeLanguage/StructureRootURLSaaS/Container(self-managed)YAML.travis.ymlhttps://travis-ci.org\n--- language: node_js node_js: - \"14\" env: - CI_REG_IMG_APP=\"my_node_app\" before_script: - echo \"Logging into DockerHub...\" - echo \"$DOCKER_PASSWORD\" | docker login -u \"$DOCKER_USERNAME\" --password-stdin script: - echo \"Building Docker image...\" - docker build -t $CI_REG_IMG_APP . deploy: \u003c...\u003e language and node - Defines language to be used and versions env - Environment variable definition happens here before_script - Contains commands to be executed before running the main build script script - Contains the main build script deploy - Specifies deployment configuration I’d recommend checking out this video that shows how easy it is to integrate with Github and getting started with Travis.\nGitLab Available Enterprise and Community edition.\nGitlab has many features for DevOps:\nGit Repository Docker Image Registry Project Board CI/CD Pipelines Runners Offering modeLanguage/StructureRootURLSaaS/Container(self-managed)YAML.gitlab-ci.ymlhttps://gitlab.com\n--- stages: - build - test - deploy variables: NODE_VERSION: \"14\" before_script: - npm install -g yarn - yarn install build: stage: build script: - yarn build test: stage: test script: - yarn test deploy: stage: deploy script: - echo \"Deploying application...\" # Add deployment commands here only: - main stages - Defines stages of the pipeline variables - Defines global variables for the pipeline. before-script - Specifies commands to be executed before running any job in the pipeline build - Stage to build the application. It executes the yarn build command. test - Stage to run automated tests before deployment deploy - Responsible for deploying the application Here is an example of how this could be represented graphically.\nI would suggest exploring some of the tutorials to get familiar with GitLab.\n",
+  "wordCount" : "705",
+  "inLanguage": "en",
+  "datePublished": "2024-01-18T19:46:23Z",
+  "dateModified": "2024-01-18T19:46:23Z",
+  "author":{
+    "@type": "Person",
+    "name": "alex"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/ci-tools/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
