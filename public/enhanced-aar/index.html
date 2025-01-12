@@ -4,7 +4,7 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Enhanced Application Aware Routing | NetWithAlex</title>
 <meta name="keywords" content="">
 <meta name="description" content="Introduction
@@ -58,7 +58,77 @@ Before diving into EAAR, let&rsquo;s understand why it was created.">
         }
 
     </style>
-</noscript>
+</noscript><meta property="og:url" content="http://localhost:1313/enhanced-aar/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="Enhanced Application Aware Routing">
+  <meta property="og:description" content="Introduction In my previous series of posts, I talked in depth about Application Aware Routing (AAR), a technology used to direct traffic through best performing paths. AAR is a core functionality of SD-WAN and has been around for years. Naturally, new ideas to improve it came around and gave birth to a revamped implementation which Cisco called Enhanced Application Aware Routing (EAAR). Let´s take a look to it.
+AAR Limitations Before diving into EAAR, let’s understand why it was created.">
+  <meta property="og:locale" content="en-US">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-01-05T14:20:31+00:00">
+    <meta property="article:modified_time" content="2025-01-05T14:20:31+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Enhanced Application Aware Routing">
+<meta name="twitter:description" content="Introduction
+In my previous series of posts, I talked in depth about Application Aware Routing (AAR), a technology used to direct traffic through best performing paths. AAR is a core functionality of SD-WAN and has been around for years. Naturally, new ideas to improve it came around and gave birth to a revamped implementation which Cisco called Enhanced Application Aware Routing (EAAR). Let´s take a look to it.
+AAR Limitations
+Before diving into EAAR, let&rsquo;s understand why it was created.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Enhanced Application Aware Routing",
+      "item": "http://localhost:1313/enhanced-aar/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Enhanced Application Aware Routing",
+  "name": "Enhanced Application Aware Routing",
+  "description": "Introduction In my previous series of posts, I talked in depth about Application Aware Routing (AAR), a technology used to direct traffic through best performing paths. AAR is a core functionality of SD-WAN and has been around for years. Naturally, new ideas to improve it came around and gave birth to a revamped implementation which Cisco called Enhanced Application Aware Routing (EAAR). Let´s take a look to it.\nAAR Limitations Before diving into EAAR, let\u0026rsquo;s understand why it was created.\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introduction In my previous series of posts, I talked in depth about Application Aware Routing (AAR), a technology used to direct traffic through best performing paths. AAR is a core functionality of SD-WAN and has been around for years. Naturally, new ideas to improve it came around and gave birth to a revamped implementation which Cisco called Enhanced Application Aware Routing (EAAR). Let´s take a look to it.\nAAR Limitations Before diving into EAAR, let’s understand why it was created.\nThe current AAR implementation meassures the path quality using BFD, sending packets at a defined interval, 1 second by default. Loss, latency and jitter are derived from those packtes and these values are placed into rotating buckets to calculate an average tunnel health metric. This process would typically take between 10 and 60 minutes and with some configuration tweaks we could achieve times of 2 - 10 mins.\nFalse Positive Tunnel Scale issues if bfd hello interval is reduced Slow degradation detection and switch times Enhanced AAR In a nutshell these are the advantages\nImproves performance measurements using inline data Steer traffic in seconds rather than minutes 10s by default Dapening implemented for stability purposes Taking a deeper look Loss measurement is done per queue Latency is the RTT Jitter is unidirectional, which means it is measured at the receiver and reported to the sender\nIn Continuous Integration (CI), a crucial idea is the frequent uploading of code into the code base, often multiple times a day. This involves the constant merging of developer work with the code base, and the early identification of issues through the use of testing.\nCI Diagram\nBenefits Reduce time to market Achieve revenue and results at a faster pace Smaller backlog Smaller code changes Fewer bugs Build Process Involves activities such as:\nIntegration: Merging code. If several people are working on a project, the changes of each of them, must be consolidated in a single place. Linting: Analyze code to identify programming errors, software defects, style and incorrect amounts of spaces. Some linting tools to know: Pylint Pyflakes Bandit Black Unit Testing: Test individual components of code, not the entire code base. Write tests first, then code - Test Driven Development (TDD). Some tools to know: Pytest Unittest Build: This stage implies that all linting and unit tests have been completed and code is ready to be deployed on staging environment. Here an “artifact” is built and stored independently. Suggestion: Explore the different tools shown above and know the basics of them\nCI tools These are some of the most common CI tools out there. In the next post we are going to explore them with more detail.\nCI ToolsURL**Travis CIhttps://travis-ci.orgJenkinshttps://jenkins.ioDronehttps://drone.ioGitLab CI**https://gitlab.com\nClick here to learn about them!\n",
+  "wordCount" : "454",
+  "inLanguage": "en",
+  "datePublished": "2025-01-05T14:20:31Z",
+  "dateModified": "2025-01-05T14:20:31Z",
+  "author":{
+    "@type": "Person",
+    "name": "alex"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/enhanced-aar/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
