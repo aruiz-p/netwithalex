@@ -250,8 +250,7 @@ To achieve this, I will use LangGraph officially defined as:">
 <h2 id="getting-started">Getting Started<a hidden class="anchor" aria-hidden="true" href="#getting-started">#</a></h2>
 <p>To achieve this, I will use <a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> officially defined as:</p>
 <blockquote>
-<p>A library for building stateful, multi-actor applications with LLMs, used to create agent and multi-agent workflows</p>
-</blockquote>
+<p>A library for building stateful, multi-actor applications with LLMs, used to create agent and multi-agent workflows</p></blockquote>
 <p>There are <a href="https://langchain-ai.github.io/langgraph/tutorials/#multi-agent-systems">different approaches</a>, but I decided to build a structure where there is a supervisor that orchestrates the workflow and decides who should act next. The idea is to build a graph that represents the agents and how they are connected. The graph illustrates the order in which agents can be executed.</p>
 <p>In my case I have 3 agents:</p>
 <ol>

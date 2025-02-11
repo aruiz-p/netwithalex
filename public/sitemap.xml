@@ -2,13 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/category/</loc>
+    <lastmod>2025-01-05T14:20:31+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/enhanced-aar/</loc>
+    <lastmod>2025-01-05T14:20:31+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/category/networking/</loc>
+    <lastmod>2025-01-05T14:20:31+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/posts/</loc>
     <lastmod>2025-01-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/category/ai/</loc>
-    <lastmod>2024-07-28T14:56:45+00:00</lastmod>
+    <loc>http://localhost:1313/category/sdwan/</loc>
+    <lastmod>2025-01-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/category/</loc>
+    <loc>http://localhost:1313/category/ai/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tag/genai/</loc>
@@ -95,13 +104,13 @@
     <loc>http://localhost:1313/demystifying-aar-understanding-different-scenarios/</loc>
     <lastmod>2024-02-01T20:27:37+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/network-wide-path-insights-an-introduction/</loc>
+    <lastmod>2024-01-25T20:34:14+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/category/troubleshooting/</loc>
     <lastmod>2024-01-25T20:34:14+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/category/visibility/</loc>
-    <lastmod>2024-01-25T20:34:14+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/network-wide-path-insights-an-introduction/</loc>
     <lastmod>2024-01-25T20:34:14+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/ci-tools/</loc>

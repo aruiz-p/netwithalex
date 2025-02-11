@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.140.2"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.143.1"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -190,6 +190,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Enhanced Application Aware Routing
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Introduction In my previous series of posts, I explored Application Aware Routing (AAR) in depth, a key SD-WAN technology that steers traffic over best-performing paths. While AAR has been a fundamental capability for years, the evolution of networking brought new ideas to enhance its effectiveness. This led to the introduction of Enhanced Application Aware Routing (EAAR).
+AAR Limitations Before diving into EAAR, let’s understand why it was created.
+The current AAR implementation measures the path quality using BFD, sending probes at a defined interval (1s by default). Loss, latency and jitter are derived from those packets and these values are placed into rotating buckets to calculate an average tunnel health metric. This process would typically take between 10 to 60 minutes and with some configuration tweaks we could achieve times of 2 to 10 mins.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-01-05 14:20:31 +0000 WET'>January 5, 2025</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;alex</footer>
+  <a class="entry-link" aria-label="post link to Enhanced Application Aware Routing" href="http://localhost:1313/enhanced-aar/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Improving my SD-WAN Assistant - Multiple agents
     </h2>
   </header>
@@ -313,21 +328,6 @@ Organization that were not ready to take the full SD-WAN leap, while still desir
   </div>
   <footer class="entry-footer"><span title='2024-02-24 12:06:47 +0000 WET'>February 24, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;alex</footer>
   <a class="entry-link" aria-label="post link to A New Chapter: SD-Routing&#39;s Revolution in Network Management" href="http://localhost:1313/a-new-chapter-sd-routings-revolution-in-network-management/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Simplifying AAR: 3/3 Fallback to best path
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Introduction For the final post of this series, let’s explore the remaining option to handle traffic when SLA is not met: Fallback to best path. It was introduced on 20.5/17.5 and it provides more flexibility and enhanced path selection compared to the other options. Let’s understand why it was created.
-Motivation With the previous methods, traffic would either:
-Be dropped - Rarely used, specific use cases that apply to a small amount of environments. Be load balanced on the available paths - Widely used, however traffic could be using the worst performing path. Take the following example
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-02-11 12:11:06 +0000 WET'>February 11, 2024</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;alex</footer>
-  <a class="entry-link" aria-label="post link to Simplifying AAR: 3/3 Fallback to best path" href="http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -4,7 +4,7 @@
     <title>Sd-Wan on NetWithAlex</title>
     <link>http://localhost:1313/category/sd-wan/</link>
     <description>Recent content in Sd-Wan on NetWithAlex</description>
-    <generator>Hugo -- 0.140.2</generator>
+    <generator>Hugo -- 0.143.1</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 28 Jul 2024 14:56:45 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/category/sd-wan/feed.xml" rel="self" type="application/rss+xml" />
@@ -68,7 +68,7 @@
 &lt;p&gt;Now, we continue by digging deeper on different AAR configurations, more specifically we will concentrate on &lt;em&gt;Strict/Drop&lt;/em&gt; and &lt;em&gt;Backup SLA Preferred Color&lt;/em&gt; behaviors.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>What On Earth Is Happening On The Network? NWPI!</title>
+      <title>Cisco SD-WAN Network Wide Path Insights (NWPI)</title>
       <link>http://localhost:1313/network-wide-path-insights-an-introduction/</link>
       <pubDate>Thu, 25 Jan 2024 20:34:14 +0000</pubDate>
       <guid>http://localhost:1313/network-wide-path-insights-an-introduction/</guid>

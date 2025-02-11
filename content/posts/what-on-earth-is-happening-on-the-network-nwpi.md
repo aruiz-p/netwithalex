@@ -6,7 +6,7 @@ category:
   - visibility
 date: "2024-01-25T20:34:14+00:00"
 guid: https://netwithalex.blog/?p=260
-title: What On Earth Is Happening On The Network? NWPI!
+title: Cisco SD-WAN Network Wide Path Insights (NWPI)
 url: /network-wide-path-insights-an-introduction/
 
 ---

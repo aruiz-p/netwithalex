@@ -4,10 +4,21 @@
     <title>Posts on NetWithAlex</title>
     <link>http://localhost:1313/posts/</link>
     <description>Recent content in Posts on NetWithAlex</description>
-    <generator>Hugo -- 0.140.2</generator>
+    <generator>Hugo -- 0.143.1</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 28 Jul 2024 14:56:45 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 05 Jan 2025 14:20:31 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Enhanced Application Aware Routing</title>
+      <link>http://localhost:1313/enhanced-aar/</link>
+      <pubDate>Sun, 05 Jan 2025 14:20:31 +0000</pubDate>
+      <guid>http://localhost:1313/enhanced-aar/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;In my previous &lt;a href=&#34;http://localhost:1313/demystifying-aar-1-3-the-foundations&#34;&gt;series of posts&lt;/a&gt;, I explored &lt;strong&gt;Application Aware Routing (AAR)&lt;/strong&gt; in depth, a key SD-WAN technology that steers traffic over best-performing paths. While AAR has been a fundamental capability for years, the evolution of networking brought new ideas to enhance its effectiveness. This led to the introduction of &lt;strong&gt;&lt;em&gt;Enhanced&lt;/em&gt; Application Aware Routing (EAAR)&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;aar-limitations&#34;&gt;AAR Limitations&lt;/h2&gt;
+&lt;p&gt;Before diving into EAAR, let&amp;rsquo;s understand why it was created.&lt;/p&gt;
+&lt;p&gt;The current AAR implementation measures the path quality using BFD, sending probes at a defined interval (1s by default). Loss, latency and jitter are derived from those packets and these values are placed into rotating buckets to calculate an average tunnel health metric. This process would typically take between 10 to 60 minutes and with some configuration tweaks we could achieve times of 2 to 10 mins.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Improving my SD-WAN Assistant - Multiple agents</title>
       <link>http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/</link>
@@ -155,7 +166,7 @@ CMD&lt;/p&gt;</description>
 &lt;p&gt;Now, we continue by digging deeper on different AAR configurations, more specifically we will concentrate on &lt;em&gt;Strict/Drop&lt;/em&gt; and &lt;em&gt;Backup SLA Preferred Color&lt;/em&gt; behaviors.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>What On Earth Is Happening On The Network? NWPI!</title>
+      <title>Cisco SD-WAN Network Wide Path Insights (NWPI)</title>
       <link>http://localhost:1313/network-wide-path-insights-an-introduction/</link>
       <pubDate>Thu, 25 Jan 2024 20:34:14 +0000</pubDate>
       <guid>http://localhost:1313/network-wide-path-insights-an-introduction/</guid>

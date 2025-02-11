@@ -8,9 +8,10 @@
 <title>Enhanced Application Aware Routing | NetWithAlex</title>
 <meta name="keywords" content="">
 <meta name="description" content="Introduction
-In my previous series of posts, I talked in depth about Application Aware Routing (AAR), a technology used to direct traffic through best performing paths. AAR is a core functionality of SD-WAN and has been around for years. Naturally, new ideas to improve it came around and gave birth to a revamped implementation which Cisco called Enhanced Application Aware Routing (EAAR). Let´s take a look to it.
+In my previous series of posts, I explored Application Aware Routing (AAR) in depth, a key SD-WAN technology that steers traffic over best-performing paths. While AAR has been a fundamental capability for years, the evolution of networking brought new ideas to enhance its effectiveness. This led to the introduction of Enhanced Application Aware Routing (EAAR).
 AAR Limitations
-Before diving into EAAR, let&rsquo;s understand why it was created.">
+Before diving into EAAR, let&rsquo;s understand why it was created.
+The current AAR implementation measures the path quality using BFD, sending probes at a defined interval (1s by default). Loss, latency and jitter are derived from those packets and these values are placed into rotating buckets to calculate an average tunnel health metric. This process would typically take between 10 to 60 minutes and with some configuration tweaks we could achieve times of 2 to 10 mins.">
 <meta name="author" content="alex">
 <link rel="canonical" href="http://localhost:1313/enhanced-aar/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
@@ -61,8 +62,9 @@ Before diving into EAAR, let&rsquo;s understand why it was created.">
 </noscript><meta property="og:url" content="http://localhost:1313/enhanced-aar/">
   <meta property="og:site_name" content="NetWithAlex">
   <meta property="og:title" content="Enhanced Application Aware Routing">
-  <meta property="og:description" content="Introduction In my previous series of posts, I talked in depth about Application Aware Routing (AAR), a technology used to direct traffic through best performing paths. AAR is a core functionality of SD-WAN and has been around for years. Naturally, new ideas to improve it came around and gave birth to a revamped implementation which Cisco called Enhanced Application Aware Routing (EAAR). Let´s take a look to it.
-AAR Limitations Before diving into EAAR, let’s understand why it was created.">
+  <meta property="og:description" content="Introduction In my previous series of posts, I explored Application Aware Routing (AAR) in depth, a key SD-WAN technology that steers traffic over best-performing paths. While AAR has been a fundamental capability for years, the evolution of networking brought new ideas to enhance its effectiveness. This led to the introduction of Enhanced Application Aware Routing (EAAR).
+AAR Limitations Before diving into EAAR, let’s understand why it was created.
+The current AAR implementation measures the path quality using BFD, sending probes at a defined interval (1s by default). Loss, latency and jitter are derived from those packets and these values are placed into rotating buckets to calculate an average tunnel health metric. This process would typically take between 10 to 60 minutes and with some configuration tweaks we could achieve times of 2 to 10 mins.">
   <meta property="og:locale" content="en-US">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -71,9 +73,10 @@ AAR Limitations Before diving into EAAR, let’s understand why it was created."
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Enhanced Application Aware Routing">
 <meta name="twitter:description" content="Introduction
-In my previous series of posts, I talked in depth about Application Aware Routing (AAR), a technology used to direct traffic through best performing paths. AAR is a core functionality of SD-WAN and has been around for years. Naturally, new ideas to improve it came around and gave birth to a revamped implementation which Cisco called Enhanced Application Aware Routing (EAAR). Let´s take a look to it.
+In my previous series of posts, I explored Application Aware Routing (AAR) in depth, a key SD-WAN technology that steers traffic over best-performing paths. While AAR has been a fundamental capability for years, the evolution of networking brought new ideas to enhance its effectiveness. This led to the introduction of Enhanced Application Aware Routing (EAAR).
 AAR Limitations
-Before diving into EAAR, let&rsquo;s understand why it was created.">
+Before diving into EAAR, let&rsquo;s understand why it was created.
+The current AAR implementation measures the path quality using BFD, sending probes at a defined interval (1s by default). Loss, latency and jitter are derived from those packets and these values are placed into rotating buckets to calculate an average tunnel health metric. This process would typically take between 10 to 60 minutes and with some configuration tweaks we could achieve times of 2 to 10 mins.">
 
 
 <script type="application/ld+json">
@@ -102,12 +105,12 @@ Before diving into EAAR, let&rsquo;s understand why it was created.">
   "@type": "BlogPosting",
   "headline": "Enhanced Application Aware Routing",
   "name": "Enhanced Application Aware Routing",
-  "description": "Introduction In my previous series of posts, I talked in depth about Application Aware Routing (AAR), a technology used to direct traffic through best performing paths. AAR is a core functionality of SD-WAN and has been around for years. Naturally, new ideas to improve it came around and gave birth to a revamped implementation which Cisco called Enhanced Application Aware Routing (EAAR). Let´s take a look to it.\nAAR Limitations Before diving into EAAR, let\u0026rsquo;s understand why it was created.\n",
+  "description": "Introduction In my previous series of posts, I explored Application Aware Routing (AAR) in depth, a key SD-WAN technology that steers traffic over best-performing paths. While AAR has been a fundamental capability for years, the evolution of networking brought new ideas to enhance its effectiveness. This led to the introduction of Enhanced Application Aware Routing (EAAR).\nAAR Limitations Before diving into EAAR, let\u0026rsquo;s understand why it was created.\nThe current AAR implementation measures the path quality using BFD, sending probes at a defined interval (1s by default). Loss, latency and jitter are derived from those packets and these values are placed into rotating buckets to calculate an average tunnel health metric. This process would typically take between 10 to 60 minutes and with some configuration tweaks we could achieve times of 2 to 10 mins.\n",
   "keywords": [
     
   ],
-  "articleBody": "Introduction In my previous series of posts, I talked in depth about Application Aware Routing (AAR), a technology used to direct traffic through best performing paths. AAR is a core functionality of SD-WAN and has been around for years. Naturally, new ideas to improve it came around and gave birth to a revamped implementation which Cisco called Enhanced Application Aware Routing (EAAR). Let´s take a look to it.\nAAR Limitations Before diving into EAAR, let’s understand why it was created.\nThe current AAR implementation meassures the path quality using BFD, sending packets at a defined interval, 1 second by default. Loss, latency and jitter are derived from those packtes and these values are placed into rotating buckets to calculate an average tunnel health metric. This process would typically take between 10 and 60 minutes and with some configuration tweaks we could achieve times of 2 - 10 mins.\nFalse Positive Tunnel Scale issues if bfd hello interval is reduced Slow degradation detection and switch times Enhanced AAR In a nutshell these are the advantages\nImproves performance measurements using inline data Steer traffic in seconds rather than minutes 10s by default Dapening implemented for stability purposes Taking a deeper look Loss measurement is done per queue Latency is the RTT Jitter is unidirectional, which means it is measured at the receiver and reported to the sender\nIn Continuous Integration (CI), a crucial idea is the frequent uploading of code into the code base, often multiple times a day. This involves the constant merging of developer work with the code base, and the early identification of issues through the use of testing.\nCI Diagram\nBenefits Reduce time to market Achieve revenue and results at a faster pace Smaller backlog Smaller code changes Fewer bugs Build Process Involves activities such as:\nIntegration: Merging code. If several people are working on a project, the changes of each of them, must be consolidated in a single place. Linting: Analyze code to identify programming errors, software defects, style and incorrect amounts of spaces. Some linting tools to know: Pylint Pyflakes Bandit Black Unit Testing: Test individual components of code, not the entire code base. Write tests first, then code - Test Driven Development (TDD). Some tools to know: Pytest Unittest Build: This stage implies that all linting and unit tests have been completed and code is ready to be deployed on staging environment. Here an “artifact” is built and stored independently. Suggestion: Explore the different tools shown above and know the basics of them\nCI tools These are some of the most common CI tools out there. In the next post we are going to explore them with more detail.\nCI ToolsURL**Travis CIhttps://travis-ci.orgJenkinshttps://jenkins.ioDronehttps://drone.ioGitLab CI**https://gitlab.com\nClick here to learn about them!\n",
-  "wordCount" : "454",
+  "articleBody": "Introduction In my previous series of posts, I explored Application Aware Routing (AAR) in depth, a key SD-WAN technology that steers traffic over best-performing paths. While AAR has been a fundamental capability for years, the evolution of networking brought new ideas to enhance its effectiveness. This led to the introduction of Enhanced Application Aware Routing (EAAR).\nAAR Limitations Before diving into EAAR, let’s understand why it was created.\nThe current AAR implementation measures the path quality using BFD, sending probes at a defined interval (1s by default). Loss, latency and jitter are derived from those packets and these values are placed into rotating buckets to calculate an average tunnel health metric. This process would typically take between 10 to 60 minutes and with some configuration tweaks we could achieve times of 2 to 10 mins.\nFor those networks that require faster detection, some challenges arise:\nLowering the hello interval to less than 1s affects the device’s tunnel scale Lowering bfd multiplier and poll intervals could lead to false positives, switching traffic even with transient network conditions. Switch traffic back and forth, there is no mechanism to determine if a transport is stable again after a network degradation event. Enhanced AAR So, what is EAAR and how it improves its predecessor?\nIn a nutshell these are the advantages:\nImproves performance measurements using inline data. In other words, the data plane packets are used to measure loss, latency and jitter. Steer traffic in seconds rather than minutes Dampening implemented for stability purposes, ensuring transports are stable before forwarding traffic through them. More accurate measurements of loss, latency and jitter Taking a deeper look When EAAR is enabled, data packets will be used to measure loss, latency and jitter. Let’s understand the key differences:\nLoss measurement The SD-WAN routers will use inline data along with IPSEC sequence numbers to measure loss.\nThere is an in-built mechanism that allows the routers to determine if the loss is local to the router (local loss - typically due to QoS drops) or external to the router (WAN loss - any packet loss outside the router). To calculate the local loss, the router will determine the amount of packets it generated against the amount of packets that actually were sent. To get the WAN loss, peer SD-WAN routers will report the amount of packets received and will use BFD (Path Monitor TLVs) to share this information back to the originating router. This is done per tunnel.\nUp to this point, there is an important improvement in how loss measurement is done, however, this could be further improved by leveraging per queue loss measurements. To achieve this, we need to associate an SLA class with an App Probe Class. Let’s see an example.\nWith this App Probe Class, the router will use (and generate BFD) packets with DSCP 18, mimicking less important traffic that will be subject to different rules and paths on the local and external routers. This will provide a more accurate measurement of loss for this type of traffic.\nIf there is no inline data, BFD is used to get measurements.\nNote If using GRE, per queue measurement is not available.\nHere is a visual to better understand how loss will be measured depending on multiple factors\nEncapsulation App Probe Class Measurement type Public tunnels Private Tunnels IPsec Yes Per SLA Total WAN loss + local loss per queue WAN loss per queue + local loss per queue IPsec No All SLAs Total WAN loss + total local loss Total WAN loss + total local loss GRE - All SLAs Total WAN loss + total local loss Total WAN loss + total local loss Latency To measure latency, the router will simply calculate the time taken to send and receive packets between source and destination devices. Inline data is used and it can get to App Probe granularity.\nJitter Another worth mentioning change is that the jitter is computed per direction (receive or transmit). The jitter is computed at the receiver and reported to the sender using BFD TLVs. Inline data is used and BFD is the fallback mechanism if no data traffic is available.\nSLA Dampening One of the benefits of EAAR is steering traffic in seconds rather than minutes, but what would happen if there are transient network conditions causing the transports to not meet the sla every few minutes? Traffic would be constantly switching between transports which is not a desirable scenario and the reason why dampening was introduced.\nThe general idea is that when a transport link goes out of compliance, traffic is rerouted to an alternate path. Once the transport becomes compliant again, the device does not immediately move traffic back. Instead, it starts a timer to ensure the link remains stable for a specified period before reusing it.\nIn the end, dampening helps prevent unnecessary traffic shifts, which could negatively impact performance due to transport instability\nConfiguring EAAR To enable EAAR we have three predefined options:\nMode Poll Interval Poll Multiplier Dampening Multiplier Aggressive 10s 6 (10s-60s) 120 (20 mins) Moderate 60s 5 (60s-300s) 40 (40 mins) Conservative 300s 6 (300s-1800s) 12 (60 mins) Note To use custom timers, configuration needs to be done through CLI templates.\nThe fundamental principle behind EAAR is similar to AAR in that they will both use rotating buckets and calculate average values for loss, latency and jitter. With the Aggressive mode, traffic would take between 10-60 seconds to shift, depending on how severe the impairment is. The dampening window (poll interval x dampening multiplier) is 20 minutes, meaning that before switching traffic back to a transport, it needs to be stable for 20 minutes.\nIn my lab, I am using Configuration Groups, however this is available through templates as well.\nYou could decide to use a variable, instead of a global value, to account for devices that wouldn’t be running EAAR. In this case, EAAR enabled devices will use traditional AAR with non-enabled EAAR devices.\nThe following config is added to the devices:\nbfd enhanced-app-route enable bfd enhanced-app-route pfr-poll-interval 10000 bfd enhanced-app-route pfr-multiplier 6 bfd sla-dampening enable bfd sla-dampening multiplier 120 Let’s see how it works\nDemo In my lab, I use Manager 20.16.1 and my devices are running 17.13.1a\nNote The minimum version required is 20.12/17.12\nLet’s start with some verifications after pushing the configuration.\nTo check the configured timers and multipliers\nBR10#show sdwan app-route params Enhanced Application-Aware routing Config: :Enabled Poll interval: :10000 Poll multiplier: :6 App route Poll interval: :120000 Poll multiplier: :5 SLA dampening Config: :Enabled Multiplier: :120 To verify what sessions are using EAAR, look for the FLAGS column\nBR10#show sdwan bfd sessions alt SOURCE TLOC REMOTE TLOC DST PUBLIC DST PUBLIC SYSTEM IP SITE ID STATE COLOR COLOR SOURCE IP IP PORT ENCAP BFD-LD FLAGS UPTIME ------------------------------------------------------------------------------------------------------------------------------------------------- 1.1.1.20 200 up biz-internet biz-internet 30.1.10.2 30.1.20.2 12406 ipsec 20006 EAAR 0:00:20:31 1.1.1.20 200 up mpls mpls 30.2.10.2 30.2.20.2 12366 ipsec 20002 EAAR 0:00:20:38 1.1.1.20 200 up private1 private1 30.3.10.2 30.3.20.2 12366 ipsec 20003 EAAR 0:00:20:37 To get more details about a specific tunnel.\nBR10#show sdwan app-route stats summary Generating output, this might take time, please wait ... app-route statistics 30.1.10.2 30.1.20.2 ipsec 12386 12406 remote-system-ip 1.1.1.20 local-color biz-internet remote-color biz-internet sla-class-index 0,1,2 fallback-sla-class-index None enhanced-app-route Enabled sla-dampening-index None app-probe-class-list None mean-loss 0.000 mean-latency 0 mean-jitter 0 TOTAL AVERAGE AVERAGE TX DATA RX DATA IPV6 TX IPV6 RX INDEX PACKETS LOSS LATENCY JITTER PKTS PKTS DATA PKTS DATA PKTS ------------------------------------------------------------------------------------------------------------- 0 0 0 0 0 0 0 0 0 1 64 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 0 4 0 0 0 0 0 0 0 0 5 64 0 0 0 0 0 0 0 Notice that there is no traffic between my devices, thus the total packet count on each bucket is low.\nSame information is available through the Manager’s UI, using the Real Time dashboard and using the App Routes Statistics Device Option.\nScenario 1 Conclusions App probes offer higher benefits if there are private transports that offer quality of service The total number of samples increase dramatically\n",
+  "wordCount" : "1359",
   "inLanguage": "en",
   "datePublished": "2025-01-05T14:20:31Z",
   "dateModified": "2025-01-05T14:20:31Z",
@@ -183,8 +186,13 @@ Before diving into EAAR, let&rsquo;s understand why it was created.">
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/posts/" title="Blogs">
-                    <span>Blogs</span>
+                <a href="http://localhost:1313/archives/" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/category/" title="Categories">
+                    <span>Categories</span>
                 </a>
             </li>
             <li>
@@ -208,7 +216,7 @@ Before diving into EAAR, let&rsquo;s understand why it was created.">
     <h1 class="post-title entry-hint-parent">
       Enhanced Application Aware Routing
     </h1>
-    <div class="post-meta"><span title='2025-01-05 14:20:31 +0000 WET'>January 5, 2025</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;alex
+    <div class="post-meta"><span title='2025-01-05 14:20:31 +0000 WET'>January 5, 2025</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;alex
 
 </div>
   </header> <div class="toc">
@@ -229,75 +237,207 @@ Before diving into EAAR, let&rsquo;s understand why it was created.">
                     <a href="#taking-a-deeper-look" aria-label="Taking a deeper look">Taking a deeper look</a><ul>
                         
                 <li>
-                    <a href="#benefits" aria-label="Benefits">Benefits</a></li>
+                    <a href="#loss-measurement" aria-label="Loss measurement">Loss measurement</a></li>
                 <li>
-                    <a href="#build-process" aria-label="Build Process">Build Process</a></li></ul>
-                </li></ul>
+                    <a href="#latency" aria-label="Latency">Latency</a></li>
+                <li>
+                    <a href="#jitter" aria-label="Jitter">Jitter</a></li></ul>
                 </li>
                 <li>
-                    <a href="#ci-tools" aria-label="CI tools">CI tools</a>
+                    <a href="#sla-dampening" aria-label="SLA Dampening">SLA Dampening</a></li></ul>
                 </li>
+                <li>
+                    <a href="#configuring-eaar" aria-label="Configuring EAAR">Configuring EAAR</a></li>
+                <li>
+                    <a href="#demo" aria-label="Demo">Demo</a><ul>
+                        
+                <li>
+                    <a href="#scenario-1" aria-label="Scenario 1">Scenario 1</a></li>
+                <li>
+                    <a href="#conclusions" aria-label="Conclusions">Conclusions</a>
+                </li>
+            </ul>
+            </li>
             </ul>
         </div>
     </details>
 </div>
 
-  <div class="post-content"><h3 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h3>
-<p>In my previous <a href="/demystifying-aar-1-3-the-foundations">series of posts</a>, I talked in depth about Application Aware Routing (AAR), a technology used to direct traffic through best performing paths. AAR is a core functionality of SD-WAN and has been around for years. Naturally, new ideas to improve it came around and gave birth to a revamped implementation which Cisco called <strong><em>Enhanced</em></strong> Application Aware Routing (EAAR). Let´s take a look to it.</p>
-<h3 id="aar-limitations">AAR Limitations<a hidden class="anchor" aria-hidden="true" href="#aar-limitations">#</a></h3>
+  <div class="post-content"><h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
+<p>In my previous <a href="/demystifying-aar-1-3-the-foundations">series of posts</a>, I explored <strong>Application Aware Routing (AAR)</strong> in depth, a key SD-WAN technology that steers traffic over best-performing paths. While AAR has been a fundamental capability for years, the evolution of networking brought new ideas to enhance its effectiveness. This led to the introduction of <strong><em>Enhanced</em> Application Aware Routing (EAAR)</strong>.</p>
+<h2 id="aar-limitations">AAR Limitations<a hidden class="anchor" aria-hidden="true" href="#aar-limitations">#</a></h2>
 <p>Before diving into EAAR, let&rsquo;s understand why it was created.</p>
-<p>The current AAR implementation meassures the path quality using BFD, sending packets at a defined interval, 1 second by default. Loss, latency and jitter are derived from those packtes and these values are placed into rotating buckets to calculate an average tunnel health metric. This process would typically take between 10 and 60 minutes and with some configuration tweaks we could achieve times of 2 - 10 mins.</p>
+<p>The current AAR implementation measures the path quality using BFD, sending probes at a defined interval (1s by default). Loss, latency and jitter are derived from those packets and these values are placed into rotating buckets to calculate an average tunnel health metric. This process would typically take between 10 to 60 minutes and with some configuration tweaks we could achieve times of 2 to 10 mins.</p>
+<p>For those networks that require faster detection, some challenges arise:</p>
 <ul>
-<li>False Positive</li>
-<li>Tunnel Scale issues if bfd hello interval is reduced</li>
-<li>Slow degradation detection and switch times</li>
+<li>Lowering the hello interval to less than 1s affects the device&rsquo;s tunnel scale</li>
+<li>Lowering bfd multiplier and poll intervals could lead to false positives, switching traffic even with transient network conditions.</li>
+<li>Switch traffic back and forth, there is no mechanism to determine if a transport is stable again after a network degradation event.</li>
 </ul>
-<h3 id="enhanced-aar">Enhanced AAR<a hidden class="anchor" aria-hidden="true" href="#enhanced-aar">#</a></h3>
-<p>In a nutshell these are the advantages</p>
+<h2 id="enhanced-aar">Enhanced AAR<a hidden class="anchor" aria-hidden="true" href="#enhanced-aar">#</a></h2>
+<p><em>So, what is EAAR and how it improves its predecessor?</em></p>
+<p>In a nutshell these are the advantages:</p>
 <ul>
-<li>Improves performance measurements using <strong>inline data</strong></li>
-<li>Steer traffic in seconds rather than minutes 10s by default</li>
-<li>Dapening implemented for stability purposes</li>
+<li>Improves performance measurements using <u>inline data</u>. In other words, the data plane packets are used to measure loss, latency and jitter.</li>
+<li>Steer traffic in <u>seconds</u> rather than minutes</li>
+<li>Dampening implemented for <u>stability</u> purposes, ensuring transports are stable before forwarding traffic through them.</li>
+<li>More <u>accurate measurement</u>s of loss, latency and jitter</li>
 </ul>
-<h4 id="taking-a-deeper-look">Taking a deeper look<a hidden class="anchor" aria-hidden="true" href="#taking-a-deeper-look">#</a></h4>
-<p>Loss measurement is done per queue
-Latency is the RTT
-Jitter is unidirectional, which means it is measured at the receiver and reported to the sender</p>
-<p>In <strong>Continuous Integration (CI)</strong>, a crucial idea is the frequent uploading of code into the code base, often multiple times a day. This involves the constant merging of developer work with the code base, and the early identification of issues through the use of testing.</p>
-<p><img loading="lazy" src="/wp-content/uploads/2024/01/Screenshot-2024-01-17-at-15.23.10.png">CI Diagram</p>
-<h5 id="benefits">Benefits<a hidden class="anchor" aria-hidden="true" href="#benefits">#</a></h5>
-<ul>
-<li>Reduce time to market</li>
-<li>Achieve revenue and results at a faster pace</li>
-<li>Smaller backlog</li>
-<li>Smaller code changes</li>
-<li>Fewer bugs</li>
-</ul>
-<h5 id="build-process">Build Process<a hidden class="anchor" aria-hidden="true" href="#build-process">#</a></h5>
-<p>Involves activities such as:</p>
-<ol>
-<li><strong>Integration:</strong> Merging code. If several people are working on a project, the changes of each of them, must be consolidated in a single place.</li>
-<li><strong>Linting:</strong> Analyze code to identify programming errors, software defects, style and incorrect amounts of spaces. Some linting tools to know:
-<ul>
-<li><a href="https://pypi.org/project/pylint/">Pylint</a></li>
-<li><a href="https://pypi.org/project/pyflakes/">Pyflakes</a></li>
-<li><a href="https://bandit.readthedocs.io/en/latest/">Bandit</a></li>
-<li><a href="https://black.readthedocs.io/en/stable/">Black</a></li>
-</ul>
-</li>
-<li><strong>Unit Testing:</strong> Test individual components of code, not the entire code base. Write tests first, then code - Test Driven Development (TDD). Some tools to know:
-<ul>
-<li><a href="https://docs.pytest.org/en/7.4.x/">Pytest</a></li>
-<li><a href="https://docs.python.org/3/library/unittest.html">Unittest</a></li>
-</ul>
-</li>
-<li><strong>Build:</strong> This stage implies that all linting and unit tests have been completed and code is ready to be deployed on staging environment. Here an &ldquo;artifact&rdquo; is built and stored independently.</li>
-</ol>
-<p><strong>Suggestion:</strong> Explore the different tools shown above and know the basics of them</p>
-<h3 id="ci-tools">CI tools<a hidden class="anchor" aria-hidden="true" href="#ci-tools">#</a></h3>
-<p>These are some of the most common CI tools out there. In the next post we are going to explore them with more detail.</p>
-<p>CI ToolsURL**<em>Travis CI</em><strong><a href="https://travis-ci.org">https://travis-ci.org</a></strong><em>Jenkins</em><strong><a href="https://jenkins.io">https://jenkins.io</a></strong><em>Drone</em><strong><a href="https://drone.io">https://drone.io</a></strong><em>GitLab CI</em>**<a href="https://gitlab.com">https://gitlab.com</a></p>
-<p>Click <a href="/ci-tools/">here</a> to learn about them!</p>
+<h3 id="taking-a-deeper-look">Taking a deeper look<a hidden class="anchor" aria-hidden="true" href="#taking-a-deeper-look">#</a></h3>
+<p>When EAAR is enabled, data packets will be used to measure loss, latency and jitter. Let&rsquo;s understand the key differences:</p>
+<h4 id="loss-measurement">Loss measurement<a hidden class="anchor" aria-hidden="true" href="#loss-measurement">#</a></h4>
+<p>The SD-WAN routers will use inline data along with IPSEC sequence numbers to measure loss.</p>
+<p>There is an in-built mechanism that allows the routers to determine if the loss is local to the router (<strong>local loss</strong> - typically due to QoS drops) or external to the router (<strong>WAN loss</strong> - any packet loss outside the router). To calculate the local loss, the router will determine the amount of packets it generated against the amount of packets that actually were sent. To get the WAN loss, peer SD-WAN routers will report the amount of packets received and will use BFD (Path Monitor TLVs) to share this information back to the originating router. This is done per tunnel.</p>
+<p>Up to this point, there is an important improvement in how loss measurement is done, however, this could be further improved by leveraging per queue loss measurements. To achieve this, we need to associate an SLA class with an App Probe Class. Let&rsquo;s see an example.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/app-probe.png"></p>
+<p>With this App Probe Class, the router will use (and generate BFD) packets with DSCP 18, mimicking less important traffic that will be subject to different rules and paths on the local and external routers. This will provide a more accurate measurement of loss for this type of traffic.</p>
+<p>If there is no inline data, BFD is used to get measurements.</p>
+<p><strong>Note</strong> If using GRE, per queue measurement is not available.</p>
+<p>Here is a visual to better understand how loss will be measured depending on multiple factors</p>
+<table>
+  <thead>
+      <tr>
+          <th>Encapsulation</th>
+          <th>App Probe Class</th>
+          <th>Measurement type</th>
+          <th>Public tunnels</th>
+          <th>Private Tunnels</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>IPsec</td>
+          <td>Yes</td>
+          <td>Per SLA</td>
+          <td>Total WAN loss + local loss per queue</td>
+          <td>WAN loss per queue + local loss per queue</td>
+      </tr>
+      <tr>
+          <td>IPsec</td>
+          <td>No</td>
+          <td>All SLAs</td>
+          <td>Total WAN loss + total local loss</td>
+          <td>Total WAN loss + total local loss</td>
+      </tr>
+      <tr>
+          <td>GRE</td>
+          <td>-</td>
+          <td>All SLAs</td>
+          <td>Total WAN loss + total local loss</td>
+          <td>Total WAN loss + total local loss</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="latency">Latency<a hidden class="anchor" aria-hidden="true" href="#latency">#</a></h4>
+<p>To measure latency, the router will simply calculate the time taken to send and receive packets between source and destination devices. Inline data is used and it can get to App Probe granularity.</p>
+<h4 id="jitter">Jitter<a hidden class="anchor" aria-hidden="true" href="#jitter">#</a></h4>
+<p>Another worth mentioning change is that the jitter is computed per direction (receive or transmit). The jitter is computed at the receiver and reported to the sender using BFD TLVs. Inline data is used and BFD is the fallback mechanism if no data traffic is available.</p>
+<h3 id="sla-dampening">SLA Dampening<a hidden class="anchor" aria-hidden="true" href="#sla-dampening">#</a></h3>
+<p>One of the benefits of EAAR is steering traffic in seconds rather than minutes, but what would happen if there are transient network conditions causing the transports to not meet the sla every few minutes? Traffic would be constantly switching between transports which is not a desirable scenario and the reason why dampening was introduced.</p>
+<p>The general idea is that when a transport link goes out of compliance, traffic is rerouted to an alternate path. Once the transport becomes compliant again, the device <strong>does not</strong> immediately move traffic back. Instead, it starts a timer to ensure the link remains stable for a specified period before reusing it.</p>
+<p>In the end, dampening helps prevent unnecessary traffic shifts, which could negatively impact performance due to transport instability</p>
+<h2 id="configuring-eaar">Configuring EAAR<a hidden class="anchor" aria-hidden="true" href="#configuring-eaar">#</a></h2>
+<p>To enable EAAR we have three predefined options:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Mode</th>
+          <th>Poll Interval</th>
+          <th>Poll Multiplier</th>
+          <th>Dampening Multiplier</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Aggressive</td>
+          <td>10s</td>
+          <td>6 (10s-60s)</td>
+          <td>120 (20 mins)</td>
+      </tr>
+      <tr>
+          <td>Moderate</td>
+          <td>60s</td>
+          <td>5 (60s-300s)</td>
+          <td>40  (40 mins)</td>
+      </tr>
+      <tr>
+          <td>Conservative</td>
+          <td>300s</td>
+          <td>6 (300s-1800s)</td>
+          <td>12  (60 mins)</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Note</strong> To use custom timers, configuration needs to be done through CLI templates.</p>
+<p>The fundamental principle behind EAAR is similar to AAR in that they will both use rotating buckets and calculate average values for loss, latency and jitter. With the <em>Aggressive</em> mode, traffic would take between 10-60 seconds to shift, depending on how severe the impairment is. The dampening window (poll interval x dampening multiplier) is 20 minutes, meaning that before switching traffic back to a transport, it needs to be stable for 20 minutes.</p>
+<p>In my lab, I am using Configuration Groups, however this is <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/m-enhanced-application-aware-routing.html#configure-enhanced-application-aware-routing-using-a-feature-template-in-cisco-sd-wan-manager">available through templates</a> as well.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/eaar-config-groups.png"></p>
+<p>You could decide to use a variable, instead of a global value, to account for devices that wouldn&rsquo;t be running EAAR. In this case, EAAR enabled devices will use traditional AAR with non-enabled EAAR devices.</p>
+<p>The following config is added to the devices:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>  bfd enhanced-app-route enable
+</span></span><span style="display:flex;"><span>  bfd enhanced-app-route pfr-poll-interval 10000
+</span></span><span style="display:flex;"><span>  bfd enhanced-app-route pfr-multiplier 6
+</span></span><span style="display:flex;"><span>  bfd sla-dampening enable
+</span></span><span style="display:flex;"><span>  bfd sla-dampening multiplier 120
+</span></span></code></pre></div><p>Let&rsquo;s see how it works</p>
+<h2 id="demo">Demo<a hidden class="anchor" aria-hidden="true" href="#demo">#</a></h2>
+<p>In my lab, I use Manager 20.16.1 and my devices are running 17.13.1a</p>
+<p><strong>Note</strong> The minimum version required is 20.12/17.12</p>
+<p>Let&rsquo;s start with some verifications after pushing the configuration.</p>
+<p>To check the configured timers and multipliers</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan app-route params
+</span></span><span style="display:flex;"><span>Enhanced Application-Aware routing
+</span></span><span style="display:flex;"><span>    Config:                  :Enabled   
+</span></span><span style="display:flex;"><span>    Poll interval:           :10000     
+</span></span><span style="display:flex;"><span>    Poll multiplier:         :6         
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>App route 
+</span></span><span style="display:flex;"><span>    Poll interval:           :120000    
+</span></span><span style="display:flex;"><span>    Poll multiplier:         :5         
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SLA dampening  
+</span></span><span style="display:flex;"><span>    Config:                  :Enabled   
+</span></span><span style="display:flex;"><span>    Multiplier:              :120    
+</span></span></code></pre></div><p>To verify what sessions are using EAAR, look for the <em>FLAGS</em> column</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan bfd sessions alt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                                  SOURCE TLOC      REMOTE TLOC                     DST PUBLIC    DST PUBLIC                                  
+</span></span><span style="display:flex;"><span>SYSTEM IP   SITE ID   STATE       COLOR            COLOR            SOURCE IP      IP            PORT        ENCAP  BFD-LD    FLAGS   UPTIME    
+</span></span><span style="display:flex;"><span>-------------------------------------------------------------------------------------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>1.1.1.20    200       up          biz-internet     biz-internet     30.1.10.2      30.1.20.2     12406       ipsec  20006     EAAR    0:00:20:31 
+</span></span><span style="display:flex;"><span>1.1.1.20    200       up          mpls             mpls             30.2.10.2      30.2.20.2     12366       ipsec  20002     EAAR    0:00:20:38 
+</span></span><span style="display:flex;"><span>1.1.1.20    200       up          private1         private1         30.3.10.2      30.3.20.2     12366       ipsec  20003     EAAR    0:00:20:37 
+</span></span></code></pre></div><p>To get more details about a specific tunnel.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan app-route stats summary 
+</span></span><span style="display:flex;"><span>Generating output, this might take time, please wait ...
+</span></span><span style="display:flex;"><span>app-route statistics 30.1.10.2 30.1.20.2 ipsec 12386 12406
+</span></span><span style="display:flex;"><span> remote-system-ip         1.1.1.20
+</span></span><span style="display:flex;"><span> local-color              biz-internet
+</span></span><span style="display:flex;"><span> remote-color             biz-internet
+</span></span><span style="display:flex;"><span> sla-class-index          0,1,2
+</span></span><span style="display:flex;"><span> fallback-sla-class-index None
+</span></span><span style="display:flex;"><span> enhanced-app-route       Enabled
+</span></span><span style="display:flex;"><span> sla-dampening-index      None
+</span></span><span style="display:flex;"><span> app-probe-class-list None
+</span></span><span style="display:flex;"><span>  mean-loss    0.000
+</span></span><span style="display:flex;"><span>  mean-latency 0
+</span></span><span style="display:flex;"><span>  mean-jitter  0
+</span></span><span style="display:flex;"><span>       TOTAL                       AVERAGE  AVERAGE  TX DATA       RX DATA       IPV6 TX       IPV6 RX       
+</span></span><span style="display:flex;"><span>INDEX  PACKETS       LOSS          LATENCY  JITTER   PKTS          PKTS          DATA PKTS     DATA PKTS     
+</span></span><span style="display:flex;"><span>-------------------------------------------------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>0      0             0             0        0        0             0             0             0             
+</span></span><span style="display:flex;"><span>1      64            0             0        0        0             0             0             0             
+</span></span><span style="display:flex;"><span>2      0             0             0        0        0             0             0             0             
+</span></span><span style="display:flex;"><span>3      0             0             0        0        0             0             0             0             
+</span></span><span style="display:flex;"><span>4      0             0             0        0        0             0             0             0             
+</span></span><span style="display:flex;"><span>5      64            0             0        0        0             0             0             0             
+</span></span></code></pre></div><p>Notice that there is no traffic between my devices, thus the total packet count on each bucket is low.</p>
+<p>Same information is available through the Manager&rsquo;s UI, using the <em>Real Time</em> dashboard and using the <em>App Routes Statistics</em> Device Option.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/eaar-1.png"></p>
+<h3 id="scenario-1">Scenario 1<a hidden class="anchor" aria-hidden="true" href="#scenario-1">#</a></h3>
+<h3 id="conclusions">Conclusions<a hidden class="anchor" aria-hidden="true" href="#conclusions">#</a></h3>
+<p>App probes offer higher benefits if there are private transports that offer quality of service
+The total number of samples increase dramatically</p>
 
 
   </div>
