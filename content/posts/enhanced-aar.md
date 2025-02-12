@@ -3,10 +3,13 @@ author: alex
 category:
   - sdwan
   - networking
-date: "2025-02-05T14:20:31+00:00"
+date: "2025-01-05T14:20:31+00:00"
 title: Enhanced Application Aware Routing
+description: Learn the benefits of enhanced app aware routing and how to implement it on your network
 url: /enhanced-aar/
-
+tag:
+  - eaar
+  - sdwan
 ---
 ## Introduction
 
