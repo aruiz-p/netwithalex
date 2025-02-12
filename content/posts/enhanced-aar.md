@@ -5,7 +5,6 @@ category:
   - networking
 date: "2025-01-05T14:20:31+00:00"
 title: Enhanced Application Aware Routing
-draft: true
 url: /enhanced-aar/
 
 ---
@@ -15,7 +14,7 @@ In my previous [series of posts](/demystifying-aar-1-3-the-foundations), I explo
 
 ## AAR Limitations
 
-Before diving into EAAR, let's understand why it was created.
+Before diving into EAAR, let's understand why it was created. 🤓
 
 The current AAR implementation measures the path quality using BFD, sending probes at a defined interval (1s by default). Loss, latency and jitter are derived from those packets and these values are placed into rotating buckets to calculate an average tunnel health metric. This process would typically take between 10 to 60 minutes and with some configuration tweaks we could achieve times of 2 to 10 mins.
 
@@ -26,15 +25,15 @@ For those networks that require faster detection, some challenges arise:
 
 ## Enhanced AAR
 
-_So, what is EAAR and how it improves its predecessor?_
+_So, what is EAAR and how it improves its predecessor?_ 🤔
 
 In a nutshell these are the advantages:
-- Improves performance measurements using <u>inline data</u>. In other words, the data plane packets are used to measure loss, latency and jitter.
+- Uses <u>inline data</u> rather than BFD. In other words, the data plane packets are used to measure loss, latency and jitter.
 - Steer traffic in <u>seconds</u> rather than minutes
 - Dampening implemented for <u>stability</u> purposes, ensuring transports are stable before forwarding traffic through them. 
-- More <u>accurate measurement</u>s of loss, latency and jitter
+- More <u>accurate measurement</u>s of loss, latency and jitter 
 
-### Taking a deeper look 
+### Breaking It Down 
 
 When EAAR is enabled, data packets will be used to measure loss, latency and jitter. Let's understand the key differences: 
 
@@ -42,17 +41,22 @@ When EAAR is enabled, data packets will be used to measure loss, latency and jit
 
 The SD-WAN routers will use inline data along with IPSEC sequence numbers to measure loss. 
 
-There is an in-built mechanism that allows the routers to determine if the loss is local to the router (**local loss** - typically due to QoS drops) or external to the router (**WAN loss** - any packet loss outside the router). To calculate the local loss, the router will determine the amount of packets it generated against the amount of packets that actually were sent. To get the WAN loss, peer SD-WAN routers will report the amount of packets received and will use BFD (Path Monitor TLVs) to share this information back to the originating router. This is done per tunnel. 
+There is an in-built mechanism that allows the routers to determine if the loss is local to the router 
 
-Up to this point, there is an important improvement in how loss measurement is done, however, this could be further improved by leveraging per queue loss measurements. To achieve this, we need to associate an SLA class with an App Probe Class. Let's see an example. 
+- **Local loss** - typically due to QoS drops 
+
+Or external to the router 
+- **WAN loss** - any packet loss outside the router 
+
+To calculate the local loss, the router will determine the amount of packets it generated against the amount of packets that actually were sent. To get the WAN loss, peer SD-WAN routers will report the amount of packets received and will use BFD (Path Monitor TLVs) to send this information back to the originating router.
+
+Up to this point, there is an important improvement in how loss measurement is done, however, this could be further improved by leveraging per queue loss measurements. To achieve this, we need to associate an SLA class with an [App Probe Class](https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html#concept_gjc_5pm_dnb). Let's see an example. 
 
 ![](/wp-content/uploads/2025/02/app-probe.png)
 
-With this App Probe Class, the router will use (and generate BFD) packets with DSCP 18, mimicking less important traffic that will be subject to different rules and paths on the local and external routers. This will provide a more accurate measurement of loss for this type of traffic. 
+With this App Probe Class, the router will use (and generate BFD) packets with DSCP 18, mimicking less important traffic that will be subject to different rules and paths on the local and external routers. This will provide a more accurate measurement of loss for each type of traffic on the specified transports. If there is no inline data, BFD is used to get measurements.
 
-If there is no inline data, BFD is used to get measurements.
-
-**Note** If using GRE, per queue measurement is not available. 
+**Note** If using GRE, per queue measurement is **not** available. 
 
 Here is a visual to better understand how loss will be measured depending on multiple factors
 
@@ -64,7 +68,7 @@ Here is a visual to better understand how loss will be measured depending on mul
 
 #### Latency 
 
-To measure latency, the router will simply calculate the time taken to send and receive packets between source and destination devices. Inline data is used and it can get to App Probe granularity.
+To measure latency, the router will simply calculate the time taken to send and receive packets between source and destination devices. Inline data is used and it can get to App Probe granularity. 
 
 #### Jitter
 
@@ -89,13 +93,15 @@ To enable EAAR we have three predefined options:
 
 **Note** To use custom timers, configuration needs to be done through CLI templates.
 
-The fundamental principle behind EAAR is similar to AAR in that they will both use rotating buckets and calculate average values for loss, latency and jitter. With the _Aggressive_ mode, traffic would take between 10-60 seconds to shift, depending on how severe the impairment is. The dampening window (poll interval x dampening multiplier) is 20 minutes, meaning that before switching traffic back to a transport, it needs to be stable for 20 minutes. 
+EAAR follows the same fundamental principle as AAR, using rotating buckets to calculate average loss, latency, and jitter. With the _Aggressive_ mode, traffic would take between 10-60 seconds to shift, depending on how severe the impairment is. 
+
+The dampening window (_poll interval **x** dampening multiplier_) is 1200 seconds, meaning that before switching traffic back to a transport, it needs to be stable for 20 minutes. 
 
 In my lab, I am using Configuration Groups, however this is [available through templates](https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/m-enhanced-application-aware-routing.html#configure-enhanced-application-aware-routing-using-a-feature-template-in-cisco-sd-wan-manager) as well. 
 
 ![](/wp-content/uploads/2025/02/eaar-config-groups.png)
 
-You could decide to use a variable, instead of a global value, to account for devices that wouldn't be running EAAR. In this case, EAAR enabled devices will use traditional AAR with non-enabled EAAR devices. 
+You can use a variable, instead of a global value, to account for devices that will not be running EAAR. In this case, EAAR enabled devices will fallback to AAR. 
 
 The following config is added to the devices:
 ```
@@ -108,7 +114,7 @@ The following config is added to the devices:
 Let's see how it works
 
 ## Demo
-In my lab, I use Manager 20.16.1 and my devices are running 17.13.1a
+In my lab, I use Manager 20.16.1 and my devices are running 17.15.1a
 
 **Note** The minimum version required is 20.12/17.12 
 
@@ -132,7 +138,7 @@ SLA dampening
     Multiplier:              :120    
 ```
 
-To verify what sessions are using EAAR, look for the _FLAGS_ column
+To verify what BFD sessions are using EAAR, look for the _FLAGS_ column
 ```
 BR10#show sdwan bfd sessions alt
 
@@ -178,7 +184,9 @@ Same information is available through the Manager's UI, using the _Real Time_ da
 
 ### Scenario 1 - Slight impairment
 
-My lab has two devices with three tunnels: mpls, private1 and biz-internet colors. 
+This is my lab's topology
+
+![](/wp-content/uploads/2024/02/AAR-Topo2.png)
 
 For this first test, I will use the following SLA parameters:
 
@@ -188,7 +196,11 @@ Loss: 3%
 Latency: 150ms
 Jitter: 100ms
 ```
-The AAR policy received from the Controller indicate to use mpls as primary, private1 as backup and load-balance when SLA not met. 
+The AAR policy from the Controller instructs: 
+- Use mpls as primary path 
+- If no color meets the SLA and private1 is available, use it. 
+- If private1 is not available, load-balance among all remaining colors. 
+
 I am matching traffic between 172.16.10.0/24 and 172.16.20.0/24. 
 ```
 BR10#show sdwan policy from-vsmart
@@ -269,9 +281,9 @@ INDEX  PACKETS       LOSS          LATENCY  JITTER   PKTS          PKTS         
 5      131072        1589          0        0        65198         14226         0             0             
           
 ```
-Traffic using mpls as primary transport
+Traffic is using mpls as primary transport
 ```
-BR10#        
+BR10# show sdwan policy service-path vpn 10 interface gigabitEthernet 4 source-ip 172.16.10.10 dest-ip 172.16.20.10 protocol 6 all       
 Number of possible next hops: 1
 Next Hop: IPsec
   Source: 30.2.10.2 12366 Destination: 30.2.20.2 12366 Local Color: mpls Remote Color: mpls Remote System IP: 1.1.1.20
@@ -280,16 +292,6 @@ Next Hop: IPsec
 I will introduce 3% packet loss on the mpls transport and see how long it takes to switch traffic. Since there is around 1% loss already, 3% should be enough to trigger
 a change. 
 
-After 56 seconds, the traffic shifted and any of the remaining compliant transports could be used 
-```
-BR10#$et4 source-ip 172.16.10.10 dest-ip 172.16.20.10 protocol 6 all
-Number of possible next hops: 2
-Next Hop: IPsec
-  Source: 30.3.10.2 12366 Destination: 30.3.20.2 12366 Local Color: private1 Remote Color: private1 Remote System IP: 1.1.1.20
-Next Hop: IPsec
-  Source: 30.1.10.2 12386 Destination: 30.1.20.2 12366 Local Color: biz-internet Remote Color: biz-internet Remote System IP: 1.1.1.20
-
-```
 The mpls transport has more than 3% loss
 ```
 BR10#show sdwan app-route stats remote-color mpls summary 
@@ -307,6 +309,18 @@ app-route statistics 30.2.10.2 30.2.20.2 ipsec 12366 12366
   mean-latency 0
   mean-jitter  0
 ```
+
+After 56 seconds, the traffic shifted and any of the remaining compliant transports could be used 
+```
+BR10# show sdwan policy service-path vpn 10 interface gigabitEthernet 4 source-ip 172.16.10.10 dest-ip 172.16.20.10 protocol 6 all
+Number of possible next hops: 2
+Next Hop: IPsec
+  Source: 30.3.10.2 12366 Destination: 30.3.20.2 12366 Local Color: private1 Remote Color: private1 Remote System IP: 1.1.1.20
+Next Hop: IPsec
+  Source: 30.1.10.2 12386 Destination: 30.1.20.2 12366 Local Color: biz-internet Remote Color: biz-internet Remote System IP: 1.1.1.20
+
+```
+
 If I take the loss away we can see the dampening mechanism gets activated. So, if the transport is stable for 20 minutes, it will be used again as preferred path. 
 ```
 BR10#show sdwan app-route stats remote-color mpls summary 
@@ -324,7 +338,7 @@ app-route statistics 30.2.10.2 30.2.20.2 ipsec 12366 12366
   mean-latency 0
   mean-jitter  0
 ```
-#### Scenario 2 - Severe impairment
+### Scenario 2 - Greater impairment
 
 In this case, I will introduce 10% packet loss to biz-internet transport, making private 1 the only compliant transport. 
 
@@ -349,7 +363,7 @@ app-route statistics 30.1.10.2 30.1.20.2 ipsec 12386 12366
 
 Traffic shifted to private1 only
 ```
-BR10#$et4 source-ip 172.16.10.10 dest-ip 172.16.20.10 protocol 6 all
+BR10#show sdwan policy service-path vpn 10 interface gigabitEthernet 4 source-ip 172.16.10.10 dest-ip 172.16.20.10 protocol 6 all
 Number of possible next hops: 1
 Next Hop: IPsec
   Source: 30.3.10.2 12366 Destination: 30.3.20.2 12366 Local Color: private1 Remote Color: private1 Remote System IP: 1.1.1.20
@@ -372,11 +386,38 @@ app-route statistics 30.1.10.2 30.1.20.2 ipsec 12386 12366
   mean-jitter  0
 ```
 
-Scenario 3 - Multiple App Probe Classes
+In this case, the time to switch traffic was reduced as a cosequence of a greater impairment. 
 
-For this final scenario the configuration is more complex as it involved QoS, App Probe Classes and AAR Policy. 
+### Scenario 3 - Multiple App Probe Classes
 
-I configured QoS on the router. I have a shaper to 3 mbps and will have two simultaneous downloads:
+For this final scenario, let's see how to get the most benefit out of EAAR. 
+
+The configuration is more complex as it involves QoS, App Probe Classes and AAR Policy.
+
+- QoS is required to classify and send traffic out on different queues.
+- App Probes Classes to measure loss, latency and jitter on each of those queues, independently.
+
+My Qos configuration has 3 queues and queue 2 will handle the least important traffic. 
+
+- Queue 0 for control traffic
+- Queue 1 for Real-Time Traffic (marked DSCP 46)
+- Queue 2 for Transactional traffic (marked DSCP 18)
+
+I use a data policy to match traffic on the service side, mark it with the right DSCP and put it on the right forwarding class. I also created a shaper on my mpls interface
+
+To demo things out, I will have two data transfers:
+- HTTP GET (port 8000)
+- SCP copy (port 22) 
+
+My SLAs have the following configurations:
+
+|SLA Class Name     | Loss |Latency|Jitter  |
+|-------------------|-----|--------|--------|
+| SLA_Real-Time     | 3 % | 150 ms | 100 ms |
+| SLA_Transactional | 5 % | 45 ms  | 150 ms | 
+
+
+The first thing to note is that my two app probes classes are measured independently. See how the _**mean loss**_ for _Transactional-Probe_Class_ is **1**, whereas for _Real_Time_Probe_Class_ is **0**.
 
 ```
 BR10#show sdwan app-route stats local-color mpls summary 
@@ -432,9 +473,86 @@ INDEX  PACKETS       LOSS          LATENCY  JITTER   PKTS          PKTS         
 5      32768         0             1        0        -             -             -             -             
 
 ```
+Now, I have lowered my shaper. EAAR was quick to detect a change in latency for the transactional SLA, it is now 53 ms. 
 
-### Conclusions 
+```
+BR10# show sdwan app-route stats local mpls summary
+Generating output, this might take time, please wait ...
+app-route statistics 30.2.10.2 30.2.20.2 ipsec 12386 12366
+ remote-system-ip         1.1.1.20
+ local-color              mpls
+ remote-color             mpls
+ sla-class-index          0,1,2
+ fallback-sla-class-index None
+ enhanced-app-route       Enabled
+ sla-dampening-index      None
+ app-probe-class-list None
+  mean-loss    0.000
+  mean-latency 53
+  mean-jitter  0
+       TOTAL                       AVERAGE  AVERAGE  TX DATA       RX DATA       IPV6 TX       IPV6 RX       
+INDEX  PACKETS       LOSS          LATENCY  JITTER   PKTS          PKTS          DATA PKTS     DATA PKTS     
+-------------------------------------------------------------------------------------------------------------
+0      2048          0             54       0        4396          8513          0             0             
+1      1024          0             55       0        4461          8534          0             0             
+2      8256          0             49       0        4429          8549          0             0             
+3      16384         0             54       0        4411          8549          0             0             
+4      0             0             53       0        4440          8549          0             0             
+5      0             0             54       0        4443          8549          0             0             
 
-App probes offer higher benefits if there are private transports that offer quality of service
-The total number of samples increase dramatically
+ app-probe-class-list Real_Time_Probe_Class
+  mean-loss    0.000
+  mean-latency 0
+  mean-jitter  0
+       TOTAL                       AVERAGE  AVERAGE  TX DATA       RX DATA       IPV6 TX       IPV6 RX       
+INDEX  PACKETS       LOSS          LATENCY  JITTER   PKTS          PKTS          DATA PKTS     DATA PKTS     
+-------------------------------------------------------------------------------------------------------------
+0      0             0             0        0        -             -             -             -             
+1      0             0             0        0        -             -             -             -             
+2      8192          0             0        0        -             -             -             -             
+3      16384         0             0        0        -             -             -             -             
+4      0             0             0        0        -             -             -             -             
+5      0             0             0        0        -             -             -             -             
+
+ app-probe-class-list Transactional-Probe_Class
+  mean-loss    0.000
+  mean-latency 53    <<<<<<<
+  mean-jitter  0
+       TOTAL                       AVERAGE  AVERAGE  TX DATA       RX DATA       IPV6 TX       IPV6 RX       
+INDEX  PACKETS       LOSS          LATENCY  JITTER   PKTS          PKTS          DATA PKTS     DATA PKTS     
+-------------------------------------------------------------------------------------------------------------
+0      2048          0             54       0        -             -             -             -             
+1      1024          0             55       0        -             -             -             -             
+2      8256          0             49       0        -             -             -             -             
+3      16384         0             54       0        -             -             -             -             
+4      0             0             53       0        -             -             -             -             
+5      0             0             54       0        -             -             -             -             
+```
+Now that my Transactional SLA with a maximum latency of 45 ms is not met , I will use [NWPI](/network-wide-path-insights-an-introduction/) to understand how traffic is getting sent out. Let's examine HTTP traffic using port 80000
+
+![](/wp-content/uploads/2025/02/eaar-nwpi-8000.png)
+
+Notice that, on the _upstream direction_, the _local_ and _remote color_ is set to **private1**, indicating that traffic has moved away from mpls and its 53 ms latency. Just what we expected ✅
+
+Now, let's see how traffic on port 22 is flowing 
+
+![](/wp-content/uploads/2025/02/eaar-nwpi-22.png)
+
+Again, take a look at the upstream _local_ and _remote color_, notice how **mpls** is still in use for this traffic, as there are no path issues detected. 
+
+In summary, the traffic with dscp 46 is working perfectly fine on the mpls transport, however, traffic with DSCP 18 was having more latency than the configured SLA, so traffic was moved to Private1 as it complies with the SLA. 
+
+We can confirm we are measuring and taking routing decisions on a per queue basis, this is a huge difference 🤯 !
+
+
+## Lessons learned 
+
+- Using inline data, the number of samples increases dramatically compared to BFD sample size. 📈
+- EAAR can steer traffic in seconds, rather than minutes. ⏩
+- EAAR delivers the greatest benefits on transports with QoS, such as MPLS. 🚀
+- Even on transports without QoS, inline data measurements increases sample size and accuracy. ⏳
+- The dampening timer is useful to ensure transports are stable before marking them as valid. ✅
+- Interoperability between devices running EAAR and devices running AAR is possible 🔄
+
+I hope you have learned something useful! See you on the next one 👋
 
