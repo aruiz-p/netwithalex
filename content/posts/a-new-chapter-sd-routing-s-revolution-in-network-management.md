@@ -5,7 +5,7 @@ category:
 date: "2024-02-24T12:06:47+00:00"
 guid: https://netwithalex.blog/?p=541
 title: 'A New Chapter: SD-Routing''s Revolution in Network Management'
-description: Explore how SD-Routing can simply and effectively help you manage and monitor your WAN network. 
+summary: Explore how SD-Routing can simply and effectively help you manage and monitor your WAN network. 
 url: /a-new-chapter-sd-routings-revolution-in-network-management/
 
 ---

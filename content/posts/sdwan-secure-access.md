@@ -5,18 +5,22 @@ category:
   - security
   - secure access
 date: "2025-02-05T14:20:31+00:00"
-title: Enhanced Application Aware Routing
-description: Learn the benefits of enhanced app aware routing and how to implement it on your network
-url: /enhanced-aar/
+title: "Securing the Edge: SSE and SD-WAN integration"
+summary: Discover how Cisco SD-WAN and Cisco Secure Access work together to enhance network performance and security in a cloud-first world.
+url: /sdwan-sse-integration/
+draft: true
 tag:
-  - eaar
+  - sse
+  - zerotrust
   - sdwan
 ---
 ## Introduction
 
-In my previous [series of posts](/demystifying-aar-1-3-the-foundations), I explored **Application Aware Routing (AAR)** in depth, a key SD-WAN technology that steers traffic over best-performing paths. While AAR has been a fundamental capability for years, the evolution of networking brought new ideas to enhance its effectiveness. This led to the introduction of **_Enhanced_ Application Aware Routing (EAAR)**. 
+Security has always been a top priority for organizations, but protecting every angle of the network remains a challenge. At the same time, ensuring a seamless application and user experience is just as critical. Organizations often had to choose between security focused solutions and performance driven networking tools, leading to increased management complexity. 
 
-## AAR Limitations
+The integration between Secure Access and SD-WAN brings the best of both worlds: _Enhanced security and optimized connectivity in a simple, unified approach_. Let’s see how this integration helps organizations achieve both security and performance in a simple way. 
+
+## At a Glance
 
 Before diving into EAAR, let's understand why it was created. 🤓
 

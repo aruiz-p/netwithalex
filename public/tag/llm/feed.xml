@@ -4,7 +4,7 @@
     <title>Llm on NetWithAlex</title>
     <link>http://localhost:1313/tag/llm/</link>
     <description>Recent content in Llm on NetWithAlex</description>
-    <generator>Hugo -- 0.140.2</generator>
+    <generator>Hugo -- 0.143.1</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 28 Jul 2024 14:56:45 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tag/llm/feed.xml" rel="self" type="application/rss+xml" />
@@ -13,10 +13,7 @@
       <link>http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
       <guid>http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/</guid>
-      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;In my &lt;a href=&#34;http://localhost:1313/building-my-first-sd-wan-ai-assistant-with-langchain/&#34;&gt;last post&lt;/a&gt;, I created a Cisco SD-WAN assistant to help me run NWPI traces and troubleshoot the network. The interaction with the assistant required the user to answer questions until receiving information about a particular flow and potential problems. In this post my goal is to use multiple agents and see if I can get to the same conclusion with less human interaction. Repository can be found &lt;a href=&#34;https://github.com/aruiz-p/sdwan-langgraph&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;getting-started&#34;&gt;Getting Started&lt;/h2&gt;
-&lt;p&gt;To achieve this, I will use &lt;a href=&#34;https://langchain-ai.github.io/langgraph/&#34;&gt;LangGraph&lt;/a&gt; officially defined as:&lt;/p&gt;</description>
+      <description>Learn how an LLM agentic approach can be used to troubleshoot your SD-WAN network</description>
     </item>
   </channel>
 </rss>

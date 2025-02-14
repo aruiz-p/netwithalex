@@ -4,7 +4,7 @@
     <title>Sd-Routing on NetWithAlex</title>
     <link>http://localhost:1313/category/sd-routing/</link>
     <description>Recent content in Sd-Routing on NetWithAlex</description>
-    <generator>Hugo -- 0.140.2</generator>
+    <generator>Hugo -- 0.143.1</generator>
     <language>en-US</language>
     <lastBuildDate>Sat, 24 Feb 2024 12:06:47 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/category/sd-routing/feed.xml" rel="self" type="application/rss+xml" />
@@ -13,9 +13,7 @@
       <link>http://localhost:1313/a-new-chapter-sd-routings-revolution-in-network-management/</link>
       <pubDate>Sat, 24 Feb 2024 12:06:47 +0000</pubDate>
       <guid>http://localhost:1313/a-new-chapter-sd-routings-revolution-in-network-management/</guid>
-      <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
-&lt;p&gt;Software Defined Networks (SDNs) came with the promise of simplifying network management, enabling network teams to automate and adopt a programmatic approach. Cisco created solutions like - Catalyst Center, ACI, Meraki and &lt;em&gt;Viptela SD-WAN&lt;/em&gt;. The latter introduced new controllers that changed the rules that dictate how the network operates.&lt;/p&gt;
-&lt;p&gt;Organization that were not ready to take the full SD-WAN leap, while still desiring the benefits of SDN principles had limited options, such as integrating with third-party systems or relying on Catalyst Center. While these solutions addressed some challenges, a significant gap remained unfilled until&amp;hellip; SD-Routing!&lt;/p&gt;</description>
+      <description>Explore how SD-Routing can simply and effectively help you manage and monitor your WAN network.</description>
     </item>
   </channel>
 </rss>

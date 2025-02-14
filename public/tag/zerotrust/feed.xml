@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Zerotrust on NetWithAlex</title>
+    <link>http://localhost:1313/tag/zerotrust/</link>
+    <description>Recent content in Zerotrust on NetWithAlex</description>
+    <generator>Hugo -- 0.143.1</generator>
+    <language>en-US</language>
+    <lastBuildDate>Wed, 05 Feb 2025 14:20:31 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tag/zerotrust/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Securing the Edge with SD-WAN and Secure Access</title>
+      <link>http://localhost:1313/sdwan-sse-integration/</link>
+      <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
+      <guid>http://localhost:1313/sdwan-sse-integration/</guid>
+      <description>Discover how Cisco SD-WAN and Cisco Secure Access work together to enhance network performance and security in a cloud-first world.</description>
+    </item>
+  </channel>
+</rss>

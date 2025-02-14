@@ -4,7 +4,7 @@
     <title>Sdwan on NetWithAlex</title>
     <link>http://localhost:1313/category/sdwan/</link>
     <description>Recent content in Sdwan on NetWithAlex</description>
-    <generator>Hugo -- 0.140.2</generator>
+    <generator>Hugo -- 0.143.1</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 05 Jan 2025 14:20:31 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/category/sdwan/feed.xml" rel="self" type="application/rss+xml" />
@@ -13,11 +13,7 @@
       <link>http://localhost:1313/enhanced-aar/</link>
       <pubDate>Sun, 05 Jan 2025 14:20:31 +0000</pubDate>
       <guid>http://localhost:1313/enhanced-aar/</guid>
-      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;In my previous &lt;a href=&#34;http://localhost:1313/demystifying-aar-1-3-the-foundations&#34;&gt;series of posts&lt;/a&gt;, I explored &lt;strong&gt;Application Aware Routing (AAR)&lt;/strong&gt; in depth, a key SD-WAN technology that steers traffic over best-performing paths. While AAR has been a fundamental capability for years, the evolution of networking brought new ideas to enhance its effectiveness. This led to the introduction of &lt;strong&gt;&lt;em&gt;Enhanced&lt;/em&gt; Application Aware Routing (EAAR)&lt;/strong&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;aar-limitations&#34;&gt;AAR Limitations&lt;/h2&gt;
-&lt;p&gt;Before diving into EAAR, let&amp;rsquo;s understand why it was created.&lt;/p&gt;
-&lt;p&gt;The current AAR implementation measures the path quality using BFD, sending probes at a defined interval (1s by default). Loss, latency and jitter are derived from those packets and these values are placed into rotating buckets to calculate an average tunnel health metric. This process would typically take between 10 to 60 minutes and with some configuration tweaks we could achieve times of 2 to 10 mins.&lt;/p&gt;</description>
+      <description>Learn the benefits of enhanced app aware routing and how to implement it on your network</description>
     </item>
   </channel>
 </rss>
