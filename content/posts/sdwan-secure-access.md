@@ -15,21 +15,24 @@ tag:
 ---
 ## Introduction
 
-Security has always been a top of mind for organizations, but protecting every angle of the network remains a challenge. At the same time, ensuring a seamless application and user experience is just as critical. Traditionally, solutions focused on security and those designed for routing and performance have operated independently, forcing IT teams to manage complexity and trade-offs.
+Security has always been a top of mind for organizations, but protecting every angle of the network remains a challenge. At the same time, ensuring an optimal application and user experience is equally important. Organizations have often had to choose between security-focused and performance-driven solutions, leading to increased management and operational complexity. 
 
-Organizations have often had to choose between security-focused solutions and performance-driven networking tools, leading to increased management and operational complexity. 
+Secure Access is a robust solution that addresses these challenges. It offers top notch security by integrating advanced technologies and access controls. This means that users can get a _**secure and direct**_ internet connectivity from SD-WAN sites.
 
-Secure Access is a robust solution that addresses these challenges. It offers top notch security by integrating advanced technologies and access controls. 
+Let's see how it works 
 
 ## SD-WAN Meets Secure Access
 
-Starting with SD-WAN version 20.13/17.13, a native integration with Secure Access is now available.
+Starting with SD-WAN version 20.13/17.13, an integration with Secure Access is now available out of the box.
 
 With this integration, automatic tunnels are established to the primary and secondary Secure Access Data Centers closest to your router’s location, ensuring optimal performance. These tunnels route internet traffic while enforcing your organization's security policies, providing a simple and powerful way to improve both security and connectivity.
 
-## Enhanced AAR
+At the center of Secure Access there are Network Tunnels Groups (NTG) to manage IPSec connections. These NTGs will contain a primary and secondary Secure Access Data Center. Although it's not mandatory to have a tunnel to primary and secondary DC, it is highly recommended to achieve high availability in case one of them is not available. 
 
-_So, what is EAAR and how it improves its predecessor?_ 🤔
+![](/wp-content/uploads/2025/02/sse-topo.png)
+
+You can configure up to 16 tunnels, 8 active and 8 backup and load balance across active tunnels is possible. 
+
 
 ## Lessons learned 
 

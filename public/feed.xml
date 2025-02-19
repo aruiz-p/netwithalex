@@ -4,10 +4,17 @@
     <title>Home on NetWithAlex</title>
     <link>http://localhost:1313/</link>
     <description>Recent content in Home on NetWithAlex</description>
-    <generator>Hugo -- 0.143.1</generator>
+    <generator>Hugo -- 0.144.0</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 05 Jan 2025 14:20:31 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Feb 2025 14:20:31 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Securing the Edge with Cisco SD-WAN and Secure Access</title>
+      <link>http://localhost:1313/sdwan-sse-integration/</link>
+      <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
+       <guid isPermaLink="false">http://localhost:1313/sdwan-sse-integration/</guid> 
+      <description>Discover how Cisco SD-WAN and Cisco Secure Access work together to enhance network performance and security in a cloud-first world.</description>
+    </item>
     <item>
       <title>Enhanced Application Aware Routing</title>
       <link>http://localhost:1313/enhanced-aar/</link>

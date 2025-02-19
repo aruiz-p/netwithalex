@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Securing the Edge: SSE and SD-WAN integration | NetWithAlex</title>
+<title>Securing the Edge with Cisco SD-WAN and Secure Access | NetWithAlex</title>
 <meta name="keywords" content="">
 <meta name="description" content="Discover how Cisco SD-WAN and Cisco Secure Access work together to enhance network performance and security in a cloud-first world.">
 <meta name="author" content="alex">
@@ -57,7 +57,7 @@
     </style>
 </noscript><meta property="og:url" content="http://localhost:1313/sdwan-sse-integration/">
   <meta property="og:site_name" content="NetWithAlex">
-  <meta property="og:title" content="Securing the Edge: SSE and SD-WAN integration">
+  <meta property="og:title" content="Securing the Edge with Cisco SD-WAN and Secure Access">
   <meta property="og:description" content="Discover how Cisco SD-WAN and Cisco Secure Access work together to enhance network performance and security in a cloud-first world.">
   <meta property="og:locale" content="en-US">
   <meta property="og:type" content="article">
@@ -65,7 +65,7 @@
     <meta property="article:published_time" content="2025-02-05T14:20:31+00:00">
     <meta property="article:modified_time" content="2025-02-05T14:20:31+00:00">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Securing the Edge: SSE and SD-WAN integration">
+<meta name="twitter:title" content="Securing the Edge with Cisco SD-WAN and Secure Access">
 <meta name="twitter:description" content="Discover how Cisco SD-WAN and Cisco Secure Access work together to enhance network performance and security in a cloud-first world.">
 
 
@@ -83,7 +83,7 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "Securing the Edge: SSE and SD-WAN integration",
+      "name": "Securing the Edge with Cisco SD-WAN and Secure Access",
       "item": "http://localhost:1313/sdwan-sse-integration/"
     }
   ]
@@ -93,14 +93,14 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Securing the Edge: SSE and SD-WAN integration",
-  "name": "Securing the Edge: SSE and SD-WAN integration",
+  "headline": "Securing the Edge with Cisco SD-WAN and Secure Access",
+  "name": "Securing the Edge with Cisco SD-WAN and Secure Access",
   "description": "Discover how Cisco SD-WAN and Cisco Secure Access work together to enhance network performance and security in a cloud-first world.",
   "keywords": [
     
   ],
-  "articleBody": "Introduction Security has always been a top priority for organizations, but protecting every angle of the network remains a challenge. At the same time, ensuring a seamless application and user experience is just as critical. Organizations often had to choose between security focused solutions and performance driven networking tools, leading to increased management complexity.\nThe integration between Secure Access and SD-WAN brings the best of both worlds: Enhanced security and optimized connectivity in a simple, unified approach. Let’s see how this integration helps organizations achieve both security and performance in a simple way.\nAt a Glance Before diving into EAAR, let’s understand why it was created. 🤓\nThe current AAR implementation measures the path quality using BFD, sending probes at a defined interval (1s by default). Loss, latency and jitter are derived from those packets and these values are placed into rotating buckets to calculate an average tunnel health metric. This process would typically take between 10 to 60 minutes and with some configuration tweaks we could achieve times of 2 to 10 mins.\nFor those networks that require faster detection, some challenges arise:\nLowering the hello interval to less than 1s affects the device’s tunnel scale Lowering bfd multiplier and poll intervals could lead to false positives, switching traffic even with transient network conditions. Switch traffic back and forth, there is no mechanism to determine if a transport is stable again after a network degradation event. Enhanced AAR So, what is EAAR and how it improves its predecessor? 🤔\nIn a nutshell these are the advantages:\nUses inline data rather than BFD. In other words, the data plane packets are used to measure loss, latency and jitter. Steer traffic in seconds rather than minutes Dampening implemented for stability purposes, ensuring transports are stable before forwarding traffic through them. More accurate measurements of loss, latency and jitter Breaking It Down When EAAR is enabled, data packets will be used to measure loss, latency and jitter. Let’s understand the key differences:\nLoss measurement The SD-WAN routers will use inline data along with IPSEC sequence numbers to measure loss.\nThere is an in-built mechanism that allows the routers to determine if the loss is local to the router\nLocal loss - typically due to QoS drops Or external to the router\nWAN loss - any packet loss outside the router To calculate the local loss, the router will determine the amount of packets it generated against the amount of packets that actually were sent. To get the WAN loss, peer SD-WAN routers will report the amount of packets received and will use BFD (Path Monitor TLVs) to send this information back to the originating router.\nUp to this point, there is an important improvement in how loss measurement is done, however, this could be further improved by leveraging per queue loss measurements. To achieve this, we need to associate an SLA class with an App Probe Class. Let’s see an example.\nWith this App Probe Class, the router will use (and generate BFD) packets with DSCP 18, mimicking less important traffic that will be subject to different rules and paths on the local and external routers. This will provide a more accurate measurement of loss for each type of traffic on the specified transports. If there is no inline data, BFD is used to get measurements.\nNote If using GRE, per queue measurement is not available.\nHere is a visual to better understand how loss will be measured depending on multiple factors\nEncapsulation App Probe Class Measurement type Public tunnels Private Tunnels IPsec Yes Per SLA Total WAN loss + local loss per queue WAN loss per queue + local loss per queue IPsec No All SLAs Total WAN loss + total local loss Total WAN loss + total local loss GRE - All SLAs Total WAN loss + total local loss Total WAN loss + total local loss Latency To measure latency, the router will simply calculate the time taken to send and receive packets between source and destination devices. Inline data is used and it can get to App Probe granularity.\nJitter Another worth mentioning change is that the jitter is computed per direction (receive or transmit). The jitter is computed at the receiver and reported to the sender using BFD TLVs. Inline data is used and BFD is the fallback mechanism if no data traffic is available.\nSLA Dampening One of the benefits of EAAR is steering traffic in seconds rather than minutes, but what would happen if there are transient network conditions causing the transports to not meet the sla every few minutes? Traffic would be constantly switching between transports which is not a desirable scenario and the reason why dampening was introduced.\nThe general idea is that when a transport link goes out of compliance, traffic is rerouted to an alternate path. Once the transport becomes compliant again, the device does not immediately move traffic back. Instead, it starts a timer to ensure the link remains stable for a specified period before reusing it.\nIn the end, dampening helps prevent unnecessary traffic shifts, which could negatively impact performance due to transport instability\nConfiguring EAAR To enable EAAR we have three predefined options:\nMode Poll Interval Poll Multiplier Dampening Multiplier Aggressive 10s 6 (10s-60s) 120 (20 mins) Moderate 60s 5 (60s-300s) 40 (40 mins) Conservative 300s 6 (300s-1800s) 12 (60 mins) Note To use custom timers, configuration needs to be done through CLI templates.\nEAAR follows the same fundamental principle as AAR, using rotating buckets to calculate average loss, latency, and jitter. With the Aggressive mode, traffic would take between 10-60 seconds to shift, depending on how severe the impairment is.\nThe dampening window (poll interval x dampening multiplier) is 1200 seconds, meaning that before switching traffic back to a transport, it needs to be stable for 20 minutes.\nIn my lab, I am using Configuration Groups, however this is available through templates as well.\nYou can use a variable, instead of a global value, to account for devices that will not be running EAAR. In this case, EAAR enabled devices will fallback to AAR.\nThe following config is added to the devices:\nbfd enhanced-app-route enable bfd enhanced-app-route pfr-poll-interval 10000 bfd enhanced-app-route pfr-multiplier 6 bfd sla-dampening enable bfd sla-dampening multiplier 120 Let’s see how it works\nDemo In my lab, I use Manager 20.16.1 and my devices are running 17.15.1a\nNote The minimum version required is 20.12/17.12\nLet’s start with some verifications after pushing the configuration.\nTo check the configured timers and multipliers\nBR10#show sdwan app-route params Enhanced Application-Aware routing Config: :Enabled Poll interval: :10000 Poll multiplier: :6 App route Poll interval: :120000 Poll multiplier: :5 SLA dampening Config: :Enabled Multiplier: :120 To verify what BFD sessions are using EAAR, look for the FLAGS column\nBR10#show sdwan bfd sessions alt SOURCE TLOC REMOTE TLOC DST PUBLIC DST PUBLIC SYSTEM IP SITE ID STATE COLOR COLOR SOURCE IP IP PORT ENCAP BFD-LD FLAGS UPTIME ------------------------------------------------------------------------------------------------------------------------------------------------- 1.1.1.20 200 up biz-internet biz-internet 30.1.10.2 30.1.20.2 12406 ipsec 20006 EAAR 0:00:20:31 1.1.1.20 200 up mpls mpls 30.2.10.2 30.2.20.2 12366 ipsec 20002 EAAR 0:00:20:38 1.1.1.20 200 up private1 private1 30.3.10.2 30.3.20.2 12366 ipsec 20003 EAAR 0:00:20:37 To get more details about a specific tunnel.\nBR10#show sdwan app-route stats summary Generating output, this might take time, please wait ... app-route statistics 30.1.10.2 30.1.20.2 ipsec 12386 12406 remote-system-ip 1.1.1.20 local-color biz-internet remote-color biz-internet sla-class-index 0,1,2 fallback-sla-class-index None enhanced-app-route Enabled sla-dampening-index None app-probe-class-list None mean-loss 0.000 mean-latency 0 mean-jitter 0 TOTAL AVERAGE AVERAGE TX DATA RX DATA IPV6 TX IPV6 RX INDEX PACKETS LOSS LATENCY JITTER PKTS PKTS DATA PKTS DATA PKTS ------------------------------------------------------------------------------------------------------------- 0 0 0 0 0 0 0 0 0 1 64 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 0 4 0 0 0 0 0 0 0 0 5 64 0 0 0 0 0 0 0 Notice that there is no traffic between my devices, thus the total packet count on each bucket is low.\nSame information is available through the Manager’s UI, using the Real Time dashboard and using the App Routes Statistics Device Option.\nScenario 1 - Slight impairment This is my lab’s topology\nFor this first test, I will use the following SLA parameters:\nSLA_Real-Time Loss: 3% Latency: 150ms Jitter: 100ms The AAR policy from the Controller instructs:\nUse mpls as primary path If no color meets the SLA and private1 is available, use it. If private1 is not available, load-balance among all remaining colors. I am matching traffic between 172.16.10.0/24 and 172.16.20.0/24.\nBR10#show sdwan policy from-vsmart from-vsmart app-route-policy app_route_AAR vpn-list vpn_Corporate_Users sequence 1 match source-data-prefix-list BR10 destination-data-prefix-list BR20 action backup-sla-preferred-color private1 sla-class SLA_Real-Time no sla-class strict sla-class preferred-color mpls sequence 11 match source-data-prefix-list BR20 destination-data-prefix-list BR10 action backup-sla-preferred-color private1 sla-class SLA_Real-Time no sla-class strict sla-class preferred-color mpls Initial state without network issues\nBR10#show sdwan app-route stats summary | i color|damp|mean local-color biz-internet remote-color biz-internet sla-dampening-index None mean-loss 0.000 mean-latency 1 mean-jitter 0 local-color mpls remote-color mpls sla-dampening-index None mean-loss 1.212 mean-latency 1 mean-jitter 0 mean-loss 1.212 mean-latency 1 mean-jitter 0 local-color private1 remote-color private1 sla-dampening-index None mean-loss 0.000 mean-latency 0 mean-jitter 0 mean-loss 0.000 mean-latency 0 mean-jitter 0 Notice that the number of packets per bucket increased dramatically\nBR10#show sdwan app-route stats remote-color mpls summary Generating output, this might take time, please wait ... app-route statistics 30.2.10.2 30.2.20.2 ipsec 12366 12366 remote-system-ip 1.1.1.20 local-color mpls remote-color mpls sla-class-index 0,1 fallback-sla-class-index None enhanced-app-route Enabled sla-dampening-index None app-probe-class-list None mean-loss 1.176 mean-latency 0 mean-jitter 0 TOTAL AVERAGE AVERAGE TX DATA RX DATA IPV6 TX IPV6 RX INDEX PACKETS LOSS LATENCY JITTER PKTS PKTS DATA PKTS DATA PKTS ------------------------------------------------------------------------------------------------------------- 0 131136 1501 0 0 100084 20846 0 0 1 131072 1438 0 0 95287 19605 0 0 2 131072 1400 0 0 100985 20937 0 0 3 131072 1781 0 0 85553 18271 0 0 4 64 0 0 0 72618 15942 0 0 5 131072 1589 0 0 65198 14226 0 0 Traffic is using mpls as primary transport\nBR10# show sdwan policy service-path vpn 10 interface gigabitEthernet 4 source-ip 172.16.10.10 dest-ip 172.16.20.10 protocol 6 all Number of possible next hops: 1 Next Hop: IPsec Source: 30.2.10.2 12366 Destination: 30.2.20.2 12366 Local Color: mpls Remote Color: mpls Remote System IP: 1.1.1.20 I will introduce 3% packet loss on the mpls transport and see how long it takes to switch traffic. Since there is around 1% loss already, 3% should be enough to trigger a change.\nThe mpls transport has more than 3% loss\nBR10#show sdwan app-route stats remote-color mpls summary Generating output, this might take time, please wait ... app-route statistics 30.2.10.2 30.2.20.2 ipsec 12366 12366 remote-system-ip 1.1.1.20 local-color mpls remote-color mpls sla-class-index 0 fallback-sla-class-index 1 enhanced-app-route Enabled sla-dampening-index None app-probe-class-list None mean-loss 3.125 \u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c mean-latency 0 mean-jitter 0 After 56 seconds, the traffic shifted and any of the remaining compliant transports could be used\nBR10# show sdwan policy service-path vpn 10 interface gigabitEthernet 4 source-ip 172.16.10.10 dest-ip 172.16.20.10 protocol 6 all Number of possible next hops: 2 Next Hop: IPsec Source: 30.3.10.2 12366 Destination: 30.3.20.2 12366 Local Color: private1 Remote Color: private1 Remote System IP: 1.1.1.20 Next Hop: IPsec Source: 30.1.10.2 12386 Destination: 30.1.20.2 12366 Local Color: biz-internet Remote Color: biz-internet Remote System IP: 1.1.1.20 If I take the loss away we can see the dampening mechanism gets activated. So, if the transport is stable for 20 minutes, it will be used again as preferred path.\nBR10#show sdwan app-route stats remote-color mpls summary Generating output, this might take time, please wait ... app-route statistics 30.2.10.2 30.2.20.2 ipsec 12366 12366 remote-system-ip 1.1.1.20 local-color mpls remote-color mpls sla-class-index 0 fallback-sla-class-index 1 enhanced-app-route Enabled sla-dampening-index 1 \u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c app-probe-class-list None mean-loss 0.000 mean-latency 0 mean-jitter 0 Scenario 2 - Greater impairment In this case, I will introduce 10% packet loss to biz-internet transport, making private 1 the only compliant transport.\nAfter around 45 seconds, loss for biz-internet was 12%\nBR10#show sdwan app-route stats local-color biz-internet summary Generating output, this might take time, please wait ... app-route statistics 30.1.10.2 30.1.20.2 ipsec 12386 12366 remote-system-ip 1.1.1.20 local-color biz-internet remote-color biz-internet sla-class-index 0 fallback-sla-class-index 1 enhanced-app-route Enabled sla-dampening-index None app-probe-class-list None mean-loss 12.500 mean-latency 0 mean-jitter 0 Traffic shifted to private1 only\nBR10#show sdwan policy service-path vpn 10 interface gigabitEthernet 4 source-ip 172.16.10.10 dest-ip 172.16.20.10 protocol 6 all Number of possible next hops: 1 Next Hop: IPsec Source: 30.3.10.2 12366 Destination: 30.3.20.2 12366 Local Color: private1 Remote Color: private1 Remote System IP: 1.1.1.20 After removing the packet loss, biz-internet has the dampening mechanism activated\nBR10#show sdwan app-route stats local-color biz-internet summary Generating output, this might take time, please wait ... app-route statistics 30.1.10.2 30.1.20.2 ipsec 12386 12366 remote-system-ip 1.1.1.20 local-color biz-internet remote-color biz-internet sla-class-index 0 fallback-sla-class-index 1 enhanced-app-route Enabled sla-dampening-index 1 \u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c app-probe-class-list None mean-loss 1.562 mean-latency 0 mean-jitter 0 In this case, the time to switch traffic was reduced as a cosequence of a greater impairment.\nScenario 3 - Multiple App Probe Classes For this final scenario, let’s see how to get the most benefit out of EAAR.\nThe configuration is more complex as it involves QoS, App Probe Classes and AAR Policy.\nQoS is required to classify and send traffic out on different queues. App Probes Classes to measure loss, latency and jitter on each of those queues, independently. My Qos configuration has 3 queues and queue 2 will handle the least important traffic.\nQueue 0 for control traffic Queue 1 for Real-Time Traffic (marked DSCP 46) Queue 2 for Transactional traffic (marked DSCP 18) I use a data policy to match traffic on the service side, mark it with the right DSCP and put it on the right forwarding class. I also created a shaper on my mpls interface\nTo demo things out, I will have two data transfers:\nHTTP GET (port 8000) SCP copy (port 22) My SLAs have the following configurations:\nSLA Class Name Loss Latency Jitter SLA_Real-Time 3 % 150 ms 100 ms SLA_Transactional 5 % 45 ms 150 ms The first thing to note is that my two app probes classes are measured independently. See how the mean loss for Transactional-Probe_Class is 1, whereas for Real_Time_Probe_Class is 0.\nBR10#show sdwan app-route stats local-color mpls summary Generating output, this might take time, please wait ... app-route statistics 30.2.10.2 30.2.20.2 ipsec 12366 12366 remote-system-ip 1.1.1.20 local-color mpls remote-color mpls sla-class-index 0,1,2 fallback-sla-class-index None enhanced-app-route Enabled sla-dampening-index None app-probe-class-list None mean-loss 0.000 mean-latency 1 mean-jitter 0 TOTAL AVERAGE AVERAGE TX DATA RX DATA IPV6 TX IPV6 RX INDEX PACKETS LOSS LATENCY JITTER PKTS PKTS DATA PKTS DATA PKTS ------------------------------------------------------------------------------------------------------------- 0 16384 0 0 0 35827 111807 0 0 1 49152 0 1 0 37788 118236 0 0 2 49216 0 1 0 36859 115551 0 0 3 16384 0 1 0 23894 77280 0 0 4 32768 0 1 1 33179 103759 0 0 5 32768 0 1 0 21485 71702 0 0 app-probe-class-list Real_Time_Probe_Class mean-loss 0.000 mean-latency 0 mean-jitter 0 TOTAL AVERAGE AVERAGE TX DATA RX DATA IPV6 TX IPV6 RX INDEX PACKETS LOSS LATENCY JITTER PKTS PKTS DATA PKTS DATA PKTS ------------------------------------------------------------------------------------------------------------- 0 0 0 0 0 - - - - 1 32768 0 1 0 - - - - 2 32768 0 0 0 - - - - 3 0 0 0 0 - - - - 4 32768 0 1 2 - - - - 5 0 0 0 0 - - - - app-probe-class-list Transactional-Probe_Class mean-loss 0.000 mean-latency 1 mean-jitter 0 TOTAL AVERAGE AVERAGE TX DATA RX DATA IPV6 TX IPV6 RX INDEX PACKETS LOSS LATENCY JITTER PKTS PKTS DATA PKTS DATA PKTS ------------------------------------------------------------------------------------------------------------- 0 16384 0 0 0 - - - - 1 49152 0 1 0 - - - - 2 49216 0 1 0 - - - - 3 16384 0 1 0 - - - - 4 32768 0 1 1 - - - - 5 32768 0 1 0 - - - - Now, I have lowered my shaper. EAAR was quick to detect a change in latency for the transactional SLA, it is now 53 ms.\nBR10# show sdwan app-route stats local mpls summary Generating output, this might take time, please wait ... app-route statistics 30.2.10.2 30.2.20.2 ipsec 12386 12366 remote-system-ip 1.1.1.20 local-color mpls remote-color mpls sla-class-index 0,1,2 fallback-sla-class-index None enhanced-app-route Enabled sla-dampening-index None app-probe-class-list None mean-loss 0.000 mean-latency 53 mean-jitter 0 TOTAL AVERAGE AVERAGE TX DATA RX DATA IPV6 TX IPV6 RX INDEX PACKETS LOSS LATENCY JITTER PKTS PKTS DATA PKTS DATA PKTS ------------------------------------------------------------------------------------------------------------- 0 2048 0 54 0 4396 8513 0 0 1 1024 0 55 0 4461 8534 0 0 2 8256 0 49 0 4429 8549 0 0 3 16384 0 54 0 4411 8549 0 0 4 0 0 53 0 4440 8549 0 0 5 0 0 54 0 4443 8549 0 0 app-probe-class-list Real_Time_Probe_Class mean-loss 0.000 mean-latency 0 mean-jitter 0 TOTAL AVERAGE AVERAGE TX DATA RX DATA IPV6 TX IPV6 RX INDEX PACKETS LOSS LATENCY JITTER PKTS PKTS DATA PKTS DATA PKTS ------------------------------------------------------------------------------------------------------------- 0 0 0 0 0 - - - - 1 0 0 0 0 - - - - 2 8192 0 0 0 - - - - 3 16384 0 0 0 - - - - 4 0 0 0 0 - - - - 5 0 0 0 0 - - - - app-probe-class-list Transactional-Probe_Class mean-loss 0.000 mean-latency 53 \u003c\u003c\u003c\u003c\u003c\u003c\u003c mean-jitter 0 TOTAL AVERAGE AVERAGE TX DATA RX DATA IPV6 TX IPV6 RX INDEX PACKETS LOSS LATENCY JITTER PKTS PKTS DATA PKTS DATA PKTS ------------------------------------------------------------------------------------------------------------- 0 2048 0 54 0 - - - - 1 1024 0 55 0 - - - - 2 8256 0 49 0 - - - - 3 16384 0 54 0 - - - - 4 0 0 53 0 - - - - 5 0 0 54 0 - - - - Now that my Transactional SLA with a maximum latency of 45 ms is not met , I will use NWPI to understand how traffic is getting sent out. Let’s examine HTTP traffic using port 80000\nNotice that, on the upstream direction, the local and remote color is set to private1, indicating that traffic has moved away from mpls and its 53 ms latency. Just what we expected ✅\nNow, let’s see how traffic on port 22 is flowing\nAgain, take a look at the upstream local and remote color, notice how mpls is still in use for this traffic, as there are no path issues detected.\nIn summary, the traffic with dscp 46 is working perfectly fine on the mpls transport, however, traffic with DSCP 18 was having more latency than the configured SLA, so traffic was moved to Private1 as it complies with the SLA.\nWe can confirm we are measuring and taking routing decisions on a per queue basis, this is a huge difference 🤯 !\nLessons learned Using inline data, the number of samples increases dramatically compared to BFD sample size. 📈 EAAR can steer traffic in seconds, rather than minutes. ⏩ EAAR delivers the greatest benefits on transports with QoS, such as MPLS. 🚀 Even on transports without QoS, inline data measurements increases sample size and accuracy. ⏳ The dampening timer is useful to ensure transports are stable before marking them as valid. ✅ Interoperability between devices running EAAR and devices running AAR is possible 🔄 I hope you have learned something useful! See you on the next one 👋\n",
-  "wordCount" : "3239",
+  "articleBody": "Introduction Security has always been a top of mind for organizations, but protecting every angle of the network remains a challenge. At the same time, ensuring an optimal application and user experience is equally important. Organizations have often had to choose between security-focused and performance-driven solutions, leading to increased management and operational complexity.\nSecure Access is a robust solution that addresses these challenges. It offers top notch security by integrating advanced technologies and access controls. This means that users can get a secure and direct internet connectivity from SD-WAN sites.\nLet’s see how it works\nSD-WAN Meets Secure Access Starting with SD-WAN version 20.13/17.13, an integration with Secure Access is now available out of the box.\nWith this integration, automatic tunnels are established to the primary and secondary Secure Access Data Centers closest to your router’s location, ensuring optimal performance. These tunnels route internet traffic while enforcing your organization’s security policies, providing a simple and powerful way to improve both security and connectivity.\nAt the center of Secure Access there are Network Tunnels Groups (NTG) to manage IPSec connections. These NTGs will contain a primary and secondary Secure Access Data Center. Although it’s not mandatory to have a tunnel to primary and secondary DC, it is highly recommended to achieve high availability in case one of them is not available.\nYou can configure up to 16 tunnels, 8 active and 8 backup and load balance across active tunnels is possible.\nLessons learned Using inline data, the number of samples increases dramatically compared to BFD sample size. 📈 EAAR can steer traffic in seconds, rather than minutes. ⏩ EAAR delivers the greatest benefits on transports with QoS, such as MPLS. 🚀 Even on transports without QoS, inline data measurements increases sample size and accuracy. ⏳ The dampening timer is useful to ensure transports are stable before marking them as valid. ✅ Interoperability between devices running EAAR and devices running AAR is possible 🔄 I hope you have learned something useful! See you on the next one 👋\n",
+  "wordCount" : "336",
   "inLanguage": "en",
   "datePublished": "2025-02-05T14:20:31Z",
   "dateModified": "2025-02-05T14:20:31Z",
@@ -204,9 +204,9 @@
   <header class="post-header">
     <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
-      Securing the Edge: SSE and SD-WAN integration
+      Securing the Edge with Cisco SD-WAN and Secure Access
     </h1>
-    <div class="post-meta"><span title='2025-02-05 14:20:31 +0000 WET'>February 5, 2025</span>&nbsp;·&nbsp;16 min&nbsp;·&nbsp;alex
+    <div class="post-meta"><span title='2025-02-05 14:20:31 +0000 WET'>February 5, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;alex
 
 </div>
   </header> <div class="toc">
@@ -219,35 +219,7 @@
                 <li>
                     <a href="#introduction" aria-label="Introduction">Introduction</a></li>
                 <li>
-                    <a href="#at-a-glance" aria-label="At a Glance">At a Glance</a></li>
-                <li>
-                    <a href="#enhanced-aar" aria-label="Enhanced AAR">Enhanced AAR</a><ul>
-                        
-                <li>
-                    <a href="#breaking-it-down" aria-label="Breaking It Down">Breaking It Down</a><ul>
-                        
-                <li>
-                    <a href="#loss-measurement" aria-label="Loss measurement">Loss measurement</a></li>
-                <li>
-                    <a href="#latency" aria-label="Latency">Latency</a></li>
-                <li>
-                    <a href="#jitter" aria-label="Jitter">Jitter</a></li></ul>
-                </li>
-                <li>
-                    <a href="#sla-dampening" aria-label="SLA Dampening">SLA Dampening</a></li></ul>
-                </li>
-                <li>
-                    <a href="#configuring-eaar" aria-label="Configuring EAAR">Configuring EAAR</a></li>
-                <li>
-                    <a href="#demo" aria-label="Demo">Demo</a><ul>
-                        
-                <li>
-                    <a href="#scenario-1---slight-impairment" aria-label="Scenario 1 - Slight impairment">Scenario 1 - Slight impairment</a></li>
-                <li>
-                    <a href="#scenario-2---greater-impairment" aria-label="Scenario 2 - Greater impairment">Scenario 2 - Greater impairment</a></li>
-                <li>
-                    <a href="#scenario-3---multiple-app-probe-classes" aria-label="Scenario 3 - Multiple App Probe Classes">Scenario 3 - Multiple App Probe Classes</a></li></ul>
-                </li>
+                    <a href="#sd-wan-meets-secure-access" aria-label="SD-WAN Meets Secure Access">SD-WAN Meets Secure Access</a></li>
                 <li>
                     <a href="#lessons-learned" aria-label="Lessons learned">Lessons learned</a>
                 </li>
@@ -257,510 +229,15 @@
 </div>
 
   <div class="post-content"><h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
-<p>Security has always been a top priority for organizations, but protecting every angle of the network remains a challenge. At the same time, ensuring a seamless application and user experience is just as critical. Organizations often had to choose between security focused solutions and performance driven networking tools, leading to increased management complexity.</p>
-<p>The integration between Secure Access and SD-WAN brings the best of both worlds: <em>Enhanced security and optimized connectivity in a simple, unified approach</em>. Let’s see how this integration helps organizations achieve both security and performance in a simple way.</p>
-<h2 id="at-a-glance">At a Glance<a hidden class="anchor" aria-hidden="true" href="#at-a-glance">#</a></h2>
-<p>Before diving into EAAR, let&rsquo;s understand why it was created. 🤓</p>
-<p>The current AAR implementation measures the path quality using BFD, sending probes at a defined interval (1s by default). Loss, latency and jitter are derived from those packets and these values are placed into rotating buckets to calculate an average tunnel health metric. This process would typically take between 10 to 60 minutes and with some configuration tweaks we could achieve times of 2 to 10 mins.</p>
-<p>For those networks that require faster detection, some challenges arise:</p>
-<ul>
-<li>Lowering the hello interval to less than 1s affects the device&rsquo;s tunnel scale</li>
-<li>Lowering bfd multiplier and poll intervals could lead to false positives, switching traffic even with transient network conditions.</li>
-<li>Switch traffic back and forth, there is no mechanism to determine if a transport is stable again after a network degradation event.</li>
-</ul>
-<h2 id="enhanced-aar">Enhanced AAR<a hidden class="anchor" aria-hidden="true" href="#enhanced-aar">#</a></h2>
-<p><em>So, what is EAAR and how it improves its predecessor?</em> 🤔</p>
-<p>In a nutshell these are the advantages:</p>
-<ul>
-<li>Uses <u>inline data</u> rather than BFD. In other words, the data plane packets are used to measure loss, latency and jitter.</li>
-<li>Steer traffic in <u>seconds</u> rather than minutes</li>
-<li>Dampening implemented for <u>stability</u> purposes, ensuring transports are stable before forwarding traffic through them.</li>
-<li>More <u>accurate measurement</u>s of loss, latency and jitter</li>
-</ul>
-<h3 id="breaking-it-down">Breaking It Down<a hidden class="anchor" aria-hidden="true" href="#breaking-it-down">#</a></h3>
-<p>When EAAR is enabled, data packets will be used to measure loss, latency and jitter. Let&rsquo;s understand the key differences:</p>
-<h4 id="loss-measurement">Loss measurement<a hidden class="anchor" aria-hidden="true" href="#loss-measurement">#</a></h4>
-<p>The SD-WAN routers will use inline data along with IPSEC sequence numbers to measure loss.</p>
-<p>There is an in-built mechanism that allows the routers to determine if the loss is local to the router</p>
-<ul>
-<li><strong>Local loss</strong> - typically due to QoS drops</li>
-</ul>
-<p>Or external to the router</p>
-<ul>
-<li><strong>WAN loss</strong> - any packet loss outside the router</li>
-</ul>
-<p>To calculate the local loss, the router will determine the amount of packets it generated against the amount of packets that actually were sent. To get the WAN loss, peer SD-WAN routers will report the amount of packets received and will use BFD (Path Monitor TLVs) to send this information back to the originating router.</p>
-<p>Up to this point, there is an important improvement in how loss measurement is done, however, this could be further improved by leveraging per queue loss measurements. To achieve this, we need to associate an SLA class with an <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html#concept_gjc_5pm_dnb">App Probe Class</a>. Let&rsquo;s see an example.</p>
-<p><img loading="lazy" src="/wp-content/uploads/2025/02/app-probe.png"></p>
-<p>With this App Probe Class, the router will use (and generate BFD) packets with DSCP 18, mimicking less important traffic that will be subject to different rules and paths on the local and external routers. This will provide a more accurate measurement of loss for each type of traffic on the specified transports. If there is no inline data, BFD is used to get measurements.</p>
-<p><strong>Note</strong> If using GRE, per queue measurement is <strong>not</strong> available.</p>
-<p>Here is a visual to better understand how loss will be measured depending on multiple factors</p>
-<table>
-  <thead>
-      <tr>
-          <th>Encapsulation</th>
-          <th>App Probe Class</th>
-          <th>Measurement type</th>
-          <th>Public tunnels</th>
-          <th>Private Tunnels</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>IPsec</td>
-          <td>Yes</td>
-          <td>Per SLA</td>
-          <td>Total WAN loss + local loss per queue</td>
-          <td>WAN loss per queue + local loss per queue</td>
-      </tr>
-      <tr>
-          <td>IPsec</td>
-          <td>No</td>
-          <td>All SLAs</td>
-          <td>Total WAN loss + total local loss</td>
-          <td>Total WAN loss + total local loss</td>
-      </tr>
-      <tr>
-          <td>GRE</td>
-          <td>-</td>
-          <td>All SLAs</td>
-          <td>Total WAN loss + total local loss</td>
-          <td>Total WAN loss + total local loss</td>
-      </tr>
-  </tbody>
-</table>
-<h4 id="latency">Latency<a hidden class="anchor" aria-hidden="true" href="#latency">#</a></h4>
-<p>To measure latency, the router will simply calculate the time taken to send and receive packets between source and destination devices. Inline data is used and it can get to App Probe granularity.</p>
-<h4 id="jitter">Jitter<a hidden class="anchor" aria-hidden="true" href="#jitter">#</a></h4>
-<p>Another worth mentioning change is that the jitter is computed per direction (receive or transmit). The jitter is computed at the receiver and reported to the sender using BFD TLVs. Inline data is used and BFD is the fallback mechanism if no data traffic is available.</p>
-<h3 id="sla-dampening">SLA Dampening<a hidden class="anchor" aria-hidden="true" href="#sla-dampening">#</a></h3>
-<p>One of the benefits of EAAR is steering traffic in seconds rather than minutes, but what would happen if there are transient network conditions causing the transports to not meet the sla every few minutes? Traffic would be constantly switching between transports which is not a desirable scenario and the reason why dampening was introduced.</p>
-<p>The general idea is that when a transport link goes out of compliance, traffic is rerouted to an alternate path. Once the transport becomes compliant again, the device <strong>does not</strong> immediately move traffic back. Instead, it starts a timer to ensure the link remains stable for a specified period before reusing it.</p>
-<p>In the end, dampening helps prevent unnecessary traffic shifts, which could negatively impact performance due to transport instability</p>
-<h2 id="configuring-eaar">Configuring EAAR<a hidden class="anchor" aria-hidden="true" href="#configuring-eaar">#</a></h2>
-<p>To enable EAAR we have three predefined options:</p>
-<table>
-  <thead>
-      <tr>
-          <th>Mode</th>
-          <th>Poll Interval</th>
-          <th>Poll Multiplier</th>
-          <th>Dampening Multiplier</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Aggressive</td>
-          <td>10s</td>
-          <td>6 (10s-60s)</td>
-          <td>120 (20 mins)</td>
-      </tr>
-      <tr>
-          <td>Moderate</td>
-          <td>60s</td>
-          <td>5 (60s-300s)</td>
-          <td>40  (40 mins)</td>
-      </tr>
-      <tr>
-          <td>Conservative</td>
-          <td>300s</td>
-          <td>6 (300s-1800s)</td>
-          <td>12  (60 mins)</td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Note</strong> To use custom timers, configuration needs to be done through CLI templates.</p>
-<p>EAAR follows the same fundamental principle as AAR, using rotating buckets to calculate average loss, latency, and jitter. With the <em>Aggressive</em> mode, traffic would take between 10-60 seconds to shift, depending on how severe the impairment is.</p>
-<p>The dampening window (<em>poll interval <strong>x</strong> dampening multiplier</em>) is 1200 seconds, meaning that before switching traffic back to a transport, it needs to be stable for 20 minutes.</p>
-<p>In my lab, I am using Configuration Groups, however this is <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/m-enhanced-application-aware-routing.html#configure-enhanced-application-aware-routing-using-a-feature-template-in-cisco-sd-wan-manager">available through templates</a> as well.</p>
-<p><img loading="lazy" src="/wp-content/uploads/2025/02/eaar-config-groups.png"></p>
-<p>You can use a variable, instead of a global value, to account for devices that will not be running EAAR. In this case, EAAR enabled devices will fallback to AAR.</p>
-<p>The following config is added to the devices:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>  bfd enhanced-app-route enable
-</span></span><span style="display:flex;"><span>  bfd enhanced-app-route pfr-poll-interval 10000
-</span></span><span style="display:flex;"><span>  bfd enhanced-app-route pfr-multiplier 6
-</span></span><span style="display:flex;"><span>  bfd sla-dampening enable
-</span></span><span style="display:flex;"><span>  bfd sla-dampening multiplier 120
-</span></span></code></pre></div><p>Let&rsquo;s see how it works</p>
-<h2 id="demo">Demo<a hidden class="anchor" aria-hidden="true" href="#demo">#</a></h2>
-<p>In my lab, I use Manager 20.16.1 and my devices are running 17.15.1a</p>
-<p><strong>Note</strong> The minimum version required is 20.12/17.12</p>
-<p>Let&rsquo;s start with some verifications after pushing the configuration.</p>
-<p>To check the configured timers and multipliers</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan app-route params
-</span></span><span style="display:flex;"><span>Enhanced Application-Aware routing
-</span></span><span style="display:flex;"><span>    Config:                  :Enabled   
-</span></span><span style="display:flex;"><span>    Poll interval:           :10000     
-</span></span><span style="display:flex;"><span>    Poll multiplier:         :6         
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>App route 
-</span></span><span style="display:flex;"><span>    Poll interval:           :120000    
-</span></span><span style="display:flex;"><span>    Poll multiplier:         :5         
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>SLA dampening  
-</span></span><span style="display:flex;"><span>    Config:                  :Enabled   
-</span></span><span style="display:flex;"><span>    Multiplier:              :120    
-</span></span></code></pre></div><p>To verify what BFD sessions are using EAAR, look for the <em>FLAGS</em> column</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan bfd sessions alt
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                                  SOURCE TLOC      REMOTE TLOC                     DST PUBLIC    DST PUBLIC                                  
-</span></span><span style="display:flex;"><span>SYSTEM IP   SITE ID   STATE       COLOR            COLOR            SOURCE IP      IP            PORT        ENCAP  BFD-LD    FLAGS   UPTIME    
-</span></span><span style="display:flex;"><span>-------------------------------------------------------------------------------------------------------------------------------------------------
-</span></span><span style="display:flex;"><span>1.1.1.20    200       up          biz-internet     biz-internet     30.1.10.2      30.1.20.2     12406       ipsec  20006     EAAR    0:00:20:31 
-</span></span><span style="display:flex;"><span>1.1.1.20    200       up          mpls             mpls             30.2.10.2      30.2.20.2     12366       ipsec  20002     EAAR    0:00:20:38 
-</span></span><span style="display:flex;"><span>1.1.1.20    200       up          private1         private1         30.3.10.2      30.3.20.2     12366       ipsec  20003     EAAR    0:00:20:37 
-</span></span></code></pre></div><p>To get more details about a specific tunnel.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan app-route stats summary 
-</span></span><span style="display:flex;"><span>Generating output, this might take time, please wait ...
-</span></span><span style="display:flex;"><span>app-route statistics 30.1.10.2 30.1.20.2 ipsec 12386 12406
-</span></span><span style="display:flex;"><span> remote-system-ip         1.1.1.20
-</span></span><span style="display:flex;"><span> local-color              biz-internet
-</span></span><span style="display:flex;"><span> remote-color             biz-internet
-</span></span><span style="display:flex;"><span> sla-class-index          0,1,2
-</span></span><span style="display:flex;"><span> fallback-sla-class-index None
-</span></span><span style="display:flex;"><span> enhanced-app-route       Enabled
-</span></span><span style="display:flex;"><span> sla-dampening-index      None
-</span></span><span style="display:flex;"><span> app-probe-class-list None
-</span></span><span style="display:flex;"><span>  mean-loss    0.000
-</span></span><span style="display:flex;"><span>  mean-latency 0
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span><span style="display:flex;"><span>       TOTAL                       AVERAGE  AVERAGE  TX DATA       RX DATA       IPV6 TX       IPV6 RX       
-</span></span><span style="display:flex;"><span>INDEX  PACKETS       LOSS          LATENCY  JITTER   PKTS          PKTS          DATA PKTS     DATA PKTS     
-</span></span><span style="display:flex;"><span>-------------------------------------------------------------------------------------------------------------
-</span></span><span style="display:flex;"><span>0      0             0             0        0        0             0             0             0             
-</span></span><span style="display:flex;"><span>1      64            0             0        0        0             0             0             0             
-</span></span><span style="display:flex;"><span>2      0             0             0        0        0             0             0             0             
-</span></span><span style="display:flex;"><span>3      0             0             0        0        0             0             0             0             
-</span></span><span style="display:flex;"><span>4      0             0             0        0        0             0             0             0             
-</span></span><span style="display:flex;"><span>5      64            0             0        0        0             0             0             0             
-</span></span></code></pre></div><p>Notice that there is no traffic between my devices, thus the total packet count on each bucket is low.</p>
-<p>Same information is available through the Manager&rsquo;s UI, using the <em>Real Time</em> dashboard and using the <em>App Routes Statistics</em> Device Option.</p>
-<p><img loading="lazy" src="/wp-content/uploads/2025/02/eaar-1.png"></p>
-<h3 id="scenario-1---slight-impairment">Scenario 1 - Slight impairment<a hidden class="anchor" aria-hidden="true" href="#scenario-1---slight-impairment">#</a></h3>
-<p>This is my lab&rsquo;s topology</p>
-<p><img loading="lazy" src="/wp-content/uploads/2024/02/AAR-Topo2.png"></p>
-<p>For this first test, I will use the following SLA parameters:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>SLA_Real-Time 
-</span></span><span style="display:flex;"><span>Loss: 3%
-</span></span><span style="display:flex;"><span>Latency: 150ms
-</span></span><span style="display:flex;"><span>Jitter: 100ms
-</span></span></code></pre></div><p>The AAR policy from the Controller instructs:</p>
-<ul>
-<li>Use mpls as primary path</li>
-<li>If no color meets the SLA and private1 is available, use it.</li>
-<li>If private1 is not available, load-balance among all remaining colors.</li>
-</ul>
-<p>I am matching traffic between 172.16.10.0/24 and 172.16.20.0/24.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan policy from-vsmart
-</span></span><span style="display:flex;"><span>from-vsmart app-route-policy app_route_AAR
-</span></span><span style="display:flex;"><span> vpn-list vpn_Corporate_Users
-</span></span><span style="display:flex;"><span>  sequence 1
-</span></span><span style="display:flex;"><span>   match
-</span></span><span style="display:flex;"><span>    source-data-prefix-list      BR10
-</span></span><span style="display:flex;"><span>    destination-data-prefix-list BR20
-</span></span><span style="display:flex;"><span>   action
-</span></span><span style="display:flex;"><span>    backup-sla-preferred-color private1
-</span></span><span style="display:flex;"><span>    sla-class       SLA_Real-Time
-</span></span><span style="display:flex;"><span>    no sla-class strict
-</span></span><span style="display:flex;"><span>    sla-class preferred-color mpls
-</span></span><span style="display:flex;"><span>  sequence 11
-</span></span><span style="display:flex;"><span>   match
-</span></span><span style="display:flex;"><span>    source-data-prefix-list      BR20
-</span></span><span style="display:flex;"><span>    destination-data-prefix-list BR10
-</span></span><span style="display:flex;"><span>   action
-</span></span><span style="display:flex;"><span>    backup-sla-preferred-color private1
-</span></span><span style="display:flex;"><span>    sla-class       SLA_Real-Time
-</span></span><span style="display:flex;"><span>    no sla-class strict
-</span></span><span style="display:flex;"><span>    sla-class preferred-color mpls
-</span></span></code></pre></div><p>Initial state without network issues</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan app-route stats summary | i color|damp|mean         
-</span></span><span style="display:flex;"><span> local-color              biz-internet
-</span></span><span style="display:flex;"><span> remote-color             biz-internet
-</span></span><span style="display:flex;"><span> sla-dampening-index      None
-</span></span><span style="display:flex;"><span>  mean-loss    0.000
-</span></span><span style="display:flex;"><span>  mean-latency 1
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span><span style="display:flex;"><span> local-color              mpls
-</span></span><span style="display:flex;"><span> remote-color             mpls
-</span></span><span style="display:flex;"><span> sla-dampening-index      None
-</span></span><span style="display:flex;"><span>  mean-loss    1.212
-</span></span><span style="display:flex;"><span>  mean-latency 1
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span><span style="display:flex;"><span>  mean-loss    1.212
-</span></span><span style="display:flex;"><span>  mean-latency 1
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span><span style="display:flex;"><span> local-color              private1
-</span></span><span style="display:flex;"><span> remote-color             private1
-</span></span><span style="display:flex;"><span> sla-dampening-index      None
-</span></span><span style="display:flex;"><span>  mean-loss    0.000
-</span></span><span style="display:flex;"><span>  mean-latency 0
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span><span style="display:flex;"><span>  mean-loss    0.000
-</span></span><span style="display:flex;"><span>  mean-latency 0
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span></code></pre></div><p>Notice that the number of packets per bucket increased dramatically</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan app-route stats remote-color mpls summary  
-</span></span><span style="display:flex;"><span>Generating output, this might take time, please wait ...
-</span></span><span style="display:flex;"><span>app-route statistics 30.2.10.2 30.2.20.2 ipsec 12366 12366
-</span></span><span style="display:flex;"><span> remote-system-ip         1.1.1.20
-</span></span><span style="display:flex;"><span> local-color              mpls
-</span></span><span style="display:flex;"><span> remote-color             mpls
-</span></span><span style="display:flex;"><span> sla-class-index          0,1
-</span></span><span style="display:flex;"><span> fallback-sla-class-index None
-</span></span><span style="display:flex;"><span> enhanced-app-route       Enabled
-</span></span><span style="display:flex;"><span> sla-dampening-index      None
-</span></span><span style="display:flex;"><span> app-probe-class-list None
-</span></span><span style="display:flex;"><span>  mean-loss    1.176
-</span></span><span style="display:flex;"><span>  mean-latency 0
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span><span style="display:flex;"><span>       TOTAL                       AVERAGE  AVERAGE  TX DATA       RX DATA       IPV6 TX       IPV6 RX       
-</span></span><span style="display:flex;"><span>INDEX  PACKETS       LOSS          LATENCY  JITTER   PKTS          PKTS          DATA PKTS     DATA PKTS     
-</span></span><span style="display:flex;"><span>-------------------------------------------------------------------------------------------------------------
-</span></span><span style="display:flex;"><span>0      131136        1501          0        0        100084        20846         0             0             
-</span></span><span style="display:flex;"><span>1      131072        1438          0        0        95287         19605         0             0             
-</span></span><span style="display:flex;"><span>2      131072        1400          0        0        100985        20937         0             0             
-</span></span><span style="display:flex;"><span>3      131072        1781          0        0        85553         18271         0             0             
-</span></span><span style="display:flex;"><span>4      64            0             0        0        72618         15942         0             0             
-</span></span><span style="display:flex;"><span>5      131072        1589          0        0        65198         14226         0             0             
-</span></span><span style="display:flex;"><span>          
-</span></span></code></pre></div><p>Traffic is using mpls as primary transport</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10# show sdwan policy service-path vpn 10 interface gigabitEthernet 4 source-ip 172.16.10.10 dest-ip 172.16.20.10 protocol 6 all       
-</span></span><span style="display:flex;"><span>Number of possible next hops: 1
-</span></span><span style="display:flex;"><span>Next Hop: IPsec
-</span></span><span style="display:flex;"><span>  Source: 30.2.10.2 12366 Destination: 30.2.20.2 12366 Local Color: mpls Remote Color: mpls Remote System IP: 1.1.1.20
-</span></span></code></pre></div><p>I will introduce 3% packet loss on the mpls transport and see how long it takes to switch traffic. Since there is around 1% loss already, 3% should be enough to trigger
-a change.</p>
-<p>The mpls transport has more than 3% loss</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan app-route stats remote-color mpls summary 
-</span></span><span style="display:flex;"><span>Generating output, this might take time, please wait ...
-</span></span><span style="display:flex;"><span>app-route statistics 30.2.10.2 30.2.20.2 ipsec 12366 12366
-</span></span><span style="display:flex;"><span> remote-system-ip         1.1.1.20
-</span></span><span style="display:flex;"><span> local-color              mpls
-</span></span><span style="display:flex;"><span> remote-color             mpls
-</span></span><span style="display:flex;"><span> sla-class-index          0
-</span></span><span style="display:flex;"><span> fallback-sla-class-index 1
-</span></span><span style="display:flex;"><span> enhanced-app-route       Enabled
-</span></span><span style="display:flex;"><span> sla-dampening-index      None
-</span></span><span style="display:flex;"><span> app-probe-class-list None
-</span></span><span style="display:flex;"><span>  mean-loss    3.125          &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-</span></span><span style="display:flex;"><span>  mean-latency 0
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span></code></pre></div><p>After 56 seconds, the traffic shifted and any of the remaining compliant transports could be used</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10# show sdwan policy service-path vpn 10 interface gigabitEthernet 4 source-ip 172.16.10.10 dest-ip 172.16.20.10 protocol 6 all
-</span></span><span style="display:flex;"><span>Number of possible next hops: 2
-</span></span><span style="display:flex;"><span>Next Hop: IPsec
-</span></span><span style="display:flex;"><span>  Source: 30.3.10.2 12366 Destination: 30.3.20.2 12366 Local Color: private1 Remote Color: private1 Remote System IP: 1.1.1.20
-</span></span><span style="display:flex;"><span>Next Hop: IPsec
-</span></span><span style="display:flex;"><span>  Source: 30.1.10.2 12386 Destination: 30.1.20.2 12366 Local Color: biz-internet Remote Color: biz-internet Remote System IP: 1.1.1.20
-</span></span></code></pre></div><p>If I take the loss away we can see the dampening mechanism gets activated. So, if the transport is stable for 20 minutes, it will be used again as preferred path.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan app-route stats remote-color mpls summary 
-</span></span><span style="display:flex;"><span>Generating output, this might take time, please wait ...
-</span></span><span style="display:flex;"><span>app-route statistics 30.2.10.2 30.2.20.2 ipsec 12366 12366
-</span></span><span style="display:flex;"><span> remote-system-ip         1.1.1.20
-</span></span><span style="display:flex;"><span> local-color              mpls
-</span></span><span style="display:flex;"><span> remote-color             mpls
-</span></span><span style="display:flex;"><span> sla-class-index          0
-</span></span><span style="display:flex;"><span> fallback-sla-class-index 1
-</span></span><span style="display:flex;"><span> enhanced-app-route       Enabled
-</span></span><span style="display:flex;"><span> sla-dampening-index      1        &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-</span></span><span style="display:flex;"><span> app-probe-class-list None
-</span></span><span style="display:flex;"><span>  mean-loss    0.000
-</span></span><span style="display:flex;"><span>  mean-latency 0
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span></code></pre></div><h3 id="scenario-2---greater-impairment">Scenario 2 - Greater impairment<a hidden class="anchor" aria-hidden="true" href="#scenario-2---greater-impairment">#</a></h3>
-<p>In this case, I will introduce 10% packet loss to biz-internet transport, making private 1 the only compliant transport.</p>
-<p>After around 45 seconds, loss for biz-internet was 12%</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan app-route stats local-color biz-internet summary         
-</span></span><span style="display:flex;"><span>Generating output, this might take time, please wait ...
-</span></span><span style="display:flex;"><span>app-route statistics 30.1.10.2 30.1.20.2 ipsec 12386 12366
-</span></span><span style="display:flex;"><span> remote-system-ip         1.1.1.20
-</span></span><span style="display:flex;"><span> local-color              biz-internet
-</span></span><span style="display:flex;"><span> remote-color             biz-internet
-</span></span><span style="display:flex;"><span> sla-class-index          0
-</span></span><span style="display:flex;"><span> fallback-sla-class-index 1
-</span></span><span style="display:flex;"><span> enhanced-app-route       Enabled
-</span></span><span style="display:flex;"><span> sla-dampening-index      None
-</span></span><span style="display:flex;"><span> app-probe-class-list None
-</span></span><span style="display:flex;"><span>  mean-loss    12.500
-</span></span><span style="display:flex;"><span>  mean-latency 0
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span></code></pre></div><p>Traffic shifted to private1 only</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan policy service-path vpn 10 interface gigabitEthernet 4 source-ip 172.16.10.10 dest-ip 172.16.20.10 protocol 6 all
-</span></span><span style="display:flex;"><span>Number of possible next hops: 1
-</span></span><span style="display:flex;"><span>Next Hop: IPsec
-</span></span><span style="display:flex;"><span>  Source: 30.3.10.2 12366 Destination: 30.3.20.2 12366 Local Color: private1 Remote Color: private1 Remote System IP: 1.1.1.20
-</span></span></code></pre></div><p>After removing the packet loss, biz-internet has the dampening mechanism activated</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan app-route stats local-color biz-internet summary 
-</span></span><span style="display:flex;"><span>Generating output, this might take time, please wait ...
-</span></span><span style="display:flex;"><span>app-route statistics 30.1.10.2 30.1.20.2 ipsec 12386 12366
-</span></span><span style="display:flex;"><span> remote-system-ip         1.1.1.20
-</span></span><span style="display:flex;"><span> local-color              biz-internet
-</span></span><span style="display:flex;"><span> remote-color             biz-internet
-</span></span><span style="display:flex;"><span> sla-class-index          0
-</span></span><span style="display:flex;"><span> fallback-sla-class-index 1
-</span></span><span style="display:flex;"><span> enhanced-app-route       Enabled
-</span></span><span style="display:flex;"><span> sla-dampening-index      1         &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-</span></span><span style="display:flex;"><span> app-probe-class-list None
-</span></span><span style="display:flex;"><span>  mean-loss    1.562
-</span></span><span style="display:flex;"><span>  mean-latency 0
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span></code></pre></div><p>In this case, the time to switch traffic was reduced as a cosequence of a greater impairment.</p>
-<h3 id="scenario-3---multiple-app-probe-classes">Scenario 3 - Multiple App Probe Classes<a hidden class="anchor" aria-hidden="true" href="#scenario-3---multiple-app-probe-classes">#</a></h3>
-<p>For this final scenario, let&rsquo;s see how to get the most benefit out of EAAR.</p>
-<p>The configuration is more complex as it involves QoS, App Probe Classes and AAR Policy.</p>
-<ul>
-<li>QoS is required to classify and send traffic out on different queues.</li>
-<li>App Probes Classes to measure loss, latency and jitter on each of those queues, independently.</li>
-</ul>
-<p>My Qos configuration has 3 queues and queue 2 will handle the least important traffic.</p>
-<ul>
-<li>Queue 0 for control traffic</li>
-<li>Queue 1 for Real-Time Traffic (marked DSCP 46)</li>
-<li>Queue 2 for Transactional traffic (marked DSCP 18)</li>
-</ul>
-<p>I use a data policy to match traffic on the service side, mark it with the right DSCP and put it on the right forwarding class. I also created a shaper on my mpls interface</p>
-<p>To demo things out, I will have two data transfers:</p>
-<ul>
-<li>HTTP GET (port 8000)</li>
-<li>SCP copy (port 22)</li>
-</ul>
-<p>My SLAs have the following configurations:</p>
-<table>
-  <thead>
-      <tr>
-          <th>SLA Class Name</th>
-          <th>Loss</th>
-          <th>Latency</th>
-          <th>Jitter</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>SLA_Real-Time</td>
-          <td>3 %</td>
-          <td>150 ms</td>
-          <td>100 ms</td>
-      </tr>
-      <tr>
-          <td>SLA_Transactional</td>
-          <td>5 %</td>
-          <td>45 ms</td>
-          <td>150 ms</td>
-      </tr>
-  </tbody>
-</table>
-<p>The first thing to note is that my two app probes classes are measured independently. See how the <em><strong>mean loss</strong></em> for <em>Transactional-Probe_Class</em> is <strong>1</strong>, whereas for <em>Real_Time_Probe_Class</em> is <strong>0</strong>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan app-route stats local-color mpls summary 
-</span></span><span style="display:flex;"><span>Generating output, this might take time, please wait ...
-</span></span><span style="display:flex;"><span>app-route statistics 30.2.10.2 30.2.20.2 ipsec 12366 12366
-</span></span><span style="display:flex;"><span> remote-system-ip         1.1.1.20
-</span></span><span style="display:flex;"><span> local-color              mpls
-</span></span><span style="display:flex;"><span> remote-color             mpls
-</span></span><span style="display:flex;"><span> sla-class-index          0,1,2
-</span></span><span style="display:flex;"><span> fallback-sla-class-index None
-</span></span><span style="display:flex;"><span> enhanced-app-route       Enabled
-</span></span><span style="display:flex;"><span> sla-dampening-index      None
-</span></span><span style="display:flex;"><span> app-probe-class-list None
-</span></span><span style="display:flex;"><span>  mean-loss    0.000
-</span></span><span style="display:flex;"><span>  mean-latency 1
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span><span style="display:flex;"><span>       TOTAL                       AVERAGE  AVERAGE  TX DATA       RX DATA       IPV6 TX       IPV6 RX       
-</span></span><span style="display:flex;"><span>INDEX  PACKETS       LOSS          LATENCY  JITTER   PKTS          PKTS          DATA PKTS     DATA PKTS     
-</span></span><span style="display:flex;"><span>-------------------------------------------------------------------------------------------------------------
-</span></span><span style="display:flex;"><span>0      16384         0             0        0        35827         111807        0             0             
-</span></span><span style="display:flex;"><span>1      49152         0             1        0        37788         118236        0             0             
-</span></span><span style="display:flex;"><span>2      49216         0             1        0        36859         115551        0             0             
-</span></span><span style="display:flex;"><span>3      16384         0             1        0        23894         77280         0             0             
-</span></span><span style="display:flex;"><span>4      32768         0             1        1        33179         103759        0             0             
-</span></span><span style="display:flex;"><span>5      32768         0             1        0        21485         71702         0             0             
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span> app-probe-class-list Real_Time_Probe_Class
-</span></span><span style="display:flex;"><span>  mean-loss    0.000
-</span></span><span style="display:flex;"><span>  mean-latency 0
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span><span style="display:flex;"><span>       TOTAL                       AVERAGE  AVERAGE  TX DATA       RX DATA       IPV6 TX       IPV6 RX       
-</span></span><span style="display:flex;"><span>INDEX  PACKETS       LOSS          LATENCY  JITTER   PKTS          PKTS          DATA PKTS     DATA PKTS     
-</span></span><span style="display:flex;"><span>-------------------------------------------------------------------------------------------------------------
-</span></span><span style="display:flex;"><span>0      0             0             0        0        -             -             -             -             
-</span></span><span style="display:flex;"><span>1      32768         0             1        0        -             -             -             -             
-</span></span><span style="display:flex;"><span>2      32768         0             0        0        -             -             -             -             
-</span></span><span style="display:flex;"><span>3      0             0             0        0        -             -             -             -             
-</span></span><span style="display:flex;"><span>4      32768         0             1        2        -             -             -             -             
-</span></span><span style="display:flex;"><span>5      0             0             0        0        -             -             -             -             
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span> app-probe-class-list Transactional-Probe_Class
-</span></span><span style="display:flex;"><span>  mean-loss    0.000
-</span></span><span style="display:flex;"><span>  mean-latency 1
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span><span style="display:flex;"><span>       TOTAL                       AVERAGE  AVERAGE  TX DATA       RX DATA       IPV6 TX       IPV6 RX       
-</span></span><span style="display:flex;"><span>INDEX  PACKETS       LOSS          LATENCY  JITTER   PKTS          PKTS          DATA PKTS     DATA PKTS     
-</span></span><span style="display:flex;"><span>-------------------------------------------------------------------------------------------------------------
-</span></span><span style="display:flex;"><span>0      16384         0             0        0        -             -             -             -             
-</span></span><span style="display:flex;"><span>1      49152         0             1        0        -             -             -             -             
-</span></span><span style="display:flex;"><span>2      49216         0             1        0        -             -             -             -             
-</span></span><span style="display:flex;"><span>3      16384         0             1        0        -             -             -             -             
-</span></span><span style="display:flex;"><span>4      32768         0             1        1        -             -             -             -             
-</span></span><span style="display:flex;"><span>5      32768         0             1        0        -             -             -             -             
-</span></span></code></pre></div><p>Now, I have lowered my shaper. EAAR was quick to detect a change in latency for the transactional SLA, it is now 53 ms.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10# show sdwan app-route stats local mpls summary
-</span></span><span style="display:flex;"><span>Generating output, this might take time, please wait ...
-</span></span><span style="display:flex;"><span>app-route statistics 30.2.10.2 30.2.20.2 ipsec 12386 12366
-</span></span><span style="display:flex;"><span> remote-system-ip         1.1.1.20
-</span></span><span style="display:flex;"><span> local-color              mpls
-</span></span><span style="display:flex;"><span> remote-color             mpls
-</span></span><span style="display:flex;"><span> sla-class-index          0,1,2
-</span></span><span style="display:flex;"><span> fallback-sla-class-index None
-</span></span><span style="display:flex;"><span> enhanced-app-route       Enabled
-</span></span><span style="display:flex;"><span> sla-dampening-index      None
-</span></span><span style="display:flex;"><span> app-probe-class-list None
-</span></span><span style="display:flex;"><span>  mean-loss    0.000
-</span></span><span style="display:flex;"><span>  mean-latency 53
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span><span style="display:flex;"><span>       TOTAL                       AVERAGE  AVERAGE  TX DATA       RX DATA       IPV6 TX       IPV6 RX       
-</span></span><span style="display:flex;"><span>INDEX  PACKETS       LOSS          LATENCY  JITTER   PKTS          PKTS          DATA PKTS     DATA PKTS     
-</span></span><span style="display:flex;"><span>-------------------------------------------------------------------------------------------------------------
-</span></span><span style="display:flex;"><span>0      2048          0             54       0        4396          8513          0             0             
-</span></span><span style="display:flex;"><span>1      1024          0             55       0        4461          8534          0             0             
-</span></span><span style="display:flex;"><span>2      8256          0             49       0        4429          8549          0             0             
-</span></span><span style="display:flex;"><span>3      16384         0             54       0        4411          8549          0             0             
-</span></span><span style="display:flex;"><span>4      0             0             53       0        4440          8549          0             0             
-</span></span><span style="display:flex;"><span>5      0             0             54       0        4443          8549          0             0             
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span> app-probe-class-list Real_Time_Probe_Class
-</span></span><span style="display:flex;"><span>  mean-loss    0.000
-</span></span><span style="display:flex;"><span>  mean-latency 0
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span><span style="display:flex;"><span>       TOTAL                       AVERAGE  AVERAGE  TX DATA       RX DATA       IPV6 TX       IPV6 RX       
-</span></span><span style="display:flex;"><span>INDEX  PACKETS       LOSS          LATENCY  JITTER   PKTS          PKTS          DATA PKTS     DATA PKTS     
-</span></span><span style="display:flex;"><span>-------------------------------------------------------------------------------------------------------------
-</span></span><span style="display:flex;"><span>0      0             0             0        0        -             -             -             -             
-</span></span><span style="display:flex;"><span>1      0             0             0        0        -             -             -             -             
-</span></span><span style="display:flex;"><span>2      8192          0             0        0        -             -             -             -             
-</span></span><span style="display:flex;"><span>3      16384         0             0        0        -             -             -             -             
-</span></span><span style="display:flex;"><span>4      0             0             0        0        -             -             -             -             
-</span></span><span style="display:flex;"><span>5      0             0             0        0        -             -             -             -             
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span> app-probe-class-list Transactional-Probe_Class
-</span></span><span style="display:flex;"><span>  mean-loss    0.000
-</span></span><span style="display:flex;"><span>  mean-latency 53    &lt;&lt;&lt;&lt;&lt;&lt;&lt;
-</span></span><span style="display:flex;"><span>  mean-jitter  0
-</span></span><span style="display:flex;"><span>       TOTAL                       AVERAGE  AVERAGE  TX DATA       RX DATA       IPV6 TX       IPV6 RX       
-</span></span><span style="display:flex;"><span>INDEX  PACKETS       LOSS          LATENCY  JITTER   PKTS          PKTS          DATA PKTS     DATA PKTS     
-</span></span><span style="display:flex;"><span>-------------------------------------------------------------------------------------------------------------
-</span></span><span style="display:flex;"><span>0      2048          0             54       0        -             -             -             -             
-</span></span><span style="display:flex;"><span>1      1024          0             55       0        -             -             -             -             
-</span></span><span style="display:flex;"><span>2      8256          0             49       0        -             -             -             -             
-</span></span><span style="display:flex;"><span>3      16384         0             54       0        -             -             -             -             
-</span></span><span style="display:flex;"><span>4      0             0             53       0        -             -             -             -             
-</span></span><span style="display:flex;"><span>5      0             0             54       0        -             -             -             -             
-</span></span></code></pre></div><p>Now that my Transactional SLA with a maximum latency of 45 ms is not met , I will use <a href="/network-wide-path-insights-an-introduction/">NWPI</a> to understand how traffic is getting sent out. Let&rsquo;s examine HTTP traffic using port 80000</p>
-<p><img loading="lazy" src="/wp-content/uploads/2025/02/eaar-nwpi-8000.png"></p>
-<p>Notice that, on the <em>upstream direction</em>, the <em>local</em> and <em>remote color</em> is set to <strong>private1</strong>, indicating that traffic has moved away from mpls and its 53 ms latency. Just what we expected ✅</p>
-<p>Now, let&rsquo;s see how traffic on port 22 is flowing</p>
-<p><img loading="lazy" src="/wp-content/uploads/2025/02/eaar-nwpi-22.png"></p>
-<p>Again, take a look at the upstream <em>local</em> and <em>remote color</em>, notice how <strong>mpls</strong> is still in use for this traffic, as there are no path issues detected.</p>
-<p>In summary, the traffic with dscp 46 is working perfectly fine on the mpls transport, however, traffic with DSCP 18 was having more latency than the configured SLA, so traffic was moved to Private1 as it complies with the SLA.</p>
-<p>We can confirm we are measuring and taking routing decisions on a per queue basis, this is a huge difference 🤯 !</p>
+<p>Security has always been a top of mind for organizations, but protecting every angle of the network remains a challenge. At the same time, ensuring an optimal application and user experience is equally important. Organizations have often had to choose between security-focused and performance-driven solutions, leading to increased management and operational complexity.</p>
+<p>Secure Access is a robust solution that addresses these challenges. It offers top notch security by integrating advanced technologies and access controls. This means that users can get a <em><strong>secure and direct</strong></em> internet connectivity from SD-WAN sites.</p>
+<p>Let&rsquo;s see how it works</p>
+<h2 id="sd-wan-meets-secure-access">SD-WAN Meets Secure Access<a hidden class="anchor" aria-hidden="true" href="#sd-wan-meets-secure-access">#</a></h2>
+<p>Starting with SD-WAN version 20.13/17.13, an integration with Secure Access is now available out of the box.</p>
+<p>With this integration, automatic tunnels are established to the primary and secondary Secure Access Data Centers closest to your router’s location, ensuring optimal performance. These tunnels route internet traffic while enforcing your organization&rsquo;s security policies, providing a simple and powerful way to improve both security and connectivity.</p>
+<p>At the center of Secure Access there are Network Tunnels Groups (NTG) to manage IPSec connections. These NTGs will contain a primary and secondary Secure Access Data Center. Although it&rsquo;s not mandatory to have a tunnel to primary and secondary DC, it is highly recommended to achieve high availability in case one of them is not available.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/sse-topo.png"></p>
+<p>You can configure up to 16 tunnels, 8 active and 8 backup and load balance across active tunnels is possible.</p>
 <h2 id="lessons-learned">Lessons learned<a hidden class="anchor" aria-hidden="true" href="#lessons-learned">#</a></h2>
 <ul>
 <li>Using inline data, the number of samples increases dramatically compared to BFD sample size. 📈</li>
