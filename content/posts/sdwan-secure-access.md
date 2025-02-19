@@ -17,7 +17,7 @@ tag:
 
 Security has always been a top of mind for organizations, but protecting every angle of the network remains a challenge. At the same time, ensuring an optimal application and user experience is equally important. Organizations have often had to choose between security-focused and performance-driven solutions, leading to increased management and operational complexity. 
 
-Secure Access is a robust solution that addresses these challenges. It offers top notch security by integrating advanced technologies and access controls. This means that users can get a _**secure and direct**_ internet connectivity from SD-WAN sites.
+Secure Access is a robust solution that addresses these challenges. It offers top notch security by integrating advanced technologies and access controls. This means that users can get a _**secure and direct**_ connectivity from SD-WAN sites to the internet or private/public clouds.
 
 Let's see how it works 
 
@@ -25,13 +25,15 @@ Let's see how it works
 
 Starting with SD-WAN version 20.13/17.13, an integration with Secure Access is now available out of the box.
 
-With this integration, automatic tunnels are established to the primary and secondary Secure Access Data Centers closest to your router’s location, ensuring optimal performance. These tunnels route internet traffic while enforcing your organization's security policies, providing a simple and powerful way to improve both security and connectivity.
+With this integration, automatic tunnels are established to the primary and secondary Secure Access Data Centers closest to your router’s location, ensuring optimal performance. These tunnels route traffic while enforcing your organization's security policies, providing a simple and powerful way to improve both security and connectivity.
 
-At the center of Secure Access there are Network Tunnels Groups (NTG) to manage IPSec connections. These NTGs will contain a primary and secondary Secure Access Data Center. Although it's not mandatory to have a tunnel to primary and secondary DC, it is highly recommended to achieve high availability in case one of them is not available. 
+At the core of Secure Access are [Network Tunnel Groups (NTGs)](https://docs.sse.cisco.com/sse-user-guide/docs/manage-network-tunnel-groups), which manage IPSec connections. Each NTG includes a primary and a secondary Secure Access Data Center. While configuring tunnels to both data centers is not mandatory, it is highly recommended to ensure high availability in case one becomes unavailable.
 
 ![](/wp-content/uploads/2025/02/sse-topo.png)
 
-You can configure up to 16 tunnels, 8 active and 8 backup and load balance across active tunnels is possible. 
+Each tunnel supports up to 1 Gbps of throughput in either direction. It is possible to configure up to 16 tunnels, 8 active and 8 backup, allowing for load balancing across active tunnels to increase the available bandwidth. 
+
+To automatically establish the tunnels, the SD-WAN router should have internet connectivity and DNS lookup enabled. This is needed so the device can determine it's own public ip address, communicate it to vmanage and 
 
 
 ## Lessons learned 
