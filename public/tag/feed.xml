@@ -4,36 +4,22 @@
     <title>Tag on NetWithAlex</title>
     <link>http://localhost:1313/tag/</link>
     <description>Recent content in Tag on NetWithAlex</description>
-    <generator>Hugo -- 0.144.0</generator>
+    <generator>Hugo -- 0.140.2</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 05 Feb 2025 14:20:31 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 05 Jan 2025 14:20:31 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tag/feed.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Sdwan</title>
-      <link>http://localhost:1313/tag/sdwan/</link>
-      <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/tag/sdwan/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Security</title>
-      <link>http://localhost:1313/tag/security/</link>
-      <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/tag/security/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Sse</title>
-      <link>http://localhost:1313/tag/sse/</link>
-      <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/tag/sse/</guid>
-      <description></description>
-    </item>
     <item>
       <title>Eaar</title>
       <link>http://localhost:1313/tag/eaar/</link>
       <pubDate>Sun, 05 Jan 2025 14:20:31 +0000</pubDate>
       <guid>http://localhost:1313/tag/eaar/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sdwan</title>
+      <link>http://localhost:1313/tag/sdwan/</link>
+      <pubDate>Sun, 05 Jan 2025 14:20:31 +0000</pubDate>
+      <guid>http://localhost:1313/tag/sdwan/</guid>
       <description></description>
     </item>
     <item>
