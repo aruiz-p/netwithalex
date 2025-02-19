@@ -2,23 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/category/</loc>
-    <lastmod>2025-02-05T14:20:31+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/posts/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/category/sdwan/</loc>
-    <lastmod>2025-02-05T14:20:31+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/category/secure-access/</loc>
-    <lastmod>2025-02-05T14:20:31+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/sdwan-sse-integration/</loc>
-    <lastmod>2025-02-05T14:20:31+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/category/security/</loc>
-    <lastmod>2025-02-05T14:20:31+00:00</lastmod>
+    <loc>http://localhost:1313/category/</loc>
+    <lastmod>2025-01-05T14:20:31+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tag/eaar/</loc>
     <lastmod>2025-01-05T14:20:31+00:00</lastmod>
@@ -30,6 +18,9 @@
     <lastmod>2025-01-05T14:20:31+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tag/sdwan/</loc>
+    <lastmod>2025-01-05T14:20:31+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/category/sdwan/</loc>
     <lastmod>2025-01-05T14:20:31+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tag/</loc>
