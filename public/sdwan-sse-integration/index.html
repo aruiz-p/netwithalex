@@ -99,8 +99,8 @@
   "keywords": [
     
   ],
-  "articleBody": "Introduction Security has always been a top of mind for organizations, but protecting every angle of the network remains a challenge. At the same time, ensuring an optimal application and user experience is equally important. Organizations have often had to choose between security-focused and performance-driven solutions, leading to increased management and operational complexity.\nSecure Access is a robust solution that addresses these challenges. It offers top notch security by integrating advanced technologies and access controls. This means that users can get a secure and direct connectivity from SD-WAN sites to the internet or private/public clouds.\nLet’s see how it works\nSD-WAN Meets Secure Access Starting with SD-WAN version 20.13/17.13, an integration with Secure Access is now available out of the box.\nWith this integration, automatic tunnels are established to the primary and secondary Secure Access Data Centers closest to your router’s location, ensuring optimal performance. These tunnels route traffic while enforcing your organization’s security policies, providing a simple and powerful way to improve both security and connectivity.\nAt the core of Secure Access are Network Tunnel Groups (NTGs), which manage IPSec connections. Each NTG includes a primary and a secondary Secure Access Data Center. While configuring tunnels to both data centers is not mandatory, it is highly recommended to ensure high availability in case one becomes unavailable.\nEach tunnel supports up to 1 Gbps of throughput in either direction. It is possible to configure up to 16 tunnels, 8 active and 8 backup, allowing for load balancing across active tunnels to increase the available bandwidth.\nTo automatically establish the tunnels, the SD-WAN router should have internet connectivity and DNS lookup enabled. This is needed so the device can determine it’s own public ip address, communicate it to vmanage and\nLessons learned Using inline data, the number of samples increases dramatically compared to BFD sample size. 📈 EAAR can steer traffic in seconds, rather than minutes. ⏩ EAAR delivers the greatest benefits on transports with QoS, such as MPLS. 🚀 Even on transports without QoS, inline data measurements increases sample size and accuracy. ⏳ The dampening timer is useful to ensure transports are stable before marking them as valid. ✅ Interoperability between devices running EAAR and devices running AAR is possible 🔄 I hope you have learned something useful! See you on the next one 👋\n",
-  "wordCount" : "385",
+  "articleBody": "Introduction Security has always been a top of mind for organizations, but protecting every angle of the network remains a challenge. At the same time, ensuring an optimal application and user experience is equally important. Organizations have often had to choose between security-focused and performance-driven solutions, leading to increased management and operational complexity.\nSecure Access is a robust solution that addresses these challenges. It offers top notch security by integrating advanced technologies and access controls. This means that users can get a secure and direct connectivity from SD-WAN sites to the internet or private/public clouds.\nLet’s see how it works\nSD-WAN Meets Secure Access Starting with SD-WAN version 20.13/17.13, an integration with Secure Access is now available out of the box.\nWith this integration, automatic tunnels can be established to the primary and secondary Secure Access Data Centers closest to your router’s location, ensuring optimal performance. These tunnels route traffic while enforcing your organization’s security policies, providing a simple and powerful way to improve both security and connectivity.\nAt the core of Secure Access are Network Tunnel Groups (NTGs), which manage IPSec connections. Each NTG includes a primary and a secondary Secure Access Data Center. While configuring tunnels to both data centers is not mandatory, it is highly recommended to ensure high availability in case one becomes unavailable.\nEach tunnel supports up to 1 Gbps of throughput in either direction. It is possible to configure up to 16 tunnels, 8 active and 8 backup, allowing for load balancing across active tunnels to increase the available bandwidth.\nTo automatically establish the tunnels, the SD-WAN router needs internet connectivity and DNS lookup enabled. This allows the device to determine its own public ip address, communicate it to the Manager and get assigned the nearest primary and secondary SSE Data Centers.\nOnce the tunnels are established, traffic going through them will be secured by the core security features of SSE: FWaaS, CASB, ZTNA and SWG.\nConfiguration Steps Create API Key To start, on SSE create an API key for the Manager to securely connect. Make sure the following privileges are granted:\nDeployment / Network Tunnel Group - Read/Write Deployment / Tunnels - Read/Write Deployment / Regions - Read You will get your API Key and Key Secret\nEnter Credentials on the Manager Next, input the information on the SD-WAN Manager under Administration \u003e Settings \u003e Cloud Credentials \u003e SSE\nCreate SSE Policy on the Manager You need to create a new SSE Policy. This is where you input information about the IPSec tunnels.\nFrom Configuration \u003e Policy Groups \u003e Secure Service Edge\nThe following is the minimum you need:\nTracker IP - Used to confirm the tunnel is operational. Tunnel - At least 1 tunnel. Enter tunnel name, source interface and select primary/secondary DC Interface Pair - Specify active and backup tunnels. Select none as backup if there’s only 1 tunnel. Note You can select the SSE region of your preference or use Auto to automatically select it.\nThen, create a Policy Group, associate a device and add the SSE policy\nRedirect service side traffic Now, we need to redirect traffic from users to the tunnel. We have two options:\nLessons learned Using inline data, the number of samples increases dramatically compared to BFD sample size. 📈 EAAR can steer traffic in seconds, rather than minutes. ⏩ EAAR delivers the greatest benefits on transports with QoS, such as MPLS. 🚀 Even on transports without QoS, inline data measurements increases sample size and accuracy. ⏳ The dampening timer is useful to ensure transports are stable before marking them as valid. ✅ Interoperability between devices running EAAR and devices running AAR is possible 🔄 I hope you have learned something useful! See you on the next one 👋\n",
+  "wordCount" : "623",
   "inLanguage": "en",
   "datePublished": "2025-02-05T14:20:31Z",
   "dateModified": "2025-02-05T14:20:31Z",
@@ -206,7 +206,7 @@
     <h1 class="post-title entry-hint-parent">
       Securing the Edge with Cisco SD-WAN and Secure Access
     </h1>
-    <div class="post-meta"><span title='2025-02-05 14:20:31 +0000 WET'>February 5, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;alex
+    <div class="post-meta"><span title='2025-02-05 14:20:31 +0000 WET'>February 5, 2025</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;alex
 
 </div>
   </header> <div class="toc">
@@ -221,6 +221,18 @@
                 <li>
                     <a href="#sd-wan-meets-secure-access" aria-label="SD-WAN Meets Secure Access">SD-WAN Meets Secure Access</a></li>
                 <li>
+                    <a href="#configuration-steps" aria-label="Configuration Steps">Configuration Steps</a><ul>
+                        
+                <li>
+                    <a href="#create-api-key" aria-label="Create API Key">Create API Key</a></li>
+                <li>
+                    <a href="#enter-credentials-on-the-manager" aria-label="Enter Credentials on the Manager">Enter Credentials on the Manager</a></li>
+                <li>
+                    <a href="#create-sse-policy-on-the-manager" aria-label="Create SSE Policy on the Manager">Create SSE Policy on the Manager</a></li>
+                <li>
+                    <a href="#redirect-service-side-traffic" aria-label="Redirect service side traffic">Redirect service side traffic</a></li></ul>
+                </li>
+                <li>
                     <a href="#lessons-learned" aria-label="Lessons learned">Lessons learned</a>
                 </li>
             </ul>
@@ -234,11 +246,40 @@
 <p>Let&rsquo;s see how it works</p>
 <h2 id="sd-wan-meets-secure-access">SD-WAN Meets Secure Access<a hidden class="anchor" aria-hidden="true" href="#sd-wan-meets-secure-access">#</a></h2>
 <p>Starting with SD-WAN version 20.13/17.13, an integration with Secure Access is now available out of the box.</p>
-<p>With this integration, automatic tunnels are established to the primary and secondary Secure Access Data Centers closest to your router’s location, ensuring optimal performance. These tunnels route traffic while enforcing your organization&rsquo;s security policies, providing a simple and powerful way to improve both security and connectivity.</p>
+<p>With this integration, automatic tunnels can be established to the primary and secondary Secure Access Data Centers closest to your router’s location, ensuring optimal performance. These tunnels route traffic while enforcing your organization&rsquo;s security policies, providing a simple and powerful way to improve both security and connectivity.</p>
 <p>At the core of Secure Access are <a href="https://docs.sse.cisco.com/sse-user-guide/docs/manage-network-tunnel-groups">Network Tunnel Groups (NTGs)</a>, which manage IPSec connections. Each NTG includes a primary and a secondary Secure Access Data Center. While configuring tunnels to both data centers is not mandatory, it is highly recommended to ensure high availability in case one becomes unavailable.</p>
 <p><img loading="lazy" src="/wp-content/uploads/2025/02/sse-topo.png"></p>
 <p>Each tunnel supports up to 1 Gbps of throughput in either direction. It is possible to configure up to 16 tunnels, 8 active and 8 backup, allowing for load balancing across active tunnels to increase the available bandwidth.</p>
-<p>To automatically establish the tunnels, the SD-WAN router should have internet connectivity and DNS lookup enabled. This is needed so the device can determine it&rsquo;s own public ip address, communicate it to vmanage and</p>
+<p>To <em>automatically</em> establish the tunnels, the SD-WAN router needs internet connectivity and DNS lookup enabled. This allows the device to determine its own public ip address, communicate it to the Manager and get assigned the nearest primary and secondary SSE Data Centers.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/get-ip.png"></p>
+<p>Once the tunnels are established, traffic going through them will be secured by the <a href="https://www.cisco.com/c/en/us/products/collateral/security/secure-access/hybrid-workforce-cloud-agile-security-ds.html#CiscoSecureAccessproductoverview">core security features of SSE</a>: FWaaS, CASB, ZTNA and SWG.</p>
+<h2 id="configuration-steps">Configuration Steps<a hidden class="anchor" aria-hidden="true" href="#configuration-steps">#</a></h2>
+<h3 id="create-api-key">Create API Key<a hidden class="anchor" aria-hidden="true" href="#create-api-key">#</a></h3>
+<p>To start, on SSE <a href="https://docs.sse.cisco.com/sse-user-guide/docs/add-secure-access-api-keys">create an API key</a> for the Manager to securely connect. Make sure the following privileges are granted:</p>
+<ul>
+<li>Deployment / Network Tunnel Group - <strong>Read/Write</strong></li>
+<li>Deployment / Tunnels - <strong>Read/Write</strong></li>
+<li>Deployment / Regions - <strong>Read</strong></li>
+</ul>
+<p>You will get your <em>API Key and Key Secret</em></p>
+<h3 id="enter-credentials-on-the-manager">Enter Credentials on the Manager<a hidden class="anchor" aria-hidden="true" href="#enter-credentials-on-the-manager">#</a></h3>
+<p>Next, input the information on the SD-WAN Manager under <strong><em>Administration &gt; Settings &gt; Cloud Credentials &gt; SSE</em></strong></p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/sse-config.png"></p>
+<h3 id="create-sse-policy-on-the-manager">Create SSE Policy on the Manager<a hidden class="anchor" aria-hidden="true" href="#create-sse-policy-on-the-manager">#</a></h3>
+<p>You need to create a new SSE Policy. This is where you input information about the IPSec tunnels.</p>
+<p>From <strong><em>Configuration &gt; Policy Groups &gt; Secure Service Edge</em></strong></p>
+<p>The following is the minimum you need:</p>
+<ul>
+<li>Tracker IP - Used to confirm the tunnel is operational.</li>
+<li>Tunnel - At least 1 tunnel. Enter <em>tunnel name, source interface</em> and select <em>primary/secondary DC</em></li>
+<li>Interface Pair - Specify <em>active and backup tunnels</em>. Select <em>none</em> as backup if there&rsquo;s only 1 tunnel.</li>
+</ul>
+<p><strong>Note</strong> You can select the SSE region of your preference or use <em>Auto</em> to automatically select it.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/tunnel-config.png"></p>
+<p>Then, create a Policy Group, associate a device and add the SSE policy</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/policyg.png"></p>
+<h3 id="redirect-service-side-traffic">Redirect service side traffic<a hidden class="anchor" aria-hidden="true" href="#redirect-service-side-traffic">#</a></h3>
+<p>Now, we need to redirect traffic from users to the tunnel. We have two options:</p>
 <h2 id="lessons-learned">Lessons learned<a hidden class="anchor" aria-hidden="true" href="#lessons-learned">#</a></h2>
 <ul>
 <li>Using inline data, the number of samples increases dramatically compared to BFD sample size. 📈</li>
