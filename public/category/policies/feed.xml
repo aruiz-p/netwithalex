@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Policies on NetWithAlex</title>
-    <link>http://localhost:1313/category/policies/</link>
+    <link>http://localhost:46243/category/policies/</link>
     <description>Recent content in Policies on NetWithAlex</description>
-    <generator>Hugo -- 0.140.2</generator>
+    <generator>Hugo -- 0.144.0</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 11 Feb 2024 12:11:06 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/category/policies/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:46243/category/policies/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Simplifying AAR: 3/3 Fallback to best path</title>
-      <link>http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/</link>
+      <link>http://localhost:46243/simplifying-aar-3-3-fallback-to-best-path/</link>
       <pubDate>Sun, 11 Feb 2024 12:11:06 +0000</pubDate>
-      <guid>http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/</guid>
+      <guid>http://localhost:46243/simplifying-aar-3-3-fallback-to-best-path/</guid>
       <description>Learn how AAR can help improve the application user experience with Cisco SD-WAN</description>
     </item>
     <item>
       <title>Simplifying AAR:  1/3 The Foundations</title>
-      <link>http://localhost:1313/demystifying-aar-1-3-the-foundations/</link>
+      <link>http://localhost:46243/demystifying-aar-1-3-the-foundations/</link>
       <pubDate>Wed, 07 Feb 2024 16:25:27 +0000</pubDate>
-      <guid>http://localhost:1313/demystifying-aar-1-3-the-foundations/</guid>
+      <guid>http://localhost:46243/demystifying-aar-1-3-the-foundations/</guid>
       <description>Learn how AAR can help improve the application user experience with Cisco SD-WAN</description>
     </item>
     <item>
       <title>Simplifying AAR: 2/3 Understanding different scenarios</title>
-      <link>http://localhost:1313/demystifying-aar-understanding-different-scenarios/</link>
+      <link>http://localhost:46243/demystifying-aar-understanding-different-scenarios/</link>
       <pubDate>Thu, 01 Feb 2024 20:27:37 +0000</pubDate>
-      <guid>http://localhost:1313/demystifying-aar-understanding-different-scenarios/</guid>
+      <guid>http://localhost:46243/demystifying-aar-understanding-different-scenarios/</guid>
       <description>Learn how AAR can help improve the application user experience with Cisco SD-WAN</description>
     </item>
   </channel>

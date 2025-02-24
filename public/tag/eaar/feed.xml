@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Eaar on NetWithAlex</title>
-    <link>http://localhost:1313/tag/eaar/</link>
+    <link>http://localhost:46243/tag/eaar/</link>
     <description>Recent content in Eaar on NetWithAlex</description>
-    <generator>Hugo -- 0.140.2</generator>
+    <generator>Hugo -- 0.144.0</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 05 Jan 2025 14:20:31 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tag/eaar/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:46243/tag/eaar/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Enhanced Application Aware Routing</title>
-      <link>http://localhost:1313/enhanced-aar/</link>
+      <link>http://localhost:46243/enhanced-aar/</link>
       <pubDate>Sun, 05 Jan 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/enhanced-aar/</guid>
+      <guid>http://localhost:46243/enhanced-aar/</guid>
       <description>Learn the benefits of enhanced app aware routing and how to implement it on your network</description>
     </item>
   </channel>

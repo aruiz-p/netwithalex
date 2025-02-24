@@ -2,55 +2,55 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on NetWithAlex</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>http://localhost:46243/posts/</link>
     <description>Recent content in Posts on NetWithAlex</description>
-    <generator>Hugo -- 0.140.2</generator>
+    <generator>Hugo -- 0.144.0</generator>
     <language>en-US</language>
     <lastBuildDate>Wed, 05 Feb 2025 14:20:31 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:46243/posts/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Securing the Edge with Cisco SD-WAN and Secure Access</title>
-      <link>http://localhost:1313/sdwan-sse-integration/</link>
+      <link>http://localhost:46243/sdwan-sse-integration/</link>
       <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/sdwan-sse-integration/</guid>
+      <guid>http://localhost:46243/sdwan-sse-integration/</guid>
       <description>Discover how Cisco SD-WAN and Cisco Secure Access work together to enhance network performance and security in a cloud-first world.</description>
     </item>
     <item>
       <title>Enhanced Application Aware Routing</title>
-      <link>http://localhost:1313/enhanced-aar/</link>
+      <link>http://localhost:46243/enhanced-aar/</link>
       <pubDate>Sun, 05 Jan 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/enhanced-aar/</guid>
+      <guid>http://localhost:46243/enhanced-aar/</guid>
       <description>Learn the benefits of enhanced app aware routing and how to implement it on your network</description>
     </item>
     <item>
       <title>Improving my SD-WAN Assistant - Multiple agents</title>
-      <link>http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/</link>
+      <link>http://localhost:46243/improving-my-sd-wan-assistant-multiple-agents/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/</guid>
+      <guid>http://localhost:46243/improving-my-sd-wan-assistant-multiple-agents/</guid>
       <description>Learn how an LLM agentic approach can be used to troubleshoot your SD-WAN network</description>
     </item>
     <item>
       <title>Building my first SD-WAN AI Assistant with LangChain</title>
-      <link>http://localhost:1313/building-my-first-sd-wan-ai-assistant-with-langchain/</link>
+      <link>http://localhost:46243/building-my-first-sd-wan-ai-assistant-with-langchain/</link>
       <pubDate>Wed, 10 Jul 2024 18:51:08 +0000</pubDate>
-      <guid>http://localhost:1313/building-my-first-sd-wan-ai-assistant-with-langchain/</guid>
+      <guid>http://localhost:46243/building-my-first-sd-wan-ai-assistant-with-langchain/</guid>
       <description>Discover how LLMs can be integrated with Cisco SD-WAN to troubleshoot your network in a simple way</description>
     </item>
     <item>
       <title>Ansible Notes</title>
-      <link>http://localhost:1313/ansible-notes/</link>
+      <link>http://localhost:46243/ansible-notes/</link>
       <pubDate>Sun, 19 May 2024 13:49:53 +0000</pubDate>
-      <guid>http://localhost:1313/ansible-notes/</guid>
+      <guid>http://localhost:46243/ansible-notes/</guid>
       <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;http://localhost:1313/study-devops-blueprint/&#34;&gt;&lt;em&gt;This post is part of DEVNET DevOps (300-910) – Blueprint&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:46243/study-devops-blueprint/&#34;&gt;&lt;em&gt;This post is part of DEVNET DevOps (300-910) – Blueprint&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Ansible is an open-source automation tool used for configuration management, application deployment and task automation. Although it can be used for a lot of purposes, we are particularly interested on network automation related tasks.&lt;/p&gt;
 &lt;p&gt;There are a lot of resources to learn Ansible online, these notes should serve only as guidance, but you are encouraged to go deeper at your own pace.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Docker - Safety practices</title>
-      <link>http://localhost:1313/docker-safety-practices/</link>
+      <link>http://localhost:46243/docker-safety-practices/</link>
       <pubDate>Sun, 21 Apr 2024 12:49:34 +0000</pubDate>
-      <guid>http://localhost:1313/docker-safety-practices/</guid>
+      <guid>http://localhost:46243/docker-safety-practices/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;Docker helps with packaging, distributing, and running applications. However, we should be responsible so we can ensure the security of the Docker environment. There are some best practices and strategies we can follow to achieve this objective.&lt;/p&gt;
 &lt;h2 id=&#34;security-best-practices-and-strategies&#34;&gt;Security best practices and strategies&lt;/h2&gt;
@@ -59,9 +59,9 @@
     </item>
     <item>
       <title>CI/CD Deployment Strategies</title>
-      <link>http://localhost:1313/ci-cd-deployment-strategies/</link>
+      <link>http://localhost:46243/ci-cd-deployment-strategies/</link>
       <pubDate>Sun, 21 Apr 2024 12:03:50 +0000</pubDate>
-      <guid>http://localhost:1313/ci-cd-deployment-strategies/</guid>
+      <guid>http://localhost:46243/ci-cd-deployment-strategies/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;In the CI/CD world, Deploying updates efficiently and with minimal disruption is crucial. There are different release deployment strategies that organization can adopt including &lt;strong&gt;&lt;em&gt;Big-Bang, Rolling, Blue-Green, and Canary.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;deployment-option&#34;&gt;Deployment Option&lt;/h2&gt;
@@ -70,18 +70,18 @@
     </item>
     <item>
       <title>Docker Golden Images</title>
-      <link>http://localhost:1313/docker-golden-images/</link>
+      <link>http://localhost:46243/docker-golden-images/</link>
       <pubDate>Sat, 06 Apr 2024 10:45:40 +0000</pubDate>
-      <guid>http://localhost:1313/docker-golden-images/</guid>
+      <guid>http://localhost:46243/docker-golden-images/</guid>
       <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;The concept of golden image refers to an image that has been extensively tested and verified its fully operational. Following the same logic, an image that has not been tested or verified should not be considered a golden image. Organizations need to define the process to follow to mark an image as &lt;strong&gt;golden&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The process should include testing and verification methodologies. Also, from a security standpoint patches should be present and if there are external dependencies, it&amp;rsquo;s crucial to update them to their respective recommended versions.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Dockerfile</title>
-      <link>http://localhost:1313/dockerfile/</link>
+      <link>http://localhost:46243/dockerfile/</link>
       <pubDate>Sat, 06 Apr 2024 08:47:03 +0000</pubDate>
-      <guid>http://localhost:1313/dockerfile/</guid>
+      <guid>http://localhost:46243/dockerfile/</guid>
       <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. This page describes the commands you can use in a Dockerfile.&lt;/p&gt;
 &lt;p&gt;Docker runs instructions in a Dockerfile in order. A Dockerfile &lt;strong&gt;must begin with a FROM instruction&lt;/strong&gt;.&lt;/p&gt;
@@ -116,78 +116,78 @@ CMD&lt;/p&gt;</description>
     </item>
     <item>
       <title>Tracking SD-WAN incidents with Service Now</title>
-      <link>http://localhost:1313/tracking-sd-wan-incidents-with-service-now/</link>
+      <link>http://localhost:46243/tracking-sd-wan-incidents-with-service-now/</link>
       <pubDate>Fri, 15 Mar 2024 18:06:34 +0000</pubDate>
-      <guid>http://localhost:1313/tracking-sd-wan-incidents-with-service-now/</guid>
+      <guid>http://localhost:46243/tracking-sd-wan-incidents-with-service-now/</guid>
       <description>Learn how to integrate Cisco SD-WAN with ServiceNow and automate your incident management</description>
     </item>
     <item>
       <title>A New Chapter: SD-Routing&#39;s Revolution in Network Management</title>
-      <link>http://localhost:1313/a-new-chapter-sd-routings-revolution-in-network-management/</link>
+      <link>http://localhost:46243/a-new-chapter-sd-routings-revolution-in-network-management/</link>
       <pubDate>Sat, 24 Feb 2024 12:06:47 +0000</pubDate>
-      <guid>http://localhost:1313/a-new-chapter-sd-routings-revolution-in-network-management/</guid>
+      <guid>http://localhost:46243/a-new-chapter-sd-routings-revolution-in-network-management/</guid>
       <description>Explore how SD-Routing can simply and effectively help you manage and monitor your WAN network.</description>
     </item>
     <item>
       <title>Simplifying AAR: 3/3 Fallback to best path</title>
-      <link>http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/</link>
+      <link>http://localhost:46243/simplifying-aar-3-3-fallback-to-best-path/</link>
       <pubDate>Sun, 11 Feb 2024 12:11:06 +0000</pubDate>
-      <guid>http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/</guid>
+      <guid>http://localhost:46243/simplifying-aar-3-3-fallback-to-best-path/</guid>
       <description>Learn how AAR can help improve the application user experience with Cisco SD-WAN</description>
     </item>
     <item>
       <title>Simplifying AAR:  1/3 The Foundations</title>
-      <link>http://localhost:1313/demystifying-aar-1-3-the-foundations/</link>
+      <link>http://localhost:46243/demystifying-aar-1-3-the-foundations/</link>
       <pubDate>Wed, 07 Feb 2024 16:25:27 +0000</pubDate>
-      <guid>http://localhost:1313/demystifying-aar-1-3-the-foundations/</guid>
+      <guid>http://localhost:46243/demystifying-aar-1-3-the-foundations/</guid>
       <description>Learn how AAR can help improve the application user experience with Cisco SD-WAN</description>
     </item>
     <item>
       <title>Simplifying AAR: 2/3 Understanding different scenarios</title>
-      <link>http://localhost:1313/demystifying-aar-understanding-different-scenarios/</link>
+      <link>http://localhost:46243/demystifying-aar-understanding-different-scenarios/</link>
       <pubDate>Thu, 01 Feb 2024 20:27:37 +0000</pubDate>
-      <guid>http://localhost:1313/demystifying-aar-understanding-different-scenarios/</guid>
+      <guid>http://localhost:46243/demystifying-aar-understanding-different-scenarios/</guid>
       <description>Learn how AAR can help improve the application user experience with Cisco SD-WAN</description>
     </item>
     <item>
       <title>Cisco SD-WAN Network Wide Path Insights (NWPI)</title>
-      <link>http://localhost:1313/network-wide-path-insights-an-introduction/</link>
+      <link>http://localhost:46243/network-wide-path-insights-an-introduction/</link>
       <pubDate>Thu, 25 Jan 2024 20:34:14 +0000</pubDate>
-      <guid>http://localhost:1313/network-wide-path-insights-an-introduction/</guid>
+      <guid>http://localhost:46243/network-wide-path-insights-an-introduction/</guid>
       <description>Learn how to use the most advanced troubleshooting tool for your Cisco SD-WAN Network.</description>
     </item>
     <item>
       <title>CI Tools</title>
-      <link>http://localhost:1313/ci-tools/</link>
+      <link>http://localhost:46243/ci-tools/</link>
       <pubDate>Thu, 18 Jan 2024 19:46:23 +0000</pubDate>
-      <guid>http://localhost:1313/ci-tools/</guid>
+      <guid>http://localhost:46243/ci-tools/</guid>
       <description>&lt;h2 id=&#34;describe-characteristics-and-concepts-of-build-deploy-tools-such-as-jenkins-drone-or-travis-ci&#34;&gt;Describe characteristics and concepts of build /deploy tools such as Jenkins, Drone, or Travis CI&lt;/h2&gt;
-&lt;p&gt;In the &lt;a href=&#34;http://localhost:1313/devops-ci-cd-pipeline/&#34;&gt;last post&lt;/a&gt; we talked about the concepts of CI/CD, emphasizing the importance of the &lt;strong&gt;&lt;em&gt;build&lt;/em&gt;&lt;/strong&gt; phase as part of Continuous Integration process. It is now time to dig deeper on the following CI tools: Jenkins, Drone, Travis and GitLab.&lt;/p&gt;
+&lt;p&gt;In the &lt;a href=&#34;http://localhost:46243/devops-ci-cd-pipeline/&#34;&gt;last post&lt;/a&gt; we talked about the concepts of CI/CD, emphasizing the importance of the &lt;strong&gt;&lt;em&gt;build&lt;/em&gt;&lt;/strong&gt; phase as part of Continuous Integration process. It is now time to dig deeper on the following CI tools: Jenkins, Drone, Travis and GitLab.&lt;/p&gt;
 &lt;h3 id=&#34;jenkins&#34;&gt;Jenkins&lt;/h3&gt;
 &lt;p&gt;Jenkins is a &lt;strong&gt;&lt;em&gt;free&lt;/em&gt;&lt;/strong&gt; automation server (open source) designed to automate parts of the software development process, most notably the building, testing, and deployment of code changes. It is Java based, has a large community and has been out there for a while.&lt;/p&gt;</description>
     </item>
     <item>
       <title>1.0 CI/CD Pipeline</title>
-      <link>http://localhost:1313/devops-ci-cd-pipeline/</link>
+      <link>http://localhost:46243/devops-ci-cd-pipeline/</link>
       <pubDate>Wed, 17 Jan 2024 12:12:31 +0000</pubDate>
-      <guid>http://localhost:1313/devops-ci-cd-pipeline/</guid>
+      <guid>http://localhost:46243/devops-ci-cd-pipeline/</guid>
       <description>&lt;h3 id=&#34;cicd-concepts&#34;&gt;CI/CD concepts&lt;/h3&gt;
 &lt;p&gt;Continuous Integration/continuous delivery/deployment is a methodology to develop solutions. The idea is to automate as much as possible to move quickly and optimize the development process. The NetDevOps pipeline includes a building phase which we are going to focus on to better understand the concept of Continuous Integration.&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;http://localhost:1313/wp-content/uploads/2024/01/Screenshot-2024-01-18-at-18.45.53.png&#34;&gt;NetDevOps pipeline&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;http://localhost:46243/wp-content/uploads/2024/01/Screenshot-2024-01-18-at-18.45.53.png&#34;&gt;NetDevOps pipeline&lt;/p&gt;
 &lt;p&gt;In &lt;strong&gt;Continuous Integration (CI)&lt;/strong&gt;, a crucial idea is the frequent uploading of code into the code base, often multiple times a day. This involves the constant merging of developer work with the code base, and the early identification of issues through the use of testing.&lt;/p&gt;</description>
     </item>
     <item>
       <title>DEVNET DevOps (300-910) - Blueprint</title>
-      <link>http://localhost:1313/study-devops-blueprint/</link>
+      <link>http://localhost:46243/study-devops-blueprint/</link>
       <pubDate>Wed, 10 Jan 2024 18:46:45 +0000</pubDate>
-      <guid>http://localhost:1313/study-devops-blueprint/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;http://localhost:1313/devops-ci-cd-pipeline/&#34;&gt;20% 1.0 CI/CD Pipeline&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+      <guid>http://localhost:46243/study-devops-blueprint/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;http://localhost:46243/devops-ci-cd-pipeline/&#34;&gt;20% 1.0 CI/CD Pipeline&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://localhost:1313/ci-tools/&#34;&gt;1.1 Describe characteristics and concepts of build /deploy tools such as Jenkins, Drone, or Travis CI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:46243/ci-tools/&#34;&gt;1.1 Describe characteristics and concepts of build /deploy tools such as Jenkins, Drone, or Travis CI&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;1.2 Identify the sequence, components, and integrations to implement a CI/CD pipeline for a given scenario&lt;/li&gt;
 &lt;li&gt;1.3 Troubleshoot issues with a CI/CD pipeline such as code-based failures, pipeline issues, and tool incompatibility&lt;/li&gt;
 &lt;li&gt;1.4 Identify tests to integrate into a CI/CD pipeline for a given scenario&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://localhost:1313/ci-cd-deployment-strategies/&#34;&gt;1.5 Identify release deployment strategy (canary, rollbacks, and blue/green) for a given scenario&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost:46243/ci-cd-deployment-strategies/&#34;&gt;1.5 Identify release deployment strategy (canary, rollbacks, and blue/green) for a given scenario&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;1.6 Diagnose code dependency management issues including API, tool chain, and libraries&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;15% 2.0 Packaging and Delivery of Applications&lt;/strong&gt;&lt;/p&gt;</description>

@@ -82,7 +82,42 @@ Now, we need to redirect traffic from users to the tunnel. There are two options
 
 #### Service Route of type SSE 
 
-The first op
+On the Service VPN, add a Service Route with SSE Provider _Cisco-Secure Access_
+
+![](/wp-content/uploads/2025/02/static-sse.png)
+
+This will be added in the following way:
+
+```
+ip sdwan route vrf 10 0.0.0.0/0 service sse Cisco-Secure-Access
+```
+
+You can decide to forward some traffic to SSE by modifying the route, however this approach doesn't give a lot of flexibility compared to the second option.
+
+#### Data Policy
+
+Data Policies provide more flexibility to redirect traffic. We can not only match on the destination, but also on other useful elements such as source, applications and more. 
+
+![](/wp-content/uploads/2025/02/match-sse.png)
+
+This is an example matching all traffic coming from my VPN 10 users and setting an action of Secure Service Edge. Notice that we can enable the option to _Fallback to routing_ in case tunnels are unavailable. 
+
+![](/wp-content/uploads/2025/02/data-sse.png)
+
+### Validations from the User
+
+To verify that users are using SSE we have a couple of options
+
+The first one is to visit policy.test.sse.com, if traffic is correctly redirected it will show something like this:
+![](/wp-content/uploads/2025/02/policy-sse.png)
+
+On SSE side, there is a policy denying traffic to social media apps, let's see the result of trying to access x.com 
+
+![](/wp-content/uploads/2025/02/x-sse.png)
+
+Lastly, accessing welcome.umbrella.com will let us know if user is protected  
+
+![](/wp-content/uploads/2025/02/umbrella-sse.png)
 
 ## Lessons learned 
 

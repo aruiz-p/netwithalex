@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Troubleshooting on NetWithAlex</title>
-    <link>http://localhost:1313/category/troubleshooting/</link>
+    <link>http://localhost:46243/category/troubleshooting/</link>
     <description>Recent content in Troubleshooting on NetWithAlex</description>
-    <generator>Hugo -- 0.140.2</generator>
+    <generator>Hugo -- 0.144.0</generator>
     <language>en-US</language>
     <lastBuildDate>Thu, 25 Jan 2024 20:34:14 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/category/troubleshooting/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:46243/category/troubleshooting/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cisco SD-WAN Network Wide Path Insights (NWPI)</title>
-      <link>http://localhost:1313/network-wide-path-insights-an-introduction/</link>
+      <link>http://localhost:46243/network-wide-path-insights-an-introduction/</link>
       <pubDate>Thu, 25 Jan 2024 20:34:14 +0000</pubDate>
-      <guid>http://localhost:1313/network-wide-path-insights-an-introduction/</guid>
+      <guid>http://localhost:46243/network-wide-path-insights-an-introduction/</guid>
       <description>Learn how to use the most advanced troubleshooting tool for your Cisco SD-WAN Network.</description>
     </item>
   </channel>
