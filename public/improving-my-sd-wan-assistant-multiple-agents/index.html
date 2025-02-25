@@ -294,7 +294,7 @@
 <h2 id="behind-the-scenes">Behind the scenes<a hidden class="anchor" aria-hidden="true" href="#behind-the-scenes">#</a></h2>
 <p>Ok, the assistant came back with a good response, but let&rsquo;s see in more detail what happened under the hood.</p>
 <p>Using LangSmith we can get details and insights about the workflow followed. Here is the complete process.</p>
-<p><img loading="lazy" src="/wp-content/uploads/2024/07/agent-workflow-436x1024.png"></p>
+<p><img loading="lazy" src="/wp-content/uploads/2024/07/agent-workflow.png"></p>
 <p>First, the <code>supervisor</code> receives the user&rsquo;s query and pass it to the <code>tracer</code>.</p>
 <p><img loading="lazy" src="/wp-content/uploads/2024/07/sup1.png"></p>
 <p>Next, the <code>tracer</code> uses the available tools to starts the trace, waits to capture some flows and retrieves information. Reports to the <code>supervisor</code>. Note that the order in which tools are executed is up to the agent.</p>

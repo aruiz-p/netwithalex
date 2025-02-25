@@ -98,7 +98,7 @@ Ok, the assistant came back with a good response, but let's see in more detail w
 
 Using LangSmith we can get details and insights about the workflow followed. Here is the complete process.
 
-![](/wp-content/uploads/2024/07/agent-workflow-436x1024.png)
+![](/wp-content/uploads/2024/07/agent-workflow.png)
 
 First, the `supervisor` receives the user's query and pass it to the `tracer`.
 
