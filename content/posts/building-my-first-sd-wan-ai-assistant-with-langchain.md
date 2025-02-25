@@ -161,7 +161,7 @@ Then, I ask the assistant if flows have been captured, it responds with this
 
 We can see flows were captured and also it gave me more information of the events detected and the path with device names. The first event seem to be related to our issue. So far the information looks accurate, let's get more details.
 
-![](/wp-content/uploads/2024/07/assistant-2-866x1024.png)
+![](/wp-content/uploads/2024/07/assistant-2.png)
 
 With this, we can see that the client sent multiple ssh attempts, we can dig further into one of the flows. Let's see what else it gives.
 

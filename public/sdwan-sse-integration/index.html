@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=46243&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -9,16 +9,16 @@
 <meta name="keywords" content="">
 <meta name="description" content="Discover how Cisco SD-WAN and Cisco Secure Access work together to enhance network performance and security in a cloud-first world.">
 <meta name="author" content="alex">
-<link rel="canonical" href="http://localhost:46243/sdwan-sse-integration/">
+<link rel="canonical" href="http://localhost:1313/sdwan-sse-integration/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:46243/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:46243/assets/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:46243/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:46243/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:46243/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:46243/sdwan-sse-integration/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/sdwan-sse-integration/">
 <noscript>
     <style>
         #theme-toggle,
@@ -55,7 +55,7 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="http://localhost:46243/sdwan-sse-integration/">
+</noscript><meta property="og:url" content="http://localhost:1313/sdwan-sse-integration/">
   <meta property="og:site_name" content="NetWithAlex">
   <meta property="og:title" content="Securing the Edge with Cisco SD-WAN and Secure Access">
   <meta property="og:description" content="Discover how Cisco SD-WAN and Cisco Secure Access work together to enhance network performance and security in a cloud-first world.">
@@ -78,13 +78,13 @@
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "http://localhost:46243/posts/"
+      "item": "http://localhost:1313/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Securing the Edge with Cisco SD-WAN and Secure Access",
-      "item": "http://localhost:46243/sdwan-sse-integration/"
+      "item": "http://localhost:1313/sdwan-sse-integration/"
     }
   ]
 }
@@ -99,8 +99,8 @@
   "keywords": [
     
   ],
-  "articleBody": "Introduction Security has always been a top of mind for organizations, but protecting every angle of the network remains a challenge. At the same time, ensuring an optimal application and user experience is equally important. Organizations have often had to choose between security-focused and performance-driven solutions, leading to increased management and operational complexity.\nSecure Access is a robust solution that addresses these challenges. It offers top notch security by integrating advanced technologies and access controls. This means that users can get a secure and direct connectivity from SD-WAN sites to the internet or private/public clouds.\nLet’s see how it works\nSD-WAN Meets Secure Access Starting with SD-WAN version 20.13/17.13, an integration with Secure Access is now available out of the box.\nWith this integration, automatic tunnels can be established to the primary and secondary Secure Access Data Centers closest to your router’s location, ensuring optimal performance. These tunnels route traffic while enforcing your organization’s security policies, providing a simple and powerful way to improve both security and connectivity.\nAt the core of Secure Access are Network Tunnel Groups (NTGs), which manage IPSec connections. Each NTG includes a primary and a secondary Secure Access Data Center. While configuring tunnels to both data centers is not mandatory, it is highly recommended to ensure high availability in case one becomes unavailable.\nEach tunnel supports up to 1 Gbps of throughput in either direction. It is possible to configure up to 16 tunnels, 8 active and 8 backup, allowing for load balancing across active tunnels to increase the available bandwidth.\nTo automatically establish the tunnels, the SD-WAN router needs internet connectivity and DNS lookup enabled. This allows the device to determine its own public ip address, communicate it to the Manager and get assigned the nearest primary and secondary SSE Data Centers.\nOnce the tunnels are established, traffic going through them will be secured by the core security features of SSE: FWaaS, CASB, ZTNA and SWG.\nConfiguration Steps Create API Key To start, on SSE create an API key for the Manager to securely connect. Make sure the following privileges are granted:\nDeployment / Network Tunnel Group - Read/Write Deployment / Tunnels - Read/Write Deployment / Regions - Read You will get your API Key and Key Secret\nEnter Credentials on the Manager Next, input the information on the SD-WAN Manager under Administration \u003e Settings \u003e Cloud Credentials \u003e SSE\nCreate SSE Policy on the Manager You need to create a new SSE Policy. This is where you input information about the IPSec tunnels.\nFrom Configuration \u003e Policy Groups \u003e Secure Service Edge\nThe following is the minimum you need:\nTracker IP - Used to confirm the tunnel is operational. Tunnel - At least 1 tunnel. Enter tunnel name, source interface and select primary/secondary DC Interface Pair - Specify active and backup tunnels. Select none as backup if there’s only 1 tunnel. Note You can select the SSE region of your preference or use Auto to automatically select it.\nThen, create a Policy Group, associate a device and add the SSE policy\nRedirect service side traffic Now, we need to redirect traffic from users to the tunnel. There are two options:\nService Route of type SSE On the Service VPN, add a Service Route with SSE Provider Cisco-Secure Access\nThis will be added in the following way:\nip sdwan route vrf 10 0.0.0.0/0 service sse Cisco-Secure-Access You can decide to forward some traffic to SSE by modifying the route, however this approach doesn’t give a lot of flexibility compared to the second option.\nData Policy Data Policies provide more flexibility to redirect traffic. We can not only match on the destination, but also on other useful elements such as source, applications and more.\nThis is an example matching all traffic coming from my VPN 10 users and setting an action of Secure Service Edge. Notice that we can enable the option to Fallback to routing in case tunnels are unavailable.\nValidations from the User To verify that users are using SSE we have a couple of options\nThe first one is to visit policy.test.sse.com, if traffic is correctly redirected it will show something like this: On SSE side, there is a policy denying traffic to social media apps, let’s see the result of trying to access x.com\nLastly, accessing welcome.umbrella.com will let us know if user is protected\nLessons learned Using inline data, the number of samples increases dramatically compared to BFD sample size. 📈 EAAR can steer traffic in seconds, rather than minutes. ⏩ EAAR delivers the greatest benefits on transports with QoS, such as MPLS. 🚀 Even on transports without QoS, inline data measurements increases sample size and accuracy. ⏳ The dampening timer is useful to ensure transports are stable before marking them as valid. ✅ Interoperability between devices running EAAR and devices running AAR is possible 🔄 I hope you have learned something useful! See you on the next one 👋\n",
-  "wordCount" : "820",
+  "articleBody": "Introduction Security has always been a top of mind for organizations, but protecting every angle of the network remains a challenge. At the same time, ensuring an optimal application and user experience is equally important. Organizations have often had to choose between security-focused and performance-driven solutions, leading to increased management and operational complexity.\nSecure Access is a robust solution that addresses these challenges. It offers top notch security by integrating advanced technologies and access controls. This means that users can get a secure and direct connectivity from SD-WAN sites to the internet or private/public clouds.\nLet’s see how it works\nSD-WAN Meets Secure Access Starting with SD-WAN version 20.13/17.13, an integration with Secure Access is now available out of the box.\nWith this integration, automatic tunnels can be established to the primary and secondary Secure Access Data Centers closest to your router’s location, ensuring optimal performance. These tunnels route traffic while enforcing your organization’s security policies, providing a simple and powerful way to improve both security and connectivity.\nAt the core of Secure Access are Network Tunnel Groups (NTGs), which manage IPSec connections. Each NTG includes a primary and a secondary Secure Access Data Center. While configuring tunnels to both data centers is not mandatory, it is highly recommended to ensure high availability in case one becomes unavailable.\nEach tunnel supports up to 1 Gbps of throughput in either direction. It is possible to configure up to 16 tunnels, 8 active and 8 backup, allowing for load balancing across active tunnels to increase the available bandwidth.\nTo automatically establish the tunnels, the SD-WAN router needs internet connectivity and DNS lookup enabled. This allows the device to determine its own public ip address, communicate it to the Manager and get assigned the nearest primary and secondary SSE Data Centers.\nOnce the tunnels are established, traffic going through them will be secured by the core security features of SSE: FWaaS, CASB, ZTNA and SWG.\nConfiguration Steps Create API Key To start, on SSE create an API key for the Manager to securely connect. Make sure the following privileges are granted:\nDeployment / Network Tunnel Group - Read/Write Deployment / Tunnels - Read/Write Deployment / Regions - Read You will get your API Key and Key Secret\nEnter Credentials on the Manager Next, input the information on the SD-WAN Manager under Administration \u003e Settings \u003e Cloud Credentials \u003e SSE\nCreate SSE Policy on the Manager You need to create a new SSE Policy. This is where you input information about the IPSec tunnels.\nFrom Configuration \u003e Policy Groups \u003e Secure Service Edge\nThe following is the minimum you need:\nTracker IP - Used to confirm the tunnel is operational. Tunnel - At least 1 tunnel. Enter tunnel name, source interface and select primary/secondary DC Interface Pair - Specify active and backup tunnels. Select none as backup if there’s only 1 tunnel. Note You can select the SSE region of your preference or use Auto to automatically select it.\nThen, create a Policy Group, associate a device and add the SSE policy\nRedirect service side traffic Now, we need to redirect traffic from users to the tunnel. There are two options:\nService Route of type SSE On the Service VPN, add a Service Route with SSE Provider Cisco-Secure Access\nThis will be added in the following way:\nip sdwan route vrf 10 0.0.0.0/0 service sse Cisco-Secure-Access You can decide to forward some traffic to SSE by modifying the route, however this approach doesn’t give a lot of flexibility compared to the second option.\nData Policy Data Policies provide more flexibility to redirect traffic. We can not only match on the destination, but also on other useful elements such as source, applications and more.\nThis is an example matching all traffic coming from my VPN 10 users and setting an action of Secure Service Edge. Notice that we can enable the option to Fallback to routing in case tunnels are unavailable.\nValidations from the User To verify that users are using SSE we have a couple of options\nThe first one is to visit policy.test.sse.com, if traffic is correctly redirected it will show something like this: On SSE side, there is a policy denying traffic to social media apps, let’s see the result of trying to access x.com\nLastly, accessing welcome.umbrella.com will let us know if user is protected\nAdditional considerations ECMP is available when multiple active tunnels are active. Un-equal load balance can be achieved through weight assignment to IPSec tunnels. Fallback to routing is available when tunnels aren’t available Trackers are customizable - custom URL and thresholds to meet desired SLAs I hope you have learned something useful! See you on the next one 👋\n",
+  "wordCount" : "782",
   "inLanguage": "en",
   "datePublished": "2025-02-05T14:20:31Z",
   "dateModified": "2025-02-05T14:20:31Z",
@@ -110,14 +110,14 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "http://localhost:46243/sdwan-sse-integration/"
+    "@id": "http://localhost:1313/sdwan-sse-integration/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "NetWithAlex",
     "logo": {
       "@type": "ImageObject",
-      "url": "http://localhost:46243/favicon.ico"
+      "url": "http://localhost:1313/favicon.ico"
     }
   }
 }
@@ -139,7 +139,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:46243/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <a href="http://localhost:1313/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -176,22 +176,22 @@
                 </a>
             </li>
             <li>
-                <a href="http://localhost:46243/archives/" title="Archive">
+                <a href="http://localhost:1313/archives/" title="Archive">
                     <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:46243/category/" title="Categories">
+                <a href="http://localhost:1313/category/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:46243/about/" title="About me.">
+                <a href="http://localhost:1313/about/" title="About me.">
                     <span>About me.</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:46243/search/" title="🔍">
+                <a href="http://localhost:1313/search/" title="🔍">
                     <span>🔍</span>
                 </a>
             </li>
@@ -202,7 +202,7 @@
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="http://localhost:46243/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:46243/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
       Securing the Edge with Cisco SD-WAN and Secure Access
     </h1>
@@ -241,7 +241,7 @@
                     <a href="#validations-from-the-user" aria-label="Validations from the User">Validations from the User</a></li></ul>
                 </li>
                 <li>
-                    <a href="#lessons-learned" aria-label="Lessons learned">Lessons learned</a>
+                    <a href="#additional-considerations" aria-label="Additional considerations">Additional considerations</a>
                 </li>
             </ul>
         </div>
@@ -307,14 +307,12 @@
 <p><img loading="lazy" src="/wp-content/uploads/2025/02/x-sse.png"></p>
 <p>Lastly, accessing welcome.umbrella.com will let us know if user is protected</p>
 <p><img loading="lazy" src="/wp-content/uploads/2025/02/umbrella-sse.png"></p>
-<h2 id="lessons-learned">Lessons learned<a hidden class="anchor" aria-hidden="true" href="#lessons-learned">#</a></h2>
+<h2 id="additional-considerations">Additional considerations<a hidden class="anchor" aria-hidden="true" href="#additional-considerations">#</a></h2>
 <ul>
-<li>Using inline data, the number of samples increases dramatically compared to BFD sample size. 📈</li>
-<li>EAAR can steer traffic in seconds, rather than minutes. ⏩</li>
-<li>EAAR delivers the greatest benefits on transports with QoS, such as MPLS. 🚀</li>
-<li>Even on transports without QoS, inline data measurements increases sample size and accuracy. ⏳</li>
-<li>The dampening timer is useful to ensure transports are stable before marking them as valid. ✅</li>
-<li>Interoperability between devices running EAAR and devices running AAR is possible 🔄</li>
+<li>ECMP is available when multiple active tunnels are active.</li>
+<li>Un-equal load balance can be achieved through weight assignment to IPSec tunnels.</li>
+<li>Fallback to routing is available when tunnels aren&rsquo;t available</li>
+<li>Trackers are customizable - custom URL and thresholds to meet desired SLAs</li>
 </ul>
 <p>I hope you have learned something useful! See you on the next one 👋</p>
 
@@ -329,7 +327,7 @@
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="http://localhost:46243/">NetWithAlex</a></span> · 
+        <span>&copy; 2025 <a href="http://localhost:1313/">NetWithAlex</a></span> · 
 
     <span>
         Powered by

@@ -119,14 +119,13 @@ Lastly, accessing welcome.umbrella.com will let us know if user is protected
 
 ![](/wp-content/uploads/2025/02/umbrella-sse.png)
 
-## Lessons learned 
 
-- Using inline data, the number of samples increases dramatically compared to BFD sample size. 📈
-- EAAR can steer traffic in seconds, rather than minutes. ⏩
-- EAAR delivers the greatest benefits on transports with QoS, such as MPLS. 🚀
-- Even on transports without QoS, inline data measurements increases sample size and accuracy. ⏳
-- The dampening timer is useful to ensure transports are stable before marking them as valid. ✅
-- Interoperability between devices running EAAR and devices running AAR is possible 🔄
+## Additional considerations
+
+- ECMP is available when multiple active tunnels are active.
+- Un-equal load balance can be achieved through weight assignment to IPSec tunnels. 
+- Fallback to routing is available when tunnels aren't available
+- Trackers are customizable - custom URL and thresholds to meet desired SLAs
 
 I hope you have learned something useful! See you on the next one 👋
 
