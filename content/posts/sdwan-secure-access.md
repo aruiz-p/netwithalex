@@ -1,5 +1,4 @@
 ---
-draft: false
 author: alex
 category:
   - sdwan
