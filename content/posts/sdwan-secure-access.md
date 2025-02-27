@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 author: alex
 category:
   - sdwan
@@ -106,8 +106,13 @@ This is an example matching all traffic coming from my VPN 10 users and setting 
 
 ### Validations from the Manager
 
+Check the tunnel status from **_Monitor > Tunnels > SIG/SSE Tunnels_**
 
+![](/wp-content/uploads/2025/02/verify1.png)
 
+Logs are available and are useful to determine if there are any issues forming the tunnels 
+
+![](/wp-content/uploads/2025/02/verify2.png)
 
 ### Validations from the User
 
@@ -127,10 +132,13 @@ Lastly, accessing welcome.umbrella.com will let us know if user is protected
 
 ## Additional considerations
 
-- ECMP is available when multiple active tunnels are active.
+- ECMP is available when multiple tunnels are active.
 - Un-equal load balance can be achieved through weight assignment to IPSec tunnels. 
 - Fallback to routing is available when tunnels aren't available
 - Trackers are customizable - custom URL and thresholds to meet desired SLAs
+- In-built dampening mechanism on tunnels to avoid flapping
+- Data policy redirection provides greater flexibility than static sdwan routes
+- Use Loopback interfaces to create multiple tunnels
 
 I hope you have learned something useful! See you on the next one 👋
 

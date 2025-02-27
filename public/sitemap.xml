@@ -2,161 +2,161 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:42589/category/</loc>
+    <loc>http://localhost:1313/category/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/posts/</loc>
+    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/tag/sdwan/</loc>
+    <loc>http://localhost:1313/tag/sdwan/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/category/sdwan/</loc>
+    <loc>http://localhost:1313/category/sdwan/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/category/secure-access/</loc>
+    <loc>http://localhost:1313/category/secure-access/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/sdwan-sse-integration/</loc>
+    <loc>http://localhost:1313/sdwan-sse-integration/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/tag/security/</loc>
+    <loc>http://localhost:1313/tag/security/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/category/security/</loc>
+    <loc>http://localhost:1313/category/security/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/tag/sse/</loc>
+    <loc>http://localhost:1313/tag/sse/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/tag/</loc>
+    <loc>http://localhost:1313/tag/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/tag/eaar/</loc>
+    <loc>http://localhost:1313/tag/eaar/</loc>
     <lastmod>2025-01-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/enhanced-aar/</loc>
+    <loc>http://localhost:1313/enhanced-aar/</loc>
     <lastmod>2025-01-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/category/networking/</loc>
+    <loc>http://localhost:1313/category/networking/</loc>
     <lastmod>2025-01-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/category/ai/</loc>
+    <loc>http://localhost:1313/category/ai/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/tag/genai/</loc>
+    <loc>http://localhost:1313/tag/genai/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/improving-my-sd-wan-assistant-multiple-agents/</loc>
+    <loc>http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/tag/langchain/</loc>
+    <loc>http://localhost:1313/tag/langchain/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/tag/langgraph/</loc>
+    <loc>http://localhost:1313/tag/langgraph/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/tag/llm/</loc>
+    <loc>http://localhost:1313/tag/llm/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/tag/openai/</loc>
+    <loc>http://localhost:1313/tag/openai/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/category/sd-wan/</loc>
+    <loc>http://localhost:1313/category/sd-wan/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/tag/slm/</loc>
+    <loc>http://localhost:1313/tag/slm/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/building-my-first-sd-wan-ai-assistant-with-langchain/</loc>
+    <loc>http://localhost:1313/building-my-first-sd-wan-ai-assistant-with-langchain/</loc>
     <lastmod>2024-07-10T18:51:08+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/tag/webex/</loc>
+    <loc>http://localhost:1313/tag/webex/</loc>
     <lastmod>2024-07-10T18:51:08+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/ansible-notes/</loc>
+    <loc>http://localhost:1313/ansible-notes/</loc>
     <lastmod>2024-05-19T13:49:53+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/category/devnet/</loc>
+    <loc>http://localhost:1313/category/devnet/</loc>
     <lastmod>2024-05-19T13:49:53+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/category/study-material/</loc>
+    <loc>http://localhost:1313/category/study-material/</loc>
     <lastmod>2024-05-19T13:49:53+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/docker-safety-practices/</loc>
+    <loc>http://localhost:1313/docker-safety-practices/</loc>
     <lastmod>2024-04-21T12:49:34+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/ci-cd-deployment-strategies/</loc>
+    <loc>http://localhost:1313/ci-cd-deployment-strategies/</loc>
     <lastmod>2024-04-21T12:03:50+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/docker-golden-images/</loc>
+    <loc>http://localhost:1313/docker-golden-images/</loc>
     <lastmod>2024-04-06T10:45:40+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/dockerfile/</loc>
+    <loc>http://localhost:1313/dockerfile/</loc>
     <lastmod>2024-04-06T08:47:03+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/category/automation/</loc>
+    <loc>http://localhost:1313/category/automation/</loc>
     <lastmod>2024-03-15T18:06:34+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/tracking-sd-wan-incidents-with-service-now/</loc>
+    <loc>http://localhost:1313/tracking-sd-wan-incidents-with-service-now/</loc>
     <lastmod>2024-03-15T18:06:34+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/a-new-chapter-sd-routings-revolution-in-network-management/</loc>
+    <loc>http://localhost:1313/a-new-chapter-sd-routings-revolution-in-network-management/</loc>
     <lastmod>2024-02-24T12:06:47+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/category/sd-routing/</loc>
+    <loc>http://localhost:1313/category/sd-routing/</loc>
     <lastmod>2024-02-24T12:06:47+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/category/aar/</loc>
+    <loc>http://localhost:1313/category/aar/</loc>
     <lastmod>2024-02-11T12:11:06+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/category/policies/</loc>
+    <loc>http://localhost:1313/category/policies/</loc>
     <lastmod>2024-02-11T12:11:06+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/simplifying-aar-3-3-fallback-to-best-path/</loc>
+    <loc>http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/</loc>
     <lastmod>2024-02-11T12:11:06+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/demystifying-aar-1-3-the-foundations/</loc>
+    <loc>http://localhost:1313/demystifying-aar-1-3-the-foundations/</loc>
     <lastmod>2024-02-07T16:25:27+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/demystifying-aar-understanding-different-scenarios/</loc>
+    <loc>http://localhost:1313/demystifying-aar-understanding-different-scenarios/</loc>
     <lastmod>2024-02-01T20:27:37+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/network-wide-path-insights-an-introduction/</loc>
+    <loc>http://localhost:1313/network-wide-path-insights-an-introduction/</loc>
     <lastmod>2024-01-25T20:34:14+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/category/troubleshooting/</loc>
+    <loc>http://localhost:1313/category/troubleshooting/</loc>
     <lastmod>2024-01-25T20:34:14+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/category/visibility/</loc>
+    <loc>http://localhost:1313/category/visibility/</loc>
     <lastmod>2024-01-25T20:34:14+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/ci-tools/</loc>
+    <loc>http://localhost:1313/ci-tools/</loc>
     <lastmod>2024-01-18T19:46:23+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/devops-ci-cd-pipeline/</loc>
+    <loc>http://localhost:1313/devops-ci-cd-pipeline/</loc>
     <lastmod>2024-01-17T12:12:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/about/</loc>
+    <loc>http://localhost:1313/about/</loc>
     <lastmod>2024-01-10T18:58:35+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2024-01-10T18:58:35+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/pages/</loc>
+    <loc>http://localhost:1313/pages/</loc>
     <lastmod>2024-01-10T18:58:35+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/tag/automation/</loc>
+    <loc>http://localhost:1313/tag/automation/</loc>
     <lastmod>2024-01-10T18:46:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/study-devops-blueprint/</loc>
+    <loc>http://localhost:1313/study-devops-blueprint/</loc>
     <lastmod>2024-01-10T18:46:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/tag/devops/</loc>
+    <loc>http://localhost:1313/tag/devops/</loc>
     <lastmod>2024-01-10T18:46:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:42589/archives/</loc>
+    <loc>http://localhost:1313/archives/</loc>
   </url><url>
-    <loc>http://localhost:42589/search/</loc>
+    <loc>http://localhost:1313/search/</loc>
   </url>
 </urlset>

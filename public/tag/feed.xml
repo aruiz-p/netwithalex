@@ -2,101 +2,101 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tag on NetWithAlex</title>
-    <link>http://localhost:42589/tag/</link>
+    <link>http://localhost:1313/tag/</link>
     <description>Recent content in Tag on NetWithAlex</description>
-    <generator>Hugo -- 0.144.0</generator>
+    <generator>Hugo -- 0.140.2</generator>
     <language>en-US</language>
     <lastBuildDate>Wed, 05 Feb 2025 14:20:31 +0000</lastBuildDate>
-    <atom:link href="http://localhost:42589/tag/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tag/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Sdwan</title>
-      <link>http://localhost:42589/tag/sdwan/</link>
+      <link>http://localhost:1313/tag/sdwan/</link>
       <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:42589/tag/sdwan/</guid>
+      <guid>http://localhost:1313/tag/sdwan/</guid>
       <description></description>
     </item>
     <item>
       <title>Security</title>
-      <link>http://localhost:42589/tag/security/</link>
+      <link>http://localhost:1313/tag/security/</link>
       <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:42589/tag/security/</guid>
+      <guid>http://localhost:1313/tag/security/</guid>
       <description></description>
     </item>
     <item>
       <title>Sse</title>
-      <link>http://localhost:42589/tag/sse/</link>
+      <link>http://localhost:1313/tag/sse/</link>
       <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:42589/tag/sse/</guid>
+      <guid>http://localhost:1313/tag/sse/</guid>
       <description></description>
     </item>
     <item>
       <title>Eaar</title>
-      <link>http://localhost:42589/tag/eaar/</link>
+      <link>http://localhost:1313/tag/eaar/</link>
       <pubDate>Sun, 05 Jan 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:42589/tag/eaar/</guid>
+      <guid>http://localhost:1313/tag/eaar/</guid>
       <description></description>
     </item>
     <item>
       <title>Genai</title>
-      <link>http://localhost:42589/tag/genai/</link>
+      <link>http://localhost:1313/tag/genai/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:42589/tag/genai/</guid>
+      <guid>http://localhost:1313/tag/genai/</guid>
       <description></description>
     </item>
     <item>
       <title>Langchain</title>
-      <link>http://localhost:42589/tag/langchain/</link>
+      <link>http://localhost:1313/tag/langchain/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:42589/tag/langchain/</guid>
+      <guid>http://localhost:1313/tag/langchain/</guid>
       <description></description>
     </item>
     <item>
       <title>Langgraph</title>
-      <link>http://localhost:42589/tag/langgraph/</link>
+      <link>http://localhost:1313/tag/langgraph/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:42589/tag/langgraph/</guid>
+      <guid>http://localhost:1313/tag/langgraph/</guid>
       <description></description>
     </item>
     <item>
       <title>Llm</title>
-      <link>http://localhost:42589/tag/llm/</link>
+      <link>http://localhost:1313/tag/llm/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:42589/tag/llm/</guid>
+      <guid>http://localhost:1313/tag/llm/</guid>
       <description></description>
     </item>
     <item>
       <title>Openai</title>
-      <link>http://localhost:42589/tag/openai/</link>
+      <link>http://localhost:1313/tag/openai/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:42589/tag/openai/</guid>
+      <guid>http://localhost:1313/tag/openai/</guid>
       <description></description>
     </item>
     <item>
       <title>Slm</title>
-      <link>http://localhost:42589/tag/slm/</link>
+      <link>http://localhost:1313/tag/slm/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:42589/tag/slm/</guid>
+      <guid>http://localhost:1313/tag/slm/</guid>
       <description></description>
     </item>
     <item>
       <title>Webex</title>
-      <link>http://localhost:42589/tag/webex/</link>
+      <link>http://localhost:1313/tag/webex/</link>
       <pubDate>Wed, 10 Jul 2024 18:51:08 +0000</pubDate>
-      <guid>http://localhost:42589/tag/webex/</guid>
+      <guid>http://localhost:1313/tag/webex/</guid>
       <description></description>
     </item>
     <item>
       <title>Automation</title>
-      <link>http://localhost:42589/tag/automation/</link>
+      <link>http://localhost:1313/tag/automation/</link>
       <pubDate>Wed, 10 Jan 2024 18:46:45 +0000</pubDate>
-      <guid>http://localhost:42589/tag/automation/</guid>
+      <guid>http://localhost:1313/tag/automation/</guid>
       <description></description>
     </item>
     <item>
       <title>Devops</title>
-      <link>http://localhost:42589/tag/devops/</link>
+      <link>http://localhost:1313/tag/devops/</link>
       <pubDate>Wed, 10 Jan 2024 18:46:45 +0000</pubDate>
-      <guid>http://localhost:42589/tag/devops/</guid>
+      <guid>http://localhost:1313/tag/devops/</guid>
       <description></description>
     </item>
   </channel>

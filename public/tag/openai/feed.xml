@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Openai on NetWithAlex</title>
-    <link>http://localhost:42589/tag/openai/</link>
+    <link>http://localhost:1313/tag/openai/</link>
     <description>Recent content in Openai on NetWithAlex</description>
-    <generator>Hugo -- 0.144.0</generator>
+    <generator>Hugo -- 0.140.2</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 28 Jul 2024 14:56:45 +0000</lastBuildDate>
-    <atom:link href="http://localhost:42589/tag/openai/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tag/openai/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Improving my SD-WAN Assistant - Multiple agents</title>
-      <link>http://localhost:42589/improving-my-sd-wan-assistant-multiple-agents/</link>
+      <link>http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:42589/improving-my-sd-wan-assistant-multiple-agents/</guid>
+      <guid>http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/</guid>
       <description>Learn how an LLM agentic approach can be used to troubleshoot your SD-WAN network</description>
     </item>
     <item>
       <title>Building my first SD-WAN AI Assistant with LangChain</title>
-      <link>http://localhost:42589/building-my-first-sd-wan-ai-assistant-with-langchain/</link>
+      <link>http://localhost:1313/building-my-first-sd-wan-ai-assistant-with-langchain/</link>
       <pubDate>Wed, 10 Jul 2024 18:51:08 +0000</pubDate>
-      <guid>http://localhost:42589/building-my-first-sd-wan-ai-assistant-with-langchain/</guid>
+      <guid>http://localhost:1313/building-my-first-sd-wan-ai-assistant-with-langchain/</guid>
       <description>Discover how LLMs can be integrated with Cisco SD-WAN to troubleshoot your network in a simple way</description>
     </item>
   </channel>
