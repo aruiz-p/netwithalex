@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Asegurando el borde con Cisco SD-WAN y Secure Access | NetWithAlex</title>
+<meta name="keywords" content="">
+<meta name="description" content="Descubra cómo Cisco SD-WAN y Cisco Secure Access trabajan juntos para mejorar el rendimiento y la seguridad de la red en un mundo de la primera nube.">
+<meta name="author" content="Alex">
+<link rel="canonical" href="http://localhost:1313/sdwan-sse-integraci%C3%B3n%20/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/sdwan-sse-integration/">
+<link rel="alternate" hreflang="es" href="http://localhost:1313/sdwan-sse-integraci%C3%B3n%20/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/sdwan-sse-integraci%C3%B3n%20/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="Asegurando el borde con Cisco SD-WAN y Secure Access">
+  <meta property="og:description" content="Descubra cómo Cisco SD-WAN y Cisco Secure Access trabajan juntos para mejorar el rendimiento y la seguridad de la red en un mundo de la primera nube.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-05T14:20:31+00:00">
+    <meta property="article:modified_time" content="2025-02-05T14:20:31+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Asegurando el borde con Cisco SD-WAN y Secure Access">
+<meta name="twitter:description" content="Descubra cómo Cisco SD-WAN y Cisco Secure Access trabajan juntos para mejorar el rendimiento y la seguridad de la red en un mundo de la primera nube.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/es/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Asegurando el borde con Cisco SD-WAN y Secure Access",
+      "item": "http://localhost:1313/sdwan-sse-integraci%C3%B3n%20/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Asegurando el borde con Cisco SD-WAN y Secure Access",
+  "name": "Asegurando el borde con Cisco SD-WAN y Secure Access",
+  "description": "Descubra cómo Cisco SD-WAN y Cisco Secure Access trabajan juntos para mejorar el rendimiento y la seguridad de la red en un mundo de la primera nube.",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introducción La seguridad siempre ha sido una prioridad para las organizaciones, pero proteger cada ángulo de la red sigue siendo un desafío. Al mismo tiempo, garantizar una experiencia óptima para aplicaciones y usuarios es igualmente importante. Las organizaciones a menudo han tenido que elegir entre soluciones centradas en la seguridad o en el rendimiento, lo que aumenta la complejidad de gestión y operación.\nCisco Secure Access es una solución robusta que aborda estos desafíos. Ofrece una seguridad de primer nivel al integrar tecnologías avanzadas y controles de acceso. Esto significa que los usuarios pueden obtener una conectividad segura y directa desde los sitios SD-WAN hacia internet y aplicaciones SaaS.\nVeamos cómo funciona.\nSD-WAN se encuentra con Secure Access A partir de la versión 20.13/17.13 de SD-WAN, la integración con Secure Access está disponible de forma nativa.\nCon esta integración, se pueden establecer túneles IPSec automáticos hacia los Data Centers primarios y secundarios de Secure Access que estén mas cercanos a la ubicación de tu router, garantizando un rendimiento óptimo. Estos túneles enrutan el tráfico mientras aplican las políticas de seguridad de tu organización, proporcionando una forma sencilla y potente de mejorar tanto la seguridad como la conectividad a internet.\nEn el centro de Secure Access están los Network Tunnel Groups (NTGs), que gestionan las conexiones IPSec. Cada NTG incluye un Data Center de Secure Access primario y uno secundario. Aunque no es obligatorio configurar túneles hacia ambos, es altamente recomendable para garantizar alta disponibilidad en caso de que uno tenga algún problema\nEs posible configurar hasta 16 túneles, 8 activos y 8 backups, lo que permite hacer load balance entre los túneles activos para aumentar el ancho de banda disponible.\nPara establecer los túneles automáticamente, el Manager y el router necesitan conectividad a Internet y DNS habilitado. Esto permite que el router determine su propia dirección IP pública, se la comunique al Manager y se le asignen los Data Centers SSE primario y secundario más cercanos.\nUna vez que se establecen los túneles, el tráfico que los atraviesa está asegurado por las funcionalidades de seguridad principales de SSE FWAAS, CASB, ZTNA y SWG y más.\nPasos de configuración Crear clave API Para comenzar, en SSE crea una clave API para que el Manager se conecte de forma segura. Asegúrate de que se otorguen los siguientes privilegios:\nDeployment / Network Tunnel Group - Read/Write Deployment / Tunnels - Read/Write Deployment / Regions - Read Obtendrás el API Key y Key Secret\nIngrese credenciales en el Manager A continuación, ingresa la información en el Manager en Administration \u003e Settings \u003e Cloud Credentials \u003e SSE\nCrear política SSE en el Manager Crea una nueva política de SSE. Aquí es donde ingresas la información sobre los túneles IPSec.\nDesde Configuration \u003e Policy Groups \u003e Secure Service Edge\nLo siguiente es lo mínimo que necesitas:\nTracker IP - Se utiliza para confirmar que el túnel está arriba. Tunnel - Al menos 1 túnel. Ingresa el nombre tunnel name, source interface y selecciona primary/secondary DC Interface Pair - Especifica los túneles Active y Backup. Selecciona none como backup si solo hay 1 túnel. Nota Puedes seleccionar la región SSE de tu preferencia o usar auto para seleccionarla automáticamente.\nLuego, crea un Policy Group, asocia un dispositivo y agrega la política de SSE\nRedirigir el tráfico del lado del servicio Ahora, necesitamos redirigir el tráfico de los usuarios al túnel. Hay dos opciones:\nRuta de servicio de tipo SSE En la funcionalidad service vpn, agrega una ruta service con el proveedor de SSE Cisco-Secure Access\nEsto se agregará de la siguiente manera:\nip sdwan route vrf 10 0.0.0.0/0 service sse Cisco-Secure-Access Puede seleccionar qué tráfico se reenvía a SSE modificando la ruta, sin embargo, este enfoque no es tan flexible comparado con la segunda opción.\nData Policy Las Data Policies proporcionan más flexibilidad para redirigir el tráfico. No solo podemos hacer match al destino, sino también a otros elementos útiles, como source, aplicaciones y más.\nEste ejemplo hace match a todo el tráfico que proviene de mis usuarios en la VPN 10 y establece una acción de |Secure Service Edge. Observa que podemos habilitar la opción de Fallback to Routing en caso de que los túneles no estén disponibles.\nValidaciones en el Manager Verifica el estado del túnel desde Monitor \u003e Tunnels \u003e SIG/SSE Tunnels\nLos logs están disponibles y son útiles para determinar si hay algún problema al establecer los túneles\nValidaciones del usuario Para verificar que los usuarios están utilizando SSE, tenemos un par de opciones\nLa primera es visitar policy.test.sse.com, si el tráfico se redirige correctamente, verás algo como esto:\nEn el lado de SSE, hay una política que niega el tráfico a las aplicaciones de redes sociales, veamos el resultado de tratar de acceder a x.com\nPor último, acceder a welcome.umbrella.com nos hará saber si el usuario está protegido\nConsideraciones adicionales ECMP está disponible cuando múltiples túneles están activos. Unequal Load Balance se puede lograr mediante la asignación de peso a los túneles IPSEC. El fallback to routing se activa cuando los túneles no están disponibles Los trackers son personalizables - Se puede definir una URL y thresholds personalizados para cumplir con los SLA deseados Mecanismo de dampening incorporado en túneles para evitar flapping entre túneles. La redirección de la política de datos proporciona una mayor flexibilidad que las rutas estáticas Usa interfaces Loopback para crear múltiples túneles hacia SSE ¡Espero que hayas aprendido algo útil! Nos vemos en el siguiente 👋\n",
+  "wordCount" : "909",
+  "inLanguage": "es",
+  "datePublished": "2025-02-05T14:20:31Z",
+  "dateModified": "2025-02-05T14:20:31Z",
+  "author":{
+    "@type": "Person",
+    "name": "Alex"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/sdwan-sse-integraci%C3%B3n%20/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/assets/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/es/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="http://localhost:1313/" title="English"
+                            aria-label="English">En</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/es/" title="Inicio">
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/archives/" title="Archivo">
+                    <span>Archivo</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/category/" title="Categorías">
+                    <span>Categorías</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/sobre-mi/" title="Sobre mí">
+                    <span>Sobre mí</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/search/" title="🔍">
+                    <span>🔍</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/es/">Inicio</a>&nbsp;»&nbsp;<a href="http://localhost:1313/es/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Asegurando el borde con Cisco SD-WAN y Secure Access
+    </h1>
+    <div class="post-meta"><span title='2025-02-05 14:20:31 +0000 WET'>febrero 5, 2025</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Alex&nbsp;|&nbsp;Traducciones:
+<ul class="i18n_list">
+    <li>
+        <a href="http://localhost:1313/sdwan-sse-integration/">En</a>
+    </li>
+</ul>
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Tabla de Contenidos</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#introducci%c3%b3n" aria-label="Introducción">Introducción</a></li>
+                <li>
+                    <a href="#sd-wan-se-encuentra-con-secure-access" aria-label="SD-WAN se encuentra con Secure Access">SD-WAN se encuentra con Secure Access</a></li>
+                <li>
+                    <a href="#pasos-de-configuraci%c3%b3n" aria-label="Pasos de configuración">Pasos de configuración</a><ul>
+                        
+                <li>
+                    <a href="#crear-clave-api" aria-label="Crear clave API">Crear clave API</a></li>
+                <li>
+                    <a href="#ingrese-credenciales-en-el-manager" aria-label="Ingrese credenciales en el Manager">Ingrese credenciales en el Manager</a></li>
+                <li>
+                    <a href="#crear-pol%c3%adtica-sse-en-el-manager" aria-label="Crear política SSE en el Manager">Crear política SSE en el Manager</a></li>
+                <li>
+                    <a href="#redirigir-el-tr%c3%a1fico-del-lado-del-servicio" aria-label="Redirigir el tráfico del lado del servicio">Redirigir el tráfico del lado del servicio</a><ul>
+                        
+                <li>
+                    <a href="#ruta-de-servicio-de-tipo-sse" aria-label="Ruta de servicio de tipo SSE">Ruta de servicio de tipo SSE</a></li>
+                <li>
+                    <a href="#data-policy" aria-label="Data Policy">Data Policy</a></li></ul>
+                </li>
+                <li>
+                    <a href="#validaciones-en-el-manager" aria-label="Validaciones en el Manager">Validaciones en el Manager</a></li>
+                <li>
+                    <a href="#validaciones-del-usuario" aria-label="Validaciones del usuario">Validaciones del usuario</a></li></ul>
+                </li>
+                <li>
+                    <a href="#consideraciones-adicionales" aria-label="Consideraciones adicionales">Consideraciones adicionales</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="introducción">Introducción<a hidden class="anchor" aria-hidden="true" href="#introducción">#</a></h2>
+<p>La seguridad siempre ha sido una prioridad para las organizaciones, pero proteger cada ángulo de la red sigue siendo un desafío. Al mismo tiempo, garantizar una experiencia óptima para aplicaciones y usuarios es igualmente importante. Las organizaciones a menudo han tenido que elegir entre soluciones centradas en la seguridad o en el rendimiento, lo que aumenta la complejidad de gestión y operación.</p>
+<p>Cisco Secure Access es una solución robusta que aborda estos desafíos. Ofrece una seguridad de primer nivel al integrar tecnologías avanzadas y controles de acceso. Esto significa que los usuarios pueden obtener una conectividad <strong><em>segura y directa</em></strong> desde los sitios SD-WAN hacia internet y aplicaciones SaaS.</p>
+<p>Veamos cómo funciona.</p>
+<h2 id="sd-wan-se-encuentra-con-secure-access">SD-WAN se encuentra con Secure Access<a hidden class="anchor" aria-hidden="true" href="#sd-wan-se-encuentra-con-secure-access">#</a></h2>
+<p>A partir de la versión 20.13/17.13 de SD-WAN, la integración con Secure Access está disponible de forma nativa.</p>
+<p>Con esta integración, se pueden establecer túneles IPSec automáticos hacia los Data Centers primarios y secundarios de Secure Access que estén mas cercanos a la ubicación de tu router, garantizando un rendimiento óptimo. Estos túneles enrutan el tráfico mientras aplican las políticas de seguridad de tu organización, proporcionando una forma sencilla y potente de mejorar tanto la seguridad como la conectividad a internet.</p>
+<p>En el centro de Secure Access están los Network Tunnel Groups <a href="https://docs.sse.cisco.com/sse-user-guide/docs/manage-network-tunnel-groups">(NTGs)</a>, que gestionan las conexiones IPSec. Cada NTG incluye un Data Center de Secure Access primario y uno secundario. Aunque no es obligatorio configurar túneles hacia ambos, es altamente recomendable para garantizar alta disponibilidad en caso de que uno tenga algún problema</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/sse-topo.png"></p>
+<p>Es posible configurar hasta 16 túneles, 8 activos y 8 backups, lo que permite hacer <em>load balance</em> entre los túneles activos para aumentar el ancho de banda disponible.</p>
+<p>Para establecer los túneles <em>automáticamente</em>, el Manager y el router necesitan conectividad a Internet y DNS habilitado. Esto permite que el router determine su propia dirección IP pública, se la comunique al Manager y se le asignen los Data Centers SSE primario y secundario más cercanos.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/get-ip.png"></p>
+<p>Una vez que se establecen los túneles, el tráfico que los atraviesa está asegurado por las <a href="https://www.cisco.com/c/en/us/products/collateral/security/secure-access/hybrid-workforcecloud-agile-security-s.html#ciscurezaccessprechovers">funcionalidades de seguridad principales de SSE</a> FWAAS, CASB, ZTNA y SWG y más.</p>
+<h2 id="pasos-de-configuración">Pasos de configuración<a hidden class="anchor" aria-hidden="true" href="#pasos-de-configuración">#</a></h2>
+<h3 id="crear-clave-api">Crear clave API<a hidden class="anchor" aria-hidden="true" href="#crear-clave-api">#</a></h3>
+<p>Para comenzar, en SSE <a href="https://docs.sse.cisco.com/sse-user-guide/docs/add-secure-access-api-keys">crea una clave API</a> para que el Manager se conecte de forma segura. Asegúrate de que se otorguen los siguientes privilegios:</p>
+<ul>
+<li>Deployment / Network Tunnel Group - <strong>Read/Write</strong></li>
+<li>Deployment / Tunnels - <strong>Read/Write</strong></li>
+<li>Deployment / Regions - <strong>Read</strong></li>
+</ul>
+<p>Obtendrás el <em>API Key y Key Secret</em></p>
+<h3 id="ingrese-credenciales-en-el-manager">Ingrese credenciales en el Manager<a hidden class="anchor" aria-hidden="true" href="#ingrese-credenciales-en-el-manager">#</a></h3>
+<p>A continuación, ingresa la información en el Manager en <strong><em>Administration &gt; Settings &gt; Cloud Credentials &gt; SSE</em></strong></p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/sse-config.png"></p>
+<h3 id="crear-política-sse-en-el-manager">Crear política SSE en el Manager<a hidden class="anchor" aria-hidden="true" href="#crear-política-sse-en-el-manager">#</a></h3>
+<p>Crea una nueva política de SSE. Aquí es donde ingresas la información sobre los túneles IPSec.</p>
+<p>Desde <strong><em>Configuration &gt; Policy Groups &gt; Secure Service Edge</em></strong></p>
+<p>Lo siguiente es lo mínimo que necesitas:</p>
+<ul>
+<li>Tracker IP - Se utiliza para confirmar que el túnel está arriba.</li>
+<li>Tunnel - Al menos 1 túnel. Ingresa el nombre <em>tunnel name, source interface</em> y selecciona <em>primary/secondary DC</em></li>
+<li>Interface Pair - Especifica los túneles <em>Active y Backup</em>. Selecciona <em>none</em> como backup si solo hay 1 túnel.</li>
+</ul>
+<p><strong>Nota</strong> Puedes seleccionar la región SSE de tu preferencia o usar <em>auto</em> para seleccionarla automáticamente.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/tunnel-config.png"></p>
+<p>Luego, crea un <em>Policy Group</em>, asocia un dispositivo y agrega la política de SSE</p>
+<p><img loading="lazy" src="/wp-Content/uploads/2025/02/Policyg.png"></p>
+<h3 id="redirigir-el-tráfico-del-lado-del-servicio">Redirigir el tráfico del lado del servicio<a hidden class="anchor" aria-hidden="true" href="#redirigir-el-tráfico-del-lado-del-servicio">#</a></h3>
+<p>Ahora, necesitamos redirigir el tráfico de los usuarios al túnel. Hay dos opciones:</p>
+<h4 id="ruta-de-servicio-de-tipo-sse">Ruta de servicio de tipo SSE<a hidden class="anchor" aria-hidden="true" href="#ruta-de-servicio-de-tipo-sse">#</a></h4>
+<p>En la funcionalidad <em>service vpn</em>, agrega una ruta <em>service</em> con el proveedor de <strong><em>SSE Cisco-Secure Access</em></strong></p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/static-sse.png"></p>
+<p>Esto se agregará de la siguiente manera:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>ip sdwan route vrf 10 0.0.0.0/0 service sse Cisco-Secure-Access
+</span></span></code></pre></div><p>Puede seleccionar qué tráfico se reenvía a SSE modificando la ruta, sin embargo, este enfoque no es tan flexible  comparado con la segunda opción.</p>
+<h4 id="data-policy">Data Policy<a hidden class="anchor" aria-hidden="true" href="#data-policy">#</a></h4>
+<p>Las Data Policies proporcionan más flexibilidad para redirigir el tráfico. No solo podemos hacer match al destino, sino también a otros elementos útiles, como <em>source, aplicaciones</em> y más.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/match-sse.png"></p>
+<p>Este ejemplo hace match a todo el tráfico que proviene de mis usuarios en la VPN 10 y establece una acción de |<code>Secure Service Edge</code>. Observa que podemos habilitar la opción de <em>Fallback to Routing</em> en caso de que los túneles no estén disponibles.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/data-sse.png"></p>
+<h3 id="validaciones-en-el-manager">Validaciones en el Manager<a hidden class="anchor" aria-hidden="true" href="#validaciones-en-el-manager">#</a></h3>
+<p>Verifica el estado del túnel desde <strong><em>Monitor &gt; Tunnels &gt; SIG/SSE Tunnels</em></strong></p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/verify1.png"></p>
+<p>Los logs están disponibles y son útiles para determinar si hay algún problema al establecer los túneles</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/verify2.png"></p>
+<h3 id="validaciones-del-usuario">Validaciones del usuario<a hidden class="anchor" aria-hidden="true" href="#validaciones-del-usuario">#</a></h3>
+<p>Para verificar que los usuarios están utilizando SSE, tenemos un par de opciones</p>
+<p>La primera es visitar policy.test.sse.com, si el tráfico se redirige correctamente, verás algo como esto:</p>
+<p><img loading="lazy" src="/wp-Content/uploads/2025/02/Policy-sse.png"></p>
+<p>En el lado de SSE, hay una política que niega el tráfico a las aplicaciones de redes sociales, veamos el resultado de tratar de acceder a x.com</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/x-sse.png"></p>
+<p>Por último, acceder a welcome.umbrella.com nos hará saber si el usuario está protegido</p>
+<p><img loading="lazy" src="/wp-Content/uploads/2025/02/Umbrella-sse.png"></p>
+<h2 id="consideraciones-adicionales">Consideraciones adicionales<a hidden class="anchor" aria-hidden="true" href="#consideraciones-adicionales">#</a></h2>
+<ul>
+<li>ECMP está disponible cuando múltiples túneles están activos.</li>
+<li><em>Unequal Load Balance</em> se puede lograr mediante la asignación de peso a los túneles IPSEC.</li>
+<li>El <em>fallback to routing</em>  se activa cuando los túneles no están disponibles</li>
+<li>Los trackers son personalizables - Se puede definir una URL y <em>thresholds</em> personalizados para cumplir con los SLA deseados</li>
+<li>Mecanismo de <em>dampening</em> incorporado en túneles para evitar flapping entre túneles.</li>
+<li>La redirección de la política de datos proporciona una mayor flexibilidad que las rutas estáticas</li>
+<li>Usa interfaces Loopback para crear múltiples túneles hacia SSE</li>
+</ul>
+<p>¡Espero que hayas aprendido algo útil! Nos vemos en el siguiente 👋</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/es/">NetWithAlex</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copiar';
+
+        function copyingDone() {
+            copybutton.innerHTML = '¡copiado!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copiar';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

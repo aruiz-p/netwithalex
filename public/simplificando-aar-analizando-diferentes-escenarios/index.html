@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Simplificando AAR: 2/3 Analizando diferentes escenarios | NetWithAlex</title>
+<meta name="keywords" content="">
+<meta name="description" content="Aprende cómo AAR puede ayudarte a mejorar la experiencia del usuario y aplicación con Cisco SD-WAN">
+<meta name="author" content="Alex">
+<link rel="canonical" href="http://localhost:1313/simplificando-aar-analizando-diferentes-escenarios/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/demystifying-aar-understanding-different-scenarios/">
+<link rel="alternate" hreflang="es" href="http://localhost:1313/simplificando-aar-analizando-diferentes-escenarios/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/simplificando-aar-analizando-diferentes-escenarios/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="Simplificando AAR: 2/3 Analizando diferentes escenarios">
+  <meta property="og:description" content="Aprende cómo AAR puede ayudarte a mejorar la experiencia del usuario y aplicación con Cisco SD-WAN">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-02-07T20:27:37+00:00">
+    <meta property="article:modified_time" content="2024-02-07T20:27:37+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Simplificando AAR: 2/3 Analizando diferentes escenarios">
+<meta name="twitter:description" content="Aprende cómo AAR puede ayudarte a mejorar la experiencia del usuario y aplicación con Cisco SD-WAN">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/es/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Simplificando AAR: 2/3 Analizando diferentes escenarios",
+      "item": "http://localhost:1313/simplificando-aar-analizando-diferentes-escenarios/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Simplificando AAR: 2/3 Analizando diferentes escenarios",
+  "name": "Simplificando AAR: 2\/3 Analizando diferentes escenarios",
+  "description": "Aprende cómo AAR puede ayudarte a mejorar la experiencia del usuario y aplicación con Cisco SD-WAN",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introducción Bienvenido de nuevo a la segunda entrega de mi serie en Application Aware Routing (AAR). En mi publicación anterior, discutimos los conceptos básicos de BFD y SLAs, estableciendo las bases para comprender cómo AAR optimiza el rendimiento de la red en función de los requisitos de las aplicaciones. También tocamos brevemente la configuración de AAR con un ejemplo simple.\nAhora, vamos a ver en profundidad diferentes configuraciones de AAR cuando no hay túneles que cumplan con los SLAs, más específicamente nos concentraremos en el comportamiento de strict/drop y Preferred Backup SLA.\nTopología y configuración inicial Comencemos con una topología simple\nNo estoy limitando los túneles entre los colores, por lo que tenemos un total de 4 túneles en cada borde WAN.\nmpls - mpls mpls - biz-inet biz-inet- mpls biz-inet - biz-inet Este es el Hello interval de BFD y la configuración de app-route para todos los dispositivos; esto es lo más relevante para AAR. Si no estás familiarizado con ello, te recomiendo que revises mi última publicación antes de continuar.\nhello-interval 1000 bfd app-route multiplier 3 bfd app-route poll-interval 120000 Escenario 1: SLA not met - Strict/Drop Nuestra política de AAR está usando el SLA Business-Critical. Vou a introducir pérdida de paquetes para demostrar cómo cambia el tráfico.\nBR10#show sdwan policy from-vsmart from-vsmart sla-class Business-Critical loss 1 latency 250 jitter 100 from-vsmart app-route-policy _VPN10_AAR vpn-list VPN10 sequence 1 match source-ip 172.16.10.0/24 destination-ip 172.16.20.0/24 action sla-class Business-Critical sla-class strict sla-class preferred-color mpls sequence 11 match source-ip 172.16.20.0/24 destination-ip 172.16.10.0/24 action sla-class Business-Critical sla-class strict sla-class preferred-color mpls from-vsmart lists vpn-list VPN10 vpn 10 Leamos lo que dice la documentación sobre nuestra configuración:\nsla-class preferred-color mpls\nsla-class sla-class-name preferred-color color - Para configurar un túnel específico para el tráfico de datos que cumpla con una clase de SLA, incluye la opción preferred-color, especificando el color del túnel preferido. Si más de un túnel cumple con el SLA, el tráfico se enviará a través del túnel preferido. Si no hay un túnel del color preferido disponible, el tráfico se enviará a través de cualquier túnel que cumpla con la clase de SLA. Si ningún túnel cumple con el SLA, el tráfico de datos se enviará a través de cualquier túnel disponible.\nhttps://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html\nAquí hay un diagrama para visualizarlo mejor:\nTen en cuenta que incluso si tanto Biz-Internet como MPLS cumplen con el SLA, solo se utilizará MPLS.\nSí, Biz-Internet se utilizará incluso si no está especificado como un color preferido si el color preferido no cumple con el SLA. Desde mi experiencia, esta es una fuente frecuente de confusión, ya que la expectativa suele ser que, si MPLS no cumple con el SLA, se ejecutará la acción de SLA not met sin considerar el resto de los colores.\nsla-class strict\nHaz clic en Strict/Drop para hacer un match estricto de la clase SLA. Si no hay un túnel de plano de datos disponible que satisfaga los criterios de SLA, se tira el tráfico.\nhttps://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-ware-routing.html\nAhora el diagrama se ve así:\nPrueba 1 - MPLS/Biz-internet cumplen SLA Inicio el tráfico de Branch 10 -\u003e Branch 20 y lo capturo con NWPI. Tanto MPLS como Biz-Internet están teniendo métricas de KPI perfectas (0 pérdida, 0 latencia, 0 jitter)\nBR10-PC1#ssh -l admin 172.16.20.2 Password: Podemos ver que el color Actual Color mpls y Tunnel Match Reason is Matched sla and pref encap color. Todo funcionando de acuerdo con nuestra definición de política.\nPrueba 2- Biz-internet cumple, MPLS no cumple con SLA Introduzco el 3% de pérdida de paquetes en el enlace MPLS. Veamos qué pasa.\nAhora, nuestro túnel MPLS está por encima del 1% de pérdida, por lo que ya no es elegible. Confirmamos que el túnel biz-internet se usa porque cumple con el sla - Tunnel match reason es matched sla and color any\nPrueba 3-MPLS/Biz-internet no cumplen SLA Nuestra última prueba para este escenario será estropear los SLA para ambos transportes. Nuevamente, introduzco el 3% de pérdida de paquetes en ambos MPLS y Biz-internet.\nComo se esperaba, ahora el tráfico se está tirando en BR10, ya que no hay transportes que coincidan con el SLA. Nota como DROP_REPORT indica SdwanDataPolicyDrop\nEscenario 2: Backup SLA Preferred Color Exploremos un nuevo escenario, agregaremos un transporte adicional.\nNuestra configuración de políticas tendrá ligeros cambios. Es importante destacar que, al usar la opción Backup SLA preferred color, la única acción disponible cuando el SLA no se cumple será Load Balance.\nBR10#show sdwan policy from-vsmart from-vsmart sla-class Business-Critical loss 1 latency 250 jitter 100 from-vsmart app-route-policy _VPN10_AAR vpn-list VPN10 sequence 1 match source-ip 172.16.10.0/24 destination-ip 172.16.20.0/24 action backup-sla-preferred-color private1 sla-class Business-Critical no sla-class strict sla-class preferred-color mpls sequence 11 match source-ip 172.16.20.0/24 destination-ip 172.16.10.0/24 action backup-sla-preferred-color private1 sla-class Business-Critical no sla-class strict sla-class preferred-color mpls from-vsmart lists vpn-list VPN10 vpn 10 Nuevamente, veamos qué dice la documentación:\nbackup-sla-preferred-color private1\nCuando ningún túnel cumple con el SLA, se puede elegir cómo manejar el tráfico:\nbackup-sla-preferred-color colors: Dirige el tráfico de datos a un túnel específico. El tráfico de datos se envía a través del túnel configurado si la interfaz de dicho túnel está disponible; si no lo está, el tráfico se enviará por otro túnel disponible. Se pueden especificar uno o más colores.\nhttps://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html\nPara ponerlo visualmente\nPrueba 1- MPLS/Private1 complen con el SLA, Biz-Internet no cumple Comenzaremos con la suposición de que Biz-Internet no cumple con el SLA, por lo que tenemos dos transportes disponibles: MPLS y Private1. Inicio el tráfico.\nBR10-PC1#ssh -l admin 172.16.20.2 Password: Nota como SLA Strict tiene un varlo de No y el MPLS cumple con el SLA y se usa.\nPrueba 2 - Private1 cumple con el SLA, MPLS/Biz-internet no cumplen Para la segunda prueba, estamos introduciendo pérdida en el transporte MPLS. Con esto, el único transporte que cumple con el SLA es Private1, que también es el color preferido de respaldo para el SLA. Veamos cómo se ve.\nEn el Tunnel Match Reason podemos ver claramente que el SLA se cumple a través de un color que no es el preferido (Private1). ¿Qué crees que sucederá si Private1 no cumple con el SLA?\nPrueba 3 - MPLS/Private1/Biz-Internet No confunde Private1 es el único transporte que cumple con el SLA, me encargaré de eso al introducir la pérdida de paquetes.\nDe nuevo (!) Private1 se usa, pero ahora el tráfico coincide con el SLA por defecto, en otras palabras, no hay túneles que coincidan con el SLA, por lo que se utilizará el túnel marcado backup preferred.\nBono Private1 no disponible\nEl resultado después de apagar la interfaz Private1, aún sin ningún túnel que cumpla con el SLA. Podemos ver que se realiza una coincidencia flexible en los túneles (se puede elegir cualquier túnel disponible).\nBiz-internet cumple, MPLS/Private1 no cumplen\nEl resultado después de que biz-internet vuelve a tener valores de pérdida cero, mientras que private1 no cumple con el SLA. Aunque no sea el color preferido, aún cumple con el SLA, por lo que es seleccionado.\nComo nota final, ten en cuenta que AAR siempre intentará usar los túneles que cumplan con el SLA especificado, no te confundas solo porque los nombres de los colores no están explícitamente mencionados en la configuración.\nEn la Siguiente publicación, exploraremos la opción restante Fallback to Best Path. ¡Nos vemos allí!\n",
+  "wordCount" : "1206",
+  "inLanguage": "es",
+  "datePublished": "2024-02-07T20:27:37Z",
+  "dateModified": "2024-02-07T20:27:37Z",
+  "author":{
+    "@type": "Person",
+    "name": "Alex"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/simplificando-aar-analizando-diferentes-escenarios/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/assets/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/es/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="http://localhost:1313/" title="English"
+                            aria-label="English">En</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/es/" title="Inicio">
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/archives/" title="Archivo">
+                    <span>Archivo</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/category/" title="Categorías">
+                    <span>Categorías</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/sobre-mi/" title="Sobre mí">
+                    <span>Sobre mí</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/search/" title="🔍">
+                    <span>🔍</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/es/">Inicio</a>&nbsp;»&nbsp;<a href="http://localhost:1313/es/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Simplificando AAR: 2/3 Analizando diferentes escenarios
+    </h1>
+    <div class="post-meta"><span title='2024-02-07 20:27:37 +0000 WET'>febrero 7, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Alex&nbsp;|&nbsp;Traducciones:
+<ul class="i18n_list">
+    <li>
+        <a href="http://localhost:1313/demystifying-aar-understanding-different-scenarios/">En</a>
+    </li>
+</ul>
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Tabla de Contenidos</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#introducci%c3%b3n" aria-label="Introducción">Introducción</a></li>
+                <li>
+                    <a href="#topolog%c3%ada-y-configuraci%c3%b3n-inicial" aria-label="Topología y configuración inicial">Topología y configuración inicial</a></li>
+                <li>
+                    <a href="#escenario-1-sla-not-met---strictdrop" aria-label="Escenario 1: SLA not met - Strict/Drop">Escenario 1: SLA not met - Strict/Drop</a><ul>
+                        
+                <li>
+                    <a href="#prueba-1---mplsbiz-internet-cumplen-sla" aria-label="Prueba 1 - MPLS/Biz-internet cumplen SLA">Prueba 1 - MPLS/Biz-internet cumplen SLA</a></li>
+                <li>
+                    <a href="#prueba-2--biz-internet-cumple-mpls-no-cumple-con-sla" aria-label="Prueba 2- Biz-internet cumple, MPLS no cumple con SLA">Prueba 2- Biz-internet cumple, MPLS no cumple con SLA</a></li>
+                <li>
+                    <a href="#prueba-3-mplsbiz-internet-no-cumplen-sla" aria-label="Prueba 3-MPLS/Biz-internet no cumplen SLA">Prueba 3-MPLS/Biz-internet no cumplen SLA</a></li></ul>
+                </li>
+                <li>
+                    <a href="#escenario-2-backup-sla-preferred-color" aria-label="Escenario 2: Backup SLA Preferred Color">Escenario 2: Backup SLA Preferred Color</a><ul>
+                        
+                <li>
+                    <a href="#prueba-1--mplsprivate1-complen-con-el-sla-biz-internet-no-cumple" aria-label="Prueba 1- MPLS/Private1 complen con el SLA, Biz-Internet no cumple">Prueba 1- MPLS/Private1 complen con el SLA, Biz-Internet no cumple</a></li>
+                <li>
+                    <a href="#prueba-2---private1-cumple-con-el-sla-mplsbiz-internet-no-cumplen" aria-label="Prueba 2 - Private1 cumple con el SLA, MPLS/Biz-internet no cumplen">Prueba 2 - Private1 cumple con el SLA, MPLS/Biz-internet no cumplen</a></li>
+                <li>
+                    <a href="#prueba-3---mplsprivate1biz-internet-no-confunde" aria-label="Prueba 3 - MPLS/Private1/Biz-Internet No confunde">Prueba 3 - MPLS/Private1/Biz-Internet No confunde</a></li>
+                <li>
+                    <a href="#bono" aria-label="Bono">Bono</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h3 id="introducción">Introducción<a hidden class="anchor" aria-hidden="true" href="#introducción">#</a></h3>
+<p>Bienvenido de nuevo a la segunda entrega de mi serie en Application Aware Routing (AAR). En mi <a href="/simplificando-aar-1-3-las-bases/">publicación anterior</a>, discutimos los conceptos básicos de BFD y SLAs, estableciendo las bases para comprender cómo AAR optimiza el rendimiento de la red en función de los requisitos de las aplicaciones. También tocamos brevemente la configuración de AAR con un ejemplo simple.</p>
+<p>Ahora, vamos a ver en profundidad diferentes configuraciones de AAR cuando no hay túneles que cumplan con los SLAs, más específicamente nos concentraremos en el comportamiento de <em>strict/drop</em> y <em>Preferred Backup SLA</em>.</p>
+<h3 id="topología-y-configuración-inicial">Topología y configuración inicial<a hidden class="anchor" aria-hidden="true" href="#topología-y-configuración-inicial">#</a></h3>
+<p>Comencemos con una topología simple</p>
+<p><img loading="lazy" src="/wp-content/uploads/2024/01/aar-topology.png"></p>
+<p>No estoy limitando los túneles entre los colores, por lo que tenemos un total de 4 túneles en cada borde WAN.</p>
+<ul>
+<li>mpls - mpls</li>
+<li>mpls - biz-inet</li>
+<li>biz-inet- mpls</li>
+<li>biz-inet - biz-inet</li>
+</ul>
+<p>Este es el Hello interval de BFD y la configuración de app-route para todos los dispositivos; esto es lo más relevante para AAR. Si no estás familiarizado con ello, te recomiendo que revises mi <a href="/simplificando-aar-1-3-las-bases/">última publicación</a> antes de continuar.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>hello-interval 1000
+</span></span><span style="display:flex;"><span>bfd app-route multiplier 3
+</span></span><span style="display:flex;"><span>bfd app-route poll-interval 120000
+</span></span></code></pre></div><h3 id="escenario-1-sla-not-met---strictdrop">Escenario 1: SLA not met - Strict/Drop<a hidden class="anchor" aria-hidden="true" href="#escenario-1-sla-not-met---strictdrop">#</a></h3>
+<p>Nuestra política de AAR está usando el SLA Business-Critical. Vou a introducir <strong>pérdida de paquetes</strong> para demostrar cómo cambia el tráfico.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan policy from-vsmart
+</span></span><span style="display:flex;"><span>from-vsmart sla-class Business-Critical
+</span></span><span style="display:flex;"><span> loss    1
+</span></span><span style="display:flex;"><span> latency 250
+</span></span><span style="display:flex;"><span> jitter  100
+</span></span><span style="display:flex;"><span>from-vsmart app-route-policy _VPN10_AAR
+</span></span><span style="display:flex;"><span> vpn-list VPN10
+</span></span><span style="display:flex;"><span>  sequence 1
+</span></span><span style="display:flex;"><span>   match
+</span></span><span style="display:flex;"><span>    source-ip      172.16.10.0/24
+</span></span><span style="display:flex;"><span>    destination-ip 172.16.20.0/24
+</span></span><span style="display:flex;"><span>   action
+</span></span><span style="display:flex;"><span>    sla-class       Business-Critical
+</span></span><span style="display:flex;"><span>    sla-class strict
+</span></span><span style="display:flex;"><span>    sla-class preferred-color mpls
+</span></span><span style="display:flex;"><span>  sequence 11
+</span></span><span style="display:flex;"><span>   match
+</span></span><span style="display:flex;"><span>    source-ip      172.16.20.0/24
+</span></span><span style="display:flex;"><span>    destination-ip 172.16.10.0/24
+</span></span><span style="display:flex;"><span>   action
+</span></span><span style="display:flex;"><span>    sla-class       Business-Critical
+</span></span><span style="display:flex;"><span>    sla-class strict
+</span></span><span style="display:flex;"><span>    sla-class preferred-color mpls
+</span></span><span style="display:flex;"><span>from-vsmart lists vpn-list VPN10
+</span></span><span style="display:flex;"><span> vpn 10
+</span></span></code></pre></div><p>Leamos lo que dice la documentación sobre nuestra configuración:</p>
+<p><code>sla-class preferred-color mpls</code></p>
+<blockquote>
+<p>sla-class <em>sla-class-name</em> preferred-color <em>color</em> - Para configurar un túnel específico para el tráfico de datos que cumpla con una clase de SLA, incluye la opción preferred-color, especificando el color del túnel preferido. Si más de un túnel cumple con el SLA, el tráfico se enviará a través del túnel preferido. Si no hay un túnel del color preferido disponible, el tráfico se enviará a través de cualquier túnel que cumpla con la clase de SLA. Si ningún túnel cumple con el SLA, el tráfico de datos se enviará a través de cualquier túnel disponible.</p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html">https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html</a></p>
+</blockquote>
+<p>Aquí hay un diagrama para visualizarlo mejor:</p>
+<p><img loading="lazy" src="/wp-content/uploads/2024/01/arr100.png"></p>
+<p>Ten en cuenta que incluso si tanto Biz-Internet <strong>como</strong> MPLS cumplen con el SLA, solo se utilizará MPLS.</p>
+<p>Sí, Biz-Internet se utilizará incluso si no está especificado como un color preferido <strong>si</strong> el color preferido no cumple con el SLA. Desde mi experiencia, esta es una fuente frecuente de confusión, ya que la expectativa suele ser que, si MPLS no cumple con el SLA, se ejecutará la acción de <em>SLA not met</em> sin considerar el resto de los colores.</p>
+<p><code>sla-class strict</code></p>
+<blockquote>
+<p>Haz clic en <strong>Strict/Drop</strong> para hacer un match estricto de la clase SLA. Si no hay un túnel de plano de datos disponible que satisfaga los criterios de SLA, se tira el tráfico.</p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-ware-routing.html">https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-ware-routing.html</a></p>
+</blockquote>
+<p>Ahora el diagrama se ve así:</p>
+<p><img loading="lazy" src="/wp-content/uploads/2024/01/aar101.png"></p>
+<h4 id="prueba-1---mplsbiz-internet-cumplen-sla">Prueba 1 - MPLS/Biz-internet cumplen SLA<a hidden class="anchor" aria-hidden="true" href="#prueba-1---mplsbiz-internet-cumplen-sla">#</a></h4>
+<p>Inicio el tráfico de Branch 10 -&gt; Branch 20 y lo capturo con NWPI. Tanto MPLS como Biz-Internet están teniendo métricas de KPI perfectas (0 pérdida, 0 latencia, 0 jitter)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10-PC1#ssh -l admin 172.16.20.2
+</span></span><span style="display:flex;"><span>Password:
+</span></span></code></pre></div><p><img loading="lazy" src="/wp-content/uploads/2024/02/aar-1.png"></p>
+<p>Podemos ver que el color <em>Actual Color</em> <code>mpls</code> y <em>Tunnel Match Reason</em> is <code>Matched sla and pref encap color</code>. Todo funcionando de acuerdo con nuestra definición de política.</p>
+<h4 id="prueba-2--biz-internet-cumple-mpls-no-cumple-con-sla">Prueba 2- Biz-internet cumple, MPLS no cumple con SLA<a hidden class="anchor" aria-hidden="true" href="#prueba-2--biz-internet-cumple-mpls-no-cumple-con-sla">#</a></h4>
+<p>Introduzco el 3% de pérdida de paquetes en el enlace MPLS. Veamos qué pasa.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2024/02/aar-25.png">
+<img loading="lazy" src="/wp-content/uploads/2024/02/aar-4-e1706772628492.png"></p>
+<p>Ahora, nuestro túnel MPLS está por encima del 1% de pérdida, por lo que ya no es elegible. Confirmamos que el túnel biz-internet se usa porque cumple con el sla - <em>Tunnel match reason</em> es <code> matched sla and color any</code></p>
+<h4 id="prueba-3-mplsbiz-internet-no-cumplen-sla">Prueba 3-MPLS/Biz-internet no cumplen SLA<a hidden class="anchor" aria-hidden="true" href="#prueba-3-mplsbiz-internet-no-cumplen-sla">#</a></h4>
+<p>Nuestra última prueba para este escenario será estropear los SLA para ambos transportes. Nuevamente, introduzco el 3% de pérdida de paquetes en <strong>ambos</strong> MPLS y Biz-internet.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2024/02/aar3-e1706772589421.png"></p>
+<p>Como se esperaba, ahora el tráfico se está tirando en BR10, ya que no hay transportes que coincidan con el SLA. Nota como <em>DROP_REPORT</em> indica <code>SdwanDataPolicyDrop</code></p>
+<h3 id="escenario-2-backup-sla-preferred-color">Escenario 2: Backup SLA Preferred Color<a hidden class="anchor" aria-hidden="true" href="#escenario-2-backup-sla-preferred-color">#</a></h3>
+<p>Exploremos un nuevo escenario, agregaremos un transporte adicional.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2024/02/aar-topo2.png"></p>
+<p>Nuestra configuración de políticas tendrá ligeros cambios. Es importante destacar que, al usar la opción <em>Backup SLA preferred color</em>, la única acción disponible cuando el SLA no se cumple será <em>Load Balance</em>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10#show sdwan policy from-vsmart
+</span></span><span style="display:flex;"><span>from-vsmart sla-class Business-Critical
+</span></span><span style="display:flex;"><span> loss    1
+</span></span><span style="display:flex;"><span> latency 250
+</span></span><span style="display:flex;"><span> jitter  100
+</span></span><span style="display:flex;"><span>from-vsmart app-route-policy _VPN10_AAR
+</span></span><span style="display:flex;"><span> vpn-list VPN10
+</span></span><span style="display:flex;"><span>  sequence 1
+</span></span><span style="display:flex;"><span>   match
+</span></span><span style="display:flex;"><span>    source-ip      172.16.10.0/24
+</span></span><span style="display:flex;"><span>    destination-ip 172.16.20.0/24
+</span></span><span style="display:flex;"><span>   action
+</span></span><span style="display:flex;"><span>    backup-sla-preferred-color private1
+</span></span><span style="display:flex;"><span>    sla-class       Business-Critical
+</span></span><span style="display:flex;"><span>    no sla-class strict
+</span></span><span style="display:flex;"><span>    sla-class preferred-color mpls
+</span></span><span style="display:flex;"><span>  sequence 11
+</span></span><span style="display:flex;"><span>   match
+</span></span><span style="display:flex;"><span>    source-ip      172.16.20.0/24
+</span></span><span style="display:flex;"><span>    destination-ip 172.16.10.0/24
+</span></span><span style="display:flex;"><span>   action
+</span></span><span style="display:flex;"><span>    backup-sla-preferred-color private1
+</span></span><span style="display:flex;"><span>    sla-class       Business-Critical
+</span></span><span style="display:flex;"><span>    no sla-class strict
+</span></span><span style="display:flex;"><span>    sla-class preferred-color mpls
+</span></span><span style="display:flex;"><span>from-vsmart lists vpn-list VPN10
+</span></span><span style="display:flex;"><span> vpn 10
+</span></span></code></pre></div><p>Nuevamente, veamos qué dice la documentación:</p>
+<p><code>backup-sla-preferred-color private1</code></p>
+<blockquote>
+<p><strong>Cuando ningún túnel cumple con el SLA</strong>, se puede elegir cómo manejar el tráfico:</p>
+<p>backup-sla-preferred-color <em>colors</em>: Dirige el tráfico de datos a un túnel específico. El tráfico de datos se envía a través del túnel configurado si la interfaz de dicho túnel está disponible; si no lo está, el tráfico se enviará por otro túnel disponible. Se pueden especificar uno o más colores.</p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html">https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html</a></p>
+</blockquote>
+<p>Para ponerlo visualmente</p>
+<p><img loading="lazy" src="/wp-content/uploads/2024/02/aar200.png"></p>
+<h4 id="prueba-1--mplsprivate1-complen-con-el-sla-biz-internet-no-cumple">Prueba 1- MPLS/Private1 complen con el SLA, Biz-Internet no cumple<a hidden class="anchor" aria-hidden="true" href="#prueba-1--mplsprivate1-complen-con-el-sla-biz-internet-no-cumple">#</a></h4>
+<p>Comenzaremos con la suposición de que Biz-Internet no cumple con el SLA, por lo que tenemos dos transportes disponibles: MPLS y Private1. Inicio el tráfico.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BR10-PC1#ssh -l admin 172.16.20.2
+</span></span><span style="display:flex;"><span>Password:
+</span></span></code></pre></div><p><img loading="lazy" src="/wp-content/uploads/2024/02/s2-aar1-e17067776034732.png"></p>
+<p>Nota como <em>SLA Strict</em> tiene un varlo de <code>No</code> y el MPLS cumple con el SLA y se usa.</p>
+<h4 id="prueba-2---private1-cumple-con-el-sla-mplsbiz-internet-no-cumplen">Prueba 2 - Private1 cumple con el SLA, MPLS/Biz-internet no cumplen<a hidden class="anchor" aria-hidden="true" href="#prueba-2---private1-cumple-con-el-sla-mplsbiz-internet-no-cumplen">#</a></h4>
+<p>Para la segunda prueba, estamos introduciendo pérdida en el transporte MPLS. Con esto, el único transporte que cumple con el SLA es Private1, que también es el color preferido de respaldo para el SLA. Veamos cómo se ve.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2024/02/s2-aar101.png"></p>
+<p>En el <em>Tunnel Match Reason</em> podemos ver claramente que el SLA se cumple a través de un color que no es el preferido (Private1). ¿Qué crees que sucederá si Private1 no cumple con el SLA?</p>
+<h4 id="prueba-3---mplsprivate1biz-internet-no-confunde">Prueba 3 - MPLS/Private1/Biz-Internet No confunde<a hidden class="anchor" aria-hidden="true" href="#prueba-3---mplsprivate1biz-internet-no-confunde">#</a></h4>
+<p>Private1 es el único transporte que cumple con el SLA, me encargaré de eso al introducir la pérdida de paquetes.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2024/02/s2-102.png"></p>
+<p>De nuevo (!) Private1 se usa, pero ahora el tráfico coincide con el SLA por defecto, en otras palabras, no hay túneles que coincidan con el SLA, por lo que se utilizará el túnel marcado <em>backup preferred</em>.</p>
+<h4 id="bono">Bono<a hidden class="anchor" aria-hidden="true" href="#bono">#</a></h4>
+<p><strong>Private1 no disponible</strong><br>
+El resultado después de apagar la interfaz Private1, aún sin ningún túnel que cumpla con el SLA. Podemos ver que se realiza una coincidencia flexible en los túneles (se puede elegir cualquier túnel disponible).</p>
+<p><strong>Biz-internet cumple, MPLS/Private1 no cumplen</strong><br>
+El resultado después de que biz-internet vuelve a tener valores de pérdida cero, mientras que private1 no cumple con el SLA. Aunque no sea el color preferido, aún cumple con el SLA, por lo que es seleccionado.</p>
+<p><img loading="lazy" src="/wp-Content/uploads/2024/02/S2-103.png"></p>
+<p><img loading="lazy" src="/wp-content/uploads/2024/02/s2-104.png"></p>
+<p>Como nota final, ten en cuenta que AAR siempre intentará usar los túneles que cumplan con el SLA especificado, <strong>no te confundas solo porque los nombres de los colores no están explícitamente mencionados en la configuración.</strong></p>
+<p>En la <a href="/simplificando-aar-3-3-fallback-to-best-path">Siguiente publicación</a>, exploraremos la opción restante <em>Fallback to Best Path</em>. ¡Nos vemos allí!</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/es/">NetWithAlex</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copiar';
+
+        function copyingDone() {
+            copybutton.innerHTML = '¡copiado!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copiar';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

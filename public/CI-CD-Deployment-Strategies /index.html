@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>NetWithAlex</title>
+<meta name="keywords" content="">
+<meta name="description" content="Introducción
+En el mundo de CI/CD, la implementación de actualizaciones de manera eficiente y con una interrupción mínima es crucial. Existen diferentes estrategias de implementación de liberación que la organización puede adoptar, incluidos ** _ Big-bang, Rolling, Blue-Green y Canary ._ **
+opción de implementación
+Despliegue de Big Bang
+Todos los cambios se agrupan y se despliegan de inmediato; esta es la esencia de la implementación de Big Bang. Si bien simplifica el proceso de implementación, ya que todo se expulsa simultáneamente, también plantea _ ** riesgos significativos ** _. Si surgen problemas durante el despliegue, afectan todo el sistema de inmediato, lo que puede conducir a un tiempo de inactividad generalizado o un mal funcionamiento. El más adecuado para proyectos más pequeños o para aquellos con baja complejidad donde el impacto de las fallas es mínimo.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/CI-CD-Deployment-Strategies%20/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/ci-cd-deployment-strategies/">
+<link rel="alternate" hreflang="es" href="http://localhost:1313/CI-CD-Deployment-Strategies%20/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/CI-CD-Deployment-Strategies%20/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="NetWithAlex">
+  <meta property="og:description" content="Introducción En el mundo de CI/CD, la implementación de actualizaciones de manera eficiente y con una interrupción mínima es crucial. Existen diferentes estrategias de implementación de liberación que la organización puede adoptar, incluidos ** _ Big-bang, Rolling, Blue-Green y Canary ._ **
+opción de implementación Despliegue de Big Bang Todos los cambios se agrupan y se despliegan de inmediato; esta es la esencia de la implementación de Big Bang. Si bien simplifica el proceso de implementación, ya que todo se expulsa simultáneamente, también plantea _ ** riesgos significativos ** _. Si surgen problemas durante el despliegue, afectan todo el sistema de inmediato, lo que puede conducir a un tiempo de inactividad generalizado o un mal funcionamiento. El más adecuado para proyectos más pequeños o para aquellos con baja complejidad donde el impacto de las fallas es mínimo.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="Introducción
+En el mundo de CI/CD, la implementación de actualizaciones de manera eficiente y con una interrupción mínima es crucial. Existen diferentes estrategias de implementación de liberación que la organización puede adoptar, incluidos ** _ Big-bang, Rolling, Blue-Green y Canary ._ **
+opción de implementación
+Despliegue de Big Bang
+Todos los cambios se agrupan y se despliegan de inmediato; esta es la esencia de la implementación de Big Bang. Si bien simplifica el proceso de implementación, ya que todo se expulsa simultáneamente, también plantea _ ** riesgos significativos ** _. Si surgen problemas durante el despliegue, afectan todo el sistema de inmediato, lo que puede conducir a un tiempo de inactividad generalizado o un mal funcionamiento. El más adecuado para proyectos más pequeños o para aquellos con baja complejidad donde el impacto de las fallas es mínimo.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/es/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "",
+      "item": "http://localhost:1313/CI-CD-Deployment-Strategies%20/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "",
+  "name": "",
+  "description": "Introducción En el mundo de CI/CD, la implementación de actualizaciones de manera eficiente y con una interrupción mínima es crucial. Existen diferentes estrategias de implementación de liberación que la organización puede adoptar, incluidos ** _ Big-bang, Rolling, Blue-Green y Canary ._ **\nopción de implementación Despliegue de Big Bang Todos los cambios se agrupan y se despliegan de inmediato; esta es la esencia de la implementación de Big Bang. Si bien simplifica el proceso de implementación, ya que todo se expulsa simultáneamente, también plantea _ ** riesgos significativos ** _. Si surgen problemas durante el despliegue, afectan todo el sistema de inmediato, lo que puede conducir a un tiempo de inactividad generalizado o un mal funcionamiento. El más adecuado para proyectos más pequeños o para aquellos con baja complejidad donde el impacto de las fallas es mínimo.\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introducción En el mundo de CI/CD, la implementación de actualizaciones de manera eficiente y con una interrupción mínima es crucial. Existen diferentes estrategias de implementación de liberación que la organización puede adoptar, incluidos ** _ Big-bang, Rolling, Blue-Green y Canary ._ **\nopción de implementación Despliegue de Big Bang Todos los cambios se agrupan y se despliegan de inmediato; esta es la esencia de la implementación de Big Bang. Si bien simplifica el proceso de implementación, ya que todo se expulsa simultáneamente, también plantea _ ** riesgos significativos ** _. Si surgen problemas durante el despliegue, afectan todo el sistema de inmediato, lo que puede conducir a un tiempo de inactividad generalizado o un mal funcionamiento. El más adecuado para proyectos más pequeños o para aquellos con baja complejidad donde el impacto de las fallas es mínimo.\nSe requiere tiempo de inactividad, todo o nada de enfoque Todos los sistemas son iguales, no hay variación entre sí. No se puede probar el tráfico de producción hasta que la aplicación esté en producción. (Prueba limitada) ! [] (/wp-content/uploads/2024/04/bigbang-1.png)\ndespliegue rodante Toma un enfoque más cauteloso implementando gradualmente actualizaciones en diferentes segmentos de la infraestructura. Esta estrategia implica actualizar un subconjunto de servidores o componentes a la vez mientras mantiene el resto del sistema operativo. La implementación incremental de los cambios reduce el riesgo de fallas en todo el sistema y permite una reversión más rápida si surgen problemas. Es particularmente efectivo para aplicaciones a gran escala con arquitecturas distribuidas, ya que garantiza la disponibilidad continua mientras se aplican actualizaciones.\nActualiza los componentes individuales a la vez ! [] (/wp-content/uploads/2024/04/rolling.png)\ndespliegue azul-verde Dos entornos de producción idénticos, denominados azul y verde, se mantienen simultáneamente. Mientras que un entorno (digamos Blue) sirve tráfico en vivo, el otro (verde) permanece inactivo. Cuando las actualizaciones están listas para la implementación, se aplican al entorno inactivo (verde). Una vez que las actualizaciones se implementan y proban con éxito, el tráfico se cambia del azul al entorno verde, cambiando efectivamente sus roles. Este enfoque ofrece implementaciones de tiempo cero hacia abajo y proporciona un mecanismo de reversión directa al volver al entorno anterior si surgen problemas.\nEs muy costoso tener dos implementaciones idénticas ! [] (/wp-content/uploads/2024/04/bluegreen.png)\nCanary La idea es lanzar actualizaciones a un pequeño subconjunto de usuarios (** grupo canario **) o servidores antes de lanzarlas a todo el sistema. Al monitorear el comportamiento y el rendimiento del grupo canario, los desarrolladores pueden evaluar el impacto de los cambios y detectar cualquier problema potencial desde el principio. Si el grupo Canary se desempeña como se esperaba, las actualizaciones se amplían gradualmente a la audiencia más amplia. Si surgen problemas, la implementación se puede detener o retroceder antes de afectar todo el sistema. La implementación canaria es ideal para proyectos donde las pruebas exhaustivas y la mitigación de riesgos son cruciales, lo que permite la experimentación controlada sin afectar toda la base de usuarios.\n! [] (/wp-content/uploads/2024/04/canary.png)\ntabla de comparación ** Estrategia de implementación **** Ventajas **** Consideraciones **** Cero tiempo de inactividad **** Complejidad **** Big Bang ** Simplifica el proceso de implementación\n- Requiere un riesgo mínimo de coordinación de fallas en todo el sistema\n- Opciones de reversión limitada No\n- Permite una reversión más rápida\n- Garantiza la disponibilidad continua durante el despliegue prevé un monitoreo y coordinación cuidadosos para garantizar una transición sin problemas\n- puede prolongar el proceso de implementación para aplicaciones a gran escala 2 ** Blue-verde ** - proporciona mecanismo de reversión directa.\n- La configuración y configuración inicial pueden ser complejas\n- Muy costoso mantener Yes3 ** Canary ** Permite la experimentación y las pruebas controladas\n- Detección temprana de problemas potenciales\n- Minimiza el riesgo al limitar el impacto a un pequeño subconjunto de usuarios o servidores requiere una cuidadosa selección y monitoreo del grupo Canary\n- puede no ser adecuado para todas las aplicaciones, especialmente aquellas con pequeñas bases de usuarios o donde los cambios afectan todo el sistema igualmente 3\n[Regrese a BluePrint] (/Study-Devops-Blueprint) ",
+  "wordCount" : "669",
+  "inLanguage": "es",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/CI-CD-Deployment-Strategies%20/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/assets/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/es/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="http://localhost:1313/" title="English"
+                            aria-label="English">En</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/es/" title="Inicio">
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/archives/" title="Archivo">
+                    <span>Archivo</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/category/" title="Categorías">
+                    <span>Categorías</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/about/" title="Sobre mí">
+                    <span>Sobre mí</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/search/" title="🔍">
+                    <span>🔍</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/es/">Inicio</a>&nbsp;»&nbsp;<a href="http://localhost:1313/es/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">4 min&nbsp;|&nbsp;Traducciones:
+<ul class="i18n_list">
+    <li>
+        <a href="http://localhost:1313/ci-cd-deployment-strategies/">En</a>
+    </li>
+</ul>
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Tabla de Contenidos</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#introducci%c3%b3n" aria-label="Introducción">Introducción</a></li>
+                <li>
+                    <a href="#opci%c3%b3n-de-implementaci%c3%b3n" aria-label="opción de implementación">opción de implementación</a><ul>
+                        
+                <li>
+                    <a href="#despliegue-de-big-bang" aria-label="Despliegue de Big Bang">Despliegue de Big Bang</a></li>
+                <li>
+                    <a href="#despliegue-rodante" aria-label="despliegue rodante">despliegue rodante</a></li>
+                <li>
+                    <a href="#despliegue-azul-verde" aria-label="despliegue azul-verde">despliegue azul-verde</a></li>
+                <li>
+                    <a href="#canary" aria-label="Canary">Canary</a></li>
+                <li>
+                    <a href="#tabla-de-comparaci%c3%b3n" aria-label="tabla de comparación">tabla de comparación</a></li></ul>
+                </li>
+                <li>
+                    <a href="#regrese-a-blueprint-study-devops-blueprint" aria-label="[Regrese a BluePrint] (/Study-Devops-Blueprint)">[Regrese a BluePrint] (/Study-Devops-Blueprint)</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="introducción">Introducción<a hidden class="anchor" aria-hidden="true" href="#introducción">#</a></h2>
+<p>En el mundo de CI/CD, la implementación de actualizaciones de manera eficiente y con una interrupción mínima es crucial. Existen diferentes estrategias de implementación de liberación que la organización puede adoptar, incluidos ** _ Big-bang, Rolling, Blue-Green y Canary ._ **</p>
+<h2 id="opción-de-implementación">opción de implementación<a hidden class="anchor" aria-hidden="true" href="#opción-de-implementación">#</a></h2>
+<h3 id="despliegue-de-big-bang">Despliegue de Big Bang<a hidden class="anchor" aria-hidden="true" href="#despliegue-de-big-bang">#</a></h3>
+<p>Todos los cambios se agrupan y se despliegan de inmediato; esta es la esencia de la implementación de Big Bang. Si bien simplifica el proceso de implementación, ya que todo se expulsa simultáneamente, también plantea _ ** riesgos significativos ** _. Si surgen problemas durante el despliegue, afectan todo el sistema de inmediato, lo que puede conducir a un tiempo de inactividad generalizado o un mal funcionamiento. El más adecuado para proyectos más pequeños o para aquellos con baja complejidad donde el impacto de las fallas es mínimo.</p>
+<ul>
+<li>Se requiere tiempo de inactividad, todo o nada de enfoque</li>
+<li>Todos los sistemas son iguales, no hay variación entre sí.</li>
+<li>No se puede probar el tráfico de producción hasta que la aplicación esté en producción. (Prueba limitada)</li>
+</ul>
+<p>! [] (/wp-content/uploads/2024/04/bigbang-1.png)</p>
+<h3 id="despliegue-rodante">despliegue rodante<a hidden class="anchor" aria-hidden="true" href="#despliegue-rodante">#</a></h3>
+<p>Toma un enfoque más cauteloso implementando gradualmente actualizaciones en diferentes segmentos de la infraestructura. Esta estrategia implica actualizar un subconjunto de servidores o componentes a la vez mientras mantiene el resto del sistema operativo. La implementación incremental de los cambios reduce el riesgo de fallas en todo el sistema y permite una reversión más rápida si surgen problemas. Es particularmente efectivo para aplicaciones a gran escala con arquitecturas distribuidas, ya que garantiza la disponibilidad continua mientras se aplican actualizaciones.</p>
+<ul>
+<li>Actualiza los componentes individuales a la vez</li>
+</ul>
+<p>! [] (/wp-content/uploads/2024/04/rolling.png)</p>
+<h3 id="despliegue-azul-verde">despliegue azul-verde<a hidden class="anchor" aria-hidden="true" href="#despliegue-azul-verde">#</a></h3>
+<p>Dos entornos de producción idénticos, denominados azul y verde, se mantienen simultáneamente. Mientras que un entorno (digamos Blue) sirve tráfico en vivo, el otro (verde) permanece inactivo. Cuando las actualizaciones están listas para la implementación, se aplican al entorno inactivo (verde). Una vez que las actualizaciones se implementan y proban con éxito, el tráfico se cambia del azul al entorno verde, cambiando efectivamente sus roles. Este enfoque ofrece implementaciones de tiempo cero hacia abajo y proporciona un mecanismo de reversión directa al volver al entorno anterior si surgen problemas.</p>
+<ul>
+<li>Es muy costoso tener dos implementaciones idénticas</li>
+</ul>
+<p>! [] (/wp-content/uploads/2024/04/bluegreen.png)</p>
+<h3 id="canary">Canary<a hidden class="anchor" aria-hidden="true" href="#canary">#</a></h3>
+<p>La idea es lanzar actualizaciones a un pequeño subconjunto de usuarios (** grupo canario **) o servidores antes de lanzarlas a todo el sistema. Al monitorear el comportamiento y el rendimiento del grupo canario, los desarrolladores pueden evaluar el impacto de los cambios y detectar cualquier problema potencial desde el principio. Si el grupo Canary se desempeña como se esperaba, las actualizaciones se amplían gradualmente a la audiencia más amplia. Si surgen problemas, la implementación se puede detener o retroceder antes de afectar todo el sistema. La implementación canaria es ideal para proyectos donde las pruebas exhaustivas y la mitigación de riesgos son cruciales, lo que permite la experimentación controlada sin afectar toda la base de usuarios.</p>
+<p>! [] (/wp-content/uploads/2024/04/canary.png)</p>
+<h3 id="tabla-de-comparación">tabla de comparación<a hidden class="anchor" aria-hidden="true" href="#tabla-de-comparación">#</a></h3>
+<p>** Estrategia de implementación **** Ventajas **** Consideraciones **** Cero tiempo de inactividad **** Complejidad **** Big Bang ** Simplifica el proceso de implementación<br>
+- Requiere un riesgo mínimo de coordinación de fallas en todo el sistema<br>
+- Opciones de reversión limitada No<br>
+- Permite una reversión más rápida<br>
+- Garantiza la disponibilidad continua durante el despliegue prevé un monitoreo y coordinación cuidadosos para garantizar una transición sin problemas<br>
+- puede prolongar el proceso de implementación para aplicaciones a gran escala 2 ** Blue-verde ** - proporciona mecanismo de reversión directa.<br>
+- La configuración y configuración inicial pueden ser complejas<br>
+- Muy costoso mantener Yes3 ** Canary ** Permite la experimentación y las pruebas controladas<br>
+- Detección temprana de problemas potenciales<br>
+- Minimiza el riesgo al limitar el impacto a un pequeño subconjunto de usuarios o servidores requiere una cuidadosa selección y monitoreo del grupo Canary<br>
+- puede no ser adecuado para todas las aplicaciones, especialmente aquellas con pequeñas bases de usuarios o donde los cambios afectan todo el sistema igualmente 3</p>
+<h2 id="regrese-a-blueprint-study-devops-blueprint">[Regrese a BluePrint] (/Study-Devops-Blueprint)<a hidden class="anchor" aria-hidden="true" href="#regrese-a-blueprint-study-devops-blueprint">#</a></h2>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/es/">NetWithAlex</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copiar';
+
+        function copyingDone() {
+            copybutton.innerHTML = '¡copiado!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copiar';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

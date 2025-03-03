@@ -1,4 +1,5 @@
 baseURL: https://netwithalex.blog
+defaultContentLanguage: en
 languageCode: en-US
 title: NetWithAlex
 theme: PaperMod
@@ -7,7 +8,7 @@ taxonomies:
   tag: tag
 params:
   homeInfoParams:
-    title: Hey, I'm Alex 👋
+    title: "Hey, I'm Alex 👋"
     content: >
       NetWithAlex is my space on the web where I share my passion for networking and technology 🚀. 
       Here you'll find interesting and useful resources explained in a simple way to help you learn clearly and practically.<br><br>
@@ -30,8 +31,7 @@ params:
   comments: true
   hideFooter: false
   assets:
-    ffavicon: "/assets/favicon.ico"
-    favicon16x16: assets/favicon.ico
+    favicon: "/assets/favicon.ico"
     disableHLJS: true
 markup:
   highlight:
@@ -50,20 +50,55 @@ outputFormats:
   RSS:
     mediaType: application/rss+xml
     baseName: feed
-menu:
-  main:
-    - name: Home
-      url: https://netwithalex.blog
-      weight: 1
-    - name: Archive
-      url: /archives/
-      weight: 2
-    - name: Categories
-      url: /category/
-      weight: 3
-    - name: About me.
-      url: /about/
-      weight: 4
-    - name: "\U0001F50D"
-      url: /search/
-      weight: 5
+
+languages:
+  en:
+    languageName: "English"
+    weight: 1
+    contentDir: "content/en"
+    menu:
+      main:
+        - name: Home
+          url: /
+          weight: 1
+        - name: Archive
+          url: /archives/
+          weight: 2
+        - name: Categories
+          url: /category/
+          weight: 3
+        - name: About me.
+          url: /about/
+          weight: 4
+        - name: "🔍"
+          url: /search/
+          weight: 5
+
+  es:
+    languageName: "Español"
+    weight: 2
+    contentDir: "content/es"
+    menu:
+      main:
+        - name: Inicio
+          url: /es/
+          weight: 1
+        - name: Archivo
+          url: /es/archives/
+          weight: 2
+        - name: Categorías
+          url: /es/category/
+          weight: 3
+        - name: Sobre mí
+          url: /es/sobre-mi/
+          weight: 4
+        - name: "🔍"
+          url: /es/search/
+          weight: 5
+    params:
+      homeInfoParams:
+        title: "Hola, soy Alex 👋"
+        content: >
+          NetWithAlex es mi espacio en la web donde comparto mi pasión por las redes y la tecnología 🚀. 
+          Aquí encontrarás recursos interesantes y útiles explicados de manera sencilla para ayudarte a aprender de forma clara y práctica.<br><br>
+          💬 ¿Tienes preguntas o ideas? ¡No dudes en escribirme, me gustaría saber de ti!

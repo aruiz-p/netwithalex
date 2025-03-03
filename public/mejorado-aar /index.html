@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="es" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Enhanced App Aware Routing | NetWithAlex</title>
+<meta name="keywords" content="">
+<meta name="description" content="Aprende los beneficios de EAAR y cómo implementarlo en tu red">
+<meta name="author" content="Alex">
+<link rel="canonical" href="http://localhost:1313/mejorado-aar%20/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/enhanced-aar/">
+<link rel="alternate" hreflang="es" href="http://localhost:1313/mejorado-aar%20/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/mejorado-aar%20/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="Enhanced App Aware Routing">
+  <meta property="og:description" content="Aprende los beneficios de EAAR y cómo implementarlo en tu red">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-01-05T14:20:31+00:00">
+    <meta property="article:modified_time" content="2025-01-05T14:20:31+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Enhanced App Aware Routing">
+<meta name="twitter:description" content="Aprende los beneficios de EAAR y cómo implementarlo en tu red">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/es/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Enhanced App Aware Routing",
+      "item": "http://localhost:1313/mejorado-aar%20/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Enhanced App Aware Routing",
+  "name": "Enhanced App Aware Routing",
+  "description": "Aprende los beneficios de EAAR y cómo implementarlo en tu red",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introducción En mi anterior [serie de publicaciones] (/Demystify-AAR-1-3-The-the-Fundations), exploré ** Ruting de aplicaciones consciente (AAR) ** en profundidad, una tecnología clave SD-WAN que dirige el tráfico sobre las rutas de mejor rendimiento. Si bien AAR ha sido una capacidad fundamental durante años, la evolución de las redes trajo nuevas ideas para mejorar su efectividad. Esto condujo a la introducción de ** _ Enrutamiento de Aplicación Aplicación (EAAR) **.\nLimitaciones de AAR Antes de sumergirnos en EAAR, entendamos por qué fue creado. 🤓\nLa implementación actual de AAR mide la calidad de la ruta utilizando BFD, enviando sondas a un intervalo definido (1s por defecto). La pérdida, la latencia y la fluctuación se derivan de esos paquetes y estos valores se colocan en cubos giratorios para calcular una métrica promedio de salud del túnel. Este proceso generalmente tomaría entre 10 y 60 minutos y con algunos ajustes de configuración podríamos lograr tiempos de 2 a 10 minutos.\nPara aquellas redes que requieren una detección más rápida, surgen algunos desafíos:\nBajar el intervalo de saludo a menos de 1 afecta la escala de túnel del dispositivo Bajar el multiplicador de BFD y los intervalos de encuesta podrían conducir a falsos positivos, cambiando el tráfico incluso con condiciones de red transitorias. Cambie el tráfico de un lado a otro, no hay un mecanismo para determinar si un transporte es estable nuevamente después de un evento de degradación de la red. AAR mejorado _So, ¿qué es Eaar y cómo mejora su predecesor? _ 🤔\nEn pocas palabras, estas son las ventajas:\nUtiliza datos en línea en lugar de BFD. En otras palabras, los paquetes de plano de datos se utilizan para medir la pérdida, la latencia y la fluctuación de la fluctuación. Cadena tráfico en segundos en lugar de minutos Amortiguación implementada para los propósitos de estabilidad , asegurando que los transportes sean estables antes de reenviar el tráfico a través de ellos. más medición precisa s de pérdida, latencia y jitter desglosándolo Cuando EAAR está habilitado, los paquetes de datos se utilizarán para medir la pérdida, la latencia y la fluctuación. Entendamos las diferencias clave:\nMedición de pérdida Los enrutadores SD-WAN utilizarán datos en línea junto con los números de secuencia IPSEC para medir la pérdida.\nHay un mecanismo incorporado que permite a los enrutadores determinar si la pérdida es local para el enrutador\n** Pérdida local ** - Por lo general, debido a caídas de QoS O externo al enrutador\n** Pérdida de WAN ** - Cualquier pérdida de paquetes fuera del enrutador Para calcular la pérdida local, el enrutador determinará la cantidad de paquetes que generó contra la cantidad de paquetes que realmente se enviaron. Para obtener la pérdida de WAN, los enrutadores SD-WAN de pares informarán la cantidad de paquetes recibidos y utilizarán BFD (TLVS Monitor de ruta) para devolver esta información al enrutador de origen.\nHasta este punto, existe una mejora importante en cómo se realiza la medición de pérdidas, sin embargo, esto podría mejorarse aún más al aprovechar las mediciones de pérdida de cola. Para lograr esto, necesitamos asociar una clase de SLA con una [clase de sonda de la aplicación] (https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-xebook-xe/application-aware-routing.html#concept_gjc_5pm). Veamos un ejemplo.\nCon esta clase de sonda de aplicaciones, el enrutador utilizará (y generará BFD) paquetes con DSCP 18, imitando el tráfico menos importante que estará sujeto a diferentes reglas y rutas en los enrutadores locales y externos. Esto proporcionará una medición más precisa de la pérdida para cada tipo de tráfico en los transportes especificados. Si no hay datos en línea, BFD se usa para obtener mediciones.\n** Nota ** Si se usa GRE, según la medición de la cola ** no ** disponible.\nAquí hay un visual para comprender mejor cómo se medirán la pérdida dependiendo de múltiples factores.\n| Encapsulación | Clase de sonda de aplicaciones | Tipo de medición | Túneles públicos | Túneles privados | | ————— | —————– | ————- | IPsec | SÍ | Por SLA | Pérdida total de WAN + pérdida local por cola | Pérdida de WAN por cola + pérdida local por cola | | IPsec | No | Todos los SLA | Pérdida total de WAN + Pérdida local total | Pérdida total de WAN + Pérdida local total | | Gre | - | Todos los SLA | Pérdida total de WAN + Pérdida local total | Pérdida total de WAN + Pérdida local total |\nlatencia Para medir la latencia, el enrutador simplemente calculará el tiempo necesario para enviar y recibir paquetes entre los dispositivos de origen y de destino. Se utilizan datos en línea y puede llegar a la granularidad de la sonda de la aplicación.\nJitterOtro vale la pena mencionar el cambio es que el Jitter se calcula por dirección (recibir o transmitir). El jitter se calcula en el receptor e informa al remitente usando TLV BFD. Se utilizan datos en línea y BFD es el mecanismo de retroceso si no hay tráfico de datos disponible. amortiguación de SLA Uno de los beneficios de EAAR es dirigir el tráfico en segundos en lugar de minutos, pero ¿qué pasaría si hay condiciones de red transitorias que hacen que los transportes no cumplan con el SLA cada pocos minutos? El tráfico cambiaría constantemente entre los transportes, lo que no es un escenario deseable y la razón por la cual se introdujo la amortiguación.\nLa idea general es que cuando un enlace de transporte no se cumple, el tráfico se redirige a una ruta alternativa. Una vez que el transporte vuelve a cumplir nuevamente, el dispositivo ** no ** inmediatamente mueve el tráfico hacia atrás. En cambio, inicia un temporizador para asegurarse de que el enlace permanezca estable durante un período específico antes de reutilizarlo.\nAl final, la amortiguación ayuda a prevenir cambios de tráfico innecesarios, lo que podría afectar negativamente el rendimiento debido a la inestabilidad del transporte\nConfiguración de EAAR Para habilitar EAAR tenemos tres opciones predefinidas:\nModo Intervalo de la encuesta Multiplicador de la encuesta Multiplicador de amortiguación Agresivo 10s 6 (10s-60s) 120 (20 minutos) Moderado 60s 5 (60-300) 40 (40 minutos) Conservador 300s 6 (300s-1800) 12 (60 minutos) ** Nota ** Para usar temporizadores personalizados, la configuración debe hacerse a través de las plantillas de CLI.\nEAAR sigue el mismo principio fundamental que AAR, utilizando cubos giratorios para calcular la pérdida promedio, la latencia y la fluctuación. Con el modo AGRESSIVE, el tráfico tomaría entre 10 y 60 segundos a cambiar, dependiendo de cuán severo sea el deterioro.\nLa ventana de amortiguación (intervalo poll ** x ** Ampliating Multiplier) es de 1200 segundos, lo que significa que antes de cambiar el tráfico a un transporte, debe ser estable durante 20 minutos.\nEn mi laboratorio, estoy usando grupos de configuración, sin embargo, esto está [disponible a través de Templaciones] (https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/m-enbanced- Application-AWARE-RUTING.HTML#Configurar-envejecido también.\nPuede usar una variable, en lugar de un valor global, para tener en cuenta los dispositivos que no ejecutarán EAAR. En este caso, los dispositivos habilitados para EAAR se retirarán a AAR.\nLa siguiente configuración se agrega a los dispositivos: BFD mejorado-app-rute habilitar BFD mejorado-app-ruta-poll-interval 10000 bfd BFD SLA-Dampinging Enable BFD Multiplicador de bañado SLA 120 Veamos cómo funciona\ndemostración En mi laboratorio, uso el administrador 20.16.1 y mis dispositivos se ejecutan 17.15.1a\n** Nota ** La versión mínima requerida es 20.12/17.12\nComencemos con algunas verificaciones después de presionar la configuración.\nPara verificar los temporizadores y multiplicadores configurados\n`` BR10#show sdwan app-ruta params Enrutamiento mejorado de la aplicación Config :: habilitado\nIntervalo de la encuesta :: 10000 Multiplicador de encuesta :: 6\nRuta de la aplicación Intervalo de la encuesta :: 120000 Multiplicador de la encuesta :: 5\nAmortiguación de SLA\nConfig :: habilitado\nMultiplicador :: 120 ``\nPara verificar qué sesiones de BFD están utilizando EAAR, busque la columna Flags `` BR10#show sdwan bfd sesions altFuente TLOC Remoto TLOC DST Public DST Public Sistema ID ID de sitio Estado Color Fuente IP Port IP Encap BFD-LD FLAGS TIEMPO 1.1.1.20 200 UP Biz-Internet Biz-Internet 30.1.10.2 30.1.20.2 12406 IPSEC 20006 EAAR 0: 00: 20: 31 1.1.1.20 200 UP MPLS MPLS 30.2.10.2 30.2.20.2 12366 IPSEC 20002 EAAR 0: 00: 20: 38 1.1.1.20 200 UP Private1 Private1 30.3.10.2 30.3.20.2 12366 iPsec 20003 Eaar 0: 00: 20: 37 Para obtener más detalles sobre un túnel específico. BR10#show sdwan app-rutee estadísticas resumen Generando salida, esto podría llevar tiempo, espere … Estadísticas de app-ruta 30.1.10.2 30.1.20.2 IPSEC 12386 12406 Sistema remoto-IP 1.1.1.20 biz-internet de color local biz-internet de color remoto SLA-CLASS-índice 0,1,2 Index-sla-sla-sla ningo Enhanced-app-rute habilitado SLA-Damping-Index Ninguno App-Probe-Class-List Ninguno La pérdida media de 0.000 latencia media 0 medio-jitter 0 Datos promedio promedio total TX Datos RX IPv6 TX IPv6 RX Paquetes de índice Pérdida Latencia Jitter PKTS PKTS Datos PKTS Datos PKTS 0 0 0 0 0 0 0 0 0 0 1 64 0 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 4 0 0 0 0 0 0 0 0 0 5 64 0 0 0 0 0 0 0 0 ``\nTenga en cuenta que no hay tráfico entre mis dispositivos, por lo que el recuento total de paquetes en cada cubo es bajo.\nLa misma información está disponible a través de la interfaz de usuario del Administrador, utilizando el panel de control de Time_Real y utilizando la opción del dispositivo Statistics_Papp Routes.\nEscenario 1 - Ligero deterioro Esta es la topología de mi laboratorio\nPara esta primera prueba, usaré los siguientes parámetros de SLA:\nSLA_REAL TIEMPO Pérdida: 3% Latencia: 150 ms Jitter: 100 ms La política AAR del controlador instruye:\nUse MPLS como ruta principal Si ningún color cumple con el SLA y Private1 está disponible, úselo. Si Private1 no está disponible, el equilibrio de carga entre todos los colores restantes. Estoy haciendo coincidir el tráfico entre 172.16.10.0/24 y 172.16.20.0/24. BR10#show sdwan política de vsmart From-Vsmart App-Rute-Policy App_route_aar VPN-LIST VPN_Corporate_USERS secuencia 1 fósforo Fuente-Data-Prefix-List BR10 Destino-Data-Prefix-List BR20 acción respaldo-sla-preferido de color privado1 SLA-Class SLA_REAL TIEMPO No hay clase SLA estricta MPLS de color de clase SLA secuencia 11 fósforo Fuente-Data-Prefix-List BR20 Destino-Data-Prefix-List BR10 acción respaldo-sla-preferido de color privado1 SLA-Class SLA_REAL TIEMPO No hay clase SLA estricta MPLS de color de clase SLA Estado inicial sin problemas de red BR10#show sdwan app-rutee estadísticas Resumen | Coloro | Húmedo | Media biz-internet de color local biz-internet de color remoto SLA-Damping-Index Ninguno La pérdida media de 0.000 latencia media 1 medio-jitter 0 MPLS de color local MPLS de color remoto SLA-Damping-Index Ninguno masss media 1.212 latencia media 1 medio-jitter 0 masss media 1.212 latencia media 1 medio-jitter 0 privado de color local1 privado de color remoto1 SLA-Damping-Index Ninguno La pérdida media de 0.000 latencia media 0 medio-jitter 0 La pérdida media de 0.000 latencia media 0 medio-jitter 0 Observe que el número de paquetes por cubo aumentó dramáticamente `` BR10#show sdwan aplicaciones estadísticas de ruta remota de color remoto resumen de MPLS\nGenerando salida, esto podría llevar tiempo, espere … Estadísticas de app-ruta 30.2.10.2 30.2.20.2 IPSEC 12366 12366 Sistema remoto-IP 1.1.1.20 MPLS de color local MPLS de color remoto Índice de clase SLA 0,1 Index-sla-sla-sla ningo Enhanced-app-rute habilitado SLA-Damping-Index Ninguno App-Probe-Class-List Ninguno La pérdida media 1.176 latencia media 0 medio-jitter 0 Datos promedio promedio total TX Datos RX IPv6 TX IPv6 RX Paquetes de índice Pérdida Latencia Jitter PKTS PKTS Datos PKTS Datos PKTS 0 131136 1501 0 0 100084 20846 0 0 1 131072 1438 0 0 95287 19605 0 0 2 131072 1400 0 0 100985 20937 0 0 3 131072 1781 0 0 85553 18271 0 0 4 64 0 0 0 72618 15942 0 0 5 131072 1589 0 0 65198 14226 0 0\nEl tráfico está utilizando MPLS como transporte primario BR10# show SDWAN Policy Service-Path VPN 10 Interfaz GigabitEthernet 4 Fuente-IP 172.16.10.10 Dest-IP 172.16.20.10 Protocolo 6 Todos Número de posibles próximos saltos: 1 Next Hop: iPsec Fuente: 30.2.10.2 12366 Destino: 30.2.20.2 12366 Color local: MPLS Color remoto: Sistema remoto MPLS IP: 1.1.1.20 ``\nIntroduciré el 3% de pérdida de paquetes en el transporte MPLS y veré cuánto tiempo lleva cambiar el tráfico. Dado que ya hay alrededor del 1% de pérdida, el 3% debería ser suficiente para activar un cambio.\nEl transporte MPLS tiene más del 3% de pérdida BR10#show sdwan aplicaciones estadísticas de ruta remota de color remoto resumen de MPLS Generando salida, esto podría llevar tiempo, espere ... Estadísticas de app-ruta 30.2.10.2 30.2.20.2 IPSEC 12366 12366 Sistema remoto-IP 1.1.1.20 MPLS de color local MPLS de color remoto SLA-CLASS-índice 0 Index-de-sla-sla-sla-lay-sla 1 Enhanced-app-rute habilitado SLA-Damping-Index Ninguno App-Probe-Class-List Ninguno La pérdida media 3.125 \u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c latencia media 0 medio-jitter 0 Después de 56 segundos, el tráfico cambió y cualquiera de los transportes de cumplimiento restantes podría usarse `` BR10# show SDWAN Policy Service-Path VPN 10 Interfaz GigabitEthernet 4 Fuente-IP 172.16.10.10 Dest-IP 172.16.20.10 Protocolo 6 Todos Número de posibles altos saltos: 2 Next Hop: iPsec Fuente: 30.3.10.2 12366 Destino: 30.3.20.2 12366 Color local: privado1 Color remoto: privado1 Sistema remoto IP: 1.1.1.20 Next Hop: iPsec Fuente: 30.1.10.2 12386 Destino: 30.1.20.2 12366 Color local: Biz-Internet Color remoto: Sistema remoto de Biz-Internet IP: 1.1.1.20\n``\nSi quito la pérdida, podemos ver que el mecanismo de amortiguación se activa. Entonces, si el transporte es estable durante 20 minutos, se volverá a utilizar como ruta preferida. BR10#show sdwan aplicaciones estadísticas de ruta remota de color remoto resumen de MPLS Generando salida, esto podría llevar tiempo, espere ... Estadísticas de app-ruta 30.2.10.2 30.2.20.2 IPSEC 12366 12366 Sistema remoto-IP 1.1.1.20 MPLS de color local MPLS de color remoto SLA-CLASS-índice 0 Index-de-sla-sla-sla-lay-sla 1 Enhanced-app-rute habilitado SLA-Damping-Index 1 \u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c App-Probe-Class-List Ninguno La pérdida media de 0.000 latencia media 0 medio-jitter 0 Escenario 2 - Mayor deterioro En este caso, introduciré una pérdida de paquetes del 10% para el transporte de biz-internet, lo que hace que el 1 privado sea el único transporte compatible.\nDespués de alrededor de 45 segundos, la pérdida para Biz-Internet fue del 12% BR10#show sdwan aplicaciones estadísticas de ruta local resumen de biz-internet Generando salida, esto podría llevar tiempo, espere ... Estadísticas de app-ruta 30.1.10.2 30.1.20.2 IPSEC 12386 12366 Sistema remoto-IP 1.1.1.20 biz-internet de color local biz-internet de color remoto SLA-CLASS-índice 0 Index-de-sla-sla-sla-lay-sla 1 Enhanced-app-rute habilitado SLA-Damping-Index Ninguno App-Probe-Class-List Ninguno La pérdida media 12.500 latencia media 0 medio-jitter 0 El tráfico cambió a privado1 solamente BR10#show SDWAN Policy Service-Path VPN 10 Interfaz GigabitEthernet 4 Fuente-IP 172.16.10.10 Dest-IP 172.16.20.10 Protocolo 6 Todos Número de posibles próximos saltos: 1 Next Hop: iPsec Fuente: 30.3.10.2 12366 Destino: 30.3.20.2 12366 Color local: privado1 Color remoto: privado1 Sistema remoto IP: 1.1.1.20 Después de eliminar la pérdida de paquetes, Biz-Internet tiene el mecanismo de amortiguación activado BR10#show sdwan aplicaciones estadísticas de ruta local resumen de biz-internet Generando salida, esto podría llevar tiempo, espere ... Estadísticas de app-ruta 30.1.10.2 30.1.20.2 IPSEC 12386 12366 Sistema remoto-IP 1.1.1.20 biz-internet de color local biz-internet de color remoto SLA-CLASS-índice 0 Index-de-sla-sla-sla-lay-sla 1 Enhanced-app-rute habilitado SLA-Damping-Index 1 \u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c\u003c App-Probe-Class-List Ninguno masss media 1.562 latencia media 0 medio-jitter 0 En este caso, el tiempo para cambiar el tráfico se redujo como una transmisión de mayor deterioro.\nEscenario 3 - Clases de sonda de aplicaciones múltiples Para este escenario final, veamos cómo obtener el mayor beneficio de EAAR.\nLa configuración es más compleja ya que involucra QoS, clases de sonda de aplicaciones y política AAR.\nSe requiere QoS para clasificar y enviar tráfico en diferentes colas. La aplicación sondea clases para medir la pérdida, la latencia y la fluctuación en cada una de esas colas, de forma independiente. Mi configuración de QoS tiene 3 colas y la cola 2 manejará el tráfico menos importante.\ncola 0 para el tráfico de control cola 1 para tráfico en tiempo real (marcado DSCP 46) cola 2 para tráfico transaccional (marcado DSCP 18) Utilizo una política de datos para hacer coincidir el tráfico en el lado del servicio, marcarlo con el DSCP correcto y ponerla en la clase de reenvío correcta. También creé un shaper en mi interfaz MPLS\nPara demostrar las cosas, tendré dos transferencias de datos:\nhttp get (puerto 8000) Copia SCP (puerto 22) Mis SLA tienen las siguientes configuraciones:\nNombre de clase SLA Pérdida Latencia Jitter SLA_REAL TIEMPO 3 % 150 ms 100 ms SLA_TRANSACTIONAL 5 % 45 ms 150 ms Lo primero a tener en cuenta es que mis dos clases de sondas de aplicaciones se miden de forma independiente. Vea cómo la pérdida de _ ** media ** _ para transactional-Probe_class es ** 1 **, mientras que para real_time_probe_class es ** 0 **.\n`` BR10#show sdwan aplicaciones estadísticas de ruteo resumen de mpls de color local Generando salida, esto podría llevar tiempo, espere … Estadísticas de app-ruta 30.2.10.2 30.2.20.2 IPSEC 12366 12366 Sistema remoto-IP 1.1.1.20 MPLS de color local MPLS de color remoto SLA-CLASS-índice 0,1,2 Index-sla-sla-sla ningo Enhanced-app-rute habilitado SLA-Damping-Index Ninguno App-Probe-Class-List Ninguno La pérdida media de 0.000 latencia media 1 medio-jitter 0 Datos promedio promedio total TX Datos RX IPv6 TX IPv6 RX Paquetes de índice Pérdida Latencia Jitter PKTS PKTS Datos PKTS Datos PKTS 0 16384 0 0 0 35827 111807 0 0 1 49152 0 1 0 37788 118236 0 0 2 49216 0 1 0 36859 115551 0 0 3 16384 0 1 0 23894 77280 0 0 4 32768 0 1 1 33179 103759 0 0 5 32768 0 1 0 21485 71702 0 0app-probe-class-list real_time_probe_class La pérdida media de 0.000 latencia media 0 medio-jitter 0 Datos promedio promedio total TX Datos RX IPv6 TX IPv6 RX Paquetes de índice Pérdida Latencia Jitter PKTS PKTS Datos PKTS Datos PKTS 0 0 0 0 0 - - - - 1 32768 0 1 0 - - - - 2 32768 0 0 0 - - - - 3 0 0 0 0 - - - - 4 32768 0 1 2 - - - - 5 0 0 0 0 - - - -\nApp-Probe-Class-List transaccional-Probe_class La pérdida media de 0.000 latencia media 1 medio-jitter 0 Datos promedio promedio total TX Datos RX IPv6 TX IPv6 RX Paquetes de índice Pérdida Latencia Jitter PKTS PKTS Datos PKTS Datos PKTS 0 16384 0 0 0 - - - - 1 49152 0 1 0 - - - - 2 49216 0 1 0 - - - - 3 16384 0 1 0 - - - - 4 32768 0 1 1 - - - - 5 32768 0 1 0 - - - -\n`` Ahora, he bajado mi Shaper. EAAR se apresuró a detectar un cambio en la latencia para el SLA transaccional, ahora son 53 ms.\n`` BR10# show sdwan app-rutee estadísticas de MPLS locales resumen Generando salida, esto podría llevar tiempo, espere … Estadísticas de app-ruta 30.2.10.2 30.2.20.2 IPSEC 12386 12366 Sistema remoto-IP 1.1.1.20 MPLS de color local MPLS de color remoto SLA-CLASS-índice 0,1,2 Index-sla-sla-sla ningo Enhanced-app-rute habilitado SLA-Damping-Index Ninguno App-Probe-Class-List Ninguno La pérdida media de 0.000 latencia media 53 medio-jitter 0 Datos promedio promedio total TX Datos RX IPv6 TX IPv6 RX Paquetes de índice Pérdida Latencia Jitter PKTS PKTS Datos PKTS Datos PKTS 0 2048 0 54 0 4396 8513 0 0 1 1024 0 55 0 4461 8534 0 0 2 8256 0 49 0 4429 8549 0 0 3 16384 0 54 0 4411 8549 0 0 4 0 0 53 0 4440 8549 0 0 5 0 0 54 0 4443 8549 0 0\napp-probe-class-list real_time_probe_class La pérdida media de 0.000 latencia media 0 medio-jitter 0 Datos promedio promedio total TX Datos RX IPv6 TX IPv6 RX Paquetes de índice Pérdida Latencia Jitter PKTS PKTS Datos PKTS Datos PKTS 0 0 0 0 0 - - - - 1 0 0 0 0 - - - - 2 8192 0 0 0 - - - - 3 16384 0 0 0 - - - - 4 0 0 0 0 - - - - 5 0 0 0 0 - - - -App-Probe-Class-List transaccional-Probe_class La pérdida media de 0.000 Latencia media 53 «««\u003c medio-jitter 0 Datos promedio promedio total TX Datos RX IPv6 TX IPv6 RX Paquetes de índice Pérdida Latencia Jitter PKTS PKTS Datos PKTS Datos PKTS 0 2048 0 54 0 - - - - 1 1024 0 55 0 - - - - 2 8256 0 49 0 - - - - 3 16384 0 54 0 - - - - 4 0 0 53 0 - - - - 5 0 0 54 0 - - - - `` Ahora que no se cumple mi SLA transaccional con una latencia máxima de 45 ms, usaré [NWPI] (/Network-Wide-Path-Insights-An-Introduction/) para comprender cómo se envía el tráfico. Examinemos el tráfico HTTP con el puerto 80000\nObserve que, en la dirección upstream, el color local y _remote se establece en ** private1 **, lo que indica que el tráfico se ha alejado de MPLS y su latencia de 53 ms. Justo lo que esperábamos ✅\nAhora, veamos cómo está fluyendo el tráfico en el puerto 22\nUna vez más, eche un vistazo al color ascendente local y Remote Color, observe cómo ** MPLS ** todavía está en uso para este tráfico, ya que no hay problemas de ruta detectados.\nEn resumen, el tráfico con DSCP 46 funciona perfectamente bien en el transporte MPLS, sin embargo, el tráfico con DSCP 18 estaba teniendo más latencia que el SLA configurado, por lo que el tráfico se trasladó a Private1 a medida que cumple con el SLA.\nPodemos confirmar que estamos midiendo y tomando decisiones de enrutamiento por cola, esta es una gran diferencia 🤯!\nLecciones aprendidas Utilizando datos en línea, el número de muestras aumenta dramáticamente en comparación con el tamaño de la muestra de BFD. 📈 EAAR puede dirigir el tráfico en segundos, en lugar de minutos. ⏩ EAAR ofrece los mayores beneficios en los transportes con QoS, como MPLS. 🚀 Incluso en los transportes sin QoS, las mediciones de datos en línea aumentan el tamaño y la precisión de la muestra. ⏳ El temporizador de amortiguación es útil para garantizar que los transportes sean estables antes de marcarlos como válidos. ✅ La interoperabilidad entre dispositivos que ejecutan EAAR y dispositivos que ejecutan AAR es posible 🔄 ¡Espero que hayas aprendido algo útil! Nos vemos en el siguiente 👋\n",
+  "wordCount" : "3692",
+  "inLanguage": "es",
+  "datePublished": "2025-01-05T14:20:31Z",
+  "dateModified": "2025-01-05T14:20:31Z",
+  "author":{
+    "@type": "Person",
+    "name": "Alex"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/mejorado-aar%20/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/assets/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/es/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="http://localhost:1313/" title="English"
+                            aria-label="English">En</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/es/" title="Inicio">
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/archives/" title="Archivo">
+                    <span>Archivo</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/category/" title="Categorías">
+                    <span>Categorías</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/about/" title="Sobre mí">
+                    <span>Sobre mí</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/search/" title="🔍">
+                    <span>🔍</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/es/">Inicio</a>&nbsp;»&nbsp;<a href="http://localhost:1313/es/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Enhanced App Aware Routing
+    </h1>
+    <div class="post-meta"><span title='2025-01-05 14:20:31 +0000 WET'>enero 5, 2025</span>&nbsp;·&nbsp;18 min&nbsp;·&nbsp;Alex&nbsp;|&nbsp;Traducciones:
+<ul class="i18n_list">
+    <li>
+        <a href="http://localhost:1313/enhanced-aar/">En</a>
+    </li>
+</ul>
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Tabla de Contenidos</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#introducci%c3%b3n" aria-label="Introducción">Introducción</a></li>
+                <li>
+                    <a href="#limitaciones-de-aar" aria-label="Limitaciones de AAR">Limitaciones de AAR</a></li>
+                <li>
+                    <a href="#aar-mejorado" aria-label="AAR mejorado">AAR mejorado</a><ul>
+                        
+                <li>
+                    <a href="#desglos%c3%a1ndolo" aria-label="desglosándolo">desglosándolo</a><ul>
+                        
+                <li>
+                    <a href="#medici%c3%b3n-de-p%c3%a9rdida" aria-label="Medición de pérdida">Medición de pérdida</a></li>
+                <li>
+                    <a href="#latencia" aria-label="latencia">latencia</a></li>
+                <li>
+                    <a href="#jitterotro-vale-la-pena-mencionar-el-cambio-es-que-el-jitter-se-calcula-por-direcci%c3%b3n-recibir-o-transmitir-el-jitter-se-calcula-en-el-receptor-e-informa-al-remitente-usando-tlv-bfd-se-utilizan-datos-en-l%c3%adnea-y-bfd-es-el-mecanismo-de-retroceso-si-no-hay-tr%c3%a1fico-de-datos-disponible" aria-label="JitterOtro vale la pena mencionar el cambio es que el Jitter se calcula por dirección (recibir o transmitir). El jitter se calcula en el receptor e informa al remitente usando TLV BFD. Se utilizan datos en línea y BFD es el mecanismo de retroceso si no hay tráfico de datos disponible.">JitterOtro vale la pena mencionar el cambio es que el Jitter se calcula por dirección (recibir o transmitir). El jitter se calcula en el receptor e informa al remitente usando TLV BFD. Se utilizan datos en línea y BFD es el mecanismo de retroceso si no hay tráfico de datos disponible.</a></li></ul>
+                </li>
+                <li>
+                    <a href="#amortiguaci%c3%b3n-de-sla" aria-label="amortiguación de SLA">amortiguación de SLA</a></li></ul>
+                </li>
+                <li>
+                    <a href="#configuraci%c3%b3n-de-eaar" aria-label="Configuración de EAAR">Configuración de EAAR</a></li>
+                <li>
+                    <a href="#demostraci%c3%b3n" aria-label="demostración">demostración</a><ul>
+                        
+                <li>
+                    <a href="#escenario-1---ligero-deterioro" aria-label="Escenario 1 - Ligero deterioro">Escenario 1 - Ligero deterioro</a></li>
+                <li>
+                    <a href="#escenario-2---mayor-deterioro" aria-label="Escenario 2 - Mayor deterioro">Escenario 2 - Mayor deterioro</a></li>
+                <li>
+                    <a href="#escenario-3---clases-de-sonda-de-aplicaciones-m%c3%baltiples" aria-label="Escenario 3 - Clases de sonda de aplicaciones múltiples">Escenario 3 - Clases de sonda de aplicaciones múltiples</a></li></ul>
+                </li>
+                <li>
+                    <a href="#lecciones-aprendidas" aria-label="Lecciones aprendidas">Lecciones aprendidas</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="introducción">Introducción<a hidden class="anchor" aria-hidden="true" href="#introducción">#</a></h2>
+<p>En mi anterior [serie de publicaciones] (/Demystify-AAR-1-3-The-the-Fundations), exploré ** Ruting de aplicaciones consciente (AAR) ** en profundidad, una tecnología clave SD-WAN que dirige el tráfico sobre las rutas de mejor rendimiento. Si bien AAR ha sido una capacidad fundamental durante años, la evolución de las redes trajo nuevas ideas para mejorar su efectividad. Esto condujo a la introducción de ** _ Enrutamiento de Aplicación Aplicación (EAAR) **.</p>
+<h2 id="limitaciones-de-aar">Limitaciones de AAR<a hidden class="anchor" aria-hidden="true" href="#limitaciones-de-aar">#</a></h2>
+<p>Antes de sumergirnos en EAAR, entendamos por qué fue creado. 🤓</p>
+<p>La implementación actual de AAR mide la calidad de la ruta utilizando BFD, enviando sondas a un intervalo definido (1s por defecto). La pérdida, la latencia y la fluctuación se derivan de esos paquetes y estos valores se colocan en cubos giratorios para calcular una métrica promedio de salud del túnel. Este proceso generalmente tomaría entre 10 y 60 minutos y con algunos ajustes de configuración podríamos lograr tiempos de 2 a 10 minutos.</p>
+<p>Para aquellas redes que requieren una detección más rápida, surgen algunos desafíos:</p>
+<ul>
+<li>Bajar el intervalo de saludo a menos de 1 afecta la escala de túnel del dispositivo</li>
+<li>Bajar el multiplicador de BFD y los intervalos de encuesta podrían conducir a falsos positivos, cambiando el tráfico incluso con condiciones de red transitorias.</li>
+<li>Cambie el tráfico de un lado a otro, no hay un mecanismo para determinar si un transporte es estable nuevamente después de un evento de degradación de la red.</li>
+</ul>
+<h2 id="aar-mejorado">AAR mejorado<a hidden class="anchor" aria-hidden="true" href="#aar-mejorado">#</a></h2>
+<p>_So, ¿qué es Eaar y cómo mejora su predecesor? _ 🤔</p>
+<p>En pocas palabras, estas son las ventajas:</p>
+<ul>
+<li>Utiliza datos <u> en línea </u> en lugar de BFD. En otras palabras, los paquetes de plano de datos se utilizan para medir la pérdida, la latencia y la fluctuación de la fluctuación.</li>
+<li>Cadena tráfico en <u> segundos </u> en lugar de minutos</li>
+<li>Amortiguación implementada para los propósitos <u> de estabilidad </u>, asegurando que los transportes sean estables antes de reenviar el tráfico a través de ellos.</li>
+<li>más <u> medición precisa </u> s de pérdida, latencia y jitter</li>
+</ul>
+<h3 id="desglosándolo">desglosándolo<a hidden class="anchor" aria-hidden="true" href="#desglosándolo">#</a></h3>
+<p>Cuando EAAR está habilitado, los paquetes de datos se utilizarán para medir la pérdida, la latencia y la fluctuación. Entendamos las diferencias clave:</p>
+<h4 id="medición-de-pérdida">Medición de pérdida<a hidden class="anchor" aria-hidden="true" href="#medición-de-pérdida">#</a></h4>
+<p>Los enrutadores SD-WAN utilizarán datos en línea junto con los números de secuencia IPSEC para medir la pérdida.</p>
+<p>Hay un mecanismo incorporado que permite a los enrutadores determinar si la pérdida es local para el enrutador</p>
+<ul>
+<li>** Pérdida local ** - Por lo general, debido a caídas de QoS</li>
+</ul>
+<p>O externo al enrutador</p>
+<ul>
+<li>** Pérdida de WAN ** - Cualquier pérdida de paquetes fuera del enrutador</li>
+</ul>
+<p>Para calcular la pérdida local, el enrutador determinará la cantidad de paquetes que generó contra la cantidad de paquetes que realmente se enviaron. Para obtener la pérdida de WAN, los enrutadores SD-WAN de pares informarán la cantidad de paquetes recibidos y utilizarán BFD (TLVS Monitor de ruta) para devolver esta información al enrutador de origen.</p>
+<p>Hasta este punto, existe una mejora importante en cómo se realiza la medición de pérdidas, sin embargo, esto podría mejorarse aún más al aprovechar las mediciones de pérdida de cola. Para lograr esto, necesitamos asociar una clase de SLA con una [clase de sonda de la aplicación] (<a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-xebook-xe/application-aware-routing.html#concept_gjc_5pm%29">https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-xebook-xe/application-aware-routing.html#concept_gjc_5pm)</a>. Veamos un ejemplo.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/app-probe.png"></p>
+<p>Con esta clase de sonda de aplicaciones, el enrutador utilizará (y generará BFD) paquetes con DSCP 18, imitando el tráfico menos importante que estará sujeto a diferentes reglas y rutas en los enrutadores locales y externos. Esto proporcionará una medición más precisa de la pérdida para cada tipo de tráfico en los transportes especificados. Si no hay datos en línea, BFD se usa para obtener mediciones.</p>
+<p>** Nota ** Si se usa GRE, según la medición de la cola ** no ** disponible.</p>
+<p>Aquí hay un visual para comprender mejor cómo se medirán la pérdida dependiendo de múltiples factores.</p>
+<p>| Encapsulación | Clase de sonda de aplicaciones | Tipo de medición | Túneles públicos | Túneles privados |
+| &mdash;&mdash;&mdash;&mdash;&mdash; | &mdash;&mdash;&mdash;&mdash;&mdash;&ndash; | &mdash;&mdash;&mdash;&mdash;-
+| IPsec | SÍ | Por SLA | Pérdida total de WAN + pérdida local por cola | Pérdida de WAN por cola + pérdida local por cola |
+| IPsec | No | Todos los SLA | Pérdida total de WAN + Pérdida local total | Pérdida total de WAN + Pérdida local total |
+| Gre | - | Todos los SLA | Pérdida total de WAN + Pérdida local total | Pérdida total de WAN + Pérdida local total |</p>
+<h4 id="latencia">latencia<a hidden class="anchor" aria-hidden="true" href="#latencia">#</a></h4>
+<p>Para medir la latencia, el enrutador simplemente calculará el tiempo necesario para enviar y recibir paquetes entre los dispositivos de origen y de destino. Se utilizan datos en línea y puede llegar a la granularidad de la sonda de la aplicación.</p>
+<h4 id="jitterotro-vale-la-pena-mencionar-el-cambio-es-que-el-jitter-se-calcula-por-dirección-recibir-o-transmitir-el-jitter-se-calcula-en-el-receptor-e-informa-al-remitente-usando-tlv-bfd-se-utilizan-datos-en-línea-y-bfd-es-el-mecanismo-de-retroceso-si-no-hay-tráfico-de-datos-disponible">JitterOtro vale la pena mencionar el cambio es que el Jitter se calcula por dirección (recibir o transmitir). El jitter se calcula en el receptor e informa al remitente usando TLV BFD. Se utilizan datos en línea y BFD es el mecanismo de retroceso si no hay tráfico de datos disponible.<a hidden class="anchor" aria-hidden="true" href="#jitterotro-vale-la-pena-mencionar-el-cambio-es-que-el-jitter-se-calcula-por-dirección-recibir-o-transmitir-el-jitter-se-calcula-en-el-receptor-e-informa-al-remitente-usando-tlv-bfd-se-utilizan-datos-en-línea-y-bfd-es-el-mecanismo-de-retroceso-si-no-hay-tráfico-de-datos-disponible">#</a></h4>
+<h3 id="amortiguación-de-sla">amortiguación de SLA<a hidden class="anchor" aria-hidden="true" href="#amortiguación-de-sla">#</a></h3>
+<p>Uno de los beneficios de EAAR es dirigir el tráfico en segundos en lugar de minutos, pero ¿qué pasaría si hay condiciones de red transitorias que hacen que los transportes no cumplan con el SLA cada pocos minutos? El tráfico cambiaría constantemente entre los transportes, lo que no es un escenario deseable y la razón por la cual se introdujo la amortiguación.</p>
+<p>La idea general es que cuando un enlace de transporte no se cumple, el tráfico se redirige a una ruta alternativa. Una vez que el transporte vuelve a cumplir nuevamente, el dispositivo ** no ** inmediatamente mueve el tráfico hacia atrás. En cambio, inicia un temporizador para asegurarse de que el enlace permanezca estable durante un período específico antes de reutilizarlo.</p>
+<p>Al final, la amortiguación ayuda a prevenir cambios de tráfico innecesarios, lo que podría afectar negativamente el rendimiento debido a la inestabilidad del transporte</p>
+<h2 id="configuración-de-eaar">Configuración de EAAR<a hidden class="anchor" aria-hidden="true" href="#configuración-de-eaar">#</a></h2>
+<p>Para habilitar EAAR tenemos tres opciones predefinidas:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Modo</th>
+          <th>Intervalo de la encuesta</th>
+          <th>Multiplicador de la encuesta</th>
+          <th>Multiplicador de amortiguación</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Agresivo</td>
+          <td>10s</td>
+          <td>6 (10s-60s)</td>
+          <td>120 (20 minutos)</td>
+      </tr>
+      <tr>
+          <td>Moderado</td>
+          <td>60s</td>
+          <td>5 (60-300)</td>
+          <td>40 (40 minutos)</td>
+      </tr>
+      <tr>
+          <td>Conservador</td>
+          <td>300s</td>
+          <td>6 (300s-1800)</td>
+          <td>12 (60 minutos)</td>
+      </tr>
+  </tbody>
+</table>
+<p>** Nota ** Para usar temporizadores personalizados, la configuración debe hacerse a través de las plantillas de CLI.</p>
+<p>EAAR sigue el mismo principio fundamental que AAR, utilizando cubos giratorios para calcular la pérdida promedio, la latencia y la fluctuación. Con el modo <em>AGRESSIVE</em>, el tráfico tomaría entre 10 y 60 segundos a cambiar, dependiendo de cuán severo sea el deterioro.</p>
+<p>La ventana de amortiguación (intervalo <em>poll ** x ** Ampliating Multiplier</em>) es de 1200 segundos, lo que significa que antes de cambiar el tráfico a un transporte, debe ser estable durante 20 minutos.</p>
+<p>En mi laboratorio, estoy usando grupos de configuración, sin embargo, esto está [disponible a través de Templaciones] (<a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/m-enbanced-">https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/m-enbanced-</a> Application-AWARE-RUTING.HTML#Configurar-envejecido también.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/eaar-config-groups.png"></p>
+<p>Puede usar una variable, en lugar de un valor global, para tener en cuenta los dispositivos que no ejecutarán EAAR. En este caso, los dispositivos habilitados para EAAR se retirarán a AAR.</p>
+<p>La siguiente configuración se agrega a los dispositivos:
+<code> </code> <code>BFD mejorado-app-rute habilitar BFD mejorado-app-ruta-poll-interval 10000 bfd BFD SLA-Dampinging Enable BFD Multiplicador de bañado SLA 120</code> <code> </code>
+Veamos cómo funciona</p>
+<h2 id="demostración">demostración<a hidden class="anchor" aria-hidden="true" href="#demostración">#</a></h2>
+<p>En mi laboratorio, uso el administrador 20.16.1 y mis dispositivos se ejecutan 17.15.1a</p>
+<p>** Nota ** La versión mínima requerida es 20.12/17.12</p>
+<p>Comencemos con algunas verificaciones después de presionar la configuración.</p>
+<p>Para verificar los temporizadores y multiplicadores configurados</p>
+<p><code> </code> ``
+BR10#show sdwan app-ruta params
+Enrutamiento mejorado de la aplicación
+Config :: habilitado<br>
+Intervalo de la encuesta :: 10000  <br>
+Multiplicador de encuesta :: 6</p>
+<p>Ruta de la aplicación
+Intervalo de la encuesta :: 120000 <br>
+Multiplicador de la encuesta :: 5</p>
+<p>Amortiguación de SLA<br>
+Config :: habilitado<br>
+Multiplicador :: 120 <br>
+<code> </code> ``</p>
+<h2 id="sistema-id-id-de-sitio-estado-color-fuente-ip-port-ip-encap-bfd-ld-flags-tiempo">Para verificar qué sesiones de BFD están utilizando EAAR, busque la columna <em>Flags</em>
+<code> </code> ``
+BR10#show sdwan bfd sesions altFuente TLOC Remoto TLOC DST Public DST Public                               <br>
+Sistema ID ID de sitio Estado Color Fuente IP Port IP Encap BFD-LD FLAGS TIEMPO</h2>
+<h2 id="paquetes-de-índice-pérdida-latencia-jitter-pkts-pkts-datos-pkts-datos-pkts">1.1.1.20 200 UP Biz-Internet Biz-Internet 30.1.10.2 30.1.20.2 12406 IPSEC 20006 EAAR 0: 00: 20: 31
+1.1.1.20 200 UP MPLS MPLS 30.2.10.2 30.2.20.2 12366 IPSEC 20002 EAAR 0: 00: 20: 38
+1.1.1.20 200 UP Private1 Private1 30.3.10.2 30.3.20.2 12366 iPsec 20003 Eaar 0: 00: 20: 37
+<code> </code> <code>  Para obtener más detalles sobre un túnel específico. </code> <code> </code>
+BR10#show sdwan app-rutee estadísticas resumen
+Generando salida, esto podría llevar tiempo, espere &hellip;
+Estadísticas de app-ruta 30.1.10.2 30.1.20.2 IPSEC 12386 12406
+Sistema remoto-IP 1.1.1.20
+biz-internet de color local
+biz-internet de color remoto
+SLA-CLASS-índice 0,1,2
+Index-sla-sla-sla ningo
+Enhanced-app-rute habilitado
+SLA-Damping-Index Ninguno
+App-Probe-Class-List Ninguno
+La pérdida media de 0.000
+latencia media 0
+medio-jitter 0
+Datos promedio promedio total TX Datos RX IPv6 TX IPv6 RX    <br>
+Paquetes de índice Pérdida Latencia Jitter PKTS PKTS Datos PKTS Datos PKTS</h2>
+<p>0 0 0 0 0 0 0 0 0 0          <br>
+1 64 0 0 0 0 0 0 0 0          <br>
+2 0 0 0 0 0 0 0 0 0          <br>
+3 0 0 0 0 0 0 0 0 0          <br>
+4 0 0 0 0 0 0 0 0 0          <br>
+5 64 0 0 0 0 0 0 0 0          <br>
+<code> </code> ``</p>
+<p>Tenga en cuenta que no hay tráfico entre mis dispositivos, por lo que el recuento total de paquetes en cada cubo es bajo.</p>
+<p>La misma información está disponible a través de la interfaz de usuario del Administrador, utilizando el panel de control de Time_Real y utilizando la opción del dispositivo Statistics_Papp Routes.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/eaar-1.png"></p>
+<h3 id="escenario-1---ligero-deterioro">Escenario 1 - Ligero deterioro<a hidden class="anchor" aria-hidden="true" href="#escenario-1---ligero-deterioro">#</a></h3>
+<p>Esta es la topología de mi laboratorio</p>
+<p><img loading="lazy" src="/wp-content/uploads/2024/02/aar-topo2.png"></p>
+<p>Para esta primera prueba, usaré los siguientes parámetros de SLA:</p>
+<p><code> </code> <code>SLA_REAL TIEMPO  Pérdida: 3% Latencia: 150 ms Jitter: 100 ms</code> <code> </code>
+La política AAR del controlador instruye:</p>
+<ul>
+<li>Use MPLS como ruta principal</li>
+<li>Si ningún color cumple con el SLA y Private1 está disponible, úselo.</li>
+<li>Si Private1 no está disponible, el equilibrio de carga entre todos los colores restantes.</li>
+</ul>
+<h2 id="paquetes-de-índice-pérdida-latencia-jitter-pkts-pkts-datos-pkts-datos-pkts-1">Estoy haciendo coincidir el tráfico entre 172.16.10.0/24 y 172.16.20.0/24.
+<code> </code> <code>BR10#show sdwan política de vsmart From-Vsmart App-Rute-Policy App_route_aar VPN-LIST VPN_Corporate_USERS secuencia 1 fósforo Fuente-Data-Prefix-List BR10 Destino-Data-Prefix-List BR20 acción respaldo-sla-preferido de color privado1 SLA-Class SLA_REAL TIEMPO No hay clase SLA estricta MPLS de color de clase SLA secuencia 11 fósforo Fuente-Data-Prefix-List BR20 Destino-Data-Prefix-List BR10 acción respaldo-sla-preferido de color privado1 SLA-Class SLA_REAL TIEMPO No hay clase SLA estricta MPLS de color de clase SLA</code> <code> </code>Estado inicial sin problemas de red
+<code> </code> <code>BR10#show sdwan app-rutee estadísticas Resumen | Coloro | Húmedo | Media          biz-internet de color local biz-internet de color remoto SLA-Damping-Index Ninguno La pérdida media de 0.000 latencia media 1 medio-jitter 0 MPLS de color local MPLS de color remoto SLA-Damping-Index Ninguno masss media 1.212 latencia media 1 medio-jitter 0 masss media 1.212 latencia media 1 medio-jitter 0 privado de color local1 privado de color remoto1 SLA-Damping-Index Ninguno La pérdida media de 0.000 latencia media 0 medio-jitter 0 La pérdida media de 0.000 latencia media 0 medio-jitter 0</code> <code> </code>
+Observe que el número de paquetes por cubo aumentó dramáticamente
+<code> </code> ``
+BR10#show sdwan aplicaciones estadísticas de ruta remota de color remoto resumen de MPLS<br>
+Generando salida, esto podría llevar tiempo, espere &hellip;
+Estadísticas de app-ruta 30.2.10.2 30.2.20.2 IPSEC 12366 12366
+Sistema remoto-IP 1.1.1.20
+MPLS de color local
+MPLS de color remoto
+Índice de clase SLA 0,1
+Index-sla-sla-sla ningo
+Enhanced-app-rute habilitado
+SLA-Damping-Index Ninguno
+App-Probe-Class-List Ninguno
+La pérdida media 1.176
+latencia media 0
+medio-jitter 0
+Datos promedio promedio total TX Datos RX IPv6 TX IPv6 RX    <br>
+Paquetes de índice Pérdida Latencia Jitter PKTS PKTS Datos PKTS Datos PKTS</h2>
+<p>0 131136 1501 0 0 100084 20846 0 0          <br>
+1 131072 1438 0 0 95287 19605 0 0          <br>
+2 131072 1400 0 0 100985 20937 0 0          <br>
+3 131072 1781 0 0 85553 18271 0 0          <br>
+4 64 0 0 0 72618 15942 0 0          <br>
+5 131072 1589 0 0 65198 14226 0 0</p>
+<p><code> </code> <code>El tráfico está utilizando MPLS como transporte primario</code> <code> </code>
+BR10# show SDWAN Policy Service-Path VPN 10 Interfaz GigabitEthernet 4 Fuente-IP 172.16.10.10 Dest-IP 172.16.20.10 Protocolo 6 Todos    <br>
+Número de posibles próximos saltos: 1
+Next Hop: iPsec
+Fuente: 30.2.10.2 12366 Destino: 30.2.20.2 12366 Color local: MPLS Color remoto: Sistema remoto MPLS IP: 1.1.1.20
+<code> </code> ``</p>
+<p>Introduciré el 3% de pérdida de paquetes en el transporte MPLS y veré cuánto tiempo lleva cambiar el tráfico. Dado que ya hay alrededor del 1% de pérdida, el 3% debería ser suficiente para activar
+un cambio.</p>
+<p>El transporte MPLS tiene más del 3% de pérdida
+<code> </code> <code>BR10#show sdwan aplicaciones estadísticas de ruta remota de color remoto resumen de MPLS  Generando salida, esto podría llevar tiempo, espere ... Estadísticas de app-ruta 30.2.10.2 30.2.20.2 IPSEC 12366 12366 Sistema remoto-IP 1.1.1.20 MPLS de color local MPLS de color remoto SLA-CLASS-índice 0 Index-de-sla-sla-sla-lay-sla 1 Enhanced-app-rute habilitado SLA-Damping-Index Ninguno App-Probe-Class-List Ninguno La pérdida media 3.125 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; latencia media 0 medio-jitter 0</code> <code> </code></p>
+<p>Después de 56 segundos, el tráfico cambió y cualquiera de los transportes de cumplimiento restantes podría usarse
+<code> </code> ``
+BR10# show SDWAN Policy Service-Path VPN 10 Interfaz GigabitEthernet 4 Fuente-IP 172.16.10.10 Dest-IP 172.16.20.10 Protocolo 6 Todos
+Número de posibles altos saltos: 2
+Next Hop: iPsec
+Fuente: 30.3.10.2 12366 Destino: 30.3.20.2 12366 Color local: privado1 Color remoto: privado1 Sistema remoto IP: 1.1.1.20
+Next Hop: iPsec
+Fuente: 30.1.10.2 12386 Destino: 30.1.20.2 12366 Color local: Biz-Internet Color remoto: Sistema remoto de Biz-Internet IP: 1.1.1.20</p>
+<p><code> </code> ``</p>
+<p>Si quito la pérdida, podemos ver que el mecanismo de amortiguación se activa. Entonces, si el transporte es estable durante 20 minutos, se volverá a utilizar como ruta preferida.
+<code> </code> <code>BR10#show sdwan aplicaciones estadísticas de ruta remota de color remoto resumen de MPLS  Generando salida, esto podría llevar tiempo, espere ... Estadísticas de app-ruta 30.2.10.2 30.2.20.2 IPSEC 12366 12366 Sistema remoto-IP 1.1.1.20 MPLS de color local MPLS de color remoto SLA-CLASS-índice 0 Index-de-sla-sla-sla-lay-sla 1 Enhanced-app-rute habilitado SLA-Damping-Index 1 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; App-Probe-Class-List Ninguno La pérdida media de 0.000 latencia media 0 medio-jitter 0</code> <code> </code></p>
+<h3 id="escenario-2---mayor-deterioro">Escenario 2 - Mayor deterioro<a hidden class="anchor" aria-hidden="true" href="#escenario-2---mayor-deterioro">#</a></h3>
+<p>En este caso, introduciré una pérdida de paquetes del 10% para el transporte de biz-internet, lo que hace que el 1 privado sea el único transporte compatible.</p>
+<p>Después de alrededor de 45 segundos, la pérdida para Biz-Internet fue del 12%<code> </code> <code>BR10#show sdwan aplicaciones estadísticas de ruta local resumen de biz-internet          Generando salida, esto podría llevar tiempo, espere ... Estadísticas de app-ruta 30.1.10.2 30.1.20.2 IPSEC 12386 12366 Sistema remoto-IP 1.1.1.20 biz-internet de color local biz-internet de color remoto SLA-CLASS-índice 0 Index-de-sla-sla-sla-lay-sla 1 Enhanced-app-rute habilitado SLA-Damping-Index Ninguno App-Probe-Class-List Ninguno La pérdida media 12.500 latencia media 0 medio-jitter 0</code> <code> </code></p>
+<p>El tráfico cambió a privado1 solamente
+<code> </code> <code>BR10#show SDWAN Policy Service-Path VPN 10 Interfaz GigabitEthernet 4 Fuente-IP 172.16.10.10 Dest-IP 172.16.20.10 Protocolo 6 Todos Número de posibles próximos saltos: 1 Next Hop: iPsec Fuente: 30.3.10.2 12366 Destino: 30.3.20.2 12366 Color local: privado1 Color remoto: privado1 Sistema remoto IP: 1.1.1.20</code> <code> </code>
+Después de eliminar la pérdida de paquetes, Biz-Internet tiene el mecanismo de amortiguación activado
+<code> </code> <code>BR10#show sdwan aplicaciones estadísticas de ruta local resumen de biz-internet  Generando salida, esto podría llevar tiempo, espere ... Estadísticas de app-ruta 30.1.10.2 30.1.20.2 IPSEC 12386 12366 Sistema remoto-IP 1.1.1.20 biz-internet de color local biz-internet de color remoto SLA-CLASS-índice 0 Index-de-sla-sla-sla-lay-sla 1 Enhanced-app-rute habilitado SLA-Damping-Index 1 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; App-Probe-Class-List Ninguno masss media 1.562 latencia media 0 medio-jitter 0</code> <code> </code></p>
+<p>En este caso, el tiempo para cambiar el tráfico se redujo como una transmisión de mayor deterioro.</p>
+<h3 id="escenario-3---clases-de-sonda-de-aplicaciones-múltiples">Escenario 3 - Clases de sonda de aplicaciones múltiples<a hidden class="anchor" aria-hidden="true" href="#escenario-3---clases-de-sonda-de-aplicaciones-múltiples">#</a></h3>
+<p>Para este escenario final, veamos cómo obtener el mayor beneficio de EAAR.</p>
+<p>La configuración es más compleja ya que involucra QoS, clases de sonda de aplicaciones y política AAR.</p>
+<ul>
+<li>Se requiere QoS para clasificar y enviar tráfico en diferentes colas.</li>
+<li>La aplicación sondea clases para medir la pérdida, la latencia y la fluctuación en cada una de esas colas, de forma independiente.</li>
+</ul>
+<p>Mi configuración de QoS tiene 3 colas y la cola 2 manejará el tráfico menos importante.</p>
+<ul>
+<li>cola 0 para el tráfico de control</li>
+<li>cola 1 para tráfico en tiempo real (marcado DSCP 46)</li>
+<li>cola 2 para tráfico transaccional (marcado DSCP 18)</li>
+</ul>
+<p>Utilizo una política de datos para hacer coincidir el tráfico en el lado del servicio, marcarlo con el DSCP correcto y ponerla en la clase de reenvío correcta. También creé un shaper en mi interfaz MPLS</p>
+<p>Para demostrar las cosas, tendré dos transferencias de datos:</p>
+<ul>
+<li>http get (puerto 8000)</li>
+<li>Copia SCP (puerto 22)</li>
+</ul>
+<p>Mis SLA tienen las siguientes configuraciones:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Nombre de clase SLA</th>
+          <th>Pérdida</th>
+          <th>Latencia</th>
+          <th>Jitter</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>SLA_REAL TIEMPO</td>
+          <td>3 %</td>
+          <td>150 ms</td>
+          <td>100 ms</td>
+      </tr>
+      <tr>
+          <td>SLA_TRANSACTIONAL</td>
+          <td>5 %</td>
+          <td>45 ms</td>
+          <td>150 ms</td>
+      </tr>
+  </tbody>
+</table>
+<p>Lo primero a tener en cuenta es que mis dos clases de sondas de aplicaciones se miden de forma independiente. Vea cómo la pérdida de _ ** media ** _ para <em>transactional-Probe_class</em> es ** 1 **, mientras que para <em>real_time_probe_class</em> es ** 0 **.</p>
+<h2 id="paquetes-de-índice-pérdida-latencia-jitter-pkts-pkts-datos-pkts-datos-pkts-2"><code> </code> ``
+BR10#show sdwan aplicaciones estadísticas de ruteo resumen de mpls de color local
+Generando salida, esto podría llevar tiempo, espere &hellip;
+Estadísticas de app-ruta 30.2.10.2 30.2.20.2 IPSEC 12366 12366
+Sistema remoto-IP 1.1.1.20
+MPLS de color local
+MPLS de color remoto
+SLA-CLASS-índice 0,1,2
+Index-sla-sla-sla ningo
+Enhanced-app-rute habilitado
+SLA-Damping-Index Ninguno
+App-Probe-Class-List Ninguno
+La pérdida media de 0.000
+latencia media 1
+medio-jitter 0
+Datos promedio promedio total TX Datos RX IPv6 TX IPv6 RX    <br>
+Paquetes de índice Pérdida Latencia Jitter PKTS PKTS Datos PKTS Datos PKTS</h2>
+<h2 id="paquetes-de-índice-pérdida-latencia-jitter-pkts-pkts-datos-pkts-datos-pkts-3">0 16384 0 0 0 35827 111807 0 0          <br>
+1 49152 0 1 0 37788 118236 0 0          <br>
+2 49216 0 1 0 36859 115551 0 0          <br>
+3 16384 0 1 0 23894 77280 0 0          <br>
+4 32768 0 1 1 33179 103759 0 0          <br>
+5 32768 0 1 0 21485 71702 0 0app-probe-class-list real_time_probe_class
+La pérdida media de 0.000
+latencia media 0
+medio-jitter 0
+Datos promedio promedio total TX Datos RX IPv6 TX IPv6 RX    <br>
+Paquetes de índice Pérdida Latencia Jitter PKTS PKTS Datos PKTS Datos PKTS</h2>
+<p>0 0 0 0 0 - - - -          <br>
+1 32768 0 1 0 - - - -          <br>
+2 32768 0 0 0 - - - -          <br>
+3 0 0 0 0 - - - -          <br>
+4 32768 0 1 2 - - - -          <br>
+5 0 0 0 0 - - - -</p>
+<h2 id="paquetes-de-índice-pérdida-latencia-jitter-pkts-pkts-datos-pkts-datos-pkts-4">App-Probe-Class-List transaccional-Probe_class
+La pérdida media de 0.000
+latencia media 1
+medio-jitter 0
+Datos promedio promedio total TX Datos RX IPv6 TX IPv6 RX    <br>
+Paquetes de índice Pérdida Latencia Jitter PKTS PKTS Datos PKTS Datos PKTS</h2>
+<p>0 16384 0 0 0 - - - -          <br>
+1 49152 0 1 0 - - - -          <br>
+2 49216 0 1 0 - - - -          <br>
+3 16384 0 1 0 - - - -          <br>
+4 32768 0 1 1 - - - -          <br>
+5 32768 0 1 0 - - - -</p>
+<p><code> </code> ``
+Ahora, he bajado mi Shaper. EAAR se apresuró a detectar un cambio en la latencia para el SLA transaccional, ahora son 53 ms.</p>
+<h2 id="paquetes-de-índice-pérdida-latencia-jitter-pkts-pkts-datos-pkts-datos-pkts-5"><code> </code> ``
+BR10# show sdwan app-rutee estadísticas de MPLS locales resumen
+Generando salida, esto podría llevar tiempo, espere &hellip;
+Estadísticas de app-ruta 30.2.10.2 30.2.20.2 IPSEC 12386 12366
+Sistema remoto-IP 1.1.1.20
+MPLS de color local
+MPLS de color remoto
+SLA-CLASS-índice 0,1,2
+Index-sla-sla-sla ningo
+Enhanced-app-rute habilitado
+SLA-Damping-Index Ninguno
+App-Probe-Class-List Ninguno
+La pérdida media de 0.000
+latencia media 53
+medio-jitter 0
+Datos promedio promedio total TX Datos RX IPv6 TX IPv6 RX    <br>
+Paquetes de índice Pérdida Latencia Jitter PKTS PKTS Datos PKTS Datos PKTS</h2>
+<p>0 2048 0 54 0 4396 8513 0 0          <br>
+1 1024 0 55 0 4461 8534 0 0          <br>
+2 8256 0 49 0 4429 8549 0 0          <br>
+3 16384 0 54 0 4411 8549 0 0          <br>
+4 0 0 53 0 4440 8549 0 0          <br>
+5 0 0 54 0 4443 8549 0 0</p>
+<h2 id="paquetes-de-índice-pérdida-latencia-jitter-pkts-pkts-datos-pkts-datos-pkts-6">app-probe-class-list real_time_probe_class
+La pérdida media de 0.000
+latencia media 0
+medio-jitter 0
+Datos promedio promedio total TX Datos RX IPv6 TX IPv6 RX    <br>
+Paquetes de índice Pérdida Latencia Jitter PKTS PKTS Datos PKTS Datos PKTS</h2>
+<h2 id="paquetes-de-índice-pérdida-latencia-jitter-pkts-pkts-datos-pkts-datos-pkts-7">0 0 0 0 0 - - - -          <br>
+1 0 0 0 0 - - - -          <br>
+2 8192 0 0 0 - - - -          <br>
+3 16384 0 0 0 - - - -          <br>
+4 0 0 0 0 - - - -          <br>
+5 0 0 0 0 - - - -App-Probe-Class-List transaccional-Probe_class
+La pérdida media de 0.000
+Latencia media 53 &laquo;&laquo;&laquo;&lt;
+medio-jitter 0
+Datos promedio promedio total TX Datos RX IPv6 TX IPv6 RX    <br>
+Paquetes de índice Pérdida Latencia Jitter PKTS PKTS Datos PKTS Datos PKTS</h2>
+<p>0 2048 0 54 0 - - - -          <br>
+1 1024 0 55 0 - - - -          <br>
+2 8256 0 49 0 - - - -          <br>
+3 16384 0 54 0 - - - -          <br>
+4 0 0 53 0 - - - -          <br>
+5 0 0 54 0 - - - -          <br>
+<code> </code> ``
+Ahora que no se cumple mi SLA transaccional con una latencia máxima de 45 ms, usaré [NWPI] (/Network-Wide-Path-Insights-An-Introduction/) para comprender cómo se envía el tráfico. Examinemos el tráfico HTTP con el puerto 80000</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/eaar-nwpi-8000.png"></p>
+<p>Observe que, en la dirección <em>upstream</em>, el color <em>local</em> y _remote se establece en ** private1 **, lo que indica que el tráfico se ha alejado de MPLS y su latencia de 53 ms. Justo lo que esperábamos ✅</p>
+<p>Ahora, veamos cómo está fluyendo el tráfico en el puerto 22</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/02/eaar-nwpi-22.png"></p>
+<p>Una vez más, eche un vistazo al color ascendente <em>local</em> y <em>Remote Color</em>, observe cómo ** MPLS ** todavía está en uso para este tráfico, ya que no hay problemas de ruta detectados.</p>
+<p>En resumen, el tráfico con DSCP 46 funciona perfectamente bien en el transporte MPLS, sin embargo, el tráfico con DSCP 18 estaba teniendo más latencia que el SLA configurado, por lo que el tráfico se trasladó a Private1 a medida que cumple con el SLA.</p>
+<p>Podemos confirmar que estamos midiendo y tomando decisiones de enrutamiento por cola, esta es una gran diferencia 🤯!</p>
+<h2 id="lecciones-aprendidas">Lecciones aprendidas<a hidden class="anchor" aria-hidden="true" href="#lecciones-aprendidas">#</a></h2>
+<ul>
+<li>Utilizando datos en línea, el número de muestras aumenta dramáticamente en comparación con el tamaño de la muestra de BFD. 📈</li>
+<li>EAAR puede dirigir el tráfico en segundos, en lugar de minutos. ⏩</li>
+<li>EAAR ofrece los mayores beneficios en los transportes con QoS, como MPLS. 🚀</li>
+<li>Incluso en los transportes sin QoS, las mediciones de datos en línea aumentan el tamaño y la precisión de la muestra. ⏳</li>
+<li>El temporizador de amortiguación es útil para garantizar que los transportes sean estables antes de marcarlos como válidos. ✅</li>
+<li>La interoperabilidad entre dispositivos que ejecutan EAAR y dispositivos que ejecutan AAR es posible 🔄</li>
+</ul>
+<p>¡Espero que hayas aprendido algo útil! Nos vemos en el siguiente 👋</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/es/">NetWithAlex</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copiar';
+
+        function copyingDone() {
+            copybutton.innerHTML = '¡copiado!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copiar';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

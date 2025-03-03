@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Herramientas de integración continua (CI) | NetWithAlex</title>
+<meta name="keywords" content="">
+<meta name="description" content="Describa las características y conceptos de herramientas de compilación /implementación como Jenkins, Drone o Travis CI
+En la [Última publicación] (/DevOps-CI-CD-Pipeline/) hablamos sobre los conceptos de CI/CD, enfatizando la importancia de la fase ** _ construcción _ ** como parte del proceso de integración continua. Ahora es el momento de profundizar en las siguientes herramientas de CI: Jenkins, Drone, Travis y Gitlab.
+Jenkins
+Jenkins es un servidor de automatización _ ** gratuito (código abierto) diseñado para automatizar partes del proceso de desarrollo de software, sobre todo el edificio, las pruebas y la implementación de cambios en el código. Está basado en Java, tiene una gran comunidad y ha estado allí por un tiempo.">
+<meta name="author" content="Alex">
+<link rel="canonical" href="http://localhost:1313/herramientas-ci/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/ci-tools/">
+<link rel="alternate" hreflang="es" href="http://localhost:1313/herramientas-ci/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/herramientas-ci/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="Herramientas de integración continua (CI)">
+  <meta property="og:description" content="Describa las características y conceptos de herramientas de compilación /implementación como Jenkins, Drone o Travis CI En la [Última publicación] (/DevOps-CI-CD-Pipeline/) hablamos sobre los conceptos de CI/CD, enfatizando la importancia de la fase ** _ construcción _ ** como parte del proceso de integración continua. Ahora es el momento de profundizar en las siguientes herramientas de CI: Jenkins, Drone, Travis y Gitlab.
+Jenkins Jenkins es un servidor de automatización _ ** gratuito (código abierto) diseñado para automatizar partes del proceso de desarrollo de software, sobre todo el edificio, las pruebas y la implementación de cambios en el código. Está basado en Java, tiene una gran comunidad y ha estado allí por un tiempo.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-01-18T19:46:23+00:00">
+    <meta property="article:modified_time" content="2024-01-18T19:46:23+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Herramientas de integración continua (CI)">
+<meta name="twitter:description" content="Describa las características y conceptos de herramientas de compilación /implementación como Jenkins, Drone o Travis CI
+En la [Última publicación] (/DevOps-CI-CD-Pipeline/) hablamos sobre los conceptos de CI/CD, enfatizando la importancia de la fase ** _ construcción _ ** como parte del proceso de integración continua. Ahora es el momento de profundizar en las siguientes herramientas de CI: Jenkins, Drone, Travis y Gitlab.
+Jenkins
+Jenkins es un servidor de automatización _ ** gratuito (código abierto) diseñado para automatizar partes del proceso de desarrollo de software, sobre todo el edificio, las pruebas y la implementación de cambios en el código. Está basado en Java, tiene una gran comunidad y ha estado allí por un tiempo.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/es/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Herramientas de integración continua (CI)",
+      "item": "http://localhost:1313/herramientas-ci/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Herramientas de integración continua (CI)",
+  "name": "Herramientas de integración continua (CI)",
+  "description": "Describa las características y conceptos de herramientas de compilación /implementación como Jenkins, Drone o Travis CI En la [Última publicación] (/DevOps-CI-CD-Pipeline/) hablamos sobre los conceptos de CI/CD, enfatizando la importancia de la fase ** _ construcción _ ** como parte del proceso de integración continua. Ahora es el momento de profundizar en las siguientes herramientas de CI: Jenkins, Drone, Travis y Gitlab.\nJenkins Jenkins es un servidor de automatización _ ** gratuito (código abierto) diseñado para automatizar partes del proceso de desarrollo de software, sobre todo el edificio, las pruebas y la implementación de cambios en el código. Está basado en Java, tiene una gran comunidad y ha estado allí por un tiempo.\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "Describa las características y conceptos de herramientas de compilación /implementación como Jenkins, Drone o Travis CI En la [Última publicación] (/DevOps-CI-CD-Pipeline/) hablamos sobre los conceptos de CI/CD, enfatizando la importancia de la fase ** _ construcción _ ** como parte del proceso de integración continua. Ahora es el momento de profundizar en las siguientes herramientas de CI: Jenkins, Drone, Travis y Gitlab.\nJenkins Jenkins es un servidor de automatización _ ** gratuito (código abierto) diseñado para automatizar partes del proceso de desarrollo de software, sobre todo el edificio, las pruebas y la implementación de cambios en el código. Está basado en Java, tiene una gran comunidad y ha estado allí por un tiempo.\nOfreciendo modelanguage/structureOtUrlvm/contenedor (autogestionado) groovyjenkinsfilehttps: //www.jenkins.io/\nSu tubería se mantiene en formato maravilloso y se procesa como guión maravilloso. Este es el archivo que Jenkins buscará de forma predeterminada\nAquí hay un ejemplo para comprender la estructura:\n`` tubería { agente cualquiera\netapas { Stage (‘Checkout’) { pasos { \u003c…\u003e } }\netapa ('construir') { pasos { \u003c...\u003e } } etapa ('test') { pasos { \u003c...\u003e } } etapa ('implement') { pasos { \u003c...\u003e } } }\ncorreo{ \u003c…\u003e } } ``\n`Etapas ** –` ** 4 (pago, construir, probar e implementar) Pasos ** -- ** Acciones para ejecutar en cada una de las etapas Post Secciones que contienen acciones para ejecutar en función del resultado de la tubería (éxito, falla, siempre) Visite esta página para obtener más información sobre la [tubería] (https://www.jenkins.io/doc/book/pipeline/)\nJenkins también ofrece una interfaz de usuario para la visualización de tuberías llamado _ [Ocean Blue] (https://www.jenkins.io/doc/book/blueocean/) _\nhttps://www.jenkins.io/blog/2016/05/26/introducing-blue-cean/\nLa idea detrás de esto es mejorar la experiencia del desarrollador: facilitar la comprensión de la tubería, hacer cambios y monitorear el estado y los problemas.\ndron Construido sobre una tecnología de contenedores. El conjunto de características se puede aumentar a través de ** complementos ** que pueden funcionar con las tecnologías de control de fuente (GitHub, Bitbucket, GitLab, etc.).\nDos versiones disponibles - ** GRATIS ** Para código abierto y servicio en la nube (no gratis).\nOfreciendo modelanguage/structureoturlsaas/contenedor (autogestionado) yaml.drone.ymlhttps: //www.drone.io/\nEstá escrito en GO y usa la siguiente estructura .Drone.yml:\n`` tipo: tubería Nombre: Ejemplo\npasos:\nNombre: instalar Imagen: Nodo: 14 Comandos:\ninstalación de NPM Nombre: prueba Imagen: Nodo: 14 Comandos:\nPrueba de NPM Nombre: implementar Imagen: Alpine Comandos:\nEcho “Implementación de la aplicación” Incluye comandos de implementación o scripts aquí ``\namable ** -- ** Indica que esta es una configuración de tuberías (otros valores podrían ser Docker, Kubernetes, Secret) Nombre -- Nombre de la tubería Pasos ** -- ** Indique secciones individuales de la tubería. Cada paso tiene su propio nombre, imagen de Docker y comandos para ejecutar. Drones GUI te permitirá\nMira este [video] (https://youtu.be/kzmoclcpvmk) por arnés para familiarizarse con el dron y la GUI.\nVisite [Drone.io] (https://www.drone.io/) para obtener más información sobre esta herramienta, complementos y verificar la documentación.\nTravis CI Se integra muy bien con la API de Github.com. Se ofrecen como proyectos de software como servicio y código abierto se pueden probar para ** _ gratis _ **. VM/opciones de contenedores también están disponibles.\nOfreciendo modelanguage/structureoturlsaas/contenedor (autogestionado) yaml.travis.ymlhttps: //travis-ci.org\n`` Idioma: node_js node_js:\n“14” Env:\nCi_reg_img_app = “my_node_app” antes_script:\nEcho “Iniciar sesión en Dockerhub …” echo “$ docker_password” | Docker Login -U “$ Docker_username” - -Password -Stdin guion:\nEcho “Building Docker Image …” Docker Build -T $ CI_REG_IMG_APP. desplegar: \u003c…\u003e\n``\nlenguaje y nodo ** -- ** Define el lenguaje que se utilizará y las versiones env ** -- ** La definición de variable de entorno ocurre aquí antes_script ** -- ** Contiene comandos que se ejecutarán antes de ejecutar el script de compilación principal script ** -- ** contiene el script de compilación principal implement ** -- ** Especifica la configuración de la implementación Recomiendo consultar este [video] (https://www.youtube.com/watch?v=_og2kydtlwk) que muestra lo fácil que es integrarse con Github y comenzar con Travis.\ngitlab Enterprise y edición comunitaria disponible.\nGitlab tiene muchas características para DevOps:\nRepositorio Git Registro de imágenes de Docker Junta de proyectos tuberías CI/CD corredores Ofreciendo modelanguage/structureoturlsaas/contenedor (autogestionado) yaml.gitlab-ci.ymlhttps: //gitlab.com\n`` etapas:\nconstruir prueba desplegar Variables: Node_version: “14\"antes_script:\nNPM instalación -g hilo Instalación del hilo construir: Etapa: construir guion: - Construcción del hilo\nprueba: Etapa: prueba guion: - Prueba de hilo\ndesplegar: Etapa: desplegar guion: - Echo “Implementación de la aplicación …” # Agregar comandos de implementación aquí solo: - principal ``\nEtapas `` `define las etapas de la tubería Variables - Define las variables globales para la tubería. antes de script - Especifica los comandos que se ejecutarán antes de ejecutar cualquier trabajo en la tubería Etapa construir - para construir la aplicación. Ejecuta el comando yarn build. Test Etapa para ejecutar pruebas automatizadas antes de la implementación `implementar - ‘responsable de implementar la aplicación Aquí hay un ejemplo de cómo esto podría representarse gráficamente.\nSugeriría explorar algunos de los [tutoriales] (https://docs.gitlab.com/ee/tutorials/) para familiarizarse con Gitlab.\n",
+  "wordCount" : "812",
+  "inLanguage": "es",
+  "datePublished": "2024-01-18T19:46:23Z",
+  "dateModified": "2024-01-18T19:46:23Z",
+  "author":{
+    "@type": "Person",
+    "name": "Alex"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/herramientas-ci/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/assets/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/es/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="http://localhost:1313/" title="English"
+                            aria-label="English">En</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/es/" title="Inicio">
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/archives/" title="Archivo">
+                    <span>Archivo</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/category/" title="Categorías">
+                    <span>Categorías</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/sobre-mi/" title="Sobre mí">
+                    <span>Sobre mí</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/search/" title="🔍">
+                    <span>🔍</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/es/">Inicio</a>&nbsp;»&nbsp;<a href="http://localhost:1313/es/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Herramientas de integración continua (CI)
+    </h1>
+    <div class="post-meta"><span title='2024-01-18 19:46:23 +0000 WET'>enero 18, 2024</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Alex&nbsp;|&nbsp;Traducciones:
+<ul class="i18n_list">
+    <li>
+        <a href="http://localhost:1313/ci-tools/">En</a>
+    </li>
+</ul>
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Tabla de Contenidos</span>
+        </summary>
+
+        <div class="inner"><ul><ul>
+                <li>
+                    <a href="#describa-las-caracter%c3%adsticas-y-conceptos-de-herramientas-de-compilaci%c3%b3n-implementaci%c3%b3n-como-jenkins-drone-o-travis-ci" aria-label="Describa las características y conceptos de herramientas de compilación /implementación como Jenkins, Drone o Travis CI">Describa las características y conceptos de herramientas de compilación /implementación como Jenkins, Drone o Travis CI</a><ul>
+                        
+                <li>
+                    <a href="#jenkins" aria-label="Jenkins">Jenkins</a></li>
+                <li>
+                    <a href="#dron" aria-label="dron">dron</a></li></ul>
+                </li></ul>
+                    
+                <li>
+                    <a href="#incluye-comandos-de-implementaci%c3%b3n-o-scripts-aqu%c3%ad" aria-label="Incluye comandos de implementación o scripts aquí">Incluye comandos de implementación o scripts aquí</a><ul>
+                        <ul>
+                        
+                <li>
+                    <a href="#travis-ci" aria-label="Travis CI">Travis CI</a></li></ul>
+                    
+                <li>
+                    <a href="#--" aria-label=" ``"> ``</a><ul>
+                        
+                <li>
+                    <a href="#gitlab" aria-label="gitlab">gitlab</a></li></ul>
+                </li>
+                <li>
+                    <a href="#---1" aria-label=" ``"> ``</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="describa-las-características-y-conceptos-de-herramientas-de-compilación-implementación-como-jenkins-drone-o-travis-ci">Describa las características y conceptos de herramientas de compilación /implementación como Jenkins, Drone o Travis CI<a hidden class="anchor" aria-hidden="true" href="#describa-las-características-y-conceptos-de-herramientas-de-compilación-implementación-como-jenkins-drone-o-travis-ci">#</a></h2>
+<p>En la [Última publicación] (/DevOps-CI-CD-Pipeline/) hablamos sobre los conceptos de CI/CD, enfatizando la importancia de la fase ** _ construcción _ ** como parte del proceso de integración continua. Ahora es el momento de profundizar en las siguientes herramientas de CI: Jenkins, Drone, Travis y Gitlab.</p>
+<h3 id="jenkins">Jenkins<a hidden class="anchor" aria-hidden="true" href="#jenkins">#</a></h3>
+<p>Jenkins es un servidor de automatización _ ** gratuito (código abierto) diseñado para automatizar partes del proceso de desarrollo de software, sobre todo el edificio, las pruebas y la implementación de cambios en el código. Está basado en Java, tiene una gran comunidad y ha estado allí por un tiempo.</p>
+<p>Ofreciendo modelanguage/structureOtUrlvm/contenedor (autogestionado) groovyjenkinsfilehttps: //www.jenkins.io/</p>
+<p>Su tubería se mantiene en formato maravilloso y se procesa como guión maravilloso. Este es el archivo que Jenkins buscará de forma predeterminada</p>
+<p>Aquí hay un ejemplo para comprender la estructura:</p>
+<p><code> </code> ``
+tubería {
+agente cualquiera</p>
+<p>etapas {
+Stage (&lsquo;Checkout&rsquo;) {
+pasos {
+&lt;&hellip;&gt;
+}
+}</p>
+<pre><code>etapa ('construir') {
+  pasos {
+    &lt;...&gt;
+  }
+}
+
+etapa ('test') {
+  pasos {
+    &lt;...&gt;
+  }
+}
+
+etapa ('implement') {
+  pasos {
+    &lt;...&gt;
+  }
+}
+</code></pre>
+<p>}</p>
+<p>correo{
+&lt;&hellip;&gt;
+}
+}
+<code> </code> ``</p>
+<ul>
+<li><code> `Etapas</code> <code>**</code> &ndash;` ** 4 (pago, construir, probar e implementar)</li>
+<li><code>Pasos</code> ** <code>--</code> ** Acciones para ejecutar en cada una de las etapas</li>
+<li><code>Post</code> <code> </code> Secciones que contienen acciones para ejecutar en función del resultado de la tubería (éxito, falla, siempre)</li>
+</ul>
+<p>Visite esta página para obtener más información sobre la [tubería] (<a href="https://www.jenkins.io/doc/book/pipeline/">https://www.jenkins.io/doc/book/pipeline/</a>)</p>
+<p>Jenkins también ofrece una interfaz de usuario para la visualización de tuberías llamado _ [Ocean Blue] (<a href="https://www.jenkins.io/doc/book/blueocean/">https://www.jenkins.io/doc/book/blueocean/</a>) _</p>
+<p><img loading="lazy" src="/wp-content/uploads/2024/01/screenshot-2024-01-31-at-07.26.51.png"> <a href="https://www.jenkins.io/blog/2016/05/26/introducing-blue-cean/">https://www.jenkins.io/blog/2016/05/26/introducing-blue-cean/</a></p>
+<p>La idea detrás de esto es mejorar la experiencia del desarrollador: facilitar la comprensión de la tubería, hacer cambios y monitorear el estado y los problemas.</p>
+<hr>
+<h3 id="dron">dron<a hidden class="anchor" aria-hidden="true" href="#dron">#</a></h3>
+<p>Construido sobre una tecnología de contenedores. El conjunto de características se puede aumentar a través de ** complementos ** que pueden funcionar con las tecnologías de control de fuente (GitHub, Bitbucket, GitLab, etc.).</p>
+<p>Dos versiones disponibles - ** GRATIS ** Para código abierto y servicio en la nube (no gratis).</p>
+<p>Ofreciendo modelanguage/structureoturlsaas/contenedor (autogestionado) yaml.drone.ymlhttps: //www.drone.io/</p>
+<p>Está escrito en GO y usa la siguiente estructura .Drone.yml:</p>
+<p><code> </code> ``
+tipo: tubería
+Nombre: Ejemplo</p>
+<p>pasos:</p>
+<ul>
+<li>
+<p>Nombre: instalar
+Imagen: Nodo: 14
+Comandos:</p>
+<ul>
+<li>instalación de NPM</li>
+</ul>
+</li>
+<li>
+<p>Nombre: prueba
+Imagen: Nodo: 14
+Comandos:</p>
+<ul>
+<li>Prueba de NPM</li>
+</ul>
+</li>
+<li>
+<p>Nombre: implementar
+Imagen: Alpine
+Comandos:</p>
+<ul>
+<li>Echo &ldquo;Implementación de la aplicación&rdquo;</li>
+</ul>
+<h1 id="incluye-comandos-de-implementación-o-scripts-aquí">Incluye comandos de implementación o scripts aquí<a hidden class="anchor" aria-hidden="true" href="#incluye-comandos-de-implementación-o-scripts-aquí">#</a></h1>
+</li>
+</ul>
+<p><code> </code> ``</p>
+<ul>
+<li><code>amable</code> ** <code>--</code> ** Indica que esta es una configuración de tuberías (otros valores podrían ser Docker, Kubernetes, Secret)</li>
+<li><code>Nombre --</code> Nombre de la tubería</li>
+<li><code>Pasos</code> ** <code>--</code> ** Indique secciones individuales de la tubería. Cada paso tiene su propio nombre, imagen de Docker y comandos para ejecutar.</li>
+</ul>
+<p>Drones GUI te permitirá</p>
+<p>Mira este [video] (<a href="https://youtu.be/kzmoclcpvmk">https://youtu.be/kzmoclcpvmk</a>) por arnés para familiarizarse con el dron y la GUI.</p>
+<p>Visite [Drone.io] (<a href="https://www.drone.io/">https://www.drone.io/</a>) para obtener más información sobre esta herramienta, complementos y verificar la documentación.</p>
+<hr>
+<h3 id="travis-ci">Travis CI<a hidden class="anchor" aria-hidden="true" href="#travis-ci">#</a></h3>
+<p>Se integra muy bien con la API de Github.com. Se ofrecen como proyectos de software como servicio y código abierto se pueden probar para ** _ gratis _ **. VM/opciones de contenedores también están disponibles.</p>
+<p>Ofreciendo modelanguage/structureoturlsaas/contenedor (autogestionado) yaml.travis.ymlhttps: //travis-ci.org</p>
+<h2 id="--"><code> </code> ``<a hidden class="anchor" aria-hidden="true" href="#--">#</a></h2>
+<p>Idioma: node_js
+node_js:</p>
+<ul>
+<li>&ldquo;14&rdquo;</li>
+</ul>
+<p>Env:</p>
+<ul>
+<li>Ci_reg_img_app = &ldquo;my_node_app&rdquo;</li>
+</ul>
+<p>antes_script:</p>
+<ul>
+<li>Echo &ldquo;Iniciar sesión en Dockerhub &hellip;&rdquo;</li>
+<li>echo &ldquo;$ docker_password&rdquo; | Docker Login -U &ldquo;$ Docker_username&rdquo; - -Password -Stdin</li>
+</ul>
+<p>guion:</p>
+<ul>
+<li>Echo &ldquo;Building Docker Image &hellip;&rdquo;</li>
+<li>Docker Build -T $ CI_REG_IMG_APP.</li>
+</ul>
+<p>desplegar:
+&lt;&hellip;&gt;</p>
+<p><code> </code> ``</p>
+<ul>
+<li><code>lenguaje</code> y <code>nodo</code> ** <code>--</code> ** Define el lenguaje que se utilizará y las versiones</li>
+<li><code>env</code> ** <code>--</code> ** La definición de variable de entorno ocurre aquí</li>
+<li><code>antes_script</code> ** <code>--</code> ** Contiene comandos que se ejecutarán antes de ejecutar el script de compilación principal</li>
+<li><code>script</code> ** <code>--</code> ** contiene el script de compilación principal</li>
+<li><code>implement</code> ** <code>--</code> ** Especifica la configuración de la implementación</li>
+</ul>
+<p>Recomiendo consultar este [video] (<a href="https://www.youtube.com/watch?v=_og2kydtlwk">https://www.youtube.com/watch?v=_og2kydtlwk</a>) que muestra lo fácil que es integrarse con Github y comenzar con Travis.</p>
+<hr>
+<h3 id="gitlab">gitlab<a hidden class="anchor" aria-hidden="true" href="#gitlab">#</a></h3>
+<p>Enterprise y edición comunitaria disponible.</p>
+<p>Gitlab tiene muchas características para DevOps:</p>
+<ul>
+<li>Repositorio Git</li>
+<li>Registro de imágenes de Docker</li>
+<li>Junta de proyectos</li>
+<li>tuberías CI/CD</li>
+<li>corredores</li>
+</ul>
+<p>Ofreciendo modelanguage/structureoturlsaas/contenedor (autogestionado) yaml.gitlab-ci.ymlhttps: //gitlab.com</p>
+<h2 id="---1"><code> </code> ``<a hidden class="anchor" aria-hidden="true" href="#---1">#</a></h2>
+<p>etapas:</p>
+<ul>
+<li>construir</li>
+<li>prueba</li>
+<li>desplegar</li>
+</ul>
+<p>Variables:
+Node_version: &ldquo;14&quot;antes_script:</p>
+<ul>
+<li>NPM instalación -g hilo</li>
+<li>Instalación del hilo</li>
+</ul>
+<p>construir:
+Etapa: construir
+guion:
+- Construcción del hilo</p>
+<p>prueba:
+Etapa: prueba
+guion:
+- Prueba de hilo</p>
+<p>desplegar:
+Etapa: desplegar
+guion:
+- Echo &ldquo;Implementación de la aplicación &hellip;&rdquo;
+# Agregar comandos de implementación aquí
+solo:
+- principal
+<code> </code> ``</p>
+<ul>
+<li><code>Etapas</code> `` `define las etapas de la tubería</li>
+<li><code>Variables -</code> Define las variables globales para la tubería.</li>
+<li><code>antes de script -</code> Especifica los comandos que se ejecutarán antes de ejecutar cualquier trabajo en la tubería</li>
+<li>Etapa <code>construir -</code> para construir la aplicación. Ejecuta el comando <code>yarn build</code>.</li>
+<li><code>Test</code> <code> </code> Etapa para ejecutar pruebas automatizadas antes de la implementación</li>
+<li>`implementar - &lsquo;responsable de implementar la aplicación</li>
+</ul>
+<p>Aquí hay un ejemplo de cómo esto podría representarse gráficamente.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2024/02/gitlab1.png"></p>
+<p>Sugeriría explorar algunos de los [tutoriales] (<a href="https://docs.gitlab.com/ee/tutorials/">https://docs.gitlab.com/ee/tutorials/</a>) para familiarizarse con Gitlab.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/es/">NetWithAlex</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copiar';
+
+        function copyingDone() {
+            copybutton.innerHTML = '¡copiado!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copiar';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

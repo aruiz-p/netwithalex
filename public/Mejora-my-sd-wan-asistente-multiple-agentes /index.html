@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>NetWithAlex</title>
+<meta name="keywords" content="">
+<meta name="description" content="Introducción
+En mi [Última publicación] (/edificio-my-first-sd-wan-ai-asistant-with-langchain/), creé un asistente de Cisco SD-WAN para ayudarme a ejecutar trazas NWPI y solucionar la red. La interacción con el asistente requirió que el usuario respondiera preguntas hasta recibir información sobre un flujo particular y posibles problemas. En esta publicación, mi objetivo es usar múltiples agentes y ver si puedo llegar a la misma conclusión con menos interacción humana. Se puede encontrar el repositorio [aquí] (https://github.com/aruiz-p/sdwan-langgraph)">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/Mejora-my-sd-wan-asistente-multiple-agentes%20/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/">
+<link rel="alternate" hreflang="es" href="http://localhost:1313/Mejora-my-sd-wan-asistente-multiple-agentes%20/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/Mejora-my-sd-wan-asistente-multiple-agentes%20/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="NetWithAlex">
+  <meta property="og:description" content="Introducción En mi [Última publicación] (/edificio-my-first-sd-wan-ai-asistant-with-langchain/), creé un asistente de Cisco SD-WAN para ayudarme a ejecutar trazas NWPI y solucionar la red. La interacción con el asistente requirió que el usuario respondiera preguntas hasta recibir información sobre un flujo particular y posibles problemas. En esta publicación, mi objetivo es usar múltiples agentes y ver si puedo llegar a la misma conclusión con menos interacción humana. Se puede encontrar el repositorio [aquí] (https://github.com/aruiz-p/sdwan-langgraph)">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="Introducción
+En mi [Última publicación] (/edificio-my-first-sd-wan-ai-asistant-with-langchain/), creé un asistente de Cisco SD-WAN para ayudarme a ejecutar trazas NWPI y solucionar la red. La interacción con el asistente requirió que el usuario respondiera preguntas hasta recibir información sobre un flujo particular y posibles problemas. En esta publicación, mi objetivo es usar múltiples agentes y ver si puedo llegar a la misma conclusión con menos interacción humana. Se puede encontrar el repositorio [aquí] (https://github.com/aruiz-p/sdwan-langgraph)">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/es/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "",
+      "item": "http://localhost:1313/Mejora-my-sd-wan-asistente-multiple-agentes%20/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "",
+  "name": "",
+  "description": "Introducción En mi [Última publicación] (/edificio-my-first-sd-wan-ai-asistant-with-langchain/), creé un asistente de Cisco SD-WAN para ayudarme a ejecutar trazas NWPI y solucionar la red. La interacción con el asistente requirió que el usuario respondiera preguntas hasta recibir información sobre un flujo particular y posibles problemas. En esta publicación, mi objetivo es usar múltiples agentes y ver si puedo llegar a la misma conclusión con menos interacción humana. Se puede encontrar el repositorio [aquí] (https://github.com/aruiz-p/sdwan-langgraph)\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introducción En mi [Última publicación] (/edificio-my-first-sd-wan-ai-asistant-with-langchain/), creé un asistente de Cisco SD-WAN para ayudarme a ejecutar trazas NWPI y solucionar la red. La interacción con el asistente requirió que el usuario respondiera preguntas hasta recibir información sobre un flujo particular y posibles problemas. En esta publicación, mi objetivo es usar múltiples agentes y ver si puedo llegar a la misma conclusión con menos interacción humana. Se puede encontrar el repositorio [aquí] (https://github.com/aruiz-p/sdwan-langgraph)\nEmpezando Para lograr esto, usaré [langgraph] (https://langchain-ai.github.io/langgraph/) oficialmente definido como:\nUna biblioteca para construir aplicaciones de actores múltiples estatales con LLMS, utilizada para crear flujos de trabajo de agentes y múltiples agentes\nHay [diferentes enfoques] (https://langchain-ai.github.io/langgraph/tutorials/#multi-agent-systems), pero decidí construir una estructura donde hay un supervisor que orquesta el flujo de trabajo y decide quién debería actuar a continuación. La idea es construir un gráfico que represente a los agentes y cómo están conectados. El gráfico ilustra el orden en el que se pueden ejecutar los agentes.\nEn mi caso tengo 3 agentes:\n** Supervisor ** - Este agente está a cargo de recibir la entrada del usuario y decidir quién debe actuar a continuación. Además, una vez que otros agentes terminen sus tareas, lo informarán y se tomará una nueva decisión de enrutamiento. El supervisor es el único agente que puede decidir cuándo volver al usuario con una respuesta. ** Revisor ** - Este agente revisará la información que se enviará al usuario, realizará algunas preguntas o situaciones de suma y resolución que el marcador podría plantear. ** Tracer ** - Este es el agente que ejecutará las trazas y recuperará la información que el usuario está buscando. Se informará al supervisor cuando se haga o si se debe responder alguna pregunta. Tuve que modificar un poco el aviso del trazador, para poder obtener un comportamiento que sea mejor para este enfoque. Además, cada agente puede tener sus propias herramientas. Actualmente, el Tracer tiene más herramientas que el resto de los agentes.\nVisualizado, el gráfico se ve así:\n! [] (/wp-content/uploads/2024/07/gráfico.png)\nLa flecha punteada indica un borde condicional, lo que significa que el supervisor puede decidir cuál debe ser el próximo agente o si el final es apropiado.\nLa flecha continua indica el siguiente paso que ** debe ser ** Por ejemplo, después de “comenzar”, el siguiente agente debe ser el supervisor. Tracer y revisor deben ir al supervisor.\nAunque este es un gráfico simple, este enfoque de supervisor es muy poderoso.\n¿Cómo rutas el supervisor? El supervisor juega un papel fundamental, ya que determina quién debe actuar a continuación. Esto se define en la siguiente [función] (https://platform.openai.com/docs/guides/function-calling):\nopciones = [\"Finalizar\"] + miembros function_def = { \"Nombre\": \"Ruta\", \"Descripción\": \"Seleccione el siguiente rol.\", \"Parámetros\": { \"Título\": \"Ruteschema\", \"Escriba\": \"Objeto\", \"propiedades\": { \"próximo\": { \"Título\": \"Siguiente\", \"Anyof\": [ {\"enum\": opciones}, ] } }, \"Requerido\": [\"Siguiente\"], }, } Con esto, cada vez que el supervisor reciba cualquier entrada, obtendrá un valor de “próximo” de las opciones disponibles y esto representará el siguiente nodo en el gráfico.\ndemostración Usaremos la siguiente topología para probar\n! [] (/wp-content/uploads/2024/07/topology-2.png)\nLe digo información al asistente sobre el problema e informo que ya hay tráfico que pasa (se requiere tráfico para que NWPI genere las ideas que estamos buscando).\n! [] (/wp-content/uploads/2024/07/QUERY.PNG)\nEsto es con lo que regresó el asistente\n! [] (/wp-content/uploads/2024/07/agente-resesp.png)\nLa respuesta presenta información de manera condensada, que indica el lúpulo y el camino que el tráfico está tomando y algunos eventos detectados para esta comunicación. Los detalles de uno de los flujos también están presentes, sin embargo, tiene menos información que antes. Esto se debe a que he pedido al agente revisor que mantenga lo que considera más relevante y lo envíe al usuario. Al final, podemos ver que se menciona la caída \\ _Report y hay una sugerencia para revisar las ACL 🎉\nPodemos jugar con el `` Revisor ’’ para mostrar más información sobre los detalles del flujo.\ndetrás de escena Ok, el asistente regresó con una buena respuesta, pero veamos con más detalle lo que sucedió debajo del capó.Usando Langsmith podemos obtener detalles e ideas sobre el flujo de trabajo seguido. Aquí está el proceso completo.\n! [] (/wp-content/uploads/2024/07/agent-workflow.png)\nPrimero, el supervisor recibe la consulta del usuario y la pasa al ’trazador'.\n! [] (/wp-content/uploads/2024/07/sup1.png)\nA continuación, el ‘Tracer’ utiliza las herramientas disponibles para iniciar el rastro, espera capturar algunos flujos y recupera información. Informes al ‘Supervisor’. Tenga en cuenta que el orden en que se ejecutan las herramientas depende del agente.\n! [] (/wp-content/uploads/2024/07/tracer.png)\nLuego, el supervisor recibe la información y decide que el` revisor ‘debería actuar a continuación.\n! [] (/wp-content/uploads/2024/07/sup2.png)\nA continuación, el revisor recibe la información y reescribe lo que se recibió del trazador. Vuelve al ‘supervisor’.\n! [] (/wp-content/uploads/2024/07/rev1.png)\nEl supervisor decide que la información está lista para enviarse al usuario. Esto es cuando recibimos el mensaje en WebEx.\n! [] (/wp-content/uploads/2024/07/sup3.png)\nLecciones aprendidas Dado que los agentes pueden tomar decisiones, no siempre es fácil entender lo que están haciendo o por qué devuelven lo que devuelven, usando Langsmith definitivamente ayudó con esto. No solo podemos ver el pedido y las herramientas utilizadas, sino que también hay algunos metadatos que proporcionan información valiosa adicional. Llegué a algunas situaciones en las que el supervisor llamaba al trazador varias veces debido a algún error de recuperación de información. Al final, esto fue causado por un error en el código y, afortunadamente, mi asistente no es costoso. Sin embargo, si su caso de uso consume muchos tokens, debe considerar agregar algún tipo de protección para evitar un bucle que aumente su consumo de API. Hablando de costos, los modelos de lenguaje pequeño son una buena alternativa. Después de quedarse sin cuota, recordé que el modelo GPT-4O-Mini está fuera y decidí intentarlo. Después de algunas pruebas, vi que funcionó muy bien y era mucho más barato, así que me quedé con eso. Conclusión Usando la implementación de múltiples agentes, podemos lograr tareas más complejas y tener más flexibilidad. Si es necesario, la interacción del usuario se puede agregar en ciertas decisiones que son importantes. Además, existe cierta complejidad adicional, ya que las indicaciones deben refinarse para lograr los resultados que esperamos. En mi caso, tuve que hacer múltiples iteraciones y refinamientos a las indicaciones de todos los agentes antes de obtener un resultado que consideraba lo suficientemente bueno. Estoy interesado en probar otros enfoques para las implementaciones de múltiples agentes y agregar información adicional para que los agentes proporcionen información más precisa a través de RAG.\n",
+  "wordCount" : "1079",
+  "inLanguage": "es",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/Mejora-my-sd-wan-asistente-multiple-agentes%20/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/assets/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/es/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="http://localhost:1313/" title="English"
+                            aria-label="English">En</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/es/" title="Inicio">
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/archives/" title="Archivo">
+                    <span>Archivo</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/category/" title="Categorías">
+                    <span>Categorías</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/about/" title="Sobre mí">
+                    <span>Sobre mí</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/search/" title="🔍">
+                    <span>🔍</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/es/">Inicio</a>&nbsp;»&nbsp;<a href="http://localhost:1313/es/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">6 min&nbsp;|&nbsp;Traducciones:
+<ul class="i18n_list">
+    <li>
+        <a href="http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/">En</a>
+    </li>
+</ul>
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Tabla de Contenidos</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#introducci%c3%b3n" aria-label="Introducción">Introducción</a></li>
+                <li>
+                    <a href="#empezando" aria-label="Empezando">Empezando</a><ul>
+                        
+                <li>
+                    <a href="#c%c3%b3mo-rutas-el-supervisor" aria-label="¿Cómo rutas el supervisor?">¿Cómo rutas el supervisor?</a></li></ul>
+                </li>
+                <li>
+                    <a href="#demostraci%c3%b3n" aria-label="demostración">demostración</a></li>
+                <li>
+                    <a href="#detr%c3%a1s-de-escena" aria-label="detrás de escena">detrás de escena</a></li>
+                <li>
+                    <a href="#lecciones-aprendidas" aria-label="Lecciones aprendidas">Lecciones aprendidas</a></li>
+                <li>
+                    <a href="#conclusi%c3%b3n" aria-label="Conclusión">Conclusión</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="introducción">Introducción<a hidden class="anchor" aria-hidden="true" href="#introducción">#</a></h2>
+<p>En mi [Última publicación] (/edificio-my-first-sd-wan-ai-asistant-with-langchain/), creé un asistente de Cisco SD-WAN para ayudarme a ejecutar trazas NWPI y solucionar la red. La interacción con el asistente requirió que el usuario respondiera preguntas hasta recibir información sobre un flujo particular y posibles problemas. En esta publicación, mi objetivo es usar múltiples agentes y ver si puedo llegar a la misma conclusión con menos interacción humana. Se puede encontrar el repositorio [aquí] (<a href="https://github.com/aruiz-p/sdwan-langgraph">https://github.com/aruiz-p/sdwan-langgraph</a>)</p>
+<h2 id="empezando">Empezando<a hidden class="anchor" aria-hidden="true" href="#empezando">#</a></h2>
+<p>Para lograr esto, usaré [langgraph] (<a href="https://langchain-ai.github.io/langgraph/">https://langchain-ai.github.io/langgraph/</a>) oficialmente definido como:</p>
+<blockquote>
+<p>Una biblioteca para construir aplicaciones de actores múltiples estatales con LLMS, utilizada para crear flujos de trabajo de agentes y múltiples agentes</p>
+</blockquote>
+<p>Hay [diferentes enfoques] (<a href="https://langchain-ai.github.io/langgraph/tutorials/#multi-agent-systems%29">https://langchain-ai.github.io/langgraph/tutorials/#multi-agent-systems)</a>, pero decidí construir una estructura donde hay un supervisor que orquesta el flujo de trabajo y decide quién debería actuar a continuación. La idea es construir un gráfico que represente a los agentes y cómo están conectados. El gráfico ilustra el orden en el que se pueden ejecutar los agentes.</p>
+<p>En mi caso tengo 3 agentes:</p>
+<ol>
+<li>** Supervisor ** - Este agente está a cargo de recibir la entrada del usuario y decidir quién debe actuar a continuación. Además, una vez que otros agentes terminen sus tareas, lo informarán y se tomará una nueva decisión de enrutamiento. El supervisor es el único agente que puede decidir cuándo volver al usuario con una respuesta.</li>
+<li>** Revisor ** - Este agente revisará la información que se enviará al usuario, realizará algunas preguntas o situaciones de suma y resolución que el marcador podría plantear.</li>
+<li>** Tracer ** - Este es el agente que ejecutará las trazas y recuperará la información que el usuario está buscando. Se informará al supervisor cuando se haga o si se debe responder alguna pregunta.</li>
+</ol>
+<p>Tuve que modificar un poco el aviso del trazador, para poder obtener un comportamiento que sea mejor para este enfoque. Además, cada agente puede tener sus propias herramientas. Actualmente, el Tracer tiene más herramientas que el resto de los agentes.</p>
+<p>Visualizado, el gráfico se ve así:</p>
+<p>! [] (/wp-content/uploads/2024/07/gráfico.png)</p>
+<p>La flecha punteada indica un borde condicional, lo que significa que el supervisor puede decidir cuál debe ser el próximo agente o si el final es apropiado.</p>
+<p>La flecha continua indica el siguiente paso que ** debe ser ** Por ejemplo, después de &ldquo;comenzar&rdquo;, el siguiente agente debe ser el supervisor. Tracer y revisor deben ir al supervisor.</p>
+<p>Aunque este es un gráfico simple, este enfoque de supervisor es muy poderoso.</p>
+<h3 id="cómo-rutas-el-supervisor">¿Cómo rutas el supervisor?<a hidden class="anchor" aria-hidden="true" href="#cómo-rutas-el-supervisor">#</a></h3>
+<p>El supervisor juega un papel fundamental, ya que determina quién debe actuar a continuación. Esto se define en la siguiente [función] (<a href="https://platform.openai.com/docs/guides/function-calling%29">https://platform.openai.com/docs/guides/function-calling)</a>:</p>
+<p><code> </code> <code>opciones = [&quot;Finalizar&quot;] + miembros function_def = { &quot;Nombre&quot;: &quot;Ruta&quot;, &quot;Descripción&quot;: &quot;Seleccione el siguiente rol.&quot;, &quot;Parámetros&quot;: { &quot;Título&quot;: &quot;Ruteschema&quot;, &quot;Escriba&quot;: &quot;Objeto&quot;, &quot;propiedades&quot;: { &quot;próximo&quot;: { &quot;Título&quot;: &quot;Siguiente&quot;, &quot;Anyof&quot;: [ {&quot;enum&quot;: opciones}, ] } }, &quot;Requerido&quot;: [&quot;Siguiente&quot;], }, }</code> <code> </code></p>
+<p>Con esto, cada vez que el supervisor reciba cualquier entrada, obtendrá un valor de &ldquo;próximo&rdquo; de las opciones disponibles y esto representará el siguiente nodo en el gráfico.</p>
+<h2 id="demostración">demostración<a hidden class="anchor" aria-hidden="true" href="#demostración">#</a></h2>
+<p>Usaremos la siguiente topología para probar</p>
+<p>! [] (/wp-content/uploads/2024/07/topology-2.png)</p>
+<p>Le digo información al asistente sobre el problema e informo que ya hay tráfico que pasa (se requiere tráfico para que NWPI genere las ideas que estamos buscando).</p>
+<p>! [] (/wp-content/uploads/2024/07/QUERY.PNG)</p>
+<p>Esto es con lo que regresó el asistente</p>
+<p>! [] (/wp-content/uploads/2024/07/agente-resesp.png)</p>
+<p>La respuesta presenta información de manera condensada, que indica el lúpulo y el camino que el tráfico está tomando y algunos eventos detectados para esta comunicación. Los detalles de uno de los flujos también están presentes, sin embargo, tiene menos información que antes. Esto se debe a que he pedido al agente <code>revisor</code> que mantenga lo que considera más relevante y lo envíe al usuario. Al final, podemos ver que se menciona la caída \ _Report y hay una sugerencia para revisar las ACL 🎉</p>
+<p>Podemos jugar con el `` Revisor &rsquo;&rsquo; para mostrar más información sobre los detalles del flujo.</p>
+<h2 id="detrás-de-escena">detrás de escena<a hidden class="anchor" aria-hidden="true" href="#detrás-de-escena">#</a></h2>
+<p>Ok, el asistente regresó con una buena respuesta, pero veamos con más detalle lo que sucedió debajo del capó.Usando Langsmith podemos obtener detalles e ideas sobre el flujo de trabajo seguido. Aquí está el proceso completo.</p>
+<p>! [] (/wp-content/uploads/2024/07/agent-workflow.png)</p>
+<p>Primero, el <code>supervisor</code> recibe la consulta del usuario y la pasa al &rsquo;trazador'.</p>
+<p>! [] (/wp-content/uploads/2024/07/sup1.png)</p>
+<p>A continuación, el &lsquo;Tracer&rsquo; utiliza las herramientas disponibles para iniciar el rastro, espera capturar algunos flujos y recupera información. Informes al &lsquo;Supervisor&rsquo;. Tenga en cuenta que el orden en que se ejecutan las herramientas depende del agente.</p>
+<p>! [] (/wp-content/uploads/2024/07/tracer.png)</p>
+<p>Luego, el <code>supervisor</code> recibe la información y decide que el` revisor &lsquo;debería actuar a continuación.</p>
+<p>! [] (/wp-content/uploads/2024/07/sup2.png)</p>
+<p>A continuación, el <code>revisor</code> recibe la información y reescribe lo que se recibió del trazador. Vuelve al &lsquo;supervisor&rsquo;.</p>
+<p>! [] (/wp-content/uploads/2024/07/rev1.png)</p>
+<p>El <code>supervisor</code> decide que la información está lista para enviarse al usuario. Esto es cuando recibimos el mensaje en WebEx.</p>
+<p>! [] (/wp-content/uploads/2024/07/sup3.png)</p>
+<h2 id="lecciones-aprendidas">Lecciones aprendidas<a hidden class="anchor" aria-hidden="true" href="#lecciones-aprendidas">#</a></h2>
+<ul>
+<li>Dado que los agentes pueden tomar decisiones, no siempre es fácil entender lo que están haciendo o por qué devuelven lo que devuelven, usando Langsmith definitivamente ayudó con esto. No solo podemos ver el pedido y las herramientas utilizadas, sino que también hay algunos metadatos que proporcionan información valiosa adicional.</li>
+<li>Llegué a algunas situaciones en las que el supervisor llamaba al trazador varias veces debido a algún error de recuperación de información. Al final, esto fue causado por un error en el código y, afortunadamente, mi asistente no es costoso. Sin embargo, si su caso de uso consume muchos tokens, debe considerar agregar algún tipo de protección para evitar un bucle que aumente su consumo de API.</li>
+<li>Hablando de costos, los modelos de lenguaje pequeño son una buena alternativa. Después de quedarse sin cuota, recordé que el modelo GPT-4O-Mini está fuera y decidí intentarlo. Después de algunas pruebas, vi que funcionó muy bien y era mucho más barato, así que me quedé con eso.</li>
+</ul>
+<h2 id="conclusión">Conclusión<a hidden class="anchor" aria-hidden="true" href="#conclusión">#</a></h2>
+<p>Usando la implementación de múltiples agentes, podemos lograr tareas más complejas y tener más flexibilidad. Si es necesario, la interacción del usuario se puede agregar en ciertas decisiones que son importantes. Además, existe cierta complejidad adicional, ya que las indicaciones deben refinarse para lograr los resultados que esperamos. En mi caso, tuve que hacer múltiples iteraciones y refinamientos a las indicaciones de todos los agentes antes de obtener un resultado que consideraba lo suficientemente bueno. Estoy interesado en probar otros enfoques para las implementaciones de múltiples agentes y agregar información adicional para que los agentes proporcionen información más precisa a través de RAG.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/es/">NetWithAlex</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copiar';
+
+        function copyingDone() {
+            copybutton.innerHTML = '¡copiado!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copiar';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

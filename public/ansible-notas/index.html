@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Ansible Notes | NetWithAlex</title>
+<meta name="keywords" content="">
+<meta name="description" content="Introducción
+[_Tis Post es parte de Devnet DevOps (300-910)-BluePrint _] (/Study-DevOps-BluePrint/)
+Ansible es una herramienta de automatización de código abierto utilizada para la administración de configuración, implementación de aplicaciones y automatización de tareas. Aunque se puede utilizar para muchos propósitos, estamos particularmente interesados ​​en las tareas relacionadas con la automatización de redes.
+Hay muchos recursos para aprender Ansible en línea, estas notas deberían servir solo como orientación, pero se le recomienda que profundice a su propio ritmo.">
+<meta name="author" content="Alex">
+<link rel="canonical" href="http://localhost:1313/ansible-notas/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/ansible-notes/">
+<link rel="alternate" hreflang="es" href="http://localhost:1313/ansible-notas/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/ansible-notas/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="Ansible Notes">
+  <meta property="og:description" content="Introducción [_Tis Post es parte de Devnet DevOps (300-910)-BluePrint _] (/Study-DevOps-BluePrint/)
+Ansible es una herramienta de automatización de código abierto utilizada para la administración de configuración, implementación de aplicaciones y automatización de tareas. Aunque se puede utilizar para muchos propósitos, estamos particularmente interesados ​​en las tareas relacionadas con la automatización de redes.
+Hay muchos recursos para aprender Ansible en línea, estas notas deberían servir solo como orientación, pero se le recomienda que profundice a su propio ritmo.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-05-19T13:49:53+00:00">
+    <meta property="article:modified_time" content="2024-05-19T13:49:53+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ansible Notes">
+<meta name="twitter:description" content="Introducción
+[_Tis Post es parte de Devnet DevOps (300-910)-BluePrint _] (/Study-DevOps-BluePrint/)
+Ansible es una herramienta de automatización de código abierto utilizada para la administración de configuración, implementación de aplicaciones y automatización de tareas. Aunque se puede utilizar para muchos propósitos, estamos particularmente interesados ​​en las tareas relacionadas con la automatización de redes.
+Hay muchos recursos para aprender Ansible en línea, estas notas deberían servir solo como orientación, pero se le recomienda que profundice a su propio ritmo.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/es/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Ansible Notes",
+      "item": "http://localhost:1313/ansible-notas/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Ansible Notes",
+  "name": "Ansible Notes",
+  "description": "Introducción [_Tis Post es parte de Devnet DevOps (300-910)-BluePrint _] (/Study-DevOps-BluePrint/)\nAnsible es una herramienta de automatización de código abierto utilizada para la administración de configuración, implementación de aplicaciones y automatización de tareas. Aunque se puede utilizar para muchos propósitos, estamos particularmente interesados ​​en las tareas relacionadas con la automatización de redes.\nHay muchos recursos para aprender Ansible en línea, estas notas deberían servir solo como orientación, pero se le recomienda que profundice a su propio ritmo.\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introducción [_Tis Post es parte de Devnet DevOps (300-910)-BluePrint _] (/Study-DevOps-BluePrint/)\nAnsible es una herramienta de automatización de código abierto utilizada para la administración de configuración, implementación de aplicaciones y automatización de tareas. Aunque se puede utilizar para muchos propósitos, estamos particularmente interesados ​​en las tareas relacionadas con la automatización de redes.\nHay muchos recursos para aprender Ansible en línea, estas notas deberían servir solo como orientación, pero se le recomienda que profundice a su propio ritmo.\nCaracterísticas clave ** Sin agente: ** Ansible no requiere que los agentes se instalen en nodos administrados, lo que lo hace liviano y fácil de implementar. -** Basado en YAML: ** Los libros de jugadas y los archivos de configuración se escriben en YAML, legible por humanos y fáciles de entender. ** Idempotent: ** Ansible asegura que se mantenga el estado deseado del sistema, lo que hace que sea seguro ejecutar varias veces. Componentes ** Nodo de control **: la máquina donde se instala Ansible y desde la cual se inicia la automatización. ** Nodos administrados **: Las máquinas administradas por Ansible. Ansible se conecta a nodos administrados a través de SSH (Linux) o WinRM (Windows) para ejecutar tareas. ** Inventario **: Una lista de nodos administrados que Ansible administrará. ** Playbooks **: archivos YAML que contienen un conjunto de tareas que se ejecutarán en nodos administrados. ** Módulos **: Unidades de código que Ansible se ejecuta en nodos administrados para realizar tareas. Requisitos para usar Ansible ** Requisitos de nodo de control ** Ansible requiere que se instale Python se puede instalar con yum, apt o pip Más comúnmente instalado en Linux o macOS archivo de inventario Archivo de texto que contiene una lista de nodos administrados al que Ansible puede conectarse y administrar en este caso nuestros dispositivos de red. puede estar en formato ini o yaml Puede agrupar nodos y definir variables. Ver múltiples ejemplos [aquí] (https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html) Playbook Los archivos YAML que definen un conjunto de tareas que se ejecutarán en los nodos administrados. Son el corazón de la automatización Ansible.\nEstructura ** Hosts **: Especifica los hosts o grupos de destino (inventario) ** Tareas **: contiene una lista de tareas que se ejecutarán en nodos administrados. ** Variables **: Define las variables utilizadas dentro del libro de jugadas. Los libros de jugadas usan módulos para interactuar con los modos administrados. Recomiendo familiarizarse con algunos [módulos Cisco] (https://docs.ansible.com/ansible/latest/collections/cisco/index.html)\nEjemplos prácticos Puede encontrar algunos ejemplos prácticos en el siguiente repositorio [https://github.com/aruiz-p/netwithalex-ansible/tree/main).\n[Volver a BluePrint] (/Study-Devops-BanePrint/) ",
+  "wordCount" : "414",
+  "inLanguage": "es",
+  "datePublished": "2024-05-19T13:49:53Z",
+  "dateModified": "2024-05-19T13:49:53Z",
+  "author":{
+    "@type": "Person",
+    "name": "Alex"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/ansible-notas/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/assets/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/es/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="http://localhost:1313/" title="English"
+                            aria-label="English">En</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/es/" title="Inicio">
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/archives/" title="Archivo">
+                    <span>Archivo</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/category/" title="Categorías">
+                    <span>Categorías</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/sobre-mi/" title="Sobre mí">
+                    <span>Sobre mí</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/search/" title="🔍">
+                    <span>🔍</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/es/">Inicio</a>&nbsp;»&nbsp;<a href="http://localhost:1313/es/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Ansible Notes
+    </h1>
+    <div class="post-meta"><span title='2024-05-19 13:49:53 +0000 +0000'>mayo 19, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Alex&nbsp;|&nbsp;Traducciones:
+<ul class="i18n_list">
+    <li>
+        <a href="http://localhost:1313/ansible-notes/">En</a>
+    </li>
+</ul>
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Tabla de Contenidos</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#introducci%c3%b3n" aria-label="Introducción">Introducción</a></li>
+                <li>
+                    <a href="#caracter%c3%adsticas-clave" aria-label="Características clave">Características clave</a></li>
+                <li>
+                    <a href="#componentes" aria-label="Componentes">Componentes</a></li>
+                <li>
+                    <a href="#requisitos-para-usar-ansible" aria-label="Requisitos para usar Ansible">Requisitos para usar Ansible</a></li>
+                <li>
+                    <a href="#archivo-de-inventario" aria-label="archivo de inventario">archivo de inventario</a></li>
+                <li>
+                    <a href="#playbook" aria-label="Playbook">Playbook</a><ul>
+                        
+                <li>
+                    <a href="#estructura" aria-label="Estructura">Estructura</a></li></ul>
+                </li>
+                <li>
+                    <a href="#ejemplos-pr%c3%a1cticos" aria-label="Ejemplos prácticos">Ejemplos prácticos</a></li>
+                <li>
+                    <a href="#volver-a-blueprint-study-devops-baneprint" aria-label="[Volver a BluePrint] (/Study-Devops-BanePrint/)">[Volver a BluePrint] (/Study-Devops-BanePrint/)</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h3 id="introducción">Introducción<a hidden class="anchor" aria-hidden="true" href="#introducción">#</a></h3>
+<p>[_Tis Post es parte de Devnet DevOps (300-910)-BluePrint _] (/Study-DevOps-BluePrint/)</p>
+<p>Ansible es una herramienta de automatización de código abierto utilizada para la administración de configuración, implementación de aplicaciones y automatización de tareas. Aunque se puede utilizar para muchos propósitos, estamos particularmente interesados ​​en las tareas relacionadas con la automatización de redes.</p>
+<p>Hay muchos recursos para aprender Ansible en línea, estas notas deberían servir solo como orientación, pero se le recomienda que profundice a su propio ritmo.</p>
+<h3 id="características-clave">Características clave<a hidden class="anchor" aria-hidden="true" href="#características-clave">#</a></h3>
+<ul>
+<li>** Sin agente: ** Ansible no requiere que los agentes se instalen en nodos administrados, lo que lo hace liviano y fácil de implementar.
+-** Basado en YAML: ** Los libros de jugadas y los archivos de configuración se escriben en YAML, legible por humanos y fáciles de entender.</li>
+<li>** Idempotent: ** Ansible asegura que se mantenga el estado deseado del sistema, lo que hace que sea seguro ejecutar varias veces.</li>
+</ul>
+<h3 id="componentes">Componentes<a hidden class="anchor" aria-hidden="true" href="#componentes">#</a></h3>
+<ul>
+<li>** Nodo de control **: la máquina donde se instala Ansible y desde la cual se inicia la automatización.</li>
+<li>** Nodos administrados **: Las máquinas administradas por Ansible. Ansible se conecta a nodos administrados a través de SSH (Linux) o WinRM (Windows) para ejecutar tareas.</li>
+<li>** Inventario **: Una lista de nodos administrados que Ansible administrará.</li>
+<li>** Playbooks **: archivos YAML que contienen un conjunto de tareas que se ejecutarán en nodos administrados.</li>
+<li>** Módulos **: Unidades de código que Ansible se ejecuta en nodos administrados para realizar tareas.</li>
+</ul>
+<h3 id="requisitos-para-usar-ansible">Requisitos para usar Ansible<a hidden class="anchor" aria-hidden="true" href="#requisitos-para-usar-ansible">#</a></h3>
+<ul>
+<li>** Requisitos de nodo de control **
+<ul>
+<li>Ansible requiere que se instale Python</li>
+<li>se puede instalar con yum, apt o pip</li>
+<li>Más comúnmente instalado en Linux o macOS</li>
+</ul>
+</li>
+</ul>
+<h3 id="archivo-de-inventario">archivo de inventario<a hidden class="anchor" aria-hidden="true" href="#archivo-de-inventario">#</a></h3>
+<ul>
+<li>Archivo de texto que contiene una lista de nodos administrados al que Ansible puede conectarse y administrar en este caso nuestros dispositivos de red.</li>
+<li>puede estar en formato ini o yaml</li>
+<li>Puede agrupar nodos y definir variables. Ver múltiples ejemplos [aquí] (<a href="https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html">https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html</a>)</li>
+</ul>
+<h3 id="playbook">Playbook<a hidden class="anchor" aria-hidden="true" href="#playbook">#</a></h3>
+<p>Los archivos YAML que definen un conjunto de tareas que se ejecutarán en los nodos administrados. Son el corazón de la automatización Ansible.</p>
+<h4 id="estructura">Estructura<a hidden class="anchor" aria-hidden="true" href="#estructura">#</a></h4>
+<ul>
+<li>** Hosts **: Especifica los hosts o grupos de destino (inventario)</li>
+<li>** Tareas **: contiene una lista de tareas que se ejecutarán en nodos administrados.</li>
+<li>** Variables **: Define las variables utilizadas dentro del libro de jugadas.</li>
+</ul>
+<p>Los libros de jugadas usan módulos para interactuar con los modos administrados. Recomiendo familiarizarse con algunos [módulos Cisco] (<a href="https://docs.ansible.com/ansible/latest/collections/cisco/index.html">https://docs.ansible.com/ansible/latest/collections/cisco/index.html</a>)</p>
+<h3 id="ejemplos-prácticos">Ejemplos prácticos<a hidden class="anchor" aria-hidden="true" href="#ejemplos-prácticos">#</a></h3>
+<p>Puede encontrar algunos ejemplos prácticos en el siguiente repositorio [https://github.com/aruiz-p/netwithalex-ansible/tree/main).</p>
+<h3 id="volver-a-blueprint-study-devops-baneprint">[Volver a BluePrint] (/Study-Devops-BanePrint/)<a hidden class="anchor" aria-hidden="true" href="#volver-a-blueprint-study-devops-baneprint">#</a></h3>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/es/">NetWithAlex</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copiar';
+
+        function copyingDone() {
+            copybutton.innerHTML = '¡copiado!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copiar';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>NetWithAlex</title>
+<meta name="keywords" content="">
+<meta name="description" content="Introducción
+Para la publicación final de esta serie, exploremos la opción restante para manejar el tráfico cuando no se cumple SLA: Fallback a Best Path. Se introdujo en 20.5/17.5 y proporciona más flexibilidad y selección de ruta mejorada en comparación con las otras opciones. Entendamos por qué fue creado.
+Motivación
+Con los [métodos anteriores] (/desmitificación-AAR-Enderstanding-Diferent-SceneRios/), el tráfico lo haría:
+
+se eliminará, rara vez se usan casos de uso específicos que se aplican a una pequeña cantidad de entornos.
+Esté equilibrado en las rutas disponibles, ampliamente utilizada, sin embargo, el tráfico podría estar utilizando la ruta de peor desempeño.
+
+Tome el siguiente ejemplo">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/Simplificar-AAR-3-3-Fallback-to-Best-Path%20/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/">
+<link rel="alternate" hreflang="es" href="http://localhost:1313/Simplificar-AAR-3-3-Fallback-to-Best-Path%20/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/Simplificar-AAR-3-3-Fallback-to-Best-Path%20/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="NetWithAlex">
+  <meta property="og:description" content="Introducción Para la publicación final de esta serie, exploremos la opción restante para manejar el tráfico cuando no se cumple SLA: Fallback a Best Path. Se introdujo en 20.5/17.5 y proporciona más flexibilidad y selección de ruta mejorada en comparación con las otras opciones. Entendamos por qué fue creado.
+Motivación Con los [métodos anteriores] (/desmitificación-AAR-Enderstanding-Diferent-SceneRios/), el tráfico lo haría:
+se eliminará, rara vez se usan casos de uso específicos que se aplican a una pequeña cantidad de entornos. Esté equilibrado en las rutas disponibles, ampliamente utilizada, sin embargo, el tráfico podría estar utilizando la ruta de peor desempeño. Tome el siguiente ejemplo">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="Introducción
+Para la publicación final de esta serie, exploremos la opción restante para manejar el tráfico cuando no se cumple SLA: Fallback a Best Path. Se introdujo en 20.5/17.5 y proporciona más flexibilidad y selección de ruta mejorada en comparación con las otras opciones. Entendamos por qué fue creado.
+Motivación
+Con los [métodos anteriores] (/desmitificación-AAR-Enderstanding-Diferent-SceneRios/), el tráfico lo haría:
+
+se eliminará, rara vez se usan casos de uso específicos que se aplican a una pequeña cantidad de entornos.
+Esté equilibrado en las rutas disponibles, ampliamente utilizada, sin embargo, el tráfico podría estar utilizando la ruta de peor desempeño.
+
+Tome el siguiente ejemplo">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/es/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "",
+      "item": "http://localhost:1313/Simplificar-AAR-3-3-Fallback-to-Best-Path%20/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "",
+  "name": "",
+  "description": "Introducción Para la publicación final de esta serie, exploremos la opción restante para manejar el tráfico cuando no se cumple SLA: Fallback a Best Path. Se introdujo en 20.5/17.5 y proporciona más flexibilidad y selección de ruta mejorada en comparación con las otras opciones. Entendamos por qué fue creado.\nMotivación Con los [métodos anteriores] (/desmitificación-AAR-Enderstanding-Diferent-SceneRios/), el tráfico lo haría:\nse eliminará, rara vez se usan casos de uso específicos que se aplican a una pequeña cantidad de entornos. Esté equilibrado en las rutas disponibles, ampliamente utilizada, sin embargo, el tráfico podría estar utilizando la ruta de peor desempeño. Tome el siguiente ejemplo\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introducción Para la publicación final de esta serie, exploremos la opción restante para manejar el tráfico cuando no se cumple SLA: Fallback a Best Path. Se introdujo en 20.5/17.5 y proporciona más flexibilidad y selección de ruta mejorada en comparación con las otras opciones. Entendamos por qué fue creado.\nMotivación Con los [métodos anteriores] (/desmitificación-AAR-Enderstanding-Diferent-SceneRios/), el tráfico lo haría:\nse eliminará, rara vez se usan casos de uso específicos que se aplican a una pequeña cantidad de entornos. Esté equilibrado en las rutas disponibles, ampliamente utilizada, sin embargo, el tráfico podría estar utilizando la ruta de peor desempeño. Tome el siguiente ejemplo\n! [] (/wp-content/uploads/2024/02/s3-aar.png)\nTunnel 2 claramente tiene el peor rendimiento, sin embargo, con el método load balance, el tráfico aún podría usarlo en función del algoritmo de hash. ¿Cómo superamos esta situación? Probablemente lo hayas adivinado: _ ** Falta a la mejor ruta ** _\nFuerte a la mejor ruta Veamos cómo lo describe la documentación:\nCuando el tráfico de datos no cumple con ninguno de los requisitos de la clase SLA, esta característica le permite seleccionar la mejor secuencia de criterios de ruta del túnel utilizando el túnel mejor alternativo.\nEl gerente de Cisco SD-WAN usa Best of Weor (Bow) para encontrar el mejor túnel cuando ningún túnel cumple con ninguno de los requisitos de la clase SLA.\nhttps://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-ware-routing.html\nlo mejor de lo peor Veamos cómo funciona Bow con el siguiente ejemplo:\n! [] (/wp-content/uploads/2024/02/s3-aar5.png)\nEl requisito de latencia de SLA se establece en 8. Ninguno de los túneles lo satisface, pero el túnel 1 es el más cercano, lo que lo convierte en lo mejor de peor con una latencia de 10.\nLos criterios para elegir el arco son extremadamente flexibles, en este ejemplo utilizamos latencia, otras opciones podrían ser:\nLatencia - Solo latencia Jitter - Solo jitter Pérdida - Solo pérdida Latencia/Jitter - Primera latencia, si son iguales, entonces Jitter Latencia/pérdida - Primera latencia, si son iguales, entonces pérdida Jitter/Latencia - Primer jitter, si son iguales, entonces latencia -. . . pérdida/jitter/latencia - Primera pérdida, luego fase, luego latencia Varianza Vamos un paso más allá, el túnel 3 también está muy cerca de la latencia 8 ms, no sería una mala idea enviar tráfico también en ese túnel. ¿Cómo logramos esto? Bueno, podemos implementar un variance para acomodar pequeñas variaciones al elegir las mejores rutas.\nContinuando con este ejemplo, echemos un vistazo a la selección de arco con una `varianza de 5 ms ‘.\nBow Range = (mejor latencia, mejor latencia + varianza) Rango de arco = (10, 15) La mejor latencia en los túneles es 10 (Túnel 1), observe que esto ** no es ** la latencia configurada en el SLA. Con esta varianza, si algún otro túnel tiene una latencia entre 10 y 15, también se eligirá para enviar tráfico. En nuestro ejemplo, el túnel 3 satisface la condición, por lo que ahora el túnel 1 y el túnel 3 se utilizarán como túneles fallback.\nComo puede ver, el túnel 2 ya no se considera. ¡Excelente!\nConfiguración Clase SLA Para usar este método, lo primero que debemos hacer es modificar nuestra clase SLA para indicar que debe buscar la ruta de mejor rendimiento cuando no se cumple SLA. Nuestra configuración se ve así:\n! [] (/wp-content/uploads/2024/02/s3-aar7.png)\nSLA-CLASS Custom-SLA Pérdida 1 Latencia 250 Jitter 100 alero-mejor túnel pérdida de criterios Varianza de pérdidas 2 Observe que seleccionamos el criteria para ser pérdida 'y un _variance_ de 2`. La varianza es un parámetro ** opcional **.\nPolítica AAR A continuación, en la política de AAR especificamos la acción cuando no se cumple SLA: Fallback a Best Path\n! [] (/wp-content/uploads/2024/02/s3-aar22.png)\nsecuencia 1 fósforo Fuente-IP 172.16.10.0/24 Destino-IP 172.16.20.0/24 acción SLA-CLASS Custom-SLA No hay clase SLA estricta MPLS de color de clase SLA SLA-Class Fallback-to-Best-Path Mantengamos la misma dinámica y construamos un diagrama:\n! [] (/wp-content/uploads/2024/02/s3-aar8.png)\nEscenarios Usando la misma topología exploremos algunas situaciones\n! [] (/wp-content/uploads/2024/02/aar-topo2.png)\nMPLS compatible, biz-internet/private1 no conforme Iniciaré el tráfico de Branch10 -\u003e Branch 20 y lo capturaré con NWPI. MPLS tiene métricas KPI perfectas (0, 0, 0)\n! [] (/wp-content/uploads/2024/02/s3-aar1-1-1.png)\nObserve cómo fallback to Best Path se establece en `no ‘y el tráfico coincide con el SLA y el color preferido. Veamos también el siguiente comando de verificación de BR10. `` BR10#show sdwan tunnel sla \u003c. . .\u003e Túnel SLA-Class 1 SLA-NAME Custom-SLA SLA-Loss 1 SLA-Latencia 250 sla-jitter 100 RETROCEDER Remoto t sla sla Sistema DST SRC Local t remota media media media clase de clase PROTO SRC IP DST Puerto IP Puerto IP Color Pérdida de color Pérdida de latencia Jitter Índice SLA Nombre de clase Índice Gre 21.1.10.2 21.1.20.2 0 0 1.1.0.20 MPLS MPLS 0 0 0 0,1 all_tunnels, Custom-SLA Ninguno Gre 21.1.10.2 31.1.20.2 0 0 1.1.0.20 MPLS Biz-Internet 0 0 0 0,1 all_tunnels, Custom-SLA Ninguno GRE 21.1.10.2 41.1.20.2 0 0 1.1.0.20 MPLS Private1 0 0 0 0,1 all_tunnels, Custom-SLA Ninguno ``\nAlgunos comentarios sobre este resultado:\nEl hecho de que veamos túneles enumerados en Custom-SLA, nos dice que hay túneles que cumplen con la pérdida, la latencia y la fluctuación. Esto se espera ya que nuestro MPLS está teniendo métricas perfectas. Vea que esta clase SLA tiene un identificador numérico de 1-Túnel SLA-Class 1. Verá referencia a este número en breve. Fallback SLA Class Index está configurado en Ninguno, esto significa que estos túneles no se están utilizando como túneles de respaldo, esto quedará claro en un segundo. mpls/biz-inernet/private1 no conforma pero varianza de reunión Ahora que no tenemos transportes que cumplan con el SLA, verifiquemos cómo lo mostrará NWPI:\n! [] (/wp-content/uploads/2024/02/s3-aar10.png)\nObserve que ahora NWPI está indicando que fallback a la mejor ruta está en uso.\nPrivate1 fue elegido para enviar este flujo en particular, pero ¿hay otros túneles que pudieran usarse? Vamos a ver BR10 nuevamente.\n`` BR10# show sdwan tunnel sla Túnel SLA-Class 0 sla-name all_tunnels SLA-Loss 0 SLA-Latencia 0 sla-jitter 0 RETROCEDER SLA SLA remoto Sistema DST SRC T Local T Remote media media media clase PROTO SRC IP DST Puerto IP Puerto IP Color Pérdida de color Pérdida de latencia Jitter Índice SLA Nombre de clase Índice Gre 21.1.10.2 21.1.20.2 0 0 1.1.0.20 MPLS MPLS 18 0 0 0 0 all_tunnels Ninguno GRE 21.1.10.2 31.1.20.2 0 0 1.1.0.20 MPLS Biz-Internet 9 0 0 0 all_tunnels Ninguno Gre 21.1.10.2 41.1.20.2 0 0 1.1.0.20 MPLS Private1 11 0 0 0 all_tunnels Ninguno Gre 31.1.10.2 21.1.20.2 0 0 1.1.0.20 Biz-Internet Mpls 4 0 0 0 all_tunnels 1 Gre 31.1.10.2 31.1.20.2 0 0 1.1.0.20 Biz-Internet Biz-Internet 2 0 0 0 0 all_tunnels 1 Gre 31.1.10.2 41.1.20.2 0 0 1.1.0.20 Biz-Internet Private1 4 0 0 0 all_tunnels 1 GRE 41.1.10.2 21.1.20.2 0 0 1.1.0.20 Private1 MPLS 3 0 0 0 0 all_tunnels 1 GRE 41.1.10.2 31.1.20.2 0 0 1.1.0.20 Private1 Biz-Internet 6 0 0 0 all_tunnels Ninguno GRE 41.1.10.2 41.1.20.2 0 0 1.1.0.20 Private1 Private1 3 0 0 0 0 all_tunnels 1\nTúnel SLA-Class 1 SLA-NAME Custom-SLA SLA-Loss 1 SLA-Latencia 250 sla-jitter 100\nBR10# ``\nComentarios sobre este resultado:\nHay ** no ** túneles que cumplen con nuestro custom-sla Incluso si MPLS es el color preferido, ** no es ** considerado porque no cumple con el rango de varianza de pérdida. Hay 5 túneles que satisfacen la varianza. Observe cómo algunos túneles tienen una clase SLA de Fallback SLA Index establecido en 1, lo que significa que están sirviendo como alternativos para SLA-Class 1 (Custom-SLA). En este caso, el ** arco ** es biz-instantet-biz-insternet tunnel con una pérdida media de 2. El variance se establece en 2, por lo que el rango de arco es 2-4. Los túneles que satisfacen la gama de arco también se utilizarán para reenviar el tráfico. Dependiendo del hash de equilibrio de carga, se eligirán diferentes túneles `` BR10#show Sdwan Policy Service-Path VPN 10 Interfaz GigabitEthernet 3 Fuente-IP 172.16.10.2 Dest-IP 172.16.20.2 Protocolo 6 Dest-Port 22 Siguiente salto: Gre Fuente: 31.1.10.2 Destino: 21.1.20.2 Color local: Biz-Internet Color remoto: Sistema remoto MPLS IP: 1.1.0.20\nBR10#show SDWAN Policy Service-Path VPN 10 Interfaz GigabitEthernet 3 Fuente-IP 172.16.10.56 Dest-IP 172.16.20.2 Protocolo 6 Dest-Port 24 Siguiente salto: Gre Fuente: 31.1.10.2 Destino: 41.1.20.2 Color local: Biz-Internet Color remoto: Private1 Sistema remoto IP: 1.1.0.20 ``\nPodemos ver dos túneles diferentes biz -internet - mpls y biz -internet - privado\nLatencia fuera de cumplimiento Hasta ahora hemos estado jugando solo con pérdida, porque los criterios de alojamiento estaban establecidos en la pérdida. Veamos qué sucede cuando un criterio diferente no se cumple. Estableceré la latencia del SLA a 15 ms. .\n`` BR10#show sdwan política de vsmart From-vsmart SLA-Class Custom-SLA Pérdida 1 latencia 15 Jitter 100 alero-mejor túnel pérdida de criterios Varianza de pérdidas 2\n``\nDespués de presentar algo de latencia, vemos algo interesante:\n`` BR10#show sdwan tunnel sla Túnel SLA-Class 0 sla-name all_tunnels SLA-Loss 0 SLA-Latencia 0 sla-jitter 0 RETROCEDER SLA SLA remoto Sistema DST SRC T Local T Remote media media media clase PROTO SRC IP DST Puerto IP Puerto IP Color Pérdida de color Pérdida de latencia Jitter Índice SLA Nombre de clase Índice Gre 21.1.10.2 21.1.20.2 0 0 1.1.0.20 MPLS MPLS 0 20 1 0 all_tunnels 1 GRE 21.1.10.2 31.1.20.2 0 0 1.1.0.20 MPLS Biz-Internet 0 20 1 0 all_tunnels 1 Gre 21.1.10.2 41.1.20.2 0 0 1.1.0.20 MPLS Private1 0 20 0 0 all_tunnels 1 Gre 31.1.10.2 21.1.20.2 0 0 1.1.0.20 Biz-Internet Mpls 0 21 2 0 all_tunnels 1 Gre 31.1.10.2 31.1.20.2 0 0 1.1.0.20 Biz-Internet Biz-Internet 0 21 2 0 all_tunnels 1 Gre 31.1.10.2 41.1.20.2 0 0 1.1.0.20 Biz-Internet Private1 0 21 2 0 all_tunnels 1 Gre 41.1.10.2 21.1.20.2 0 0 1.1.0.20 Private1 MPLS 0 16 1 0 all_tunnels 1 GRE 41.1.10.2 31.1.20.2 0 0 1.1.0.20 Privado1 Biz-Internet 0 16 0 0 all_tunnels 1 GRE 41.1.10.2 41.1.20.2 0 0 1.1.0.20 Private1 Private1 0 16 0 0 all_tunnels 1\nTúnel SLA-Class 1 SLA-NAME Custom-SLA SLA-Loss 1 SLA-Latencia 15 sla-jitter 100\nBR10# ``\n¡Todos los túneles se usan como túneles respaldados porque todos tienen un 0% de pérdida! ¿Es esta la situación ideal? Esto es discutible, tal vez para algunos tipos de tráfico está bien, pero para otros probablemente desee tener un segundo o tercer criterio para elegir los mejores túneles de respaldo.\nCriterios de arco múltiple Para la última prueba, veamos qué sucede cuando seleccionamos múltiples criterios para seleccionar el arco. Agregaré latencia a los criterios de SLA.\nBR10#show sdwan política de vsmart From-vsmart SLA-Class Custom-SLA Pérdida 1 latencia 15 Jitter 100 alero-mejor túnel latencia de pérdida de criterios Varianza de pérdidas 2 Lo que esperamos es que si alguno de los KPI no cumple, el arco se decidirá en base a:\nPérdida media más baja. Si hay un empate, entonces Latencia más baja Verifiquemos `` BR10#show sdwan tunnel sla Túnel SLA-Class 0 sla-name all_tunnels SLA-Loss 0 SLA-Latencia 0 sla-jitter 0 RETROCEDER SLA SLA remoto Sistema DST SRC T Local T Remote media media media clase PROTO SRC IP DST Puerto IP Puerto IP Color Pérdida de color Pérdida de latencia Jitter Índice SLA Nombre de clase Índice Gre 21.1.10.2 21.1.20.2 0 0 1.1.0.20 MPLS MPLS 0 20 1 0 all_tunnels Ninguno Gre 21.1.10.2 31.1.20.2 0 0 1.1.0.20 MPLS Biz-Internet 0 20 1 0 all_tunnels Ninguno Gre 21.1.10.2 41.1.20.2 0 0 1.1.0.20 MPLS Private1 0 20 1 0 all_tunnels Ninguno Gre 31.1.10.2 21.1.20.2 0 0 1.1.0.20 Biz-Internet Mpls 0 20 1 0 all_tunnels Ninguno Gre 31.1.10.2 31.1.20.2 0 0 1.1.0.20 Biz-Internet Biz-Internet 0 20 1 0 all_tunnels Ninguno Gre 31.1.10.2 41.1.20.2 0 0 1.1.0.20 Biz-Internet Private1 0 21 1 0 all_tunnels Ninguno GRE 41.1.10.2 21.1.20.2 0 0 1.1.0.20 Private1 Mpls 0 16 0 0 all_tunnels 1 GRE 41.1.10.2 31.1.20.2 0 0 1.1.0.20 Privado1 Biz-Internet 0 16 0 0 all_tunnels 1 GRE 41.1.10.2 41.1.20.2 0 0 1.1.0.20 Private1 Private1 0 16 0 0 all_tunnels 1\nTúnel SLA-Class 1 SLA-NAME Custom-SLA SLA-Loss 1 SLA-Latencia 15 sla-jitter 100\nBR10# ``\nEstá claro que la pérdida no se usó para elaborar el arco, de lo contrario, veríamos todos los túneles actuando como respaldo para el índice de clase SLA 1. En cambio, se seleccionaron túneles con latencia más baja. Tenga en cuenta que podría haber agregado una varianza de latencia para incluir otros túneles con números similares.\nConclusión A través de las últimas tres publicaciones, hemos sido testigos de AAR como una funcionalidad crítica de SD-WAN para proteger el SLA de nuestras aplicaciones. Espero que después de explicar y verificar diferentes escenarios, ahora tenga una mejor comprensión y se sienta más seguro de probar AAR dentro de su infraestructura SD-WAN. Guía] (https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-ware-routing.html#config-variance-best-tunnel-path) es muy completo, lo que está familiarizado con it y use lo necesita.\nDéjame saber tus pensamientos en los comentarios.\n¡Nos vemos pronto!\n",
+  "wordCount" : "2095",
+  "inLanguage": "es",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/Simplificar-AAR-3-3-Fallback-to-Best-Path%20/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/assets/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/es/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="http://localhost:1313/" title="English"
+                            aria-label="English">En</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/es/" title="Inicio">
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/archives/" title="Archivo">
+                    <span>Archivo</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/category/" title="Categorías">
+                    <span>Categorías</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/about/" title="Sobre mí">
+                    <span>Sobre mí</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/search/" title="🔍">
+                    <span>🔍</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/es/">Inicio</a>&nbsp;»&nbsp;<a href="http://localhost:1313/es/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">10 min&nbsp;|&nbsp;Traducciones:
+<ul class="i18n_list">
+    <li>
+        <a href="http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/">En</a>
+    </li>
+</ul>
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Tabla de Contenidos</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#introducci%c3%b3n" aria-label="Introducción">Introducción</a></li>
+                <li>
+                    <a href="#motivaci%c3%b3n" aria-label="Motivación">Motivación</a></li>
+                <li>
+                    <a href="#fuerte-a-la-mejor-ruta" aria-label="Fuerte a la mejor ruta">Fuerte a la mejor ruta</a><ul>
+                        
+                <li>
+                    <a href="#lo-mejor-de-lo-peor" aria-label="lo mejor de lo peor">lo mejor de lo peor</a></li>
+                <li>
+                    <a href="#varianza" aria-label="Varianza">Varianza</a></li></ul>
+                </li>
+                <li>
+                    <a href="#configuraci%c3%b3n" aria-label="Configuración">Configuración</a><ul>
+                        <ul>
+                        
+                <li>
+                    <a href="#clase-sla" aria-label="Clase SLA">Clase SLA</a></li>
+                <li>
+                    <a href="#pol%c3%adtica-aar" aria-label="Política AAR">Política AAR</a></li></ul>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#escenarios" aria-label="Escenarios">Escenarios</a><ul>
+                        <ul>
+                        
+                <li>
+                    <a href="#mpls-compatible-biz-internetprivate1-no-conforme" aria-label="MPLS compatible, biz-internet/private1 no conforme">MPLS compatible, biz-internet/private1 no conforme</a></li>
+                <li>
+                    <a href="#mplsbiz-inernetprivate1-no-conforma-pero-varianza-de-reuni%c3%b3n" aria-label="mpls/biz-inernet/private1 no conforma pero varianza de reunión">mpls/biz-inernet/private1 no conforma pero varianza de reunión</a></li>
+                <li>
+                    <a href="#latencia-fuera-de-cumplimiento" aria-label="Latencia fuera de cumplimiento">Latencia fuera de cumplimiento</a></li>
+                <li>
+                    <a href="#criterios-de-arco-m%c3%baltiple" aria-label="Criterios de arco múltiple">Criterios de arco múltiple</a></li></ul>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#conclusi%c3%b3n" aria-label="Conclusión">Conclusión</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="introducción">Introducción<a hidden class="anchor" aria-hidden="true" href="#introducción">#</a></h2>
+<p>Para la publicación final de esta serie, exploremos la opción restante para manejar el tráfico cuando no se cumple SLA: <em>Fallback a Best Path</em>. Se introdujo en 20.5/17.5 y proporciona más flexibilidad y selección de ruta mejorada en comparación con las otras opciones. Entendamos por qué fue creado.</p>
+<h2 id="motivación">Motivación<a hidden class="anchor" aria-hidden="true" href="#motivación">#</a></h2>
+<p>Con los [métodos anteriores] (/desmitificación-AAR-Enderstanding-Diferent-SceneRios/), el tráfico lo haría:</p>
+<ul>
+<li>se eliminará, rara vez se usan casos de uso específicos que se aplican a una pequeña cantidad de entornos.</li>
+<li>Esté equilibrado en las rutas disponibles, ampliamente utilizada, sin embargo, el tráfico podría estar utilizando la ruta de peor desempeño.</li>
+</ul>
+<p>Tome el siguiente ejemplo</p>
+<p>! [] (/wp-content/uploads/2024/02/s3-aar.png)</p>
+<p>Tunnel 2 claramente tiene el peor rendimiento, sin embargo, con el método <em>load balance</em>, el tráfico aún podría usarlo en función del algoritmo de hash. ¿Cómo superamos esta situación? Probablemente lo hayas adivinado: _ ** Falta a la mejor ruta ** _</p>
+<h2 id="fuerte-a-la-mejor-ruta">Fuerte a la mejor ruta<a hidden class="anchor" aria-hidden="true" href="#fuerte-a-la-mejor-ruta">#</a></h2>
+<p>Veamos cómo lo describe la documentación:</p>
+<blockquote>
+<p>Cuando el tráfico de datos no cumple con ninguno de los requisitos de la clase SLA, esta característica le permite seleccionar la mejor secuencia de criterios de ruta del túnel utilizando el túnel mejor alternativo.</p>
+<p>El gerente de Cisco SD-WAN usa Best of Weor (Bow) para encontrar el mejor túnel cuando ningún túnel cumple con ninguno de los requisitos de la clase SLA.</p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-ware-routing.html">https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-ware-routing.html</a></p>
+</blockquote>
+<h3 id="lo-mejor-de-lo-peor">lo mejor de lo peor<a hidden class="anchor" aria-hidden="true" href="#lo-mejor-de-lo-peor">#</a></h3>
+<p>Veamos cómo funciona Bow con el siguiente ejemplo:</p>
+<p>! [] (/wp-content/uploads/2024/02/s3-aar5.png)</p>
+<p>El requisito de latencia de SLA se establece en 8. Ninguno de los túneles lo satisface, pero el túnel 1 es el más cercano, lo que lo convierte en lo mejor de peor con una latencia de 10.</p>
+<p>Los criterios para elegir el arco son extremadamente flexibles, en este ejemplo utilizamos latencia, otras opciones podrían ser:</p>
+<ul>
+<li>Latencia - Solo latencia</li>
+<li>Jitter - Solo jitter</li>
+<li>Pérdida - Solo pérdida</li>
+<li>Latencia/Jitter - Primera latencia, si son iguales, entonces Jitter</li>
+<li>Latencia/pérdida - Primera latencia, si son iguales, entonces pérdida</li>
+<li>Jitter/Latencia - Primer jitter, si son iguales, entonces latencia
+-. . .</li>
+<li>pérdida/jitter/latencia - Primera pérdida, luego fase, luego latencia</li>
+</ul>
+<h3 id="varianza">Varianza<a hidden class="anchor" aria-hidden="true" href="#varianza">#</a></h3>
+<p>Vamos un paso más allá, el túnel 3 también está muy cerca de la latencia <em>8 ms</em>, no sería una mala idea enviar tráfico también en ese túnel. ¿Cómo logramos esto? Bueno, podemos implementar un <em>variance</em> para acomodar pequeñas variaciones al elegir las mejores rutas.</p>
+<p>Continuando con este ejemplo, echemos un vistazo a la selección de arco con una `varianza de 5 ms &lsquo;.</p>
+<p><code> </code> <code>Bow Range = (mejor latencia, mejor latencia + varianza) Rango de arco = (10, 15)</code> <code> </code></p>
+<p>La mejor latencia en los túneles es 10 (Túnel 1), observe que esto ** no es ** la latencia configurada en el SLA. Con esta varianza, si algún otro túnel tiene una latencia entre 10 y 15, también se eligirá para enviar tráfico. En nuestro ejemplo, el túnel 3 satisface la condición, por lo que ahora el túnel 1 y el túnel 3 se utilizarán como túneles <em>fallback</em>.</p>
+<p>Como puede ver, el túnel 2 ya no se considera. ¡Excelente!</p>
+<h2 id="configuración">Configuración<a hidden class="anchor" aria-hidden="true" href="#configuración">#</a></h2>
+<h4 id="clase-sla">Clase SLA<a hidden class="anchor" aria-hidden="true" href="#clase-sla">#</a></h4>
+<p>Para usar este método, lo primero que debemos hacer es modificar nuestra clase SLA para indicar que debe buscar la ruta de mejor rendimiento cuando no se cumple SLA. Nuestra configuración se ve así:</p>
+<p>! [] (/wp-content/uploads/2024/02/s3-aar7.png)</p>
+<hr>
+<p><code> </code> <code>SLA-CLASS Custom-SLA Pérdida 1 Latencia 250 Jitter 100 alero-mejor túnel pérdida de criterios Varianza de pérdidas 2</code> <code> </code></p>
+<p>Observe que seleccionamos el <em>criteria</em> para ser <code>pérdida 'y un _variance_ de</code> 2`. La varianza es un parámetro ** opcional **.</p>
+<h4 id="política-aar">Política AAR<a hidden class="anchor" aria-hidden="true" href="#política-aar">#</a></h4>
+<p>A continuación, en la política de AAR especificamos la acción cuando no se cumple SLA: <em>Fallback a Best Path</em></p>
+<p>! [] (/wp-content/uploads/2024/02/s3-aar22.png)</p>
+<hr>
+<p><code> </code> <code>secuencia 1 fósforo Fuente-IP 172.16.10.0/24 Destino-IP 172.16.20.0/24 acción SLA-CLASS Custom-SLA No hay clase SLA estricta MPLS de color de clase SLA SLA-Class Fallback-to-Best-Path</code> <code> </code></p>
+<p>Mantengamos la misma dinámica y construamos un diagrama:</p>
+<p>! [] (/wp-content/uploads/2024/02/s3-aar8.png)</p>
+<h2 id="escenarios">Escenarios<a hidden class="anchor" aria-hidden="true" href="#escenarios">#</a></h2>
+<p>Usando la misma topología exploremos algunas situaciones</p>
+<p>! [] (/wp-content/uploads/2024/02/aar-topo2.png)</p>
+<h4 id="mpls-compatible-biz-internetprivate1-no-conforme">MPLS compatible, biz-internet/private1 no conforme<a hidden class="anchor" aria-hidden="true" href="#mpls-compatible-biz-internetprivate1-no-conforme">#</a></h4>
+<p>Iniciaré el tráfico de Branch10 -&gt; Branch 20 y lo capturaré con NWPI. MPLS tiene métricas KPI perfectas (0, 0, 0)</p>
+<p>! [] (/wp-content/uploads/2024/02/s3-aar1-1-1.png)</p>
+<h2 id="proto-src-ip-dst-puerto-ip-puerto-ip-color-pérdida-de-color-pérdida-de-latencia-jitter-índice-sla-nombre-de-clase-índice">Observe cómo <em>fallback to Best Path</em> se establece en `no &lsquo;y el tráfico coincide con el SLA y el color preferido. Veamos también el siguiente comando de verificación de BR10.<code> </code> ``
+BR10#show sdwan tunnel sla
+&lt;. . .&gt;
+Túnel SLA-Class 1
+SLA-NAME Custom-SLA
+SLA-Loss 1
+SLA-Latencia 250
+sla-jitter 100
+RETROCEDER
+Remoto t sla sla
+Sistema DST SRC Local t remota media media media clase de clase
+PROTO SRC IP DST Puerto IP Puerto IP Color Pérdida de color Pérdida de latencia Jitter Índice SLA Nombre de clase Índice</h2>
+<p>Gre 21.1.10.2 21.1.20.2 0 0 1.1.0.20 MPLS MPLS 0 0 0 0,1 <strong>all_tunnels</strong>, Custom-SLA Ninguno
+Gre 21.1.10.2 31.1.20.2 0 0 1.1.0.20 MPLS Biz-Internet 0 0 0 0,1 <strong>all_tunnels</strong>, Custom-SLA Ninguno
+GRE 21.1.10.2 41.1.20.2 0 0 1.1.0.20 MPLS Private1 0 0 0 0,1 <strong>all_tunnels</strong>, Custom-SLA Ninguno
+<code> </code> ``</p>
+<p>Algunos comentarios sobre este resultado:</p>
+<ol>
+<li>El hecho de que veamos túneles enumerados en Custom-SLA, nos dice que hay túneles que cumplen con la pérdida, la latencia y la fluctuación. Esto se espera ya que nuestro MPLS está teniendo métricas perfectas.</li>
+<li>Vea que esta clase SLA tiene un identificador numérico de 1-<code>Túnel SLA-Class 1</code>. Verá referencia a este número en breve.</li>
+<li><em>Fallback SLA Class Index</em> está configurado en <code>Ninguno</code>, esto significa que estos túneles no se están utilizando como túneles de respaldo, esto quedará claro en un segundo.</li>
+</ol>
+<h4 id="mplsbiz-inernetprivate1-no-conforma-pero-varianza-de-reunión">mpls/biz-inernet/private1 no conforma pero varianza de reunión<a hidden class="anchor" aria-hidden="true" href="#mplsbiz-inernetprivate1-no-conforma-pero-varianza-de-reunión">#</a></h4>
+<p>Ahora que no tenemos transportes que cumplan con el SLA, verifiquemos cómo lo mostrará NWPI:</p>
+<p>! [] (/wp-content/uploads/2024/02/s3-aar10.png)</p>
+<p>Observe que ahora NWPI está indicando que <em>fallback a la mejor ruta</em> está en uso.</p>
+<p>Private1 fue elegido para enviar este flujo en particular, pero ¿hay otros túneles que pudieran usarse? Vamos a ver BR10 nuevamente.</p>
+<h2 id="proto-src-ip-dst-puerto-ip-puerto-ip-color-pérdida-de-color-pérdida-de-latencia-jitter-índice-sla-nombre-de-clase-índice-1"><code> </code> ``
+BR10# show sdwan tunnel sla
+Túnel SLA-Class 0
+sla-name <strong>all_tunnels</strong>
+SLA-Loss 0
+SLA-Latencia 0
+sla-jitter 0
+RETROCEDER
+SLA SLA remoto
+Sistema DST SRC T Local T Remote media media media clase
+PROTO SRC IP DST Puerto IP Puerto IP Color Pérdida de color Pérdida de latencia Jitter Índice SLA Nombre de clase Índice</h2>
+<p>Gre 21.1.10.2 21.1.20.2 0 0 1.1.0.20 MPLS MPLS 18 0 0 0 0 <strong>all_tunnels</strong> Ninguno
+GRE 21.1.10.2 31.1.20.2 0 0 1.1.0.20 MPLS Biz-Internet 9 0 0 0 <strong>all_tunnels</strong> Ninguno
+Gre 21.1.10.2 41.1.20.2 0 0 1.1.0.20 MPLS Private1 11 0 0 0 <strong>all_tunnels</strong> Ninguno
+Gre 31.1.10.2 21.1.20.2 0 0 1.1.0.20 Biz-Internet Mpls 4 0 0 0 <strong>all_tunnels</strong> 1
+Gre 31.1.10.2 31.1.20.2 0 0 1.1.0.20 Biz-Internet Biz-Internet 2 0 0 0 0 <strong>all_tunnels</strong> 1
+Gre 31.1.10.2 41.1.20.2 0 0 1.1.0.20 Biz-Internet Private1 4 0 0 0 <strong>all_tunnels</strong> 1
+GRE 41.1.10.2 21.1.20.2 0 0 1.1.0.20 Private1 MPLS 3 0 0 0 0 <strong>all_tunnels</strong> 1
+GRE 41.1.10.2 31.1.20.2 0 0 1.1.0.20 Private1 Biz-Internet 6 0 0 0 <strong>all_tunnels</strong> Ninguno
+GRE 41.1.10.2 41.1.20.2 0 0 1.1.0.20 Private1 Private1 3 0 0 0 0 <strong>all_tunnels</strong> 1</p>
+<p>Túnel SLA-Class 1
+SLA-NAME Custom-SLA
+SLA-Loss 1
+SLA-Latencia 250
+sla-jitter 100</p>
+<p>BR10#
+<code> </code> ``</p>
+<p>Comentarios sobre este resultado:</p>
+<ol>
+<li>Hay ** no ** túneles que cumplen con nuestro <em>custom-sla</em></li>
+<li>Incluso si MPLS es el color preferido, ** no es ** considerado porque no cumple con el rango de varianza de pérdida.</li>
+<li>Hay 5 túneles que satisfacen la varianza. Observe cómo algunos túneles tienen una clase SLA de <em>Fallback SLA Index</em> establecido en <code>1</code>, lo que significa que están sirviendo como alternativos para SLA-Class 1 (Custom-SLA). En este caso, el ** arco ** es <em>biz-instantet-biz-insternet</em> tunnel con una pérdida media de <code>2</code>. El <em>variance</em> se establece en 2, por lo que el rango de arco es 2-4. Los túneles que satisfacen la gama de arco también se utilizarán para reenviar el tráfico.</li>
+</ol>
+<p>Dependiendo del hash de equilibrio de carga, se eligirán diferentes túneles<code> </code> ``
+BR10#show Sdwan Policy Service-Path VPN 10 Interfaz GigabitEthernet 3 Fuente-IP 172.16.10.2 Dest-IP 172.16.20.2 Protocolo 6 Dest-Port 22
+Siguiente salto: Gre
+Fuente: 31.1.10.2 Destino: 21.1.20.2 Color local: Biz-Internet Color remoto: Sistema remoto MPLS IP: 1.1.0.20</p>
+<p>BR10#show SDWAN Policy Service-Path VPN 10 Interfaz GigabitEthernet 3 Fuente-IP 172.16.10.56 Dest-IP 172.16.20.2 Protocolo 6 Dest-Port 24
+Siguiente salto: Gre
+Fuente: 31.1.10.2 Destino: 41.1.20.2 Color local: Biz-Internet Color remoto: Private1 Sistema remoto IP: 1.1.0.20
+<code> </code> ``</p>
+<p>Podemos ver dos túneles diferentes <code>biz -internet - mpls</code> y<code> biz -internet - privado</code></p>
+<h4 id="latencia-fuera-de-cumplimiento">Latencia fuera de cumplimiento<a hidden class="anchor" aria-hidden="true" href="#latencia-fuera-de-cumplimiento">#</a></h4>
+<p>Hasta ahora hemos estado jugando solo con pérdida, porque los criterios de alojamiento estaban establecidos en la pérdida. Veamos qué sucede cuando un criterio diferente no se cumple. Estableceré la latencia del SLA a 15 ms. .</p>
+<p><code> </code> ``
+BR10#show sdwan política de vsmart
+From-vsmart SLA-Class Custom-SLA
+Pérdida 1
+latencia 15
+Jitter 100
+alero-mejor túnel
+pérdida de criterios
+Varianza de pérdidas 2</p>
+<p><code> </code> ``</p>
+<p>Después de presentar algo de latencia, vemos algo interesante:</p>
+<h2 id="proto-src-ip-dst-puerto-ip-puerto-ip-color-pérdida-de-color-pérdida-de-latencia-jitter-índice-sla-nombre-de-clase-índice-2"><code> </code> ``
+BR10#show sdwan tunnel sla
+Túnel SLA-Class 0
+sla-name <strong>all_tunnels</strong>
+SLA-Loss 0
+SLA-Latencia 0
+sla-jitter 0
+RETROCEDER
+SLA SLA remoto
+Sistema DST SRC T Local T Remote media media media clase
+PROTO SRC IP DST Puerto IP Puerto IP Color Pérdida de color Pérdida de latencia Jitter Índice SLA Nombre de clase Índice</h2>
+<p>Gre 21.1.10.2 21.1.20.2 0 0 1.1.0.20 MPLS MPLS 0 20 1 0 <strong>all_tunnels</strong> 1
+GRE 21.1.10.2 31.1.20.2 0 0 1.1.0.20 MPLS Biz-Internet 0 20 1 0 <strong>all_tunnels</strong> 1
+Gre 21.1.10.2 41.1.20.2 0 0 1.1.0.20 MPLS Private1 0 20 0 0 <strong>all_tunnels</strong> 1
+Gre 31.1.10.2 21.1.20.2 0 0 1.1.0.20 Biz-Internet Mpls 0 21 2 0 <strong>all_tunnels</strong> 1
+Gre 31.1.10.2 31.1.20.2 0 0 1.1.0.20 Biz-Internet Biz-Internet 0 21 2 0 <strong>all_tunnels</strong> 1
+Gre 31.1.10.2 41.1.20.2 0 0 1.1.0.20 Biz-Internet Private1 0 21 2 0 <strong>all_tunnels</strong> 1
+Gre 41.1.10.2 21.1.20.2 0 0 1.1.0.20 Private1 MPLS 0 16 1 0 <strong>all_tunnels</strong> 1
+GRE 41.1.10.2 31.1.20.2 0 0 1.1.0.20 Privado1 Biz-Internet 0 16 0 0 <strong>all_tunnels</strong> 1
+GRE 41.1.10.2 41.1.20.2 0 0 1.1.0.20 Private1 Private1 0 16 0 0 <strong>all_tunnels</strong> 1</p>
+<p>Túnel SLA-Class 1
+SLA-NAME Custom-SLA
+SLA-Loss 1
+SLA-Latencia 15
+sla-jitter 100</p>
+<p>BR10#
+<code> </code> ``</p>
+<p>¡Todos los túneles se usan como túneles respaldados porque todos tienen un 0% de pérdida! ¿Es esta la situación ideal? Esto es discutible, tal vez para algunos tipos de tráfico está bien, pero para otros probablemente desee tener un segundo o tercer criterio para elegir los mejores túneles de respaldo.</p>
+<h4 id="criterios-de-arco-múltiple">Criterios de arco múltiple<a hidden class="anchor" aria-hidden="true" href="#criterios-de-arco-múltiple">#</a></h4>
+<p>Para la última prueba, veamos qué sucede cuando seleccionamos múltiples criterios para seleccionar el arco. Agregaré latencia a los criterios de SLA.</p>
+<p><code> </code> <code>BR10#show sdwan política de vsmart From-vsmart SLA-Class Custom-SLA Pérdida 1 latencia 15 Jitter 100 alero-mejor túnel latencia de pérdida de criterios Varianza de pérdidas 2</code> <code> </code></p>
+<p>Lo que esperamos es que si alguno de los KPI no cumple, el arco se decidirá en base a:</p>
+<ol>
+<li>Pérdida media más baja. Si hay un empate, entonces</li>
+<li>Latencia más baja</li>
+</ol>
+<h2 id="proto-src-ip-dst-puerto-ip-puerto-ip-color-pérdida-de-color-pérdida-de-latencia-jitter-índice-sla-nombre-de-clase-índice-3">Verifiquemos<code> </code> ``
+BR10#show sdwan tunnel sla
+Túnel SLA-Class 0
+sla-name <strong>all_tunnels</strong>
+SLA-Loss 0
+SLA-Latencia 0
+sla-jitter 0
+RETROCEDER
+SLA SLA remoto
+Sistema DST SRC T Local T Remote media media media clase
+PROTO SRC IP DST Puerto IP Puerto IP Color Pérdida de color Pérdida de latencia Jitter Índice SLA Nombre de clase Índice</h2>
+<p>Gre 21.1.10.2 21.1.20.2 0 0 1.1.0.20 MPLS MPLS 0 20 1 0 <strong>all_tunnels</strong> Ninguno
+Gre 21.1.10.2 31.1.20.2 0 0 1.1.0.20 MPLS Biz-Internet 0 20 1 0 <strong>all_tunnels</strong> Ninguno
+Gre 21.1.10.2 41.1.20.2 0 0 1.1.0.20 MPLS Private1 0 20 1 0 <strong>all_tunnels</strong> Ninguno
+Gre 31.1.10.2 21.1.20.2 0 0 1.1.0.20 Biz-Internet Mpls 0 20 1 0 <strong>all_tunnels</strong> Ninguno
+Gre 31.1.10.2 31.1.20.2 0 0 1.1.0.20 Biz-Internet Biz-Internet 0 20 1 0 <strong>all_tunnels</strong> Ninguno
+Gre 31.1.10.2 41.1.20.2 0 0 1.1.0.20 Biz-Internet Private1 0 21 1 0 <strong>all_tunnels</strong> Ninguno
+GRE 41.1.10.2 21.1.20.2 0 0 1.1.0.20 Private1 Mpls 0 16 0 0 <strong>all_tunnels</strong> 1
+GRE 41.1.10.2 31.1.20.2 0 0 1.1.0.20 Privado1 Biz-Internet 0 16 0 0 <strong>all_tunnels</strong> 1
+GRE 41.1.10.2 41.1.20.2 0 0 1.1.0.20 Private1 Private1 0 16 0 0 <strong>all_tunnels</strong> 1</p>
+<p>Túnel SLA-Class 1
+SLA-NAME Custom-SLA
+SLA-Loss 1
+SLA-Latencia 15
+sla-jitter 100</p>
+<p>BR10#
+<code> </code> ``</p>
+<p>Está claro que la pérdida no se usó para elaborar el arco, de lo contrario, veríamos todos los túneles actuando como respaldo para el índice de clase SLA 1. En cambio, se seleccionaron túneles con latencia más baja. Tenga en cuenta que podría haber agregado una varianza de latencia para incluir otros túneles con números similares.</p>
+<h2 id="conclusión">Conclusión<a hidden class="anchor" aria-hidden="true" href="#conclusión">#</a></h2>
+<p>A través de las últimas tres publicaciones, hemos sido testigos de AAR como una funcionalidad crítica de SD-WAN para proteger el SLA de nuestras aplicaciones. Espero que después de explicar y verificar diferentes escenarios, ahora tenga una mejor comprensión y se sienta más seguro de probar AAR dentro de su infraestructura SD-WAN. Guía] (<a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-ware-routing.html#config-variance-best-tunnel-path">https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-ware-routing.html#config-variance-best-tunnel-path</a>) es muy completo, lo que está familiarizado con it y use lo necesita.</p>
+<p>Déjame saber tus pensamientos en los comentarios.</p>
+<p>¡Nos vemos pronto!</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/es/">NetWithAlex</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copiar';
+
+        function copyingDone() {
+            copybutton.innerHTML = '¡copiado!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copiar';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -11,14 +11,15 @@
 <meta name="author" content="alex">
 <link rel="canonical" href="http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
 <link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
 <link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <link rel="alternate" hreflang="en" href="http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/">
+<link rel="alternate" hreflang="es" href="http://localhost:1313/mejorando-mi-asistente-sd-wan-multiples-agentes/">
 <noscript>
     <style>
         #theme-toggle,
@@ -59,7 +60,7 @@
   <meta property="og:site_name" content="NetWithAlex">
   <meta property="og:title" content="Improving my SD-WAN Assistant - Multiple agents">
   <meta property="og:description" content="Learn how an LLM agentic approach can be used to troubleshoot your SD-WAN network">
-  <meta property="og:locale" content="en-US">
+  <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2024-07-28T14:56:45+00:00">
@@ -99,8 +100,8 @@
   "keywords": [
     
   ],
-  "articleBody": "Introduction In my last post, I created a Cisco SD-WAN assistant to help me run NWPI traces and troubleshoot the network. The interaction with the assistant required the user to answer questions until receiving information about a particular flow and potential problems. In this post my goal is to use multiple agents and see if I can get to the same conclusion with less human interaction. Repository can be found here\nGetting Started To achieve this, I will use LangGraph officially defined as:\nA library for building stateful, multi-actor applications with LLMs, used to create agent and multi-agent workflows\nThere are different approaches, but I decided to build a structure where there is a supervisor that orchestrates the workflow and decides who should act next. The idea is to build a graph that represents the agents and how they are connected. The graph illustrates the order in which agents can be executed.\nIn my case I have 3 agents:\nSupervisor - This agent is in charge of receiving user input and deciding who should act next. Also, once others agents finish their tasks, they will report back to it and a new routing decision will be made. The supervisor is the only agent that can decide when to go back to the user with a response. Reviewer - This agent will review the information that will be sent back to the user, perform some summation and resolve questions or situations the tracer might raise. Tracer - This is the agent that will run the traces and retrieve the information that the user is looking for. It will report back to the supervisor when done or if any questions need to be answered. I had to modify the prompt of the tracer a little bit, so I could get a behavior that is better for this approach. Also, each agent can have its own tools. Currently, the tracer has more tools than the rest of agents.\nVisualized, the graph looks like this:\nThe dotted arrow indicate a conditional edge, meaning that the supervisor can decide what the next agent should be or if ending is appropriate.\nThe continuous arrow indicate the next step that must be taken. For example, after “start” the next agent must be the supervisor. Tracer and Reviewer must go to the supervisor.\nEven though this is a simple graph, this supervisor approach is very powerful.\nHow the supervisor routes? The supervisor plays a critical role as it determines who should act next. This is defined in the following function:\noptions = [\"FINISH\"] + members function_def = { \"name\": \"route\", \"description\": \"Select the next role.\", \"parameters\": { \"title\": \"routeSchema\", \"type\": \"object\", \"properties\": { \"next\": { \"title\": \"Next\", \"anyOf\": [ {\"enum\": options}, ], } }, \"required\": [\"next\"], }, } With this, every time the supervisor receives any input, it will come up with a “next” value from the available options and this will represent the next node on the graph.\nDemo We will use the following topology to test\nI tell the assistant information about the issue and inform that there is traffic passing already (traffic is required in order for NWPI to generate the insights we are looking for).\nThis is what the Assistant came back with\nThe response presents information in a condensed way, indicating the hops and path the traffic is taking and some events detected for this communication. The details of one of the flows is also present, however is has less information than before. This is because I have asked the reviewer agent to keep what it considers more relevant and send it to the user. In the end, we can see that the DROP_REPORT is mentioned and there is a suggestion to review ACLs 🎉\nWe can play with the reviewer prompt to display more information about the details of the flow.\nBehind the scenes Ok, the assistant came back with a good response, but let’s see in more detail what happened under the hood.\nUsing LangSmith we can get details and insights about the workflow followed. Here is the complete process.\nFirst, the supervisor receives the user’s query and pass it to the tracer.\nNext, the tracer uses the available tools to starts the trace, waits to capture some flows and retrieves information. Reports to the supervisor. Note that the order in which tools are executed is up to the agent.\nThen, the supervisor receives the information and decides the reviewer should act next.\nNext, the reviewer receives the information and rewrites what was received from the tracer. Goes back to the supervisor.\nThe supervisor decides the information is ready to be sent to the user. This is when we receive the message back on Webex.\nLessons Learned Since agents can make decisions, it is not always easy to understand what they are doing or why they return what they return, using LangSmith definitely helped with this. Not only we can see the order and tools used, but also there is some metadata that provides additional valuable information. I got to some situations where the supervisor was calling the tracer multiple times due to some error retrieving information. In the end, this was caused by error on the code and, fortunately, my assistant isn’t expensive. However, if your use case consumes a lot of tokens you should consider add some sort of safeguard to prevent a loop that grows your API consumption. Talking about cost, small language models are a good alternative. After running out of quota, I remembered gpt-4o-mini model is out and decided to give it a try. After some testing I saw it performed very well and was much cheaper, so I stuck to it. Conclusion Using multi-agent deployment we can achieve more complex tasks and have more flexibility. If needed, user interaction can be added on certain decisions that are important. Also, there is some added complexity as the prompts have to be refined to achieve the results we expect. In my case I had to do multiple iterations and refinements to all agents’ prompts before getting an output that I considered to be good enough. I am interested in testing other approaches to multi-agent deployments and adding additional info for agents to provide more accurate information through RAG.\n",
-  "wordCount" : "1041",
+  "articleBody": "Introduction In my last post, I created a Cisco SD-WAN assistant to help me run NWPI traces and troubleshoot the network. The interaction with the assistant required the user to answer questions until receiving information about a particular flow and potential problems. In this post my goal is to use multiple agents and see if I can get to the same conclusion with less human interaction. Repository can be found here\nGetting Started To achieve this, I will use LangGraph officially defined as:\nUna librería basada en LangChain que permite construir aplicaciones multiagente con estados persistentes\nThere are different approaches, but I decided to build a structure where there is a supervisor that orchestrates the workflow and decides who should act next. The idea is to build a graph that represents the agents and how they are connected. The graph illustrates the order in which agents can be executed.\nIn my case I have 3 agents:\nSupervisor - This agent is in charge of receiving user input and deciding who should act next. Also, once others agents finish their tasks, they will report back to it and a new routing decision will be made. The supervisor is the only agent that can decide when to go back to the user with a response. Reviewer - This agent will review the information that will be sent back to the user, perform some summarization and resolve questions or situations the tracer might raise. Tracer - This is the agent that will run the traces and retrieve the information that the user is looking for. It will report back to the supervisor when done or if any questions need to be answered. I had to modify the prompt of the tracer a little bit, so I could get a behavior that is better for this approach. Also, each agent can have its own tools. Currently, the tracer has more tools than the rest of agents.\nVisualized, the graph looks like this:\nThe dotted arrow indicate a conditional edge, meaning that the supervisor can decide what the next agent should be or if ending is appropriate.\nThe continuous arrow indicate the next step that must be taken. For example, after “start” the next agent must be the supervisor. Tracer and Reviewer must go to the supervisor.\nEven though this is a simple graph, this supervisor approach is very powerful.\nHow the supervisor routes? The supervisor plays a critical role as it determines who should act next. This is defined in the following function:\noptions = [\"FINISH\"] + members function_def = { \"name\": \"route\", \"description\": \"Select the next role.\", \"parameters\": { \"title\": \"routeSchema\", \"type\": \"object\", \"properties\": { \"next\": { \"title\": \"Next\", \"anyOf\": [ {\"enum\": options}, ], } }, \"required\": [\"next\"], }, } With this, every time the supervisor receives any input, it will come up with a “next” value from the available options and this will represent the next node on the graph.\nDemo We will use the following topology to test\nI tell the assistant information about the issue and inform that there is traffic passing already (traffic is required in order for NWPI to generate the insights we are looking for).\nThis is what the Assistant came back with\nThe response presents information in a condensed way, indicating the hops and path the traffic is taking and some events detected for this communication. The details of one of the flows is also present, however is has less information than before. This is because I have asked the reviewer agent to keep what it considers more relevant and send it to the user. In the end, we can see that the DROP_REPORT is mentioned and there is a suggestion to review ACLs 🎉\nWe can play with the reviewer prompt to display more information about the details of the flow.\nBehind the scenes Ok, the assistant came back with a good response, but let’s see in more detail what happened under the hood.\nUsing LangSmith we can get details and insights about the workflow followed. Here is the complete process.\nFirst, the supervisor receives the user’s query and pass it to the tracer.\nNext, the tracer uses the available tools to starts the trace, waits to capture some flows and retrieves information. Reports to the supervisor. Note that the order in which tools are executed is up to the agent.\nThen, the supervisor receives the information and decides the reviewer should act next.\nNext, the reviewer receives the information and rewrites what was received from the tracer. Goes back to the supervisor.\nThe supervisor decides the information is ready to be sent to the user. This is when we receive the message back on Webex.\nLessons Learned Since agents can make decisions, it is not always easy to understand what they are doing or why they return what they return, using LangSmith definitely helped with this. Not only we can see the order and tools used, but also there is some metadata that provides additional valuable information. I got to some situations where the supervisor was calling the tracer multiple times due to some error retrieving information. In the end, this was caused by error on the code and, fortunately, my assistant isn’t expensive. However, if your use case consumes a lot of tokens you should consider add some sort of safeguard to prevent a loop that grows your API consumption. Talking about cost, small language models are a good alternative. After running out of quota, I remembered gpt-4o-mini model is out and decided to give it a try. After some testing I saw it performed very well and was much cheaper, so I stuck to it. Conclusion Using multi-agent deployment we can achieve more complex tasks and have more flexibility. If needed, user interaction can be added on certain decisions that are important. Also, there is some added complexity as the prompts have to be refined to achieve the results we expect. In my case I had to do multiple iterations and refinements to all agents’ prompts before getting an output that I considered to be good enough. I am interested in testing other approaches to multi-agent deployments and adding additional info for agents to provide more accurate information through RAG.\n",
+  "wordCount" : "1038",
   "inLanguage": "en",
   "datePublished": "2024-07-28T14:56:45Z",
   "dateModified": "2024-07-28T14:56:45Z",
@@ -117,7 +118,7 @@
     "name": "NetWithAlex",
     "logo": {
       "@type": "ImageObject",
-      "url": "http://localhost:1313/favicon.ico"
+      "url": "http://localhost:1313/assets/favicon.ico"
     }
   }
 }
@@ -161,18 +162,18 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="http://localhost:1313/es/" title="Español"
+                            aria-label="Español">Es</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="https://netwithalex.blog" title="Home">
-                    <span>Home</span>&nbsp;
-                    <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
-                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
-                        <path d="M15 3h6v6"></path>
-                        <path d="M10 14L21 3"></path>
-                    </svg>
+                <a href="http://localhost:1313/" title="Home">
+                    <span>Home</span>
                 </a>
             </li>
             <li>
@@ -206,10 +207,12 @@
     <h1 class="post-title entry-hint-parent">
       Improving my SD-WAN Assistant - Multiple agents
     </h1>
-    <div class="post-description">
-      Learn how an LLM agentic approach can be used to troubleshoot your SD-WAN network
-    </div>
-    <div class="post-meta"><span title='2024-07-28 14:56:45 +0000 +0000'>July 28, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;alex
+    <div class="post-meta"><span title='2024-07-28 14:56:45 +0000 +0000'>July 28, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;alex&nbsp;|&nbsp;Translations:
+<ul class="i18n_list">
+    <li>
+        <a href="http://localhost:1313/mejorando-mi-asistente-sd-wan-multiples-agentes/">Es</a>
+    </li>
+</ul>
 
 </div>
   </header> <div class="toc">
@@ -246,13 +249,13 @@
 <h2 id="getting-started">Getting Started<a hidden class="anchor" aria-hidden="true" href="#getting-started">#</a></h2>
 <p>To achieve this, I will use <a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> officially defined as:</p>
 <blockquote>
-<p>A library for building stateful, multi-actor applications with LLMs, used to create agent and multi-agent workflows</p>
+<p>Una librería basada en LangChain que permite construir aplicaciones multiagente con estados persistentes</p>
 </blockquote>
 <p>There are <a href="https://langchain-ai.github.io/langgraph/tutorials/#multi-agent-systems">different approaches</a>, but I decided to build a structure where there is a supervisor that orchestrates the workflow and decides who should act next. The idea is to build a graph that represents the agents and how they are connected. The graph illustrates the order in which agents can be executed.</p>
 <p>In my case I have 3 agents:</p>
 <ol>
 <li><strong>Supervisor</strong> - This agent is in charge of receiving user input and deciding who should act next. Also, once others agents finish their tasks, they will report back to it and a new routing decision will be made. The supervisor is the only agent that can decide when to go back to the user with a response.</li>
-<li><strong>Reviewer</strong> - This agent will review the information that will be sent back to the user, perform some summation and resolve questions or situations the tracer might raise.</li>
+<li><strong>Reviewer</strong> - This agent will review the information that will be sent back to the user, perform some summarization and resolve questions or situations the tracer might raise.</li>
 <li><strong>Tracer</strong> - This is the agent that will run the traces and retrieve the information that the user is looking for. It will report back to the supervisor when done or if any questions need to be answered.</li>
 </ol>
 <p>I had to modify the prompt of the tracer a little bit, so I could get a behavior that is better for this approach. Also, each agent can have its own tools. Currently, the tracer has more tools than the rest of agents.</p>

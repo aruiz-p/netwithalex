@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Políticas on NetWithAlex</title>
+    <link>http://localhost:1313/es/category/pol%C3%ADticas/</link>
+    <description>Recent content in Políticas on NetWithAlex</description>
+    <generator>Hugo -- 0.140.2</generator>
+    <language>es</language>
+    <lastBuildDate>Sun, 11 Feb 2024 12:11:06 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/category/pol%C3%ADticas/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Simplificando AAR: 3/3 Fallback to Best Path</title>
+      <link>http://localhost:1313/simplificando-aar-3-3-fallback-to-best-path/</link>
+      <pubDate>Sun, 11 Feb 2024 12:11:06 +0000</pubDate>
+      <guid>http://localhost:1313/simplificando-aar-3-3-fallback-to-best-path/</guid>
+      <description>Aprende cómo AAR puede ayudar a mejorar la experiencia del usuario de la aplicación con Cisco SD-WAN</description>
+    </item>
+    <item>
+      <title>Simplificando AAR: 2/3 Analizando diferentes escenarios</title>
+      <link>http://localhost:1313/simplificando-aar-analizando-diferentes-escenarios/</link>
+      <pubDate>Wed, 07 Feb 2024 20:27:37 +0000</pubDate>
+      <guid>http://localhost:1313/simplificando-aar-analizando-diferentes-escenarios/</guid>
+      <description>Aprende cómo AAR puede ayudar a mejorar la experiencia del usuario de la aplicación con Cisco SD-WAN</description>
+    </item>
+    <item>
+      <title>Simplificando AAR: 1/3 Las bases</title>
+      <link>http://localhost:1313/simplificando-aar-1-3-las-bases/</link>
+      <pubDate>Thu, 01 Feb 2024 16:25:27 +0000</pubDate>
+      <guid>http://localhost:1313/simplificando-aar-1-3-las-bases/</guid>
+      <description>Aprende cómo AAR puede ayudar a mejorar la experiencia del usuario de la aplicación con Cisco SD-WAN</description>
+    </item>
+  </channel>
+</rss>

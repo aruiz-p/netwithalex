@@ -11,14 +11,15 @@
 <meta name="author" content="alex">
 <link rel="canonical" href="http://localhost:1313/demystifying-aar-understanding-different-scenarios/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
 <link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
 <link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <link rel="alternate" hreflang="en" href="http://localhost:1313/demystifying-aar-understanding-different-scenarios/">
+<link rel="alternate" hreflang="es" href="http://localhost:1313/simplificando-aar-analizando-diferentes-escenarios/">
 <noscript>
     <style>
         #theme-toggle,
@@ -59,11 +60,11 @@
   <meta property="og:site_name" content="NetWithAlex">
   <meta property="og:title" content="Simplifying AAR: 2/3 Understanding different scenarios">
   <meta property="og:description" content="Learn how AAR can help improve the application user experience with Cisco SD-WAN">
-  <meta property="og:locale" content="en-US">
+  <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-02-01T20:27:37+00:00">
-    <meta property="article:modified_time" content="2024-02-01T20:27:37+00:00">
+    <meta property="article:published_time" content="2024-02-07T20:27:37+00:00">
+    <meta property="article:modified_time" content="2024-02-07T20:27:37+00:00">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Simplifying AAR: 2/3 Understanding different scenarios">
 <meta name="twitter:description" content="Learn how AAR can help improve the application user experience with Cisco SD-WAN">
@@ -99,11 +100,11 @@
   "keywords": [
     
   ],
-  "articleBody": "Introduction Welcome back to the second installment of my series on Application Aware Routing (AAR). In my previous post, we discussed the essential concepts of Bidirectional Forwarding Detection (BFD) and Service Level Agreements (SLAs), laying the foundation for understanding how AAR optimizes network performance based on application requirements. We also briefly touched on tha AAR configuration with a simple example.\nNow, we continue by digging deeper on different AAR configurations, more specifically we will concentrate on Strict/Drop and Backup SLA Preferred Color behaviors.\nInitial Topology and Configuration Let’s start with a simple topology\nI am not limiting the tunnels between colors so we have a total of 4 tunnels on each wan edge.\nmpls - mpls mpls - biz-inet biz-inet- mpls biz-inet - biz-inet This is the BFD hello interval and app-route configuration for all the devices - this is the most relevant to AAR. If you are not familiar with it, I recommend you check my last post before continuing.\nhello-interval 1000 bfd app-route multiplier 3 bfd app-route poll-interval 120000 Scenario 1: SLA not Met - Strict/Drop Our AAR policy is testing against Business-Critical SLA. I will be playing with packet loss to demonstrate how traffic shifts.\nBR10#show sdwan policy from-vsmart from-vsmart sla-class Business-Critical loss 1 latency 250 jitter 100 from-vsmart app-route-policy _VPN10_AAR vpn-list VPN10 sequence 1 match source-ip 172.16.10.0/24 destination-ip 172.16.20.0/24 action sla-class Business-Critical sla-class strict sla-class preferred-color mpls sequence 11 match source-ip 172.16.20.0/24 destination-ip 172.16.10.0/24 action sla-class Business-Critical sla-class strict sla-class preferred-color mpls from-vsmart lists vpn-list VPN10 vpn 10 Let’s read what the documentation says about our config:\nsla-class preferred-color mpls\nsla-class sla-class-name preferred-color color—To set a specific tunnel to use when data traffic matches an SLA class, include the preferred-color option, specifying the color of the preferred tunnel. If more than one tunnel matches the SLA, traffic is sent to the preferred tunnel. If a tunnel of the preferred color is not available, traffic is sent through any tunnel that matches the SLA class. If no tunnel matches the SLA, data traffic is sent through any available tunnel\nhttps://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html\nHere’s a diagram to better visualize it:\nNote than even if both biz-internet and MPLS match the SLA, only MPLS will be used.\nYes, Biz-internet will be used even if it’s not specified as a preferred color - from my experience, this is a frequent source of confusion as people expect that if mpls is not matching SLA, the SLA not met action will be executed without considering the rest of the colors.\nsla-class strict\nClick Strict/Drop to perform strict matching of the SLA class. If no data plane tunnel is available that satisfies the SLA criteria, traffic is dropped.\nhttps://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html\nNow the diagram looks like this:\nTest 1 - MPLS/Biz-internet compliant I will initiate traffic from Branch10 -\u003e Branch 20 and capture it with NWPI. Both MPLS and Biz-Internet are having perfect KPI metrics (0 loss, 0 latency, 0 jitter)\nBR10-PC1#ssh -l admin 172.16.20.2 Password: We can see the Actual Color is mpls and Tunnel Match Reason is Matched sla and pref encap color. Everything working according to our policy definition.\nTest 2 - Biz-Internet compliant, MPLS non-compliant Let’s introduce 3% of packet loss on the mpls link and check the results.\nNow, our mpls tunnel is above the 1% loss threshold, so it’s no longer eligible. We confirm the Biz-Internet tunnel is used because it matches the SLA - Tunnel match reason is matched sla and color any\nTest 3 - MPLS/Biz-Internet non-compliant Our last test for this scenario will be to mess the SLAs for both transports. Again, will introduce 3% packet loss on both mpls and biz-internet.\nAs expected, now the traffic is getting dropped on BR10 as there are no transports matching the SLA class. Note the DROP_REPORT indicates SdwanDataPolicyDrop\nScenario 2: Backup SLA Preferred Color Let’s explore a new scenario, we will add one transport for this one.\nOur policy configuration will have slight changes. One thing to remark is that when using Backup SLA preferred color option, the only available action when SLA is not met will be Load Balance.\nBR10#show sdwan policy from-vsmart from-vsmart sla-class Business-Critical loss 1 latency 250 jitter 100 from-vsmart app-route-policy _VPN10_AAR vpn-list VPN10 sequence 1 match source-ip 172.16.10.0/24 destination-ip 172.16.20.0/24 action backup-sla-preferred-color private1 sla-class Business-Critical no sla-class strict sla-class preferred-color mpls sequence 11 match source-ip 172.16.20.0/24 destination-ip 172.16.10.0/24 action backup-sla-preferred-color private1 sla-class Business-Critical no sla-class strict sla-class preferred-color mpls from-vsmart lists vpn-list VPN10 vpn 10 Again, let’s see what the documentation says:\nbackup-sla-preferred-color private1\nWhen no tunnel matches the SLA, you can choose how to handle the data traffic:\nbackup-sla-preferred-color colors—Direct the data traffic to a specific tunnel. Data traffic is sent out the configured tunnel if that tunnel interface is available; if that tunnel is unavailable, traffic is sent out another available tunnel. You can specify one or more colors.\nhttps://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html\nTo put it visually\nTest 1 - MPLS/Private1 compliant, Biz-Internet non-compliant We will start with the assumption that biz-internet is not compliant with the SLA, so we have two transports available: MPLS and Private1. Let’s initiate our traffic.\nBR10-PC1#ssh -l admin 172.16.20.2 Password: Notice SLA strict is set to No and mpls is compliant and in use.\nTest 2 - Private1 compliant, MPLS/Biz-Internet non-compliant For the second test we are Introducing loss on the mpls transport. With this, now the only compliant transport is Private1, which also happens to be the Backup SLA preferred color. Let’s see how it looks.\nFrom the Tunnel Match Reason we can clearly see that the SLA is met through a color that is not the preferred one (private1). What do you think will happen if private1 becomes non-compliant?\nTest 3 - MPLS/Private1/Biz-Internet non-compliant Private1 is the only transport complying with the SLA, I will take care of that by introducing packet loss.\nAgain (!) private1 is used, BUT now traffic is matching the Default SLA, in other words, there are no tunnels matching the SLA so the tunnel marked as backup preferred, will be used.\nBonus Left - Private1 unavailable\nThe result after shutting down private1 interface, still without any tunnel matching the SLA. We can see a loose match is done on the tunnels (any available tunnel could be picked)\nRight - Biz-internet compliant, MPLS/Private1 non-compliant\nThe result after biz-internet is brought back to zero loss values with private1 not matching the SLA. Even if it’s not the preferred color, it still matches the SLA so it is selected.\nAs a final note, keep in mind AAR will always try to use tunnels that match the specified SLA, don’t get confused because the color names are not explicitly mentioned on the configuration.\nIn the next post, we will explore the remaining option Fallback to best path. Meet you there!\n",
-  "wordCount" : "1123",
+  "articleBody": "Introduction Welcome back to the second installment of my series on Application Aware Routing (AAR). In my previous post, we discussed the essential concepts of Bidirectional Forwarding Detection (BFD) and Service Level Agreements (SLAs), laying the foundation for understanding how AAR optimizes network performance based on application requirements. We also briefly touched on tha AAR configuration with a simple example.\nNow, we continue by digging deeper on different AAR configurations, more specifically we will concentrate on Strict/Drop and Backup SLA Preferred Color behaviors.\nInitial Topology and Configuration Let’s start with a simple topology\nI am not limiting the tunnels between colors so we have a total of 4 tunnels on each wan edge.\nmpls - mpls mpls - biz-inet biz-inet- mpls biz-inet - biz-inet This is the BFD hello interval and app-route configuration for all the devices - this is the most relevant to AAR. If you are not familiar with it, I recommend you check my last post before continuing.\nhello-interval 1000 bfd app-route multiplier 3 bfd app-route poll-interval 120000 Scenario 1: SLA not Met - Strict/Drop Our AAR policy is testing against Business-Critical SLA. I will be playing with packet loss to demonstrate how traffic shifts.\nBR10#show sdwan policy from-vsmart from-vsmart sla-class Business-Critical loss 1 latency 250 jitter 100 from-vsmart app-route-policy _VPN10_AAR vpn-list VPN10 sequence 1 match source-ip 172.16.10.0/24 destination-ip 172.16.20.0/24 action sla-class Business-Critical sla-class strict sla-class preferred-color mpls sequence 11 match source-ip 172.16.20.0/24 destination-ip 172.16.10.0/24 action sla-class Business-Critical sla-class strict sla-class preferred-color mpls from-vsmart lists vpn-list VPN10 vpn 10 Let’s read what the documentation says about our config:\nsla-class preferred-color mpls\nsla-class sla-class-name preferred-color color — To set a specific tunnel to use when data traffic matches an SLA class, include the preferred-color option, specifying the color of the preferred tunnel. If more than one tunnel matches the SLA, traffic is sent to the preferred tunnel. If a tunnel of the preferred color is not available, traffic is sent through any tunnel that matches the SLA class. If no tunnel matches the SLA, data traffic is sent through any available tunnel\nhttps://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html\nHere’s a diagram to better visualize it:\nNote than even if both biz-internet and MPLS match the SLA, only MPLS will be used.\nYes, Biz-internet will be used even if it’s not specified as a preferred color if the preferred color is not compliant - from my experience, this is a frequent source of confusion as the expectation is that if mpls is not matching SLA, the SLA not met action will be executed without considering the rest of the colors.\nsla-class strict\nClick Strict/Drop to perform strict matching of the SLA class. If no data plane tunnel is available that satisfies the SLA criteria, traffic is dropped.\nhttps://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html\nNow the diagram looks like this:\nTest 1 - MPLS/Biz-internet compliant I will initiate traffic from Branch10 -\u003e Branch 20 and capture it with NWPI. Both MPLS and Biz-Internet are having perfect KPI metrics (0 loss, 0 latency, 0 jitter)\nBR10-PC1#ssh -l admin 172.16.20.2 Password: We can see the Actual Color is mpls and Tunnel Match Reason is Matched sla and pref encap color. Everything working according to our policy definition.\nTest 2 - Biz-Internet compliant, MPLS non-compliant Let’s introduce 3% of packet loss on the mpls link and check the results.\nNow, our mpls tunnel is above the 1% loss threshold, so it’s no longer eligible. We confirm the Biz-Internet tunnel is used because it matches the SLA - Tunnel match reason is matched sla and color any\nTest 3 - MPLS/Biz-Internet non-compliant Our last test for this scenario will be to mess the SLAs for both transports. Again, will introduce 3% packet loss on both mpls and biz-internet.\nAs expected, now the traffic is getting dropped on BR10 as there are no transports matching the SLA class. Note the DROP_REPORT indicates SdwanDataPolicyDrop\nScenario 2: Backup SLA Preferred Color Let’s explore a new scenario, we will add one transport for this one.\nOur policy configuration will have slight changes. One thing to remark is that when using Backup SLA preferred color option, the only available action when SLA is not met will be Load Balance.\nBR10#show sdwan policy from-vsmart from-vsmart sla-class Business-Critical loss 1 latency 250 jitter 100 from-vsmart app-route-policy _VPN10_AAR vpn-list VPN10 sequence 1 match source-ip 172.16.10.0/24 destination-ip 172.16.20.0/24 action backup-sla-preferred-color private1 sla-class Business-Critical no sla-class strict sla-class preferred-color mpls sequence 11 match source-ip 172.16.20.0/24 destination-ip 172.16.10.0/24 action backup-sla-preferred-color private1 sla-class Business-Critical no sla-class strict sla-class preferred-color mpls from-vsmart lists vpn-list VPN10 vpn 10 Again, let’s see what the documentation says:\nbackup-sla-preferred-color private1\nWhen no tunnel matches the SLA, you can choose how to handle the data traffic:\nbackup-sla-preferred-color colors— Direct the data traffic to a specific tunnel. Data traffic is sent out the configured tunnel if that tunnel interface is available; if that tunnel is unavailable, traffic is sent out another available tunnel. You can specify one or more colors.\nhttps://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html\nTo put it visually\nTest 1 - MPLS/Private1 compliant, Biz-Internet non-compliant We will start with the assumption that biz-internet is not compliant with the SLA, so we have two transports available: MPLS and Private1. Let’s initiate our traffic.\nBR10-PC1#ssh -l admin 172.16.20.2 Password: Notice SLA strict is set to No and mpls is compliant and in use.\nTest 2 - Private1 compliant, MPLS/Biz-Internet non-compliant For the second test we are introducing loss on the mpls transport. With this, now the only compliant transport is Private1, which also happens to be the Backup SLA preferred color. Let’s see how it looks.\nFrom the Tunnel Match Reason we can clearly see that the SLA is met through a color that is not the preferred one (private1). What do you think will happen if private1 becomes non-compliant?\nTest 3 - MPLS/Private1/Biz-Internet non-compliant Private1 is the only transport complying with the SLA, I will take care of that by introducing packet loss.\nAgain (!) private1 is used, BUT now traffic is matching the Default SLA, in other words, there are no tunnels matching the SLA so the tunnel marked as backup preferred, will be used.\nBonus Private1 unavailable\nThe result after shutting down private1 interface, still without any tunnel matching the SLA. We can see a loose match is done on the tunnels (any available tunnel could be picked)\nBiz-internet compliant, MPLS/Private1 non-compliant\nThe result after biz-internet is brought back to zero loss values with private1 not matching the SLA. Even if it’s not the preferred color, it still matches the SLA so it is selected.\nAs a final note, keep in mind AAR will always try to use tunnels that match the specified SLA, don’t get confused because the color names are not explicitly mentioned on the configuration.\nIn the next post, we will explore the remaining option Fallback to best path. Meet you there!\n",
+  "wordCount" : "1130",
   "inLanguage": "en",
-  "datePublished": "2024-02-01T20:27:37Z",
-  "dateModified": "2024-02-01T20:27:37Z",
+  "datePublished": "2024-02-07T20:27:37Z",
+  "dateModified": "2024-02-07T20:27:37Z",
   "author":{
     "@type": "Person",
     "name": "alex"
@@ -117,7 +118,7 @@
     "name": "NetWithAlex",
     "logo": {
       "@type": "ImageObject",
-      "url": "http://localhost:1313/favicon.ico"
+      "url": "http://localhost:1313/assets/favicon.ico"
     }
   }
 }
@@ -161,18 +162,18 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="http://localhost:1313/es/" title="Español"
+                            aria-label="Español">Es</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="https://netwithalex.blog" title="Home">
-                    <span>Home</span>&nbsp;
-                    <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
-                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
-                        <path d="M15 3h6v6"></path>
-                        <path d="M10 14L21 3"></path>
-                    </svg>
+                <a href="http://localhost:1313/" title="Home">
+                    <span>Home</span>
                 </a>
             </li>
             <li>
@@ -209,7 +210,12 @@
     <div class="post-description">
       Learn how AAR can help improve the application user experience with Cisco SD-WAN
     </div>
-    <div class="post-meta"><span title='2024-02-01 20:27:37 +0000 WET'>February 1, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;alex
+    <div class="post-meta"><span title='2024-02-07 20:27:37 +0000 WET'>February 7, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;alex&nbsp;|&nbsp;Translations:
+<ul class="i18n_list">
+    <li>
+        <a href="http://localhost:1313/simplificando-aar-analizando-diferentes-escenarios/">Es</a>
+    </li>
+</ul>
 
 </div>
   </header> <div class="toc">
@@ -299,13 +305,13 @@
 </span></span></code></pre></div><p>Let&rsquo;s read what the documentation says about our config:</p>
 <p><code>sla-class preferred-color mpls</code></p>
 <blockquote>
-<p>sla-class <em>sla-class-name</em> preferred-color <em>color</em>—To set a specific tunnel to use when data traffic matches an SLA class, include the preferred-color option, specifying the color of the preferred tunnel. If more than one tunnel matches the SLA, traffic is sent to the preferred tunnel. If a tunnel of the preferred color is not available, traffic is sent through any tunnel that matches the SLA class. If no tunnel matches the SLA, data traffic is sent through any available tunnel</p>
+<p>sla-class <em>sla-class-name</em> preferred-color <em>color</em> — To set a specific tunnel to use when data traffic matches an SLA class, include the preferred-color option, specifying the color of the preferred tunnel. If more than one tunnel matches the SLA, traffic is sent to the preferred tunnel. If a tunnel of the preferred color is not available, traffic is sent through any tunnel that matches the SLA class. If no tunnel matches the SLA, data traffic is sent through any available tunnel</p>
 <p><a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html">https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html</a></p>
 </blockquote>
 <p>Here&rsquo;s a diagram to better visualize it:</p>
 <p><img loading="lazy" src="/wp-content/uploads/2024/01/ARR100.png"></p>
 <p>Note than even if both biz-internet <strong>and</strong> MPLS match the SLA, only MPLS will be used.</p>
-<p>Yes, Biz-internet will be used even if it&rsquo;s not specified as a preferred color - from my experience, this is a frequent source of confusion as people expect that if mpls is not matching SLA, the <em>SLA not met</em> action will be executed without considering the rest of the colors.</p>
+<p>Yes, Biz-internet will be used even if it&rsquo;s not specified as a preferred color <strong>if</strong> the preferred color is not compliant - from my experience, this is a frequent source of confusion as the expectation is that if mpls is not matching SLA, the <em>SLA not met</em> action will be executed without considering the rest of the colors.</p>
 <p><code>sla-class strict</code></p>
 <blockquote>
 <p>Click <strong>Strict/Drop</strong> to perform strict matching of the SLA class. If no data plane tunnel is available that satisfies the SLA criteria, traffic is dropped.</p>
@@ -362,7 +368,7 @@
 <p><code>backup-sla-preferred-color private1</code></p>
 <blockquote>
 <p><strong>When no tunnel matches the SLA</strong>, you can choose how to handle the data traffic:</p>
-<p>backup-sla-preferred-color <em>colors</em>—Direct the data traffic to a specific tunnel. Data traffic is sent out the configured tunnel if that tunnel interface is available; if that tunnel is unavailable, traffic is sent out another available tunnel. You can specify one or more colors.</p>
+<p>backup-sla-preferred-color <em>colors</em>— Direct the data traffic to a specific tunnel. Data traffic is sent out the configured tunnel if that tunnel interface is available; if that tunnel is unavailable, traffic is sent out another available tunnel. You can specify one or more colors.</p>
 <p><a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html">https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html</a></p>
 </blockquote>
 <p>To put it visually</p>
@@ -374,7 +380,7 @@
 </span></span></code></pre></div><p><img loading="lazy" src="/wp-content/uploads/2024/02/S2-AAR1-e1706776034732.png"></p>
 <p>Notice <em>SLA strict</em> is set to <code>No</code> and mpls is compliant and in use.</p>
 <h4 id="test-2---private1-compliant-mplsbiz-internet-non-compliant">Test 2 - Private1 compliant, MPLS/Biz-Internet non-compliant<a hidden class="anchor" aria-hidden="true" href="#test-2---private1-compliant-mplsbiz-internet-non-compliant">#</a></h4>
-<p>For the second test we are Introducing loss on the mpls transport. With this, now the only compliant transport is Private1, which also happens to be the Backup SLA preferred color. Let&rsquo;s see how it looks.</p>
+<p>For the second test we are introducing loss on the mpls transport. With this, now the only compliant transport is Private1, which also happens to be the Backup SLA preferred color. Let&rsquo;s see how it looks.</p>
 <p><img loading="lazy" src="/wp-content/uploads/2024/02/S2-AAR101.png"></p>
 <p>From the <em>Tunnel Match Reason</em> we can clearly see that the SLA is met through a color that is not the preferred one (private1). What do you think will happen if private1 becomes non-compliant?</p>
 <h4 id="test-3---mplsprivate1biz-internet-non-compliant">Test 3 - MPLS/Private1/Biz-Internet non-compliant<a hidden class="anchor" aria-hidden="true" href="#test-3---mplsprivate1biz-internet-non-compliant">#</a></h4>
@@ -382,11 +388,12 @@
 <p><img loading="lazy" src="/wp-content/uploads/2024/02/S2-102.png"></p>
 <p>Again (!) private1 is used, BUT now traffic is matching the Default SLA, in other words, there are no tunnels matching the SLA so the tunnel marked as backup preferred, will be used.</p>
 <h4 id="bonus">Bonus<a hidden class="anchor" aria-hidden="true" href="#bonus">#</a></h4>
-<p><strong>Left - Private1 unavailable</strong><br>
+<p><strong>Private1 unavailable</strong><br>
 The result after shutting down private1 interface, still without any tunnel matching the SLA. We can see a loose match is done on the tunnels (any available tunnel could be picked)</p>
-<p><strong>Right - Biz-internet compliant, MPLS/Private1 non-compliant</strong><br>
+<p><img loading="lazy" src="/wp-content/uploads/2024/02/S2-103.png"></p>
+<p><strong>Biz-internet compliant, MPLS/Private1 non-compliant</strong><br>
 The result after biz-internet is brought back to zero loss values with private1 not matching the SLA. Even if it&rsquo;s not the preferred color, it still matches the SLA so it is selected.</p>
-<p><img loading="lazy" src="/wp-content/uploads/2024/02/S2-103.png"><img loading="lazy" src="/wp-content/uploads/2024/02/S2-104.png"></p>
+<p><img loading="lazy" src="/wp-content/uploads/2024/02/S2-104.png"></p>
 <p>As a final note, keep in mind AAR will always try to use tunnels that match the specified SLA, <strong>don&rsquo;t get confused because the color names are not explicitly mentioned on the configuration</strong>.</p>
 <p>In the <a href="/simplifying-aar-3-3-fallback-to-best-path">next post</a>, we will explore the remaining option <em>Fallback to best path</em>. Meet you there!</p>
 
