@@ -6,14 +6,21 @@
     <description>Recent content in Posts on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>es</language>
-    <lastBuildDate>Wed, 05 Feb 2025 14:20:31 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 01 Apr 2025 14:20:31 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/es/posts/feed.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Serie AppQoE: TCP Optimization</title>
+      <link>http://localhost:1313/appqoe-opt-tcp/</link>
+      <pubDate>Tue, 01 Apr 2025 14:20:31 +0000</pubDate>
+      <guid>http://localhost:1313/appqoe-opt-tcp/</guid>
+      <description>Descubre cómo SD-WAN mejora el rendimiento de TCP. Conoce las principales técnicas de optimización que aumentan el rendimiento de las aplicaciones y mejoran la experiencia del usuario.</description>
+    </item>
+    <item>
       <title>Asegurando el borde con Cisco SD-WAN y Secure Access</title>
-      <link>http://localhost:1313/sdwan-sse-integraci%C3%B3n%20/</link>
+      <link>http://localhost:1313/sdwan-sse-integracion/</link>
       <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/sdwan-sse-integraci%C3%B3n%20/</guid>
-      <description>Descubra cómo Cisco SD-WAN y Cisco Secure Access trabajan juntos para mejorar el rendimiento y la seguridad de la red en un mundo de la primera nube.</description>
+      <guid>http://localhost:1313/sdwan-sse-integracion/</guid>
+      <description>Descubre cómo Cisco SD-WAN y Cisco Secure Access trabajan juntos para mejorar el rendimiento y la seguridad de los usuarios en internet.</description>
     </item>
     <item>
       <title>Enhanced App Aware Routing</title>
@@ -27,21 +34,21 @@
       <link>http://localhost:1313/mejorando-mi-asistente-sd-wan-multiples-agentes/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
       <guid>http://localhost:1313/mejorando-mi-asistente-sd-wan-multiples-agentes/</guid>
-      <description>Aprenda cómo se puede utilizar un enfoque de agente LLM para solucionar problemas de su red SD-WAN</description>
+      <description>Aprende cómo utilizar un enfoque &amp;ldquo;agentic&amp;rdquo; para hacer troubleshooting de tu red SD-WAN con LLMs</description>
     </item>
     <item>
       <title>Creando mi primer asistente de AI SD-WAN con Langchain</title>
       <link>http://localhost:1313/creando-mi-primer-asistente-ai-con-langchain/</link>
       <pubDate>Wed, 10 Jul 2024 18:51:08 +0000</pubDate>
       <guid>http://localhost:1313/creando-mi-primer-asistente-ai-con-langchain/</guid>
-      <description>Descubra cómo los LLM se pueden integrar con Cisco SD-WAN para solucionar su red de manera simple</description>
+      <description>Descubre cómo los LLMs se pueden integrar con Cisco SD-WAN para hacer troubleshooting de manera sencilla y sin estrés</description>
     </item>
     <item>
       <title>Seguimiento de incidentes SD-WAN con ServiceNow</title>
       <link>http://localhost:1313/rastreando-incidentes-de-sdwan-con-servicenow/</link>
       <pubDate>Fri, 15 Mar 2024 18:06:34 +0000</pubDate>
       <guid>http://localhost:1313/rastreando-incidentes-de-sdwan-con-servicenow/</guid>
-      <description>Aprenda a integrar Cisco SD-WAN con ServiceNow y automatizar su gestión de incidentes</description>
+      <description>Aprenda a integrar Cisco SD-WAN con ServiceNow y automatiza la gestión de incidentes</description>
     </item>
     <item>
       <title>Un nuevo capítulo: SD-Routing revoluciona la gestión de red</title>
@@ -55,28 +62,28 @@
       <link>http://localhost:1313/simplificando-aar-3-3-fallback-to-best-path/</link>
       <pubDate>Sun, 11 Feb 2024 12:11:06 +0000</pubDate>
       <guid>http://localhost:1313/simplificando-aar-3-3-fallback-to-best-path/</guid>
-      <description>Aprende cómo AAR puede ayudar a mejorar la experiencia del usuario de la aplicación con Cisco SD-WAN</description>
+      <description>Aprende cómo AAR puede ayudarte a mejorar la experiencia del usuario y aplicación con Cisco SD-WAN</description>
     </item>
     <item>
       <title>Simplificando AAR: 2/3 Analizando diferentes escenarios</title>
       <link>http://localhost:1313/simplificando-aar-analizando-diferentes-escenarios/</link>
       <pubDate>Wed, 07 Feb 2024 20:27:37 +0000</pubDate>
       <guid>http://localhost:1313/simplificando-aar-analizando-diferentes-escenarios/</guid>
-      <description>Aprende cómo AAR puede ayudar a mejorar la experiencia del usuario de la aplicación con Cisco SD-WAN</description>
+      <description>Aprende cómo AAR puede ayudarte a mejorar la experiencia del usuario y aplicación con Cisco SD-WAN</description>
     </item>
     <item>
       <title>Simplificando AAR: 1/3 Las bases</title>
       <link>http://localhost:1313/simplificando-aar-1-3-las-bases/</link>
       <pubDate>Thu, 01 Feb 2024 16:25:27 +0000</pubDate>
       <guid>http://localhost:1313/simplificando-aar-1-3-las-bases/</guid>
-      <description>Aprende cómo AAR puede ayudar a mejorar la experiencia del usuario de la aplicación con Cisco SD-WAN</description>
+      <description>Aprende cómo AAR puede ayudarte a mejorar la experiencia del usuario y aplicación con Cisco SD-WAN</description>
     </item>
     <item>
       <title>Cisco SD-WAN Network Wide Path Insights (NWPI)</title>
       <link>http://localhost:1313/introduccion-network-wide-path-insights/</link>
       <pubDate>Thu, 25 Jan 2024 20:34:14 +0000</pubDate>
       <guid>http://localhost:1313/introduccion-network-wide-path-insights/</guid>
-      <description>Aprenda a usar la herramienta de solución de problemas más avanzada para su red Cisco SD-WAN.</description>
+      <description>Aprende a usar la herramienta de troubleshooting más avanzada para tu red Cisco SD-WAN.</description>
     </item>
   </channel>
 </rss>

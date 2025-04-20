@@ -6,8 +6,15 @@
     <description>Recent content in Inicio on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>es</language>
-    <lastBuildDate>Wed, 05 Feb 2025 14:20:31 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 01 Apr 2025 14:20:31 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/es/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Serie AppQoE: TCP Optimization</title>
+      <link>http://localhost:1313/appqoe-opt-tcp/</link>
+      <pubDate>Tue, 01 Apr 2025 14:20:31 +0000</pubDate>
+       <guid isPermaLink="false">http://localhost:1313/appqoe-opt-tcp/</guid> 
+      <description>Descubre cómo SD-WAN mejora el rendimiento de TCP. Conoce las principales técnicas de optimización que aumentan el rendimiento de las aplicaciones y mejoran la experiencia del usuario.</description>
+    </item>
     <item>
       <title>Asegurando el borde con Cisco SD-WAN y Secure Access</title>
       <link>http://localhost:1313/sdwan-sse-integracion/</link>

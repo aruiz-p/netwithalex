@@ -10,10 +10,10 @@
     <atom:link href="http://localhost:1313/es/tag/sdwan/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Asegurando el borde con Cisco SD-WAN y Secure Access</title>
-      <link>http://localhost:1313/sdwan-sse-integraci%C3%B3n%20/</link>
+      <link>http://localhost:1313/sdwan-sse-integracion/</link>
       <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/sdwan-sse-integraci%C3%B3n%20/</guid>
-      <description>Descubra cómo Cisco SD-WAN y Cisco Secure Access trabajan juntos para mejorar el rendimiento y la seguridad de la red en un mundo de la primera nube.</description>
+      <guid>http://localhost:1313/sdwan-sse-integracion/</guid>
+      <description>Descubre cómo Cisco SD-WAN y Cisco Secure Access trabajan juntos para mejorar el rendimiento y la seguridad de los usuarios en internet.</description>
     </item>
     <item>
       <title>Enhanced App Aware Routing</title>
@@ -27,7 +27,7 @@
       <link>http://localhost:1313/creando-mi-primer-asistente-ai-con-langchain/</link>
       <pubDate>Wed, 10 Jul 2024 18:51:08 +0000</pubDate>
       <guid>http://localhost:1313/creando-mi-primer-asistente-ai-con-langchain/</guid>
-      <description>Descubra cómo los LLM se pueden integrar con Cisco SD-WAN para solucionar su red de manera simple</description>
+      <description>Descubre cómo los LLMs se pueden integrar con Cisco SD-WAN para hacer troubleshooting de manera sencilla y sin estrés</description>
     </item>
   </channel>
 </rss>

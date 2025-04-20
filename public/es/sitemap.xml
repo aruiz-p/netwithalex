@@ -2,21 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/sdwan-sse-integraci%C3%B3n%20/</loc>
-    <lastmod>2025-02-05T14:20:31+00:00</lastmod>
+    <loc>http://localhost:1313/es/category/appqoe/</loc>
+    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/sdwan-sse-integration/"
+                href="http://localhost:1313/category/appqoe/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/sdwan-sse-integraci%C3%B3n%20/"
+                href="http://localhost:1313/es/category/appqoe/"
                 />
   </url><url>
     <loc>http://localhost:1313/es/category/</loc>
-    <lastmod>2025-02-05T14:20:31+00:00</lastmod>
+    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -28,8 +28,11 @@
                 href="http://localhost:1313/es/category/"
                 />
   </url><url>
+    <loc>http://localhost:1313/es/tag/optimizacion/</loc>
+    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/es/posts/</loc>
-    <lastmod>2025-02-05T14:20:31+00:00</lastmod>
+    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -39,6 +42,71 @@
                 rel="alternate"
                 hreflang="es"
                 href="http://localhost:1313/es/posts/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/category/sdwan/</loc>
+    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/category/sdwan/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/category/sdwan/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/appqoe-opt-tcp/</loc>
+    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/appqoe-tcp-opt/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/appqoe-opt-tcp/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/tag/</loc>
+    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/tag/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/tag/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/tag/tcp/</loc>
+    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/tag/tcp/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/tag/tcp/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/sdwan-sse-integracion/</loc>
+    <lastmod>2025-02-05T14:20:31+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/sdwan-sse-integration/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/sdwan-sse-integracion/"
                 />
   </url><url>
     <loc>http://localhost:1313/es/tag/sdwan/</loc>
@@ -52,19 +120,6 @@
                 rel="alternate"
                 hreflang="es"
                 href="http://localhost:1313/es/tag/sdwan/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/es/category/sdwan/</loc>
-    <lastmod>2025-02-05T14:20:31+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/category/sdwan/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/category/sdwan/"
                 />
   </url><url>
     <loc>http://localhost:1313/es/category/secure-access/</loc>
@@ -97,19 +152,6 @@
                 rel="alternate"
                 hreflang="es"
                 href="http://localhost:1313/es/tag/sse/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/es/tag/</loc>
-    <lastmod>2025-02-05T14:20:31+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/tag/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/tag/"
                 />
   </url><url>
     <loc>http://localhost:1313/es/tag/eaar/</loc>

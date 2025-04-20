@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>AppQoe Series: TCP Optimization | NetWithAlex</title>
+<meta name="keywords" content="">
+<meta name="description" content="Discover how SD-WAN enhances TCP performance. Learn about key optimization techniques that improve application reliability and user experience.">
+<meta name="author" content="Alex">
+<link rel="canonical" href="http://localhost:1313/appqoe-tcp-opt/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/appqoe-tcp-opt/">
+<link rel="alternate" hreflang="es" href="http://localhost:1313/appqoe-opt-tcp/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/appqoe-tcp-opt/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="AppQoe Series: TCP Optimization">
+  <meta property="og:description" content="Discover how SD-WAN enhances TCP performance. Learn about key optimization techniques that improve application reliability and user experience.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-04-01T14:20:31+00:00">
+    <meta property="article:modified_time" content="2025-04-01T14:20:31+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AppQoe Series: TCP Optimization">
+<meta name="twitter:description" content="Discover how SD-WAN enhances TCP performance. Learn about key optimization techniques that improve application reliability and user experience.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "AppQoe Series: TCP Optimization",
+      "item": "http://localhost:1313/appqoe-tcp-opt/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "AppQoe Series: TCP Optimization",
+  "name": "AppQoe Series: TCP Optimization",
+  "description": "Discover how SD-WAN enhances TCP performance. Learn about key optimization techniques that improve application reliability and user experience.",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introduction Have you ever used a business app that feels painfully slow. Maybe video calls freeze, or a web dashboard takes forever to load. These (and others) are signs that your WAN might be struggling under the hood.\nThe good news? Cisco SD-WAN includes a suite of powerful technologies designed to boost performance over unreliable or high-latency links. In this series, we’ll break down three key features that can significantly improve application experience across your network: TCP Optimization, Forward Error Correction (FEC), and Packet Duplication.\nIn this first post, we’ll explore TCP Optimization - how it works, when to use it, and why it can be a game-changer for your users, especially over high-delay connections.\nSolution Overview The goal of TCP Optimization is to fine tune TCP connections to improve the performance. This is especially useful when there are long-latency links involved.\nThe SD-WAN routers will act as proxies, meaning that they will intercept the TCP connections and tune them to get better performance. Let´s see a visual.\nWithout TCP optimization, the client and server will establish a TCP session directly between them.\nWhen TCP Optimization is used, Router 1 will intercept and terminate the TCP connection from the client and establish a TCP session with Router 2 that will be optimized. Likewise Router 2 will create a TCP session with Server.\nNote All this process is transparent to the client/server and data is going to be cached on the routers to keep the sessions alive.\nThe IOS-XE SD-WAN devices use BBR algorithm which uses information about RTT and available bandwidth to optimize the connection. If you’d like to learn more I would recommend checking this video from Neal Cardwell.\nThe current TCP Optimization implementation defines different device roles:\nController Node: Device that intercepts and distributes traffic to Service Nodes. Service Node: Optimization engines for traffic acceleration. In a real world scenario the recommendation is to have optimization services on Branches and Data Centers. There are different requirements based on the volume of traffic those devices will handle. I suggest reading Cisco’s Documentation to understand platform requirements and more.\nOn the branches, it is common to use an Integrated Service Node meaning that a single device can intercept, distribute and optimize traffic. On the other hand, on the Data Center, a cluster of External Service Nodes is required to achieve higher throughput and distribute higher volumes of traffic amongst cluster members.\nOverall TCP Optimization is an intensive process for the devices and it’s crucial to confirm platform requirements. For instance, my demo environment has two Catalyst 8000V with 8 CPUs and 16 GB of RAM, requirements for a small deployment.\nLet’s see in practice what effect Optimization has on the traffic. To demonstrate it, I will take a packet capture on the WAN side with and without optimization:\nWindow Scaling Without Optimization Let’s see how the window scaling behaves without optimization\nNotice that the window size remained mostly stable at around 1,000,000 Bytes after around 5 seconds\nWindow Scaling With Optimization Let’s look at the same information with optimization enabled.\nNotice how the window size remained changing throughout the session, quickly and aggressively recovering after going down.\nWhy is the window scaling so important? I asked ChatGPT to explain it simply and concisely:\nWindow scaling is crucial in high-latency or high-bandwidth networks because it allows TCP to use a larger receive window, which directly impacts how many bytes in flight (i.e., unacknowledged data) a sender can have. Without window scaling, the max window size is 65,535 bytes — too small for high-speed links, leading to underutilization. With window scaling, the window can grow to gigabytes, enabling the sender to keep more data “in flight” and maintain high throughput despite delays.\nIn summary, the TCP session is split into three segments, with the optimizing routers advertising higher window scaling and managing connections with the client and server. Traffic is now governed by the BBR algorithm to maximize throughput.\nConfiguration To configure this feature, you can use either Feature Templates and Configuration Groups (with version 20.15 or above). In my case, I will use Configuration Groups and will make use only of Internal Service Nodes on both sides.\nTo start, I add the feature “App QoE” on the Service Profile with the following configuration:\nService Node to perform acceleration Forwarder to also act as a Controller Node This creates the service node configuration\ninterface VirtualPortGroup2 no shutdown ip address 192.168.2.1 255.255.255.0 service-insertion appqoe ! service-insertion appnav-controller-group appqoe ACG-APPQOE appnav-controller 192.168.2.1 ! service-insertion service-node-group appqoe SNG-APPQOE service-node 192.168.2.2 ! service-insertion service-context appqoe/1 appnav-controller-group ACG-APPQOE service-node-group SNG-APPQOE cluster-type integrated-service-node enable vrf global ! Status should be “Running”\nLisbon_10-1#show sdwan appqoe tcpopt status ========================================================== TCP-OPT Status ========================================================== Status ------ TCP OPT Operational State : RUNNING TCP Proxy Operational State : RUNNING Next, I create a simple data policy matching traffic between client and server and select the action to be AppQoE Optimization and check the box of TCP Optimization.\nvsmart_1# show running-config policy policy data-policy _VPN_10_AppQoE vpn-list VPN_10 sequence 1 match source-data-prefix-list BR10_172_16_10_0 destination-data-prefix-list DC_100_172_16_100_0 ! action accept tcp-optimization service-node-group SNG-APPQOE ! ! sequence 11 match source-data-prefix-list DC_100_172_16_100_0 destination-data-prefix-list BR10_172_16_10_0 ! action accept tcp-optimization service-node-group SNG-APPQOE ! ! default-action accept ! ! Note the direction to apply this policy should be ALL on both sides.\nvsmart_1# show running-config apply-policy apply-policy site-list BR_10 data-policy _VPN_10_AppQoE all ! site-list DC_100 data-policy _VPN_10_AppQoE all ! ! Verifying TCP Optimization In order to quickly confirm traffic is being optimized, we can enable On-Demand Troubleshooting and select a period of time.\nAlso, from the real-time information we can see the flow list.\nThe Services column indicates the TCP Optimization is applied to those flows.\nTesting TCP Optimization Performance To evaluate the impact of TCP Optimization, I ran iperf tests with varying delay parameters to observe where the feature delivers the most benefit. While this isn’t a professional lab setup, it offers valuable information into how the optimization behaves in practice.\nNote My iperf traffic is not encrypted. It’s not possible to optimize encrypted traffic without TLS/SSL Decryption\nSome testing details:\nThroughput is capped at 250 Mbps on the routers. I used 4 parallel streams, each simulating a 100 MB download: iperf -c 172.16.100.11 -n 100MB -P 4 -i 15 -R\nFor consistency, I ran each scenario 5 times, discarded the highest and lowest results, and averaged the remaining 3 samples\nThe following table shows the results:\nDelay TCP Opt BW (Mbps) Time (s) 0 Disabled 248 ~ 13 0 Enabled 121,6 ~ 27 50 Disabled 99,7 ~ 33 50 Enabled 124 ~ 26 100 Disabled 71 ~ 46 100 Enabled 131 ~ 25 150 Disabled 66 ~ 49 150 Enabled 125 ~ 26 200 Disabled 59 ~ 56 200 Enabled 131 ~ 25 250 Disabled 63 ~ 52 250 Enabled 126 ~ 26 Here’s a visual representation of the results\nThis is what we can conclude from the data:\nWith 0 ms delay, optimization actually reduces performance (121 Mbps vs 248 Mbps), due to overhead introduced by the feature.\nAs delay increases optimization consistently improves throughput and reduces transfer time, this is seen already at 50 ms delay.\nPerformance degrades significantly without TCP optimization. Bandwidth drops from 248 Mbps at 0 ms to ~59–63 Mbps at 200–250 ms. Time also increases proportionally.\nPerformance is stable across different delay values with TCP optimization. Throughput stays around 125–131 Mbps even at high delays. Transfer time is also consistent at around ~26s.\nConclusion TCP Optimization is highly effective in mitigating the impact of latency on TCP performance. While it introduces some overhead in low-latency conditions, its benefits become more and more evident as delay increases. In scenarios with 100 ms delay or more, optimization can help doubling the throughput and reducing transfer time. If you are thinking about enabling it, take into account that based on the router model, you will get different performance.\nAlso, this feature shouldn’t be enabled for all traffic, instead enable it for a specific application or set of applications that need acceleration. Finally, this feature brings higher benefits on inter-continental lines, satellite transports or similar high latency links.\nHope this post was useful and see you in the next one!\n",
+  "wordCount" : "1362",
+  "inLanguage": "en",
+  "datePublished": "2025-04-01T14:20:31Z",
+  "dateModified": "2025-04-01T14:20:31Z",
+  "author":{
+    "@type": "Person",
+    "name": "Alex"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/appqoe-tcp-opt/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/assets/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="http://localhost:1313/es/" title="Español"
+                            aria-label="Español">Es</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/category/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="About me.">
+                    <span>About me.</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="🔍">
+                    <span>🔍</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      AppQoe Series: TCP Optimization
+    </h1>
+    <div class="post-meta"><span title='2025-04-01 14:20:31 +0000 +0000'>April 1, 2025</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Alex&nbsp;|&nbsp;Translations:
+<ul class="i18n_list">
+    <li>
+        <a href="http://localhost:1313/appqoe-opt-tcp/">Es</a>
+    </li>
+</ul>
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#introduction" aria-label="Introduction">Introduction</a></li>
+                <li>
+                    <a href="#solution-overview" aria-label="Solution Overview">Solution Overview</a><ul>
+                        
+                <li>
+                    <a href="#window-scaling-without-optimization" aria-label="Window Scaling Without Optimization">Window Scaling Without Optimization</a></li>
+                <li>
+                    <a href="#window-scaling-with-optimization" aria-label="Window Scaling With Optimization">Window Scaling With Optimization</a></li></ul>
+                </li>
+                <li>
+                    <a href="#configuration" aria-label="Configuration">Configuration</a></li>
+                <li>
+                    <a href="#verifying-tcp-optimization" aria-label="Verifying TCP Optimization">Verifying TCP Optimization</a></li>
+                <li>
+                    <a href="#testing-tcp-optimization-performance" aria-label="Testing TCP Optimization Performance">Testing TCP Optimization Performance</a></li>
+                <li>
+                    <a href="#conclusion" aria-label="Conclusion">Conclusion</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
+<p>Have you ever used a business app that feels painfully slow. Maybe video calls freeze, or a web dashboard takes forever to load. These (and others) are signs that your WAN might be struggling under the hood.</p>
+<p>The good news? Cisco SD-WAN includes a suite of powerful technologies designed to boost performance over unreliable or high-latency links. In this series, we’ll break down three key features that can significantly improve application experience across your network: TCP Optimization, Forward Error Correction (FEC), and Packet Duplication.</p>
+<p>In this first post, we’ll explore TCP Optimization - how it works, when to use it, and why it can be a game-changer for your users, especially over high-delay connections.</p>
+<h2 id="solution-overview">Solution Overview<a hidden class="anchor" aria-hidden="true" href="#solution-overview">#</a></h2>
+<p>The goal of TCP Optimization is to fine tune TCP connections to improve the performance. This is especially useful when there are long-latency links involved.</p>
+<p>The SD-WAN routers will act as proxies, meaning that they will intercept the TCP connections and tune them to get better performance. Let´s see a visual.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/04/tcp-opt-topo.png"></p>
+<p>Without TCP optimization, the client and server will establish a TCP session directly between them.</p>
+<p>When TCP Optimization is used, Router 1 will intercept and terminate the TCP connection from the client and establish a TCP session with Router 2 that will be optimized. Likewise Router 2 will create a TCP session with Server.</p>
+<p><strong>Note</strong> All this process is transparent to the client/server and data is going to be cached on the routers to keep the sessions alive.</p>
+<p>The IOS-XE SD-WAN devices use BBR algorithm which uses information about RTT and available bandwidth to optimize the connection. If you&rsquo;d like to learn more I would recommend checking <a href="https://www.youtube.com/watch?v=VIX45zMMZG8&amp;t=1607s">this video</a> from Neal Cardwell.</p>
+<p>The current TCP Optimization implementation defines different device roles:</p>
+<ul>
+<li><strong>Controller Node:</strong> Device that intercepts and distributes traffic to Service Nodes.</li>
+<li><strong>Service Node:</strong> Optimization engines for traffic acceleration.</li>
+</ul>
+<p>In a real world scenario the recommendation is to have optimization services on Branches and Data Centers. There are different requirements based on the volume of traffic those devices will handle. I suggest reading <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/appqoe/ios-xe-17/appqoe-book-xe/m-tcp-optimization.html">Cisco&rsquo;s Documentation</a> to understand platform requirements and more.</p>
+<p>On the branches, it is common to use an <em>Integrated Service Node</em>  meaning that a single device can intercept, distribute and optimize traffic. On the other hand, on the Data Center, a cluster of <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/appqoe/ios-xe-17/appqoe-book-xe/m-support-for-multiple-appqoe-service-nodes.html">External Service Nodes</a> is required to achieve higher throughput and distribute higher volumes of traffic amongst cluster members.</p>
+<p>Overall TCP Optimization is an intensive process for the devices and it&rsquo;s crucial to confirm platform requirements. For instance, my demo environment has two Catalyst 8000V with 8 CPUs and 16 GB of RAM, requirements for a small deployment.</p>
+<p>Let&rsquo;s see in practice what effect Optimization has on the traffic. To demonstrate it, I will take a packet capture on the WAN side with and without optimization:</p>
+<h3 id="window-scaling-without-optimization">Window Scaling Without Optimization<a hidden class="anchor" aria-hidden="true" href="#window-scaling-without-optimization">#</a></h3>
+<p>Let&rsquo;s see how the window scaling behaves without optimization</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/04/router1-tcp-opt-disabled.png"></p>
+<p>Notice that the window size remained mostly stable at around 1,000,000 Bytes after around 5 seconds</p>
+<h3 id="window-scaling-with-optimization">Window Scaling With Optimization<a hidden class="anchor" aria-hidden="true" href="#window-scaling-with-optimization">#</a></h3>
+<p>Let&rsquo;s look at the same information with optimization enabled.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/04/router1-tcp-opt-enabled.png"></p>
+<p>Notice how the window size remained changing throughout the session, quickly and aggressively recovering after going down.</p>
+<p>Why is the window scaling so important? I asked ChatGPT to explain it simply and concisely:</p>
+<blockquote>
+<p><em>Window scaling is crucial in high-latency or high-bandwidth networks because it allows TCP to use a larger receive window, which directly impacts how many bytes in flight (i.e., unacknowledged data) a sender can have. Without window scaling, the max window size is 65,535 bytes — too small for high-speed links, leading to underutilization. With window scaling, the window can grow to gigabytes, enabling the sender to keep more data &ldquo;in flight&rdquo; and maintain high throughput despite delays.</em></p>
+</blockquote>
+<p>In summary, the TCP session is split into three segments, with the optimizing routers advertising higher window scaling and managing connections with the client and server. Traffic is now governed by the BBR algorithm to maximize throughput.</p>
+<h2 id="configuration">Configuration<a hidden class="anchor" aria-hidden="true" href="#configuration">#</a></h2>
+<p>To configure this feature, you can use either Feature Templates and Configuration Groups (with version 20.15 or above). In my case, I will use Configuration Groups and will make use only of Internal Service Nodes on both sides.</p>
+<p>To start, I add the feature &ldquo;App QoE&rdquo; on the Service Profile with the following configuration:</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/04/tcp-opt-config.png"></p>
+<ul>
+<li><strong>Service Node</strong> to perform acceleration</li>
+<li><strong>Forwarder</strong> to also act as a Controller Node</li>
+</ul>
+<p>This creates the service node configuration</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>interface VirtualPortGroup2
+</span></span><span style="display:flex;"><span>  no shutdown
+</span></span><span style="display:flex;"><span>  ip address 192.168.2.1 255.255.255.0
+</span></span><span style="display:flex;"><span>  service-insertion appqoe
+</span></span><span style="display:flex;"><span>!
+</span></span><span style="display:flex;"><span>service-insertion appnav-controller-group appqoe ACG-APPQOE
+</span></span><span style="display:flex;"><span>  appnav-controller 192.168.2.1
+</span></span><span style="display:flex;"><span>!
+</span></span><span style="display:flex;"><span>service-insertion service-node-group appqoe SNG-APPQOE
+</span></span><span style="display:flex;"><span>  service-node 192.168.2.2
+</span></span><span style="display:flex;"><span>!
+</span></span><span style="display:flex;"><span>service-insertion service-context appqoe/1
+</span></span><span style="display:flex;"><span>  appnav-controller-group ACG-APPQOE
+</span></span><span style="display:flex;"><span>  service-node-group      SNG-APPQOE
+</span></span><span style="display:flex;"><span>  cluster-type            integrated-service-node
+</span></span><span style="display:flex;"><span>  enable
+</span></span><span style="display:flex;"><span>  vrf global
+</span></span><span style="display:flex;"><span>!
+</span></span></code></pre></div><p>Status should be <strong>&ldquo;Running&rdquo;</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Lisbon_10-1#show sdwan appqoe tcpopt status 
+</span></span><span style="display:flex;"><span>==========================================================
+</span></span><span style="display:flex;"><span>                  TCP-OPT Status
+</span></span><span style="display:flex;"><span>==========================================================
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Status
+</span></span><span style="display:flex;"><span>------
+</span></span><span style="display:flex;"><span>TCP OPT Operational State      : RUNNING
+</span></span><span style="display:flex;"><span>TCP Proxy Operational State    : RUNNING
+</span></span></code></pre></div><p>Next, I create a simple data policy matching traffic between client and server and select the action to be <em>AppQoE Optimization</em> and check the box of <em>TCP Optimization</em>.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/04/policy-config.png"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>vsmart_1# show running-config policy 
+</span></span><span style="display:flex;"><span>policy
+</span></span><span style="display:flex;"><span> data-policy _VPN_10_AppQoE
+</span></span><span style="display:flex;"><span>  vpn-list VPN_10
+</span></span><span style="display:flex;"><span>   sequence 1
+</span></span><span style="display:flex;"><span>    match
+</span></span><span style="display:flex;"><span>     source-data-prefix-list      BR10_172_16_10_0
+</span></span><span style="display:flex;"><span>     destination-data-prefix-list DC_100_172_16_100_0
+</span></span><span style="display:flex;"><span>    !
+</span></span><span style="display:flex;"><span>    action accept
+</span></span><span style="display:flex;"><span>     tcp-optimization
+</span></span><span style="display:flex;"><span>     service-node-group SNG-APPQOE
+</span></span><span style="display:flex;"><span>    !
+</span></span><span style="display:flex;"><span>   !
+</span></span><span style="display:flex;"><span>   sequence 11
+</span></span><span style="display:flex;"><span>    match
+</span></span><span style="display:flex;"><span>     source-data-prefix-list      DC_100_172_16_100_0
+</span></span><span style="display:flex;"><span>     destination-data-prefix-list BR10_172_16_10_0
+</span></span><span style="display:flex;"><span>    !
+</span></span><span style="display:flex;"><span>    action accept
+</span></span><span style="display:flex;"><span>     tcp-optimization
+</span></span><span style="display:flex;"><span>     service-node-group SNG-APPQOE
+</span></span><span style="display:flex;"><span>    !
+</span></span><span style="display:flex;"><span>   !
+</span></span><span style="display:flex;"><span>   default-action accept
+</span></span><span style="display:flex;"><span>  !
+</span></span><span style="display:flex;"><span> !
+</span></span></code></pre></div><p><strong>Note</strong> the direction to apply this policy should be ALL on both sides.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>vsmart_1# show running-config apply-policy 
+</span></span><span style="display:flex;"><span>apply-policy
+</span></span><span style="display:flex;"><span> site-list BR_10
+</span></span><span style="display:flex;"><span>  data-policy _VPN_10_AppQoE all
+</span></span><span style="display:flex;"><span> !
+</span></span><span style="display:flex;"><span> site-list DC_100
+</span></span><span style="display:flex;"><span>  data-policy _VPN_10_AppQoE all
+</span></span><span style="display:flex;"><span> !
+</span></span><span style="display:flex;"><span>!
+</span></span></code></pre></div><h2 id="verifying-tcp-optimization">Verifying TCP Optimization<a hidden class="anchor" aria-hidden="true" href="#verifying-tcp-optimization">#</a></h2>
+<p>In order to quickly confirm traffic is being optimized, we can enable On-Demand Troubleshooting and select a period of time.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/04/odt-tcp.png"></p>
+<p>Also, from the real-time information we can see the flow list.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/04/rt-tcp.png"></p>
+<p>The Services column indicates the TCP Optimization is applied to those flows.</p>
+<h2 id="testing-tcp-optimization-performance">Testing TCP Optimization Performance<a hidden class="anchor" aria-hidden="true" href="#testing-tcp-optimization-performance">#</a></h2>
+<p>To evaluate the impact of TCP Optimization, I ran iperf tests with varying delay parameters to observe where the feature delivers the most benefit. While this isn’t a professional lab setup, it offers valuable information into how the optimization behaves in practice.</p>
+<p><strong>Note</strong>  My iperf traffic is not encrypted. It&rsquo;s not possible to optimize encrypted traffic without TLS/SSL Decryption</p>
+<p>Some testing details:</p>
+<ul>
+<li>Throughput is capped at <strong>250 Mbps</strong> on the routers.</li>
+<li>I used <strong>4 parallel streams</strong>, each simulating a <strong>100 MB download</strong>:</li>
+</ul>
+<blockquote>
+<p>iperf -c 172.16.100.11 -n 100MB -P 4 -i 15 -R</p>
+</blockquote>
+<p>For consistency, I ran each scenario 5 times, discarded the highest and lowest results, and averaged the remaining 3 samples</p>
+<p>The following table shows the results:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Delay</th>
+          <th>TCP Opt</th>
+          <th>BW (Mbps)</th>
+          <th>Time (s)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0</td>
+          <td>Disabled</td>
+          <td>248</td>
+          <td>~ 13</td>
+      </tr>
+      <tr>
+          <td>0</td>
+          <td>Enabled</td>
+          <td>121,6</td>
+          <td>~ 27</td>
+      </tr>
+      <tr>
+          <td>50</td>
+          <td>Disabled</td>
+          <td>99,7</td>
+          <td>~ 33</td>
+      </tr>
+      <tr>
+          <td>50</td>
+          <td>Enabled</td>
+          <td>124</td>
+          <td>~ 26</td>
+      </tr>
+      <tr>
+          <td>100</td>
+          <td>Disabled</td>
+          <td>71</td>
+          <td>~ 46</td>
+      </tr>
+      <tr>
+          <td>100</td>
+          <td>Enabled</td>
+          <td>131</td>
+          <td>~ 25</td>
+      </tr>
+      <tr>
+          <td>150</td>
+          <td>Disabled</td>
+          <td>66</td>
+          <td>~ 49</td>
+      </tr>
+      <tr>
+          <td>150</td>
+          <td>Enabled</td>
+          <td>125</td>
+          <td>~ 26</td>
+      </tr>
+      <tr>
+          <td>200</td>
+          <td>Disabled</td>
+          <td>59</td>
+          <td>~ 56</td>
+      </tr>
+      <tr>
+          <td>200</td>
+          <td>Enabled</td>
+          <td>131</td>
+          <td>~ 25</td>
+      </tr>
+      <tr>
+          <td>250</td>
+          <td>Disabled</td>
+          <td>63</td>
+          <td>~ 52</td>
+      </tr>
+      <tr>
+          <td>250</td>
+          <td>Enabled</td>
+          <td>126</td>
+          <td>~ 26</td>
+      </tr>
+  </tbody>
+</table>
+<p>Here&rsquo;s a visual representation of the results</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/04/charts.png"></p>
+<p>This is what we can conclude from the data:</p>
+<ol>
+<li>
+<p>With 0 ms delay, optimization actually <strong>reduces</strong> performance (121 Mbps vs 248 Mbps), due to overhead introduced by the feature.</p>
+</li>
+<li>
+<p>As delay increases optimization consistently <strong>improves throughput</strong> and <strong>reduces transfer time</strong>, this is seen already at 50 ms delay.</p>
+</li>
+<li>
+<p><strong>Performance degrades</strong> significantly <strong>without TCP optimization</strong>. Bandwidth drops from 248 Mbps at 0 ms to ~59–63 Mbps at 200–250 ms. Time also increases proportionally.</p>
+</li>
+<li>
+<p><strong>Performance is stable</strong> across different delay values <strong>with TCP optimization</strong>. Throughput stays around 125–131 Mbps even at high delays. Transfer time is also consistent at around ~26s.</p>
+</li>
+</ol>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<p>TCP Optimization is highly effective in mitigating the impact of latency on TCP performance. While it introduces some overhead in low-latency conditions, its benefits become more and more evident as delay increases. In scenarios with 100 ms delay or more, optimization can help doubling the throughput and reducing transfer time. If you are thinking about enabling it, take into account that based on the router model, you will get different performance.</p>
+<p>Also, this feature shouldn&rsquo;t be enabled for all traffic, instead enable it for a specific application or set of applications that need acceleration. Finally, this feature brings higher benefits on inter-continental lines, satellite transports or similar high latency links.</p>
+<p>Hope this post was useful and see you in the next one!</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">NetWithAlex</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
