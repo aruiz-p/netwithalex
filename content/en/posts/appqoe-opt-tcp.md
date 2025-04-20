@@ -5,7 +5,7 @@ category:
   - appqoe
 draft: false
 date: "2025-04-01T14:20:31+00:00"
-title: "AppQoe Series: TCP Optimization"
+title: "AppQoe Series: Optimización TCP "
 summary: Discover how SD-WAN enhances TCP performance. Learn about key optimization techniques that improve application reliability and user experience.
 url: /appqoe-tcp-opt/
 tag:
@@ -16,7 +16,7 @@ tag:
 
 Have you ever used a business app that feels painfully slow. Maybe video calls freeze, or a web dashboard takes forever to load. These (and others) are signs that your WAN might be struggling under the hood.
 
-The good news? Cisco SD-WAN includes a suite of powerful technologies designed to boost performance over unreliable or high-latency links. In this series, we’ll break down three key features that can significantly improve application experience across your network: TCP Optimization, Forward Error Correction (FEC), and Packet Duplication.
+The good news? Cisco SD-WAN includes a suite of powerful technologies designed to boost performance over unreliable or high-latency links. In this series, we’ll break down three key features that can significantly improve application experience across your network: **_TCP Optimization, Forward Error Correction (FEC), and Packet Duplication._**
 
 In this first post, we’ll explore TCP Optimization - how it works, when to use it, and why it can be a game-changer for your users, especially over high-delay connections.
 

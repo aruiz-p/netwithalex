@@ -16,7 +16,7 @@ tag:
 
 ¿Alguna vez has usado una aplicación que se siente demasiado lenta? Tal vez las videollamadas se congelan o un portal web tarda una eternidad en cargar. Estos (y otros) son signos de que tu red WAN podría estar teniendo problemas.
 
-¿La buena noticia? Cisco SD-WAN incluye un conjunto de tecnologías diseñadas para mejorar el rendimiento en enlaces poco confiables o con alta latencia. En esta serie, desglosaremos tres funciones clave que pueden mejorar significativamente la experiencia de las aplicaciones en tu red: Optimización TCP, Forward Error Correction (FEC) y Duplicación de Paquetes.
+¿La buena noticia? Cisco SD-WAN incluye un conjunto de tecnologías diseñadas para mejorar el rendimiento en enlaces poco confiables o con alta latencia. En esta serie, desglosaremos tres funciones clave que pueden mejorar significativamente la experiencia de las aplicaciones en tu red: **_Optimización TCP, Forward Error Correction (FEC) y Duplicación de Paquetes**_.
 
 En este primer post, exploraremos la Optimización TCP: cómo funciona, cuándo utilizarla y por qué puede marcar una gran diferencia para tus usuarios, especialmente en conexiones con alta latencia.
 
@@ -24,7 +24,7 @@ En este primer post, exploraremos la Optimización TCP: cómo funciona, cuándo 
 
 El objetivo de la Optimización TCP es ajustar finamente las conexiones TCP para mejorar su rendimiento. Esto es especialmente útil cuando hay enlaces con alta latencia involucrados.
 
-Los routers SD-WAN actuarán como proxies, lo que significa que interceptarán las conexiones TCP y las ajustarán para obtener un mejor desempeño. Veamos un ejemplo visua
+Los routers SD-WAN actuarán como proxies, lo que significa que interceptarán las conexiones TCP y las ajustarán para obtener un mejor desempeño. Veamos un ejemplo visual.
 
 ![](/wp-content/uploads/2025/04/tcp-opt-topo.png)
 
@@ -34,7 +34,7 @@ Cuando se utiliza la Optimización TCP, el Router 1 interceptará y terminará l
 
 **Nota** Todo este proceso es transparente para el cliente y el servidor, y los datos serán almacenados en caché en los routers para mantener activas las sesiones.
 
-Los equipos IOS-XE SD-WAN usan el algoritmo BBR el cual utiliza informacion sobre RTT (Round Trip Time) and ancho de banda disponible para optimizar la conexión. Si te gustaría profundizar en el tema te recomiendo ver [este vídeo](https://www.youtube.com/watch?v=VIX45zMMZG8&t=1607s) de Neal Cardwell. 
+Los equipos IOS-XE SD-WAN usan el algoritmo BBR el cual utiliza información sobre RTT (Round Trip Time) and ancho de banda disponible para optimizar la conexión. Si te gustaría profundizar en el tema te recomiendo ver [este vídeo](https://www.youtube.com/watch?v=VIX45zMMZG8&t=1607s) de Neal Cardwell. 
 
 La implementación actual de Optimization TCP tiene definidos dos roles:
 
@@ -51,7 +51,7 @@ Veamos en la práctica qué efecto tiene la optimización TCP en el tráfico. Pa
 
 ### Window Scaling Sin Optimización 
 
-Let's see how the window scaling behaves without optimization
+Veamos como se comporta el window scalind sin optimización 
 
 ![](/wp-content/uploads/2025/04/router1-tcp-opt-disabled.png)
 
@@ -167,15 +167,15 @@ apply-policy
  ```
 ## Verificando la Optimización TCP
 
-In order to quickly confirm traffic is being optimized, we can enable On-Demand Troubleshooting and select a period of time. 
+Para verificar que el tráfico está siendo optimizado, podemos habilitar On-Demand Troubleshooting y seleccionar un periodo de tiempo. 
 
 ![](/wp-content/uploads/2025/04/odt-tcp.png)
 
-Also, from the real-time information we can see the flow list. 
+También, con la información en tiempo real podemos sacar la lista de flows que están siendo optimizados
 
 ![](/wp-content/uploads/2025/04/rt-tcp.png)
 
-The Services column indicates the TCP Optimization is applied to those flows. 
+La columna de _Services_ indica que la Optimización TCP se está aplicando a esos flujos
 
  ## Probando el rendimiento de la Optimization TCP
 
