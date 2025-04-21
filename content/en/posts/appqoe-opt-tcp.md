@@ -5,7 +5,7 @@ category:
   - appqoe
 draft: false
 date: "2025-04-01T14:20:31+00:00"
-title: "AppQoe Series: Optimización TCP "
+title: "AppQoe Series: TCP Optimization "
 summary: Discover how SD-WAN enhances TCP performance. Learn about key optimization techniques that improve application reliability and user experience.
 url: /appqoe-tcp-opt/
 tag:
