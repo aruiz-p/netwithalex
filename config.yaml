@@ -4,7 +4,7 @@ languageCode: en-US
 title: NetWithAlex
 theme: 
   - PaperMod
-  - "plausible-hugo"
+  - plausible-hugo
 taxonomies:
   category: category
   tag: tag
