@@ -6,8 +6,15 @@
     <description>Recent content in Appqoe on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 01 Apr 2025 14:20:31 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Apr 2025 14:20:31 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/category/appqoe/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AppQoe Series: Forward Error Correction (FEC)</title>
+      <link>http://localhost:1313/appqoe-tcp-opt/</link>
+      <pubDate>Tue, 22 Apr 2025 14:20:31 +0000</pubDate>
+      <guid>http://localhost:1313/appqoe-tcp-opt/</guid>
+      <description>Discover how SD-WAN enhances TCP performance. Learn about key optimization techniques that improve application reliability and user experience.</description>
+    </item>
     <item>
       <title>AppQoe Series: TCP Optimization</title>
       <link>http://localhost:1313/appqoe-tcp-opt/</link>

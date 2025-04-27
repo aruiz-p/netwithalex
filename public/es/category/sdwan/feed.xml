@@ -9,7 +9,14 @@
     <lastBuildDate>Tue, 01 Apr 2025 14:20:31 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/es/category/sdwan/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Serie AppQoE: TCP Optimization</title>
+      <title>Serie AppQoE: Optimización TCP</title>
+      <link>http://localhost:1313/appqoe-opt-tcp/</link>
+      <pubDate>Tue, 01 Apr 2025 14:20:31 +0000</pubDate>
+      <guid>http://localhost:1313/appqoe-opt-tcp/</guid>
+      <description>Descubre cómo SD-WAN mejora el rendimiento de TCP. Conoce las principales técnicas de optimización que aumentan el rendimiento de las aplicaciones y mejoran la experiencia del usuario.</description>
+    </item>
+    <item>
+      <title>Serie AppQoE: Optimización TCP</title>
       <link>http://localhost:1313/appqoe-opt-tcp/</link>
       <pubDate>Tue, 01 Apr 2025 14:20:31 +0000</pubDate>
       <guid>http://localhost:1313/appqoe-opt-tcp/</guid>

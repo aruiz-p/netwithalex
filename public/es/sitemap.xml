@@ -59,16 +59,9 @@
   </url><url>
     <loc>http://localhost:1313/appqoe-opt-tcp/</loc>
     <lastmod>2025-04-01T14:20:31+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/appqoe-tcp-opt/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/appqoe-opt-tcp/"
-                />
+  </url><url>
+    <loc>http://localhost:1313/appqoe-opt-tcp/</loc>
+    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/es/tag/</loc>
     <lastmod>2025-04-01T14:20:31+00:00</lastmod>
