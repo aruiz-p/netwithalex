@@ -4,7 +4,6 @@ languageCode: en-US
 title: NetWithAlex
 theme: 
   - PaperMod
-  - plausible-hugo
 taxonomies:
   category: category
   tag: tag
@@ -22,10 +21,6 @@ params:
     - name: "email"
       url: "mailto:netwithalex@gmail.com"
   env: production
-  plausible:
-    enable: true  
-    domain: netwithalex.blog
-    gitstar: false  
   defaultTheme: auto
   disableThemeToggle: false
   showShareButtons: false
