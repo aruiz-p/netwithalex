@@ -24,7 +24,8 @@ params:
   env: production
   plausible:
     enable: true  
-    domain: netwithalex.blog  
+    domain: netwithalex.blog
+    gitstar: false  
   defaultTheme: auto
   disableThemeToggle: false
   showShareButtons: false
