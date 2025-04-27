@@ -2,7 +2,9 @@ baseURL: https://netwithalex.blog
 defaultContentLanguage: en
 languageCode: en-US
 title: NetWithAlex
-theme: PaperMod
+theme: 
+  - PaperMod
+  - "plausible-hugo"
 taxonomies:
   category: category
   tag: tag
@@ -20,6 +22,9 @@ params:
     - name: "email"
       url: "mailto:netwithalex@gmail.com"
   env: production
+  plausible:
+    enable: true  
+    domain: netwithalex.blog  
   defaultTheme: auto
   disableThemeToggle: false
   showShareButtons: false

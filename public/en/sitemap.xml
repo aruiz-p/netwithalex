@@ -2,38 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/category/appqoe/</loc>
-    <lastmod>2025-04-22T14:20:31+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/category/appqoe/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/category/appqoe/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/appqoe-tcp-opt/</loc>
-    <lastmod>2025-04-22T14:20:31+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/category/</loc>
-    <lastmod>2025-04-22T14:20:31+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/category/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/category/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/tag/optimization/</loc>
-    <lastmod>2025-04-22T14:20:31+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/posts/</loc>
     <lastmod>2025-04-22T14:20:31+00:00</lastmod>
     <xhtml:link
@@ -47,8 +15,40 @@
                 href="http://localhost:1313/posts/"
                 />
   </url><url>
+    <loc>http://localhost:1313/category/appqoe/</loc>
+    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/category/appqoe/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/category/appqoe/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/appqoe-tcp-opt/</loc>
+    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/category/</loc>
+    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/category/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/category/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/tag/optimization/</loc>
+    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/category/sdwan/</loc>
-    <lastmod>2025-04-22T14:20:31+00:00</lastmod>
+    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -61,7 +61,7 @@
                 />
   </url><url>
     <loc>http://localhost:1313/tag/</loc>
-    <lastmod>2025-04-22T14:20:31+00:00</lastmod>
+    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -74,7 +74,7 @@
                 />
   </url><url>
     <loc>http://localhost:1313/tag/tcp/</loc>
-    <lastmod>2025-04-22T14:20:31+00:00</lastmod>
+    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -85,9 +85,6 @@
                 hreflang="en"
                 href="http://localhost:1313/tag/tcp/"
                 />
-  </url><url>
-    <loc>http://localhost:1313/appqoe-tcp-opt/</loc>
-    <lastmod>2025-04-01T14:20:31+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tag/sdwan/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
