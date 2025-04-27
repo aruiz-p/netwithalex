@@ -3,7 +3,7 @@ author: Alex
 category:
   - sdwan
   - appqoe
-draft: false
+draft: true
 date: "2025-04-22T14:20:31+00:00"
 title: "Serie AppQoE: Forward Error Correction (FEC)"
 summary: Descubre cómo SD-WAN mejora el rendimiento de aplicaciones expuestas a transportes irregulares y con pérdidas de paquetes.  
