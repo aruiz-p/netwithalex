@@ -7,6 +7,7 @@ date: "2024-03-15T18:06:34+00:00"
 guid: https://netwithalex.blog/?p=602
 title: Tracking SD-WAN incidents with Service Now
 description: Learn how to integrate Cisco SD-WAN with ServiceNow and automate your incident management
+summary: Learn how to integrate Cisco SD-WAN with ServiceNow and automate your incident management
 url: /tracking-sd-wan-incidents-with-service-now/
 
 ---

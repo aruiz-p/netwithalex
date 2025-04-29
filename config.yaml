@@ -2,6 +2,7 @@ baseURL: https://netwithalex.blog
 defaultContentLanguage: en
 languageCode: en-US
 title: NetWithAlex
+Description: A technical blog about SD-WAN, automation, and modern networking. Learn, explore, and dive deep into network solutions with practical examples.
 theme: 
   - plausible-hugo
   - PaperMod

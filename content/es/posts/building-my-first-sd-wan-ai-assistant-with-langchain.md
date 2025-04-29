@@ -4,6 +4,7 @@ category:
   - ai
   - sd-wan
 date: "2024-07-10T18:51:08+00:00"
+description: Descubre cómo los LLMs se pueden integrar con Cisco SD-WAN para hacer troubleshooting de manera sencilla y sin estrés
 summary: Descubre cómo los LLMs se pueden integrar con Cisco SD-WAN para hacer troubleshooting de manera sencilla y sin estrés
 tag:
   - genai

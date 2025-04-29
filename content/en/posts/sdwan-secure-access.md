@@ -6,6 +6,7 @@ category:
   - secure access
 date: "2025-02-05T14:20:31+00:00"
 title: Securing the Edge with Cisco SD-WAN and Secure Access
+description: Discover how Cisco SD-WAN and Cisco Secure Access work together to enhance network performance and security in an internet first world.
 summary: Discover how Cisco SD-WAN and Cisco Secure Access work together to enhance network performance and security in an internet first world.
 url: /sdwan-sse-integration/
 tag:

@@ -245,6 +245,9 @@
     <h1 class="post-title entry-hint-parent">
       Enhanced App Aware Routing
     </h1>
+    <div class="post-description">
+      Aprende los beneficios de EAAR y cómo implementarlo en tu red
+    </div>
     <div class="post-meta"><span title='2025-01-05 14:20:31 +0000 WET'>enero 5, 2025</span>&nbsp;·&nbsp;16 min&nbsp;·&nbsp;Alex&nbsp;|&nbsp;Traducciones:
 <ul class="i18n_list">
     <li>
@@ -333,7 +336,7 @@
 <li><strong>Pérdida de WAN</strong> - Cualquier pérdida de paquetes fuera del router</li>
 </ul>
 <p>Para calcular la pérdida local, el router determinará la cantidad de paquetes que generó en comparación con la cantidad de paquetes que realmente fueron enviados. Para obtener la pérdida en el WAN, los routers SD-WAN vecinos informarán la cantidad de paquetes recibidos y utilizarán BFD (TLVs de Monitoreo de Ruta) para enviar esta información de vuelta al router original.</p>
-<p>Hasta este punto, existe una mejora importante en cómo se realiza la medición de pérdidas, sin embargo, esto podría mejorarse aún más al aprovechar mediciones <em>per queue</em> de QoS. Para lograr esto, necesitamos asociar una clase de SLA con una <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-xebook-xe/application-aware-routing.html#concept_gjc_5pm">App Probe Class</a>. Veamos un ejemplo.</p>
+<p>Hasta este punto, existe una mejora importante en cómo se realiza la medición de pérdidas, sin embargo, esto podría mejorarse aún más al aprovechar mediciones <em>per queue</em> de QoS. Para lograr esto, necesitamos asociar una clase de SLA con una <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-xebook-xe/application-aware-routing.html#concept_gjc_5pm" target="_blank" rel="nofollow noopener noreferrer">App Probe Class</a>. Veamos un ejemplo.</p>
 <p><img loading="lazy" src="/wp-content/uploads/2025/02/app-probe.png"></p>
 <p>Con esta App Probe Class, el router utilizará (y generará paquetes de BFD) con DSCP 18, imitando el tráfico menos importante que estará sujeto a diferentes reglas y rutas en los routers locales y externos. Esto proporcionará una medición más precisa de la pérdida de paquetes para cada tipo de tráfico en los transportes especificados. Si no hay <em>inline data</em>, BFD se usa para obtener mediciones.</p>
 <p><strong>Nota</strong> Si usas GRE, la medición <em>per queue</em> <strong>no</strong>  está disponible.</p>
@@ -415,7 +418,7 @@
 <p><strong>Nota</strong> Para usar tiempos personalizados, la configuración debe hacerse a través de plantillas CLI.</p>
 <p>EAAR sigue el mismo principio fundamental que AAR, utilizando buckets que van rotando para calcular la pérdida promedio, la latencia y la jitter. Con el modo <em>aggressive</em>, el tráfico tomaría entre 10 y 60 segundos en cambiar, dependiendo de qué tan severo sea el deterioro.</p>
 <p>El <em>Dampening Multiplier</em> (<em>poll interval</em> <strong>x</strong> <em>Dampening Multiplier</em>) es de 1200 segundos, lo que significa que antes de cambiar el tráfico a un transporte, debe ser estable durante 20 minutos.</p>
-<p>En mi laboratorio, estoy usando <em>Configuration Groups</em>, sin embargo, esto está <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/m-enhanced-application-aware-routing.html#configure-enhanced-application-aware-routing-using-a-feature-template-in-cisco-sd-wan-manager">disponible a través de Templates</a> también.</p>
+<p>En mi laboratorio, estoy usando <em>Configuration Groups</em>, sin embargo, esto está <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/m-enhanced-application-aware-routing.html#configure-enhanced-application-aware-routing-using-a-feature-template-in-cisco-sd-wan-manager" target="_blank" rel="nofollow noopener noreferrer">disponible a través de Templates</a> también.</p>
 <p><img loading="lazy" src="/wp-content/uploads/2025/02/eaar-config-groups.png"></p>
 <p>Puedes usar una variable, en lugar de un valor global, para que sea aplicable también a los dispositivos que no correrán EAAR. En este caso, los dispositivos habilitados para EAAR harán <em>fallback</em> a AAR.</p>
 <p>La siguiente configuración se agrega a los dispositivos:</p>

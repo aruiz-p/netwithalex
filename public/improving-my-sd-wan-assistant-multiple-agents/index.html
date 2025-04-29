@@ -245,6 +245,9 @@
     <h1 class="post-title entry-hint-parent">
       Improving my SD-WAN Assistant - Multiple agents
     </h1>
+    <div class="post-description">
+      Learn how an LLM agentic approach can be used to troubleshoot your SD-WAN network
+    </div>
     <div class="post-meta"><span title='2024-07-28 14:56:45 +0000 +0000'>July 28, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;alex&nbsp;|&nbsp;Translations:
 <ul class="i18n_list">
     <li>
@@ -283,13 +286,13 @@
 </div>
 
   <div class="post-content"><h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
-<p>In my <a href="/building-my-first-sd-wan-ai-assistant-with-langchain/">last post</a>, I created a Cisco SD-WAN assistant to help me run NWPI traces and troubleshoot the network. The interaction with the assistant required the user to answer questions until receiving information about a particular flow and potential problems. In this post my goal is to use multiple agents and see if I can get to the same conclusion with less human interaction. Repository can be found <a href="https://github.com/aruiz-p/sdwan-langgraph">here</a></p>
+<p>In my <a href="/building-my-first-sd-wan-ai-assistant-with-langchain/">last post</a>, I created a Cisco SD-WAN assistant to help me run NWPI traces and troubleshoot the network. The interaction with the assistant required the user to answer questions until receiving information about a particular flow and potential problems. In this post my goal is to use multiple agents and see if I can get to the same conclusion with less human interaction. Repository can be found <a href="https://github.com/aruiz-p/sdwan-langgraph" target="_blank" rel="nofollow noopener noreferrer">here</a></p>
 <h2 id="getting-started">Getting Started<a hidden class="anchor" aria-hidden="true" href="#getting-started">#</a></h2>
-<p>To achieve this, I will use <a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> officially defined as:</p>
+<p>To achieve this, I will use <a href="https://langchain-ai.github.io/langgraph/" target="_blank" rel="nofollow noopener noreferrer">LangGraph</a> officially defined as:</p>
 <blockquote>
 <p>Una librería basada en LangChain que permite construir aplicaciones multiagente con estados persistentes</p>
 </blockquote>
-<p>There are <a href="https://langchain-ai.github.io/langgraph/tutorials/#multi-agent-systems">different approaches</a>, but I decided to build a structure where there is a supervisor that orchestrates the workflow and decides who should act next. The idea is to build a graph that represents the agents and how they are connected. The graph illustrates the order in which agents can be executed.</p>
+<p>There are <a href="https://langchain-ai.github.io/langgraph/tutorials/#multi-agent-systems" target="_blank" rel="nofollow noopener noreferrer">different approaches</a>, but I decided to build a structure where there is a supervisor that orchestrates the workflow and decides who should act next. The idea is to build a graph that represents the agents and how they are connected. The graph illustrates the order in which agents can be executed.</p>
 <p>In my case I have 3 agents:</p>
 <ol>
 <li><strong>Supervisor</strong> - This agent is in charge of receiving user input and deciding who should act next. Also, once others agents finish their tasks, they will report back to it and a new routing decision will be made. The supervisor is the only agent that can decide when to go back to the user with a response.</li>
@@ -303,7 +306,7 @@
 <p>The continuous arrow indicate the next step that <strong>must</strong> be taken. For example, after &ldquo;start&rdquo; the next agent must be the supervisor. Tracer and Reviewer must go to the supervisor.</p>
 <p>Even though this is a simple graph, this supervisor approach is very powerful.</p>
 <h3 id="how-the-supervisor-routes">How the supervisor routes?<a hidden class="anchor" aria-hidden="true" href="#how-the-supervisor-routes">#</a></h3>
-<p>The supervisor plays a critical role as it determines who should act next. This is defined in the following <a href="https://platform.openai.com/docs/guides/function-calling">function</a>:</p>
+<p>The supervisor plays a critical role as it determines who should act next. This is defined in the following <a href="https://platform.openai.com/docs/guides/function-calling" target="_blank" rel="nofollow noopener noreferrer">function</a>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span>options <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;FINISH&#34;</span>] <span style="color:#f92672">+</span> members
 </span></span><span style="display:flex;"><span>function_def <span style="color:#f92672">=</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;route&#34;</span>,

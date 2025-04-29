@@ -5,6 +5,7 @@ category:
 date: "2025-01-05T14:20:31+00:00"
 title: Enhanced App Aware Routing
 summary: Aprende los beneficios de EAAR y cómo implementarlo en tu red
+description: Aprende los beneficios de EAAR y cómo implementarlo en tu red
 url: /mejorado-aar/
 tag:
   - eaar

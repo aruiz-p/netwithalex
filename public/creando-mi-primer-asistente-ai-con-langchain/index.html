@@ -245,6 +245,9 @@
     <h1 class="post-title entry-hint-parent">
       Creando mi primer asistente de AI SD-WAN con Langchain
     </h1>
+    <div class="post-description">
+      Descubre cómo los LLMs se pueden integrar con Cisco SD-WAN para hacer troubleshooting de manera sencilla y sin estrés
+    </div>
     <div class="post-meta"><span title='2024-07-10 18:51:08 +0000 +0000'>julio 10, 2024</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Alex&nbsp;|&nbsp;Traducciones:
 <ul class="i18n_list">
     <li>
@@ -295,13 +298,13 @@
 </div>
 
   <div class="post-content"><h2 id="introducción">Introducción<a hidden class="anchor" aria-hidden="true" href="#introducción">#</a></h2>
-<p>Hace tiempo que quería subirme al tren de los LLM y aprender a usar uno de los frameworks más populares. Hace unos meses, vi una excelente <a href="https://www.ciscolive.com/on-demand/on-demand-library.html?search=Jesus&amp;search=jesus#/session/1707505627331001pilj">presentación en Cisco Live</a> de mi buen amigo Jesús, y eso me dio la determinación que necesitaba para finalmente profundizar en el tema.</p>
+<p>Hace tiempo que quería subirme al tren de los LLM y aprender a usar uno de los frameworks más populares. Hace unos meses, vi una excelente <a href="https://www.ciscolive.com/on-demand/on-demand-library.html?search=Jesus&amp;search=jesus#/session/1707505627331001pilj" target="_blank" rel="nofollow noopener noreferrer">presentación en Cisco Live</a> de mi buen amigo Jesús, y eso me dio la determinación que necesitaba para finalmente profundizar en el tema.</p>
 <p>Desde entonces, he estado investigando y pensando en un buen caso de uso que pudiera servir como objetivo para mi proceso de aprendizaje. Después de considerar diferentes opciones, decidí construir un asistente de IA para SD-WAN que pudiera ayudarme a solucionar problemas relacionados con esta tecnología. Aprovechando las herramientas disponibles, decidí que mi asistente sería un experto en la funcionalidad de  <a href="/Network-Wide-Path-Insights-An-Introduction/">Network Wide Rath Insights</a>.</p>
-<p>En esta publicación, quiero compartir un poco de mi experiencia para construirlo y, por supuesto, mostrar algunos de los resultados. Para entenderlo mejor, sugiero tener el <a href="https://github.com/aruiz-p/sdwan-assistant">repositorio de Github</a> abierto y consultarlo a medida que avanzas por la publicación.</p>
+<p>En esta publicación, quiero compartir un poco de mi experiencia para construirlo y, por supuesto, mostrar algunos de los resultados. Para entenderlo mejor, sugiero tener el <a href="https://github.com/aruiz-p/sdwan-assistant" target="_blank" rel="nofollow noopener noreferrer">repositorio de Github</a> abierto y consultarlo a medida que avanzas por la publicación.</p>
 <h2 id="sobre-la-configuración">Sobre la configuración<a hidden class="anchor" aria-hidden="true" href="#sobre-la-configuración">#</a></h2>
 <p>Mi laboratorio SD-WAN está corriendo la versión 20.12.3 y WAN edges están utilizando 17.9.4a. Tengo una topología muy simple:</p>
 <p><img loading="lazy" src="/wp-content/uploads/2024/07/topology-2.png"></p>
-<p>El lenguaje de programación utilizado es Python y el framework que elegí para interactuar con el LLM es Langchain. Utilicé OpenAI Model GPT-4o y un bot de webex  para la interacción. El repositorio se puede encontrar <a href="https://github.com/aruiz-p/sdwan-assistant">aquí</a>.</p>
+<p>El lenguaje de programación utilizado es Python y el framework que elegí para interactuar con el LLM es Langchain. Utilicé OpenAI Model GPT-4o y un bot de webex  para la interacción. El repositorio se puede encontrar <a href="https://github.com/aruiz-p/sdwan-assistant" target="_blank" rel="nofollow noopener noreferrer">aquí</a>.</p>
 <h2 id="mi-objetivo">Mi objetivo<a hidden class="anchor" aria-hidden="true" href="#mi-objetivo">#</a></h2>
 <p>Para dar contexto, la solución de problemas dentro de una infraestructura SD-WAN no es sencilla debido a que el tráfico está cifrado, las políticas dictan cómo fluirá el tráfico, pueden existir múltiples caminos hacia un destino, los siguientes saltos pueden cambiar según las políticas, hay múltiples saltos involucrados, entre otros factores. Determinar toda esta información lleva tiempo y no es un proceso directo.</p>
 <p><a href="/network-wide-path-insights-an-introduction/">NWPI</a> Trace es una herramienta que mejora significativamente el proceso de troubleshooting, ya que proporciona información y visibilidad salto a salto. Se puede iniciar fácilmente desde la interfaz del Manager, detecta flujos según filtros especificados y permite explorar la red para obtener toda la visibilidad necesaria. Es una herramienta muy completa y avanzada.</p>
@@ -311,13 +314,13 @@
 </blockquote>
 <h2 id="planificación-y-construcción">Planificación y construcción<a hidden class="anchor" aria-hidden="true" href="#planificación-y-construcción">#</a></h2>
 <p>Ok, tengo mi objetivo, pero ¿cómo comienzo?</p>
-<p>Tomé un enfoque práctico que significaba que no aprendí Langchain desde cero y en su lugar tomé el <a href="https://github.com/jillesca/cleurdevnet-3707">repositorio de la sesión de Cisco Live</a> como base y construí sobre eso. Las razones para elegir este repositorio fueron simples:</p>
+<p>Tomé un enfoque práctico que significaba que no aprendí Langchain desde cero y en su lugar tomé el <a href="https://github.com/jillesca/cleurdevnet-3707" target="_blank" rel="nofollow noopener noreferrer">repositorio de la sesión de Cisco Live</a> como base y construí sobre eso. Las razones para elegir este repositorio fueron simples:</p>
 <ol>
 <li>Se explicó en las sesiones, así que tuve una idea general de las tecnologías y su propósito.</li>
 <li>Pensé que sería fácil ajustar a mi caso de uso (por ejemplo, también uso webex, interactuaré con dispositivos de red, vi cómo las herramientas podrían reemplazarse con la mías)</li>
 </ol>
 <p>Tuve que limpiar un poco antes de comenzar, esto me requirió que entendiera lo que era esencial para <em>hostear</em> el LLM e interactuar con él. Afortunadamente, el repositorio tiene una estructura organizada que facilita la comprensión.</p>
-<p>De la sesión, aprendí sobre [Langchain Tools] (<a href="https://python.langchain.com/v0.1/docs/modules/tools/%29">https://python.langchain.com/v0.1/docs/modules/tools/)</a>, así que sabía que podría crear funciones que mi agente podría usar para realizar diferentes acciones. En este caso, las acciones serían algo así como comenzar trazas y leer la información obtenida.</p>
+<p>De la sesión, aprendí sobre [Langchain Tools] (<a href="https://python.langchain.com/v0.1/docs/modules/tools/%29" target="_blank" rel="nofollow noopener noreferrer">https://python.langchain.com/v0.1/docs/modules/tools/)</a>, así que sabía que podría crear funciones que mi agente podría usar para realizar diferentes acciones. En este caso, las acciones serían algo así como comenzar trazas y leer la información obtenida.</p>
 <h3 id="desafío-1">Desafío 1<a hidden class="anchor" aria-hidden="true" href="#desafío-1">#</a></h3>
 <p>Necesitaba familiarizarme con la APIs de NWPI. En este punto, sabía que en algún lugar de la documentación de la API había visto que algunas operaciones estaban disponibles, pero nunca me había tomado el tiempo de analizarlas en detalle. Para mi sorpresa, las acciones específicas de iniciar un trace y obtener sus detalles no estaban incluidas… En su lugar, encontré información sobre cómo iniciar una &ldquo;tarea&rdquo; o &ldquo;Auto-on Task&rdquo;, que no es lo mismo que el &ldquo;Trace&rdquo; que tenía en mente.</p>
 <p>En este punto, tenía que decidir si seguir el camino &ldquo;oficial&rdquo; (quizás más fácil) o explorar una alternativa para lograr exactamente lo que quería.</p>
@@ -410,7 +413,7 @@
 </ul>
 <p><img loading="lazy" src="/wp-content/uploads/2024/07/terminal.png"></p>
 <p>El texto en verde indica las herramientas a las que está accediendo al agente. El texto amarillo es la información devuelta por una función. En este caso, podemos ver que el agente llamó la función <code>&quot;get_entry_time_and_state&quot;</code> para que obtener información necesaria para llamar a la siguiente función <code>&quot;get_flow_detail&quot;</code></p>
-<p>Hay mejores herramientas disponibles para ayudar con la resolución de problemas como <a href="https://python.langchain.com/v0.2/docs/how_to/debugging/">LangSmith Tracing</a>, lo voy a explorar en el futuro.</p>
+<p>Hay mejores herramientas disponibles para ayudar con la resolución de problemas como <a href="https://python.langchain.com/v0.2/docs/how_to/debugging/" target="_blank" rel="nofollow noopener noreferrer">LangSmith Tracing</a>, lo voy a explorar en el futuro.</p>
 <ul>
 <li>El prompts de mi agente tuvo que ser refinado varias veces, a menudo me di cuenta de que necesitaba proporcionar más detalles para manejar ciertas situaciones correctamente, especialmente cuando la salida de una función era necesaria para llamar a otra o para manejar situaciones inesperadas. Creo que aún puede mejorarse, de hecho, quiero escribir un prompt completamente diferente para intentar hacer que el agente ejecute todas las herramientas por sí mismo y solo devuelva una conclusión después de analizar todas las salidas.</li>
 </ul>

@@ -245,6 +245,9 @@
     <h1 class="post-title entry-hint-parent">
       Building my first SD-WAN AI Assistant with LangChain
     </h1>
+    <div class="post-description">
+      Discover how LLMs can be integrated with Cisco SD-WAN to troubleshoot your network in a simple and stress-free way
+    </div>
     <div class="post-meta"><span title='2024-07-10 18:51:08 +0000 +0000'>July 10, 2024</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;alex&nbsp;|&nbsp;Translations:
 <ul class="i18n_list">
     <li>
@@ -295,13 +298,13 @@
 </div>
 
   <div class="post-content"><h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
-<p>It has been a while since I wanted to hop on to the LLM train and learn how to use one of the popular frameworks. A few months back, I saw a great <a href="https://www.ciscolive.com/on-demand/on-demand-library.html?search=jesus&amp;search=jesus#/session/1707505627331001pilj">Cisco Live presentation</a> by my good friend Jesus, and it gave me the determination I needed to finally dive deeper into the topic.</p>
+<p>It has been a while since I wanted to hop on to the LLM train and learn how to use one of the popular frameworks. A few months back, I saw a great <a href="https://www.ciscolive.com/on-demand/on-demand-library.html?search=jesus&amp;search=jesus#/session/1707505627331001pilj" target="_blank" rel="nofollow noopener noreferrer">Cisco Live presentation</a> by my good friend Jesus, and it gave me the determination I needed to finally dive deeper into the topic.</p>
 <p>Since then, I have been doing research and thinking about a nice use case for me to put as objective of my learning process. After considering different options, I decided to build an SD-WAN AI assistant that could help me troubleshoot an SD-WAN issue. Taking advantage of the available tools, I decided that my assistant would be an expert on the <a href="/network-wide-path-insights-an-introduction/">Net</a> <a href="/network-wide-path-insights-an-introduction/">work Wide Path Insights</a> functionality.</p>
-<p>In this post, I want to share a bit of my experience building it and of course show some of the results. For a better understanding I suggest to have the <a href="https://github.com/aruiz-p/sdwan-assistant">G</a> <a href="https://github.com/aruiz-p/sdwan-assistant">ithub repo</a> opened as you go through the post.</p>
+<p>In this post, I want to share a bit of my experience building it and of course show some of the results. For a better understanding I suggest to have the <a href="https://github.com/aruiz-p/sdwan-assistant" target="_blank" rel="nofollow noopener noreferrer">G</a> <a href="https://github.com/aruiz-p/sdwan-assistant" target="_blank" rel="nofollow noopener noreferrer">ithub repo</a> opened as you go through the post.</p>
 <h2 id="about-the-setup">About the setup<a hidden class="anchor" aria-hidden="true" href="#about-the-setup">#</a></h2>
 <p>My SD-WAN Lab is running 20.12.3 on the Manager and the Wan Edges are using 17.9.4a. I have a very simple topology that looks something like this:</p>
 <p><img loading="lazy" src="/wp-content/uploads/2024/07/Topology-2.png"></p>
-<p>The programming language used is Python and the framework I chose to interact with the LLM is LangChain. I used OpenAI model gpt-4o and a Webex bot for the interaction. The repo can be found <a href="https://github.com/aruiz-p/sdwan-assistant">here</a>.</p>
+<p>The programming language used is Python and the framework I chose to interact with the LLM is LangChain. I used OpenAI model gpt-4o and a Webex bot for the interaction. The repo can be found <a href="https://github.com/aruiz-p/sdwan-assistant" target="_blank" rel="nofollow noopener noreferrer">here</a>.</p>
 <h2 id="my-objective">My objective<a hidden class="anchor" aria-hidden="true" href="#my-objective">#</a></h2>
 <p>For the sake of context, troubleshooting inside a SD-WAN fabric is not easy because traffic is encrypted, policies dictate how traffic will flow, there could be multiple paths to a destination, next hops can be changed with policies, there are multiple hops involved, and more. Figuring out all this information is time consuming and not a straightforward process.</p>
 <p><a href="/network-wide-path-insights-an-introduction/">NWPI</a> Trace is a tool that greatly improves the troubleshooting process as it will give hop-by-hop information and visibility. It can be easily started from the Manager&rsquo;s UI, it will detect flows based on specified filters and you can browse around to get all the visibility you need. It is a very complex and complete tool. As I described before, I wanted to use this project as a playground to learn and since I didn&rsquo;t have prior experience with LLMs or LangChain I set a simple objective:</p>
@@ -310,13 +313,13 @@
 </blockquote>
 <h2 id="planning-and-building">Planning and Building<a hidden class="anchor" aria-hidden="true" href="#planning-and-building">#</a></h2>
 <p>Ok, I had my objective, but how to start?</p>
-<p>I took a hands-on approach which meant that I didn&rsquo;t learn LangChain from scratch and instead took the <a href="https://github.com/jillesca/CLEUR-DEVNET-3707">Cisco Live session repo</a> as a base and built on top of that. The reasons to choose this repo were simple:</p>
+<p>I took a hands-on approach which meant that I didn&rsquo;t learn LangChain from scratch and instead took the <a href="https://github.com/jillesca/CLEUR-DEVNET-3707" target="_blank" rel="nofollow noopener noreferrer">Cisco Live session repo</a> as a base and built on top of that. The reasons to choose this repo were simple:</p>
 <ol>
 <li>It was explained on the sessions so I had a general idea of the technologies and its purpose.</li>
 <li>I thought it would be easy to adjust to my use case (Eg. I also use Webex, I will be interacting with network devices, I saw how the tools could be replaced with my own)</li>
 </ol>
 <p>I had to do some cleaning before starting, this required me to understand what was essential to host the LLM and interact with it. Luckily, the repo had an organized structure that made it easy to understand.</p>
-<p>From the session, I learned about <a href="https://python.langchain.com/v0.1/docs/modules/tools/">LangChain Tools</a>, so I knew I could create functions that my agent could use to perform different actions. In this case, actions would be something like starting those traces and getting info from them</p>
+<p>From the session, I learned about <a href="https://python.langchain.com/v0.1/docs/modules/tools/" target="_blank" rel="nofollow noopener noreferrer">LangChain Tools</a>, so I knew I could create functions that my agent could use to perform different actions. In this case, actions would be something like starting those traces and getting info from them</p>
 <h3 id="challenge-1">Challenge 1<a hidden class="anchor" aria-hidden="true" href="#challenge-1">#</a></h3>
 <p>I needed to get familiar with the NWPI API, at this point I knew I had seen somewhere on the API documentation that some operations were available, but never had taken the time to analyze them. To my surprise, the specific actions of starting a trace and getting details of it, were not included&hellip; There was information about starting a &ldquo;task&rdquo; a.k.a &ldquo;Auto-on Task&rdquo;, which is not the same as the &ldquo;Trace&rdquo; I had in mind. At this point, I needed to decide if I would go for the &ldquo;official&rdquo; and maybe easier way or exploring an alternative to achieve exactly what I wanted.</p>
 <p>Knowing that almost everything is API driven, I used the inspect tab of my browser and started exploring the APIs triggered when I started a trace through the UI. After a first quick pass, I determined it was doable and started gathering the information I needed.</p>
@@ -408,7 +411,7 @@
 </ul>
 <p><img loading="lazy" src="/wp-content/uploads/2024/07/Terminal.png"></p>
 <p>The text in green indicate the tools the agent is accessing. The yellow text is the information returned by a function. In this case, we can see that the agent called <code>&quot;get_entry_time_and_state&quot;</code> function so it can get information needed to call the next function <code>&quot;get_flow_detail&quot;</code></p>
-<p>There are better tools available to help with troubleshooting like <a href="https://python.langchain.com/v0.2/docs/how_to/debugging/">LangSmith Tr</a> <a href="https://python.langchain.com/v0.2/docs/how_to/debugging/">acing</a>, I will explore it for future use.</p>
+<p>There are better tools available to help with troubleshooting like <a href="https://python.langchain.com/v0.2/docs/how_to/debugging/" target="_blank" rel="nofollow noopener noreferrer">LangSmith Tr</a> <a href="https://python.langchain.com/v0.2/docs/how_to/debugging/" target="_blank" rel="nofollow noopener noreferrer">acing</a>, I will explore it for future use.</p>
 <ul>
 <li>The system prompt of my agent had to be refined several times, I often found that I needed to provide more details to handle certain situations correctly, especially when the output of a function was needed to call another one or to handle unexpected situations. I think it can still be improved, in fact I want to write a totally different prompt to try and make the agent run all of the tools by itself and just return a conclusion after analyzing all the outputs.</li>
 </ul>

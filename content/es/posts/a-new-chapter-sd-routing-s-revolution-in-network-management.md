@@ -4,6 +4,7 @@ category:
   - sd-routing
 date: "2024-02-24T12:06:47+00:00"
 title: 'Un nuevo capítulo: SD-Routing revoluciona la gestión de red'
+description: Explora cómo SD-Ruting puede ayudarte de manera simple y efectiva a administrar y monitorear equipos autónomos (IOX-XE regular, sin SD-WAN). 
 summary: Explora cómo SD-Ruting puede ayudarte de manera simple y efectiva a administrar y monitorear equipos autónomos (IOX-XE regular, sin SD-WAN). 
 url: /sd-routing-revoluciona-la-gestion-de-red/
 

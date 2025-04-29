@@ -245,6 +245,9 @@
     <h1 class="post-title entry-hint-parent">
       Simplificando AAR: 2/3 Analizando diferentes escenarios
     </h1>
+    <div class="post-description">
+      Aprende cómo AAR puede ayudarte a mejorar la experiencia del usuario y aplicación con Cisco SD-WAN
+    </div>
     <div class="post-meta"><span title='2024-02-07 20:27:37 +0000 WET'>febrero 7, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Alex&nbsp;|&nbsp;Traducciones:
 <ul class="i18n_list">
     <li>
@@ -341,7 +344,7 @@
 <p><code>sla-class preferred-color mpls</code></p>
 <blockquote>
 <p>sla-class <em>sla-class-name</em> preferred-color <em>color</em> - Para configurar un túnel específico para el tráfico de datos que cumpla con una clase de SLA, incluye la opción preferred-color, especificando el color del túnel preferido. Si más de un túnel cumple con el SLA, el tráfico se enviará a través del túnel preferido. Si no hay un túnel del color preferido disponible, el tráfico se enviará a través de cualquier túnel que cumpla con la clase de SLA. Si ningún túnel cumple con el SLA, el tráfico de datos se enviará a través de cualquier túnel disponible.</p>
-<p><a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html">https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html" target="_blank" rel="nofollow noopener noreferrer">https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html</a></p>
 </blockquote>
 <p>Aquí hay un diagrama para visualizarlo mejor:</p>
 <p><img loading="lazy" src="/wp-content/uploads/2024/01/arr100.png"></p>
@@ -350,7 +353,7 @@
 <p><code>sla-class strict</code></p>
 <blockquote>
 <p>Haz clic en <strong>Strict/Drop</strong> para hacer un match estricto de la clase SLA. Si no hay un túnel de plano de datos disponible que satisfaga los criterios de SLA, se tira el tráfico.</p>
-<p><a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-ware-routing.html">https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-ware-routing.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-ware-routing.html" target="_blank" rel="nofollow noopener noreferrer">https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-ware-routing.html</a></p>
 </blockquote>
 <p>Ahora el diagrama se ve así:</p>
 <p><img loading="lazy" src="/wp-content/uploads/2024/01/aar101.png"></p>
@@ -405,7 +408,7 @@
 <blockquote>
 <p><strong>Cuando ningún túnel cumple con el SLA</strong>, se puede elegir cómo manejar el tráfico:</p>
 <p>backup-sla-preferred-color <em>colors</em>: Dirige el tráfico de datos a un túnel específico. El tráfico de datos se envía a través del túnel configurado si la interfaz de dicho túnel está disponible; si no lo está, el tráfico se enviará por otro túnel disponible. Se pueden especificar uno o más colores.</p>
-<p><a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html">https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html</a></p>
+<p><a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html" target="_blank" rel="nofollow noopener noreferrer">https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html</a></p>
 </blockquote>
 <p>Para ponerlo visualmente</p>
 <p><img loading="lazy" src="/wp-content/uploads/2024/02/aar200.png"></p>

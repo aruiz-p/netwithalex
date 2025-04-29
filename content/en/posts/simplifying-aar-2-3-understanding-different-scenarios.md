@@ -8,6 +8,7 @@ date: "2024-02-07T20:27:37+00:00"
 guid: https://netwithalex.blog/?p=349
 title: 'Simplifying AAR: 2/3 Understanding different scenarios'
 description: Learn how AAR can help improve the application user experience with Cisco SD-WAN
+summary: Learn how AAR can help improve the application user experience with Cisco SD-WAN
 url: /demystifying-aar-understanding-different-scenarios/
 
 ---

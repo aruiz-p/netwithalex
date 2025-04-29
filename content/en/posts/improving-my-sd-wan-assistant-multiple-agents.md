@@ -13,6 +13,7 @@ tag:
   - openai
   - slm
 title: Improving my SD-WAN Assistant - Multiple agents
+description: Learn how an LLM agentic approach can be used to troubleshoot your SD-WAN network
 summary: Learn how an LLM agentic approach can be used to troubleshoot your SD-WAN network
 url: /improving-my-sd-wan-assistant-multiple-agents/
 

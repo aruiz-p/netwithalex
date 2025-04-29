@@ -244,6 +244,9 @@
     <h1 class="post-title entry-hint-parent">
       AppQoe Series: TCP Optimization
     </h1>
+    <div class="post-description">
+      Discover how SD-WAN enhances TCP performance. Learn about key optimization techniques that improve application reliability and user experience.
+    </div>
     <div class="post-meta"><span title='2025-04-01 14:20:31 +0000 +0000'>April 1, 2025</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Alex
 
 </div>
@@ -289,14 +292,14 @@
 <p>Without TCP optimization, the client and server will establish a TCP session directly between them.</p>
 <p>When TCP Optimization is used, Router 1 will intercept and terminate the TCP connection from the client and establish a TCP session with Router 2 that will be optimized. Likewise Router 2 will create a TCP session with Server.</p>
 <p><strong>Note</strong> All this process is transparent to the client/server and data is going to be cached on the routers to keep the sessions alive.</p>
-<p>The IOS-XE SD-WAN devices use BBR algorithm which uses information about RTT and available bandwidth to optimize the connection. If you&rsquo;d like to learn more I would recommend checking <a href="https://www.youtube.com/watch?v=VIX45zMMZG8&amp;t=1607s">this video</a> from Neal Cardwell.</p>
+<p>The IOS-XE SD-WAN devices use BBR algorithm which uses information about RTT and available bandwidth to optimize the connection. If you&rsquo;d like to learn more I would recommend checking <a href="https://www.youtube.com/watch?v=VIX45zMMZG8&amp;t=1607s" target="_blank" rel="nofollow noopener noreferrer">this video</a> from Neal Cardwell.</p>
 <p>The current TCP Optimization implementation defines different device roles:</p>
 <ul>
 <li><strong>Controller Node:</strong> Device that intercepts and distributes traffic to Service Nodes.</li>
 <li><strong>Service Node:</strong> Optimization engines for traffic acceleration.</li>
 </ul>
-<p>In a real world scenario the recommendation is to have optimization services on Branches and Data Centers. There are different requirements based on the volume of traffic those devices will handle. I suggest reading <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/appqoe/ios-xe-17/appqoe-book-xe/m-tcp-optimization.html">Cisco&rsquo;s Documentation</a> to understand platform requirements and more.</p>
-<p>On the branches, it is common to use an <em>Integrated Service Node</em>  meaning that a single device can intercept, distribute and optimize traffic. On the other hand, on the Data Center, a cluster of <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/appqoe/ios-xe-17/appqoe-book-xe/m-support-for-multiple-appqoe-service-nodes.html">External Service Nodes</a> is required to achieve higher throughput and distribute higher volumes of traffic amongst cluster members.</p>
+<p>In a real world scenario the recommendation is to have optimization services on Branches and Data Centers. There are different requirements based on the volume of traffic those devices will handle. I suggest reading <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/appqoe/ios-xe-17/appqoe-book-xe/m-tcp-optimization.html" target="_blank" rel="nofollow noopener noreferrer">Cisco&rsquo;s Documentation</a> to understand platform requirements and more.</p>
+<p>On the branches, it is common to use an <em>Integrated Service Node</em>  meaning that a single device can intercept, distribute and optimize traffic. On the other hand, on the Data Center, a cluster of <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/appqoe/ios-xe-17/appqoe-book-xe/m-support-for-multiple-appqoe-service-nodes.html" target="_blank" rel="nofollow noopener noreferrer">External Service Nodes</a> is required to achieve higher throughput and distribute higher volumes of traffic amongst cluster members.</p>
 <p>Overall TCP Optimization is an intensive process for the devices and it&rsquo;s crucial to confirm platform requirements. For instance, my demo environment has two Catalyst 8000V with 8 CPUs and 16 GB of RAM, requirements for a small deployment.</p>
 <p>Let&rsquo;s see in practice what effect Optimization has on the traffic. To demonstrate it, I will take a packet capture on the WAN side with and without optimization:</p>
 <h3 id="window-scaling-without-optimization">Window Scaling Without Optimization<a hidden class="anchor" aria-hidden="true" href="#window-scaling-without-optimization">#</a></h3>

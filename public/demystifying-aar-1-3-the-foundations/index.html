@@ -350,7 +350,7 @@
 </span></span></code></pre></div><p>The multiplier will indicate the amount of buckets that will be used to calculate the tunnel statistics that will make the traffic steer when network conditions worsen. For the illustration, a multiplier of 3 is used. By <strong>default</strong> the multiplier is set to 6.</p>
 <p>Notice each bucket contains 4 packets</p>
 <p><code>hello interval (s) x Poll interval (s)</code></p>
-<p>In the real world, 4 packets would be <strong>too low</strong>. If we take all default values, we would end up with a bucket of 600 packets. Check the <a href="https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-application-aware-routing-deploy-guide.html">AAR Deployment Guide</a> for more details and options.</p>
+<p>In the real world, 4 packets would be <strong>too low</strong>. If we take all default values, we would end up with a bucket of 600 packets. Check the <a href="https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-application-aware-routing-deploy-guide.html" target="_blank" rel="nofollow noopener noreferrer">AAR Deployment Guide</a> for more details and options.</p>
 <p>After filling up all the buckets, tunnel statistics will be calculated.</p>
 <p><img loading="lazy" src="/wp-content/uploads/2024/02/BFD-10.png"></p>
 <p>We can visualize the buckets and the mean calculations. Notice the values are the same for all the buckets. Don&rsquo;t get confused with the <em>avg loss, latency and jitter</em> columns shown before.</p>

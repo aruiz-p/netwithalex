@@ -5,6 +5,7 @@ category:
   - SD-WAN
 date: "2024-03-15T18:06:34+00:00"
 title: Seguimiento de incidentes SD-WAN con ServiceNow
+description: Aprenda a integrar Cisco SD-WAN con ServiceNow y automatiza la gestión de incidentes
 summary: Aprenda a integrar Cisco SD-WAN con ServiceNow y automatiza la gestión de incidentes
 url: /rastreando-incidentes-de-sdwan-con-servicenow/
 

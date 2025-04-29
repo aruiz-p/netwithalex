@@ -5,6 +5,7 @@ category:
   - visibilidad
 date: "2024-01-25T20:34:14+00:00"
 title: Cisco SD-WAN Network Wide Path Insights (NWPI)
+description: Aprende a usar la herramienta de troubleshooting más avanzada para tu red Cisco SD-WAN. 
 summary: Aprende a usar la herramienta de troubleshooting más avanzada para tu red Cisco SD-WAN. 
 URL: /introduccion-network-wide-path-insights/
 

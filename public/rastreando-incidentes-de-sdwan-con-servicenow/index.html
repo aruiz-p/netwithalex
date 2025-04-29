@@ -245,6 +245,9 @@
     <h1 class="post-title entry-hint-parent">
       Seguimiento de incidentes SD-WAN con ServiceNow
     </h1>
+    <div class="post-description">
+      Aprenda a integrar Cisco SD-WAN con ServiceNow y automatiza la gestión de incidentes
+    </div>
     <div class="post-meta"><span title='2024-03-15 18:06:34 +0000 WET'>marzo 15, 2024</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;Alex&nbsp;|&nbsp;Traducciones:
 <ul class="i18n_list">
     <li>
@@ -429,7 +432,7 @@
 Por último, el usuario y la contraseña en caso de que tu aplicación de webhook lo requiera. Estos valores se codificarían y se enviarían en los encabezados. Usa valores ficticios si no son necesarios.</li>
 </ul>
 <h3 id="construyendo-el-servidor-webhook">Construyendo el servidor webhook<a hidden class="anchor" aria-hidden="true" href="#construyendo-el-servidor-webhook">#</a></h3>
-<p>El código que uso esta publicado en el siguiente <a href="https://github.com/aruiz-p/sdwan-snow-integraci%C3%B3n">Repo de Github</a>, aquí lo explicaré de una manera más simple.</p>
+<p>El código que uso esta publicado en el siguiente <a href="https://github.com/aruiz-p/sdwan-snow-integraci%c3%b3n" target="_blank" rel="nofollow noopener noreferrer">Repo de Github</a>, aquí lo explicaré de una manera más simple.</p>
 <p><strong>Paso 1:</strong> Las solicitudes se esperan en el puerto <code>8080</code> al endpoint <code>/webhook</code>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// Listen upcoming requests
 </span></span><span style="display:flex;"><span>
@@ -562,7 +565,7 @@ Por último, el usuario y la contraseña en caso de que tu aplicación de webhoo
 <li>ServiceNow asignará una <strong>prioridad</strong> en función de la urgencia e impacto utilizados para crear el ticket.</li>
 <li>ServiceNow puede tener políticas que te impidan cerrar incidentes si cierta información no está presente en la interfaz. Familiarízate un poco con las políticas en la interfaz gráfica y Data Policies.</li>
 <li>Aunque puedes establecer manualmente el <em>&ldquo;sys_id&rdquo;</em> en ServiceNow mediante APIs, sugiero dejarlo como está, ya que poner valores manuales podría causar problemas en el futuro, y este campo debe ser único en tu instancia. Te recomiendo usar el valor generado automáticamente.</li>
-<li>Puedes usar sitios públicos <a href="https://webhook.site">como este</a> para ver fácilmente el contenido de las notificaciones mientras planificas tus casos de uso.</li>
+<li>Puedes usar sitios públicos <a href="https://webhook.site" target="_blank" rel="nofollow noopener noreferrer">como este</a> para ver fácilmente el contenido de las notificaciones mientras planificas tus casos de uso.</li>
 </ol>
 <h3 id="conclusión">Conclusión<a hidden class="anchor" aria-hidden="true" href="#conclusión">#</a></h3>
 <p>Los webhooks son una excelente manera de monitorear nuestro entorno. Al ser notificado exactamente cuándo ocurre un problema en lugar de confiar en encuestas continuas, aumente nuestra capacidad de iniciar sesión y reaccionar rápidamente a lo que esté sucediendo. Puede combinar webhooks con otro tipo de alertas, como correos electrónicos o incluso chat (webex, holgura, etc.) en caso de que necesite alertar a diferentes equipos. Espero que esta publicación te haya dado algunas ideas o active tu curiosidad.</p>

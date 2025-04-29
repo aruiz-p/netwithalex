@@ -6,6 +6,7 @@ category:
   - secure access
 date: "2025-02-05T14:20:31+00:00"
 title: Asegurando el borde con Cisco SD-WAN y Secure Access
+description: Descubre cómo Cisco SD-WAN y Cisco Secure Access trabajan juntos para mejorar el rendimiento y la seguridad de los usuarios en internet.
 summary: Descubre cómo Cisco SD-WAN y Cisco Secure Access trabajan juntos para mejorar el rendimiento y la seguridad de los usuarios en internet.
 url: /sdwan-sse-integracion/
 tag:

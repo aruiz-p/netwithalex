@@ -245,6 +245,9 @@
     <h1 class="post-title entry-hint-parent">
       Simplificando AAR: 1/3 Las bases
     </h1>
+    <div class="post-description">
+      Aprende cómo AAR puede ayudarte a mejorar la experiencia del usuario y aplicación con Cisco SD-WAN
+    </div>
     <div class="post-meta"><span title='2024-02-01 16:25:27 +0000 WET'>febrero 1, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Alex&nbsp;|&nbsp;Traducciones:
 <ul class="i18n_list">
     <li>
@@ -357,7 +360,7 @@ Jitter: 50 ms
 <p>Por defecto, el multiplicador está configurado en 6.</p>
 <p>Observa que cada bucket contiene 4 paquetes.</p>
 <p><code>hello interval (s) x Poll interval (s)</code></p>
-<p>En el mundo real, 4 paquetes serían ** demasiado bajo **. Si tomamos todos los valores predeterminados, terminaríamos con un cubo de 600 paquetes. Consulte la [Guía de implementación de AAR] (<a href="https://www.cisco.com/c/en/us/td/docs/solutions/cvd/sdwan/cisco-sdwan-application-ware-routing-deploy-guide.html">https://www.cisco.com/c/en/us/td/docs/solutions/cvd/sdwan/cisco-sdwan-application-ware-routing-deploy-guide.html</a>) para obtener más detalles y opciones.</p>
+<p>En el mundo real, 4 paquetes serían ** demasiado bajo **. Si tomamos todos los valores predeterminados, terminaríamos con un cubo de 600 paquetes. Consulte la [Guía de implementación de AAR] (<a href="https://www.cisco.com/c/en/us/td/docs/solutions/cvd/sdwan/cisco-sdwan-application-ware-routing-deploy-guide.html" target="_blank" rel="nofollow noopener noreferrer">https://www.cisco.com/c/en/us/td/docs/solutions/cvd/sdwan/cisco-sdwan-application-ware-routing-deploy-guide.html</a>) para obtener más detalles y opciones.</p>
 <p>Después de llenar todos los buckets, se calcularán las estadísticas del túnel.</p>
 <p><img loading="lazy" src="/wp-content/uploads/2024/02/bfd-10.png"></p>
 <p>Podemos visualizar los buckets y los cálculos de la media. Fíjate que los valores son los mismos para todos los buckets. No te confundas con las columnas de avg loss, latency y jitter que se mostraron antes.</p>

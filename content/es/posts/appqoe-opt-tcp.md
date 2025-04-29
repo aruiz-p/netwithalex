@@ -6,6 +6,7 @@ category:
 draft: false
 date: "2025-04-01T14:20:31+00:00"
 title: "Serie AppQoE: Optimización TCP"
+description: Descubre cómo SD-WAN mejora el rendimiento de TCP. Conoce las principales técnicas de optimización que aumentan el rendimiento de las aplicaciones y mejoran la experiencia del usuario.
 summary: Descubre cómo SD-WAN mejora el rendimiento de TCP. Conoce las principales técnicas de optimización que aumentan el rendimiento de las aplicaciones y mejoran la experiencia del usuario.
 url: /appqoe-opt-tcp/
 tag:

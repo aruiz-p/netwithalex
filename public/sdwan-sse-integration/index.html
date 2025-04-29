@@ -245,6 +245,9 @@
     <h1 class="post-title entry-hint-parent">
       Securing the Edge with Cisco SD-WAN and Secure Access
     </h1>
+    <div class="post-description">
+      Discover how Cisco SD-WAN and Cisco Secure Access work together to enhance network performance and security in an internet first world.
+    </div>
     <div class="post-meta"><span title='2025-02-05 14:20:31 +0000 WET'>February 5, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;alex&nbsp;|&nbsp;Translations:
 <ul class="i18n_list">
     <li>
@@ -301,15 +304,15 @@
 <h2 id="sd-wan-meets-secure-access">SD-WAN Meets Secure Access<a hidden class="anchor" aria-hidden="true" href="#sd-wan-meets-secure-access">#</a></h2>
 <p>Starting with SD-WAN version 20.13/17.13, an integration with Secure Access is now available out of the box.</p>
 <p>With this integration, automatic IPSec tunnels can be established to the primary and secondary Secure Access Data Centers closest to your router’s location, ensuring optimal performance. These tunnels route traffic while enforcing your organization&rsquo;s security policies, providing a simple and powerful way to improve both security and connectivity.</p>
-<p>At the core of Secure Access are <a href="https://docs.sse.cisco.com/sse-user-guide/docs/manage-network-tunnel-groups">Network Tunnel Groups (NTGs)</a>, which manage IPSec connections. Each NTG includes a primary and a secondary Secure Access Data Center. While configuring tunnels to both data centers is not mandatory, it is highly recommended to ensure high availability in case one becomes unavailable.</p>
+<p>At the core of Secure Access are <a href="https://docs.sse.cisco.com/sse-user-guide/docs/manage-network-tunnel-groups" target="_blank" rel="nofollow noopener noreferrer">Network Tunnel Groups (NTGs)</a>, which manage IPSec connections. Each NTG includes a primary and a secondary Secure Access Data Center. While configuring tunnels to both data centers is not mandatory, it is highly recommended to ensure high availability in case one becomes unavailable.</p>
 <p><img loading="lazy" src="/wp-content/uploads/2025/02/sse-topo.png"></p>
 <p>It is possible to configure up to 16 tunnels, 8 active and 8 backup, allowing for load balancing across active tunnels to increase the available bandwidth.</p>
 <p>To <em>automatically</em> establish the tunnels, the SD-WAN Manager and router need internet connectivity and DNS lookup enabled. This allows the device to determine its own public ip address, communicate it to the Manager and get assigned the nearest primary and secondary SSE Data Centers.</p>
 <p><img loading="lazy" src="/wp-content/uploads/2025/02/get-ip.png"></p>
-<p>Once the tunnels are established, traffic going through them will be secured by the <a href="https://www.cisco.com/c/en/us/products/collateral/security/secure-access/hybrid-workforce-cloud-agile-security-ds.html#CiscoSecureAccessproductoverview">core security features of SSE</a>: FWaaS, CASB, ZTNA and SWG and more.</p>
+<p>Once the tunnels are established, traffic going through them will be secured by the <a href="https://www.cisco.com/c/en/us/products/collateral/security/secure-access/hybrid-workforce-cloud-agile-security-ds.html#CiscoSecureAccessproductoverview" target="_blank" rel="nofollow noopener noreferrer">core security features of SSE</a>: FWaaS, CASB, ZTNA and SWG and more.</p>
 <h2 id="configuration-steps">Configuration Steps<a hidden class="anchor" aria-hidden="true" href="#configuration-steps">#</a></h2>
 <h3 id="create-api-key">Create API Key<a hidden class="anchor" aria-hidden="true" href="#create-api-key">#</a></h3>
-<p>To start, on SSE <a href="https://docs.sse.cisco.com/sse-user-guide/docs/add-secure-access-api-keys">create an API key</a> for the Manager to securely connect. Make sure the following privileges are granted:</p>
+<p>To start, on SSE <a href="https://docs.sse.cisco.com/sse-user-guide/docs/add-secure-access-api-keys" target="_blank" rel="nofollow noopener noreferrer">create an API key</a> for the Manager to securely connect. Make sure the following privileges are granted:</p>
 <ul>
 <li>Deployment / Network Tunnel Group - <strong>Read/Write</strong></li>
 <li>Deployment / Tunnels - <strong>Read/Write</strong></li>

@@ -245,6 +245,9 @@
     <h1 class="post-title entry-hint-parent">
       Enhanced Application Aware Routing
     </h1>
+    <div class="post-description">
+      Learn the benefits of enhanced app aware routing and how to implement it on your network
+    </div>
     <div class="post-meta"><span title='2025-01-05 14:20:31 +0000 WET'>January 5, 2025</span>&nbsp;·&nbsp;16 min&nbsp;·&nbsp;alex&nbsp;|&nbsp;Translations:
 <ul class="i18n_list">
     <li>
@@ -333,7 +336,7 @@
 <li><strong>WAN loss</strong> - any packet loss outside the router</li>
 </ul>
 <p>To calculate the local loss, the router will determine the amount of packets it generated against the amount of packets that actually were sent. To get the WAN loss, peer SD-WAN routers will report the amount of packets received and will use BFD (Path Monitor TLVs) to send this information back to the originating router.</p>
-<p>Up to this point, there is an important improvement in how loss measurement is done, however, this could be further improved by leveraging per queue loss measurements. To achieve this, we need to associate an SLA class with an <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html#concept_gjc_5pm_dnb">App Probe Class</a>. Let&rsquo;s see an example.</p>
+<p>Up to this point, there is an important improvement in how loss measurement is done, however, this could be further improved by leveraging per queue loss measurements. To achieve this, we need to associate an SLA class with an <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/application-aware-routing.html#concept_gjc_5pm_dnb" target="_blank" rel="nofollow noopener noreferrer">App Probe Class</a>. Let&rsquo;s see an example.</p>
 <p><img loading="lazy" src="/wp-content/uploads/2025/02/app-probe.png"></p>
 <p>With this App Probe Class, the router will use (and generate BFD) packets with DSCP 18, mimicking less important traffic that will be subject to different rules and paths on the local and external routers. This will provide a more accurate measurement of loss for each type of traffic on the specified transports. If there is no inline data, BFD is used to get measurements.</p>
 <p><strong>Note</strong> If using GRE, per queue measurement is <strong>not</strong> available.</p>
@@ -415,7 +418,7 @@
 <p><strong>Note</strong> To use custom timers, configuration needs to be done through CLI templates.</p>
 <p>EAAR follows the same fundamental principle as AAR, using rotating buckets to calculate average loss, latency, and jitter. With the <em>Aggressive</em> mode, traffic would take between 10-60 seconds to shift, depending on how severe the impairment is.</p>
 <p>The dampening window (<em>poll interval <strong>x</strong> dampening multiplier</em>) is 1200 seconds, meaning that before switching traffic back to a transport, it needs to be stable for 20 minutes.</p>
-<p>In my lab, I am using Configuration Groups, however this is <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/m-enhanced-application-aware-routing.html#configure-enhanced-application-aware-routing-using-a-feature-template-in-cisco-sd-wan-manager">available through templates</a> as well.</p>
+<p>In my lab, I am using Configuration Groups, however this is <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/m-enhanced-application-aware-routing.html#configure-enhanced-application-aware-routing-using-a-feature-template-in-cisco-sd-wan-manager" target="_blank" rel="nofollow noopener noreferrer">available through templates</a> as well.</p>
 <p><img loading="lazy" src="/wp-content/uploads/2025/02/eaar-config-groups.png"></p>
 <p>You can use a variable, instead of a global value, to account for devices that will not be running EAAR. In this case, EAAR enabled devices will fallback to AAR.</p>
 <p>The following config is added to the devices:</p>

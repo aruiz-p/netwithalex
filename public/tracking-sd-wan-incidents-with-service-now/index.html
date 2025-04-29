@@ -432,7 +432,7 @@
 <li>Lastly, user and password in case your webhook app requires it. These values would be encoded and sent on the headers. Use dummy values if not required.</li>
 </ul>
 <h3 id="build-the-webhook-server">Build the Webhook Server<a hidden class="anchor" aria-hidden="true" href="#build-the-webhook-server">#</a></h3>
-<p>I have posted the code I used on the following <a href="https://github.com/aruiz-p/sdwan-snow-integration">GitHub Repo</a>, here I will explain it in a simpler way.</p>
+<p>I have posted the code I used on the following <a href="https://github.com/aruiz-p/sdwan-snow-integration" target="_blank" rel="nofollow noopener noreferrer">GitHub Repo</a>, here I will explain it in a simpler way.</p>
 <p><strong>Step 1:</strong> Listen requests coming on port <code>8080</code> and destined to <code>/webhook</code> endpoint.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// Listen upcoming requests
 </span></span><span style="display:flex;"><span>
@@ -561,7 +561,7 @@
 <li>Service Now will come up with a <strong>priority</strong> based on the Urgency and Impact used to create the ticket.</li>
 <li>Service Now could have some policies that will prevent you to close incidents if certain information is not present on the UI. Be a little bit familiar with UI policies and Data Policies.</li>
 <li>Although you can manually set the <em>&ldquo;sys_id&rdquo;</em> on Service Now through APIs, I suggest to leave it alone as putting manual values could cause problems in the future and this field is supposed to be unique across your instance. Just use the auto-generated value.</li>
-<li>You can use public sites like <a href="https://webhook.site">this one</a>, to easily see the content of the notifications while planning your use cases.</li>
+<li>You can use public sites like <a href="https://webhook.site" target="_blank" rel="nofollow noopener noreferrer">this one</a>, to easily see the content of the notifications while planning your use cases.</li>
 </ol>
 <h3 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h3>
 <p>Los webhooks son una excelente manera de monitorear nuestro entorno. Ser notificados exactamente cuando ocurre un problema, en lugar de depender de monitoreo continuo, aumenta nuestra capacidad para registrar y reaccionar rápidamente ante lo que está sucediendo. Puedes combinar los webhooks con otros tipos de alertas, como correos electrónicos o incluso chat (Webex, Slack, etc.) en caso de que necesites alertar a diferentes equipos. Espero que este post te haya dado algunas ideas o haya despertado tu curiosidad.</p>
