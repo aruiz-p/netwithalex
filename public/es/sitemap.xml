@@ -17,6 +17,16 @@
   </url><url>
     <loc>http://localhost:1313/ztp-on-prem-es/</loc>
     <lastmod>2025-05-05T14:20:31+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/ztp-on-prem-en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/ztp-on-prem-es/"
+                />
   </url><url>
     <loc>http://localhost:1313/es/tag/onboarding/</loc>
     <lastmod>2025-05-05T14:20:31+00:00</lastmod>
