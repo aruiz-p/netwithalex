@@ -3,245 +3,244 @@ author: Alex
 category:
   - sdwan
 date: "2025-05-05T14:20:31+00:00"
-draft: true
+draft: false
 title: "Cisco SD-WAN On-Prem ZTP: Automating Router Onboarding"
 description: Plug and Play (PnP) lets you onboard SD-WAN devices automatically via Cisco Cloud. This post explains how to achieve zero-touch provisioning (ZTP) in an airgapped, on-premises environment.  
 summary: Plug and Play (PnP) lets you onboard SD-WAN devices automatically via Cisco Cloud. This post explains how to achieve zero-touch provisioning (ZTP) in an airgapped, on-premises environment. 
-url: /ztp-on-prem/
+url: /ztp-on-prem-en/
 tag:
   - ZTP
   - onboarding
 ---
 ## Introduction
 
-Imagine deploying a new remote site and wanting the process to be as easy as possible. You don’t want to ship the device to an intermediate location just to preload a configuration, only to ship it again to the final destination. You also don’t want to travel onsite yourself, connect a console cable, and manually configure each device. Now multiply that effort by dozens or hundreds of sites 🤯
+When deploying a new remote site you want the process to be as easy as possible. You don’t want to ship the device to an intermediate location just to preload a configuration, only to ship it again to the final destination. You also don’t want to travel onsite yourself, connect a console cable, and manually configure each device. Now multiply that effort by dozens or hundreds of sites 🤯
 
-To solve this challenge, Cisco created an automated onboarding process called Plug and Play (PnP). The idea is simple: a router powers on, obtains an IP address, locates your SD-WAN overlay, connects to your controllers, and downloads its configuration—all without human intervention beyond plugging it in.
+To solve this challenge, Cisco created an automated onboarding process called Plug and Play (**PnP**) or Zero Touch provisioning (**ZTP**). The idea is simple: a router powers on, obtains an IP address, locates its SD-WAN overlay, connects to the controllers, and downloads its configuration—all without human intervention beyond plugging it in.
 
-A key step in this process is helping the router discover the SD-WAN overlay. This can be achieved via the Cisco Cloud or, in air-gapped environments, by hosting your own On-Prem ZTP Server. Let's explore the second option.  
+A key step in this process is helping the router discover the SD-WAN overlay. This can be achieved via the Cisco Cloud or, in air-gapped environments, by hosting your **own On-Prem ZTP Server**. Today we are going to explore the second option.  
 
-## PnP operations
+## PnP/ZTP operation
 
-The following steps happen when the router boots up with no configuration:
+The following happens when the router boots up with no configuration:
 
-1. It will look for a startup config, if its not present then 
-2. It will try to get an ip address through DHCP on the available interfaces. 
-3. Next it will try resolve the following domains:
-  - ztp.<domain >
-  - devicehelper.cisco.com
-4. If ztp.domain is resolvable, it will connect and get the overlay information
+![](/wp-content/uploads/2025/05/ztp5.png)
 
+**Note** this process is available for **hardware devices** only. 
 
-
-
-
-
-The goal of TCP Optimization is to fine tune TCP connections to improve the performance. This is especially useful when there are long-latency links involved. 
-
-The SD-WAN routers will act as proxies, meaning that they will intercept the TCP connections and tune them to get better performance. Let´s see a visual. 
-
-![](/wp-content/uploads/2025/04/tcp-opt-topo.png)
-
-Without TCP optimization, the client and server will establish a TCP session directly between them. 
-
-When TCP Optimization is used, Router 1 will intercept and terminate the TCP connection from the client and establish a TCP session with Router 2 that will be optimized. Likewise Router 2 will create a TCP session with Server. 
-
-**Note** All this process is transparent to the client/server and data is going to be cached on the routers to keep the sessions alive. 
-
-The IOS-XE SD-WAN devices use BBR algorithm which uses information about RTT and available bandwidth to optimize the connection. If you'd like to learn more I would recommend checking [this video](https://www.youtube.com/watch?v=VIX45zMMZG8&t=1607s) from Neal Cardwell. 
-
-The current TCP Optimization implementation defines different device roles:
-- **Controller Node:** Device that intercepts and distributes traffic to Service Nodes.
-- **Service Node:** Optimization engines for traffic acceleration.  
-
-In a real world scenario the recommendation is to have optimization services on Branches and Data Centers. There are different requirements based on the volume of traffic those devices will handle. I suggest reading [Cisco's Documentation](https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/appqoe/ios-xe-17/appqoe-book-xe/m-tcp-optimization.html) to understand platform requirements and more.
-
-On the branches, it is common to use an _Integrated Service Node_  meaning that a single device can intercept, distribute and optimize traffic. On the other hand, on the Data Center, a cluster of [External Service Nodes](https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/appqoe/ios-xe-17/appqoe-book-xe/m-support-for-multiple-appqoe-service-nodes.html) is required to achieve higher throughput and distribute higher volumes of traffic amongst cluster members. 
-
-Overall TCP Optimization is an intensive process for the devices and it's crucial to confirm platform requirements. For instance, my demo environment has two Catalyst 8000V with 8 CPUs and 16 GB of RAM, requirements for a small deployment. 
-
-Let's see in practice what effect Optimization has on the traffic. To demonstrate it, I will take a packet capture on the WAN side with and without optimization:
-
-### Window Scaling Without Optimization
-
-Let's see how the window scaling behaves without optimization
-
-![](/wp-content/uploads/2025/04/router1-tcp-opt-disabled.png)
-
-Notice that the window size remained mostly stable at around 1,000,000 Bytes after around 5 seconds
-
-### Window Scaling With Optimization
-
-Let's look at the same information with optimization enabled.
-
-![](/wp-content/uploads/2025/04/router1-tcp-opt-enabled.png)
-
-Notice how the window size remained changing throughout the session, quickly and aggressively recovering after going down.
-
-Why is the window scaling so important? I asked ChatGPT to explain it simply and concisely:
-
-> _Window scaling is crucial in high-latency or high-bandwidth networks because it allows TCP to use a larger receive window, which directly impacts how many bytes in flight (i.e., unacknowledged data) a sender can have. Without window scaling, the max window size is 65,535 bytes — too small for high-speed links, leading to underutilization. With window scaling, the window can grow to gigabytes, enabling the sender to keep more data "in flight" and maintain high throughput despite delays._
-
-In summary, the TCP session is split into three segments, with the optimizing routers advertising higher window scaling and managing connections with the client and server. Traffic is now governed by the BBR algorithm to maximize throughput.
+The ZTP domain is defined on the DHCP server, for example, if the domain name is **_cisco.com_**, the router will try to resolve ztp.**_cisco.com_**. For more information you can check [Cisco's documentation](https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/sdwan-xe-gs-book/cisco-sd-wan-overlay-network-bringup.html#c_Start_the_Enterprise_ZTP_Server_7841.xml)
 
 ## Configuration
-To configure this feature, you can use either Feature Templates and Configuration Groups (with version 20.15 or above). In my case, I will use Configuration Groups and will make use only of Internal Service Nodes on both sides. 
 
-To start, I add the feature "App QoE" on the Service Profile with the following configuration:
+We need to complete the following tasks to make this work. 
 
-![](/wp-content/uploads/2025/04/tcp-opt-config.png)
+1. Add and configure ZTP server
+2. Upload device list to ZTP server
+3. Prepare device configuration on vManage
+4. Configure DHCP and DNS servers
+5. Trigger PnP process 
 
-- **Service Node** to perform acceleration
-- **Forwarder** to also act as a Controller Node
+### Add and configure ZTP Server
 
-This creates the service node configuration 
+The ZTP server uses the same image as a regular Validator. Follow the usual process to bring up a new VM with connectivity to the Manager. 
+
+The following is the minimum configuration needed:
 
 ```
-interface VirtualPortGroup2
+vbond# show run system
+system
+ host-name               ztp-server
+ system-ip               10.10.10.194
+ site-id                 5
+ sp-organization-name    SDWAN-LAB123
+ organization-name       SDWAN-LAB123
+ vbond 192.168.200.2 local ztp-server 
+
+vpn 0
+ interface eth0
+  ip dhcp-client
+  ipv6 dhcp-client
   no shutdown
-  ip address 192.168.2.1 255.255.255.0
-  service-insertion appqoe
-!
-service-insertion appnav-controller-group appqoe ACG-APPQOE
-  appnav-controller 192.168.2.1
-!
-service-insertion service-node-group appqoe SNG-APPQOE
-  service-node 192.168.2.2
-!
-service-insertion service-context appqoe/1
-  appnav-controller-group ACG-APPQOE
-  service-node-group      SNG-APPQOE
-  cluster-type            integrated-service-node
-  enable
-  vrf global
-!
-```
-
-Status should be **"Running"**
-
-
-```
-Lisbon_10-1#show sdwan appqoe tcpopt status 
-==========================================================
-                  TCP-OPT Status
-==========================================================
-
-Status
-------
-TCP OPT Operational State      : RUNNING
-TCP Proxy Operational State    : RUNNING
-```
-
-Next, I create a simple data policy matching traffic between client and server and select the action to be _AppQoE Optimization_ and check the box of _TCP Optimization_.
-
-![](/wp-content/uploads/2025/04/policy-config.png)
-
-```
-vsmart_1# show running-config policy 
-policy
- data-policy _VPN_10_AppQoE
-  vpn-list VPN_10
-   sequence 1
-    match
-     source-data-prefix-list      BR10_172_16_10_0
-     destination-data-prefix-list DC_100_172_16_100_0
-    !
-    action accept
-     tcp-optimization
-     service-node-group SNG-APPQOE
-    !
-   !
-   sequence 11
-    match
-     source-data-prefix-list      DC_100_172_16_100_0
-     destination-data-prefix-list BR10_172_16_10_0
-    !
-    action accept
-     tcp-optimization
-     service-node-group SNG-APPQOE
-    !
-   !
-   default-action accept
-  !
  !
- ```
-**Note** the direction to apply this policy should be ALL on both sides.
-
-```
-vsmart_1# show running-config apply-policy 
-apply-policy
- site-list BR_10
-  data-policy _VPN_10_AppQoE all
+ interface ge0/0
+  ip address 192.168.200.3/24
+  no shutdown
  !
- site-list DC_100
-  data-policy _VPN_10_AppQoE all
- !
+ ip route 0.0.0.0/0 192.168.200.253
 !
  ```
-## Verifying TCP Optimization
+Notice the **_ztp-server_** suffix, this will indicate the device to act as a ZTP server
 
-In order to quickly confirm traffic is being optimized, we can enable On-Demand Troubleshooting and select a period of time. 
+From the Manager, add the ZTP server to the Controller list: 
 
-![](/wp-content/uploads/2025/04/odt-tcp.png)
+![](/wp-content/uploads/2025/05/ztp1.png)
 
-Also, from the real-time information we can see the flow list. 
+Depending on the Controller Authentication method, generate and sign the CSR. 
 
-![](/wp-content/uploads/2025/04/rt-tcp.png)
+If you are using Enterprise Certificates, you will need to install the root certificate and the signed certificate. 
 
-The Services column indicates the TCP Optimization is applied to those flows. 
+For example: 
 
- ## Testing TCP Optimization Performance
+```
+ztp-server# request root-cert-chain install home/admin/root-ca.crt
+ztp-server# request certificate install home/admin/ztp.crt
+```
+**Note** The ZTP server doesn't have any control connections to the Manager or any other controller.
 
-To evaluate the impact of TCP Optimization, I ran iperf tests with varying delay parameters to observe where the feature delivers the most benefit. While this isn’t a professional lab setup, it offers valuable information into how the optimization behaves in practice. 
+### Upload device list to ZTP server
 
-**Note**  My iperf traffic is not encrypted. It's not possible to optimize encrypted traffic without TLS/SSL Decryption
+Now that the ZTP server is installed, we need to provide the device list that will connect with the ZTP server. 
 
-Some testing details:
+The easiest way is to get the _serialFile.viptela_ from the PnP portal and copy it locally. 
 
-- Throughput is capped at **250 Mbps** on the routers.
-- I used **4 parallel streams**, each simulating a **100 MB download**:
+```
+ztp-server:~$ ls -l | grep serial
+-rw-r--r-- 1 admin admin  2364 Apr 24 21:41 serialFile.viptela
+```
+then execute 
 
-> iperf -c 172.16.100.11 -n 100MB -P 4 -i 15 -R
+```
+ztp-server# request device-upload chassis-file home/admin/serialFile.viptela 
+Uploading chassis numbers via VPN 0
+Copying ... /home/admin/serialFile.viptela via VPN 0
+file:  /tmp/tmp.CbUWf8GnSN/viptela_serial_file
+PnP
+Verifying public key received from PnP against production root cert
+is_public_key_ok against production root ca:  OK
+Signature verified for viptela_serial_file
+final file:  /tmp/tmp.CbUWf8GnSN/viptela_serial_file
+Signature verification Suceeded.
+Success: Serial file is /tmp/tmp.CbUWf8GnSN/viptela_serial_file
+INFO: Input File specified was '/usr/share/viptela/chassis_numbers.tmp'
+INFO: # of complete chassis entries written: 12
+Json to CSV conversion succeeded!
+Successfully loaded the chassis numbers file to the database.
+```
 
-For consistency, I ran each scenario 5 times, discarded the highest and lowest results, and averaged the remaining 3 samples
+To verify the list:
 
-The following table shows the results:
+```
+ztp-server# show ztp entries 
+                                                                                                                                                  ROOT     
+                                                                                                                           VBOND  ORGANIZATION    CERT     
+INDEX  CHASSIS NUMBER                                   SERIAL NUMBER                             VALIDITY  VBOND IP       PORT   NAME            PATH     
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+...
+23     ASR1001-HX-XXXXXXXXXXX                           XXXXXXXX                                  valid     192.168.200.1  12346  SDWAN-LAB123  default   
+```
 
-| Delay | TCP Opt | BW (Mbps) | Time (s) |
-|-------|---------|-----------|----------|
-| 0     |Disabled | 248       |   ~ 13   |
-| 0     |Enabled  | 121,6     |   ~ 27   |
-| 50    |Disabled | 99,7      |   ~ 33   |
-| 50    |Enabled  | 124       |   ~ 26   |
-| 100   |Disabled | 71        |   ~ 46   |
-| 100   |Enabled  | 131       |   ~ 25   |
-| 150   |Disabled | 66        |   ~ 49   |
-| 150   |Enabled  | 125       |   ~ 26   |
-| 200   |Disabled | 59        |   ~ 56   |
-| 200   |Enabled  | 131       |   ~ 25   |
-| 250   |Disabled | 63        |   ~ 52   |
-| 250   |Enabled  | 126       |   ~ 26   |
+### Prepare device configuration on vManage
 
-Here's a visual representation of the results
+To get this done I will use a configuration group, but it can be done with templates too. 
 
-![](/wp-content/uploads/2025/04/charts.png)
+![](/wp-content/uploads/2025/05/ztp2.png)
 
-This is what we can conclude from the data:
+I create the device configuration and push it. The task is scheduled as device is offline. 
 
-1. With 0 ms delay, optimization actually **reduces** performance (121 Mbps vs 248 Mbps), due to overhead introduced by the feature. 
+![](/wp-content/uploads/2025/05/ztp3.png)
 
-2. As delay increases optimization consistently **improves throughput** and **reduces transfer time**, this is seen already at 50 ms delay. 
+### Configure DHCP and DNS servers
 
-3. **Performance degrades** significantly **without TCP optimization**. Bandwidth drops from 248 Mbps at 0 ms to ~59–63 Mbps at 200–250 ms. Time also increases proportionally. 
+To make it simple I use an intermediate switch as my DHCP and DNS Server with the following configuration:
 
-4. **Performance is stable** across different delay values **with TCP optimization**. Throughput stays around 125–131 Mbps even at high delays. Transfer time is also consistent at around ~26s.   
+```
+ip dhcp pool ASR
+ vrf MPLS
+ network 192.168.11.4 255.255.255.252
+ default-router 192.168.11.6 
+ dns-server 192.168.11.6 
+ domain-name cisco.com
+
+ip host vrf MPLS ztp.cisco.com 192.168.200.3
+ip host vrf MPLS devicehelper.cisco.com 192.168.200.3
+```
+Ok, we are all set to see it in action
+
+### Trigger PnP process 
+
+To trigger the PnP process the device has to have blank configuration. I will use the following command to reset the config and trigger the process. 
+
+```
+Router#request platform software sdwan config reset 
+
+%WARNING: Bootstrap file doesn't exist and absence 
+of it can cause loss of connectivity to the controller.
+For saving bootstrap config, use:
+request platform software sdwan bootstrap-config save
+Proceed to reset anyway? [confirm]
+
+Backup of running config is saved under /bootflash/sdwan/backup.cfg
+Config reset requested from a console session.
+Waiting for up to 60 seconds for IOS to initiate reload or report failure.
+IOS return status: "cfgreset_proceed"
+Config reset is raised successfully, device will reload shortly.
+```
+
+You need console access to see the following logs: 
+
+Device boots and PnP discovery start. 
+
+```
+*May  4 04:18:42.659: %PNP-6-PNP_DISCOVERY_STARTED: PnP Discovery started
+```
+The router gets an ip address, default router, domain name and dns server. 
+
+```
+Autoinstall trying DHCPv4 on GigabitEthernet0/0/0,GigabitEthernet0/0/1,GigabitEthernet0/0/2,GigabitEthernet0
+...
+*May  4 04:19:44.999: %PKI-2-NON_AUTHORITATIVE_CLOCK: PKI functions can not be initialized until an authoritative time source, like NTP, can be obtained.
+Acquired IPv4 address 192.168.11.5 on Interface GigabitEthernet0/0/1
+Received following DHCPv4 options:
+        domain-name     : cisco.com
+        dns-server-ip   : 192.168.11.6
+
+```
+
+Device tries to resolve domains and gets redirected to _ztp.cisco.com_
+
+```
+*May  4 04:20:08.694: %PNP-3-PNP_CCO_SERVER_IP_UNRESOLVED: CCO server (devicehelper.cisco.com.) can't be resolved (1/5) by (pid=619, pname=PnP Agent Discovery, time=04:20:08 UTC Sun May 4 2025)
+...
+*May  4 04:20:20.696: %IOSXE_SDWAN_CONFIG-5-PNP_REDIRECT: PnP Redirect Msg: Org name "" Host "ztp.cisco.com." port 0 intf GigabitEthernet0/0/1
+*May  4 04:20:42.010: %PNP-6-PNP_REDIRECTION_DONE: PnP Redirection done (1) by (pid=619, pname=PnP Agent Discovery)
+*May  4 04:20:42.010: %PNP-6-PNP_SDWAN_STARTED: PnP SDWAN started (1) via (pnp-sdwan-vbond-ztp-discovery) by (pid=619, pname=PnP Agent Discovery)
+*May  4 04:20:42.811: %PNP-6-PNP_DISCOVERY_DONE: PnP Discovery done successfully (PnP-VBOND-ONPREM-ZTP-IPV4) profile (pnp-zero-touch) 
+```
+We can confirm _ztp.cisco.com_ was resolved 
+```
+ASR1K-2#show pnp trace | i  ztp
+[05/04/25 04:20:10.695 UTC B7 619] 1: VBOND_ONPRIME_ZTP hostname ztp.cisco.com. resolved to 192.168.11.6 on interface GigabitEthernet0/0/1
+[05/04/25 04:20:10.695 UTC B8 619] host_name is ztp.cisco.com. vbond_ipv4_address is 192.168.11.6, interface is GigabitEthernet0/0/1
+```
+Next, the router connects to the ZTP-Server and gets redirected the Validator
+```
+*May  4 04:21:17.991: %Cisco-SDWAN-Router-vdaemon-6-INFO-1400002: Notification: 5/4/2025 4:21:17 control-connection-state-change severity-level:major host-name:"Router" system-ip::: personality:vedge peer-type:vbond peer-system-ip::: peer-vmanage-system-ip:0.0.0.0 public-ip:192.168.200.3 public-port:12346 src-color:default remote-color:default uptime:"0:00:00:00" new-state:up
+...
+*May  4 04:21:19.242: %Cisco-SDWAN-Router-vdaemon-6-INFO-1400002: Notification: 5/4/2025 4:21:19 org-name-change severity-level:minor host-name:"Router" system-ip::: old-organization-name:"" new-organization-name:"SDWAN-LAB123"
+*May  4 04:21:21.597: %Cisco-SDWAN-Router-vdaemon-6-INFO-1400002: Notification: 5/4/2025 4:21:21 control-connection-state-change severity-level:major host-name:"Router" system-ip::: personality:vedge peer-type:vbond peer-system-ip::: peer-vmanage-system-ip:0.0.0.0 public-ip:192.168.200.1 public-port:12346 src-color:default remote-color:default uptime:"0:00:00:00" new-state:up
+```
+
+Eventually, the device connected to the Manager and Controller and pulls the configuration
+```
+*May  4 04:21:23.924: %Cisco-SDWAN-Router-vdaemon-6-INFO-1400002: Notification: 5/4/2025 4:21:23 control-connection-state-change severity-level:major host-name:"Router" system-ip::: personality:vedge peer-type:vmanage peer-system-ip:10.10.10.2 peer-vmanage-system-ip:0.0.0.0 public-ip:192.168.100.1 public-port:12746 src-color:default remote-color:biz-internet uptime:"0:00:00:00" new-state:up
+*May  4 04:21:24.299: %Cisco-SDWAN-CSS-SDWAN-POD1-ASR1K-2-OMPD-5-NTCE-400003: Operational state changed to UP
+*May  4 04:21:43.981: %DMI-5-AUTH_PASSED: R0/0: dmiauthd: User 'vmanage-admin' authenticated successfully from 10.10.10.2:42962  for netconf over ssh.
+```
+![](/wp-content/uploads/2025/05/ztp4.png)
+
+```
+ASR1K-2#show sdwan control connections | i up
+vsmart  dtls 10.10.10.3      5          1      192.168.100.2                           12346 192.168.100.2                           12346 SDWAN-LAB123          mpls            No    up     0:02:02:51 0           
+vbond   dtls 0.0.0.0         0          0      192.168.200.1                           12346 192.168.200.1                           12346 SDWAN-LAB123          mpls            -     up     0:02:02:54 0           
+vmanage dtls 10.10.10.2      5          0      192.168.100.1                           12946 192.168.100.1                           12946 SDWAN-LAB123          mpls            No    up     0:02:02:49 0           
+```
 
 ## Conclusion
 
-TCP Optimization is highly effective in mitigating the impact of latency on TCP performance. While it introduces some overhead in low-latency conditions, its benefits become more and more evident as delay increases. In scenarios with 100 ms delay or more, optimization can help doubling the throughput and reducing transfer time. If you are thinking about enabling it, take into account that based on the router model, you will get different performance.
+On-Prem ZTP server extends the ability to onboard hardware devices to those network where internet access is restricted. 
 
-Also, this feature shouldn't be enabled for all traffic, instead enable it for a specific application or set of applications that need acceleration. Finally, this feature brings higher benefits on inter-continental lines, satellite transports or similar high latency links. 
+Automating router onboarding with On-Prem ZTP provides a great alternative for organizations that need full control over their provisioning process or operate in air-gapped environments. By replicating the Plug and Play process locally, you eliminate the need for manual configuration at remote sites while keeping sensitive environments isolated.
 
-Hope this post was useful and see you in the next one! 
+With the right setup, onboarding new sites becomes an easy and repetable process that will save precious time, reduce human error and scales SD-WAN deployments.
 
-
+👉 Interested in setting up On-Prem ZTP for your network? Leave a comment or reach out, I’d love to help or answer your questions!

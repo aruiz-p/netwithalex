@@ -2,234 +2,243 @@
 author: Alex
 category:
   - sdwan
-  - appqoe
-draft: true
-date: "2025-04-22T14:20:31+00:00"
-title: "Serie AppQoE: Forward Error Correction (FEC)"
-description: Descubre cómo SD-WAN mejora el rendimiento de aplicaciones expuestas a transportes irregulares y con pérdidas de paquetes.  
-summary: Descubre cómo SD-WAN mejora el rendimiento de aplicaciones expuestas a transportes irregulares y con pérdidas de paquetes.  
-url: /appqoe-opt-tcp/
+draft: false
+date: "2025-05-05T14:20:31+00:00"
+title: "Cisco SD-WAN ZTP On-Prem: Automatizando el onboarding de los routers"
+description: Plug and Play (PnP) te permite agregar dispositivos SD-WAN automáticamente a través de la nube de Cisco. Esta publicación explica cómo lograr Zero-Touch Provisioning (ZTP) en un entorno aislado y local (on-premises).  
+summary: Plug and Play (PnP) te permite agregar dispositivos SD-WAN automáticamente a través de la nube de Cisco. Esta publicación explica cómo lograr Zero-Touch Provisioning (ZTP) en un entorno aislado y local (on-premises). 
+url: /ztp-on-prem-es/
 tag:
-  - TCP
-  - optimizacion
+  - ZTP
+  - onboarding
 ---
-## Introduction
+## Introducción
 
-¿Alguna vez has usado una aplicación que se siente demasiado lenta? Tal vez las videollamadas se congelan o un portal web tarda una eternidad en cargar. Estos (y otros) son signos de que tu red WAN podría estar teniendo problemas.
+Cuando implementas un nuevo sitio remoto, quieres que el proceso sea lo más sencillo posible. No quieres enviar el dispositivo a una ubicación intermedia solo para precargarle una configuración, y luego volver a enviarlo a su destino final. Tampoco quieres tener que viajar al sitio, conectar un cable de consola y configurar manualmente cada dispositivo. Ahora imagina multiplicar ese esfuerzo por docenas o cientos de sitios 🤯.
 
-¿La buena noticia? Cisco SD-WAN incluye un conjunto de tecnologías diseñadas para mejorar el rendimiento en enlaces poco confiables o con alta latencia. En esta serie, desglosaremos tres funciones clave que pueden mejorar significativamente la experiencia de las aplicaciones en tu red: **_Optimización TCP, Forward Error Correction (FEC) y Duplicación de Paquetes**_.
+Para resolver este desafío, Cisco creó un proceso de incorporación automatizado llamado Plug and Play (PnP) o Zero Touch Provisioning (ZTP). La idea es simple: un router se enciende, obtiene una dirección IP, localiza su overlay de SD-WAN, se conecta a los controladores y descarga su configuración—todo esto sin intervención humana más allá de conectarlo a la corriente y la red.
 
-En este primer post, exploraremos la Optimización TCP: cómo funciona, cuándo utilizarla y por qué puede marcar una gran diferencia para tus usuarios, especialmente en conexiones con alta latencia.
+Un paso clave en este proceso es ayudar al router a descubrir el overlay de SD-WAN. Esto se puede lograr a través de la nube de Cisco o, en entornos aislados (air-gapped), alojando tu propio servidor ZTP On-Prem. Hoy vamos a explorar esta segunda opción.
 
-## Descripción de la Solución
+## Funcionalidad PnP/ZTP 
 
-El objetivo de la Optimización TCP es ajustar finamente las conexiones TCP para mejorar su rendimiento. Esto es especialmente útil cuando hay enlaces con alta latencia involucrados.
+El proceso en la imagen describe lo que hace un router SD-WAN al iniciar sin configuración:
 
-Los routers SD-WAN actuarán como proxies, lo que significa que interceptarán las conexiones TCP y las ajustarán para obtener un mejor desempeño. Veamos un ejemplo visual.
+![](/wp-content/uploads/2025/05/ztp5.png)
 
-![](/wp-content/uploads/2025/04/tcp-opt-topo.png)
+**Nota** este proceso está disponible únicamente en **plataformas físicas**. 
 
-Sin la optimización TCP, el cliente y el servidor establecerán una sesión TCP directamente entre ellos.
-
-Cuando se utiliza la Optimización TCP, el Router 1 interceptará y terminará la conexión TCP proveniente del cliente y establecerá una sesión TCP optimizada con el Router 2. De igual manera, el Router 2 creará una sesión TCP con el servidor.
-
-**Nota** Todo este proceso es transparente para el cliente y el servidor, y los datos serán almacenados en caché en los routers para mantener activas las sesiones.
-
-Los equipos IOS-XE SD-WAN usan el algoritmo BBR el cual utiliza información sobre RTT (Round Trip Time) and ancho de banda disponible para optimizar la conexión. Si te gustaría profundizar en el tema te recomiendo ver [este vídeo](https://www.youtube.com/watch?v=VIX45zMMZG8&t=1607s) de Neal Cardwell. 
-
-La implementación actual de Optimization TCP tiene definidos dos roles:
-
-- **Controller Node:** Equipo que intercepta y distribuye el trafico al _Service Node_.
-- **Service Node:** Motores de optimización para la aceleración del tráfico.
-
-En un escenario de la vida real, la recomendación es tener servicios de optimización en las sedes y en los Data Centers. Hay requerimientos diferentes basados en el volumen de tráfico que los equipos van a procesar. Te sugiero leer la [Documentación de Cisco](https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/appqoe/ios-xe-17/appqoe-book-xe/m-tcp-optimization.html) para informarte sobre los requerimientos de hardware y más.
-
-En las sedes pequeñas, es común utilizar un _Integrated Service Node_, es decir, un solo equipo puede interceptar, distribuir y optimizar el tráfico. Por otro lado, en el Data Cetner, un cluster de [External Service Nodes](https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/appqoe/ios-xe-17/appqoe-book-xe/m-support-for-multiple-appqoe-service-nodes.html) es necesario para para lograr un mayor rendimiento y distribuir volúmenes más altos de tráfico entre los miembros del cluster.
-
-En general, la Optimización TCP es un proceso intensivo para los dispositivos, por lo que es crucial confirmar los requisitos de la plataforma. Por ejemplo, mi entorno de demostración cuenta con dos Catalyst 8000V con 8 CPUs y 16 GB de RAM, requisitos adecuados para una implementación pequeña.
-
-Veamos en la práctica qué efecto tiene la optimización TCP en el tráfico. Para demostrarlo, voy a tomar una captura de paquetes en el lado WAN con y sin optimización. 
-
-### Window Scaling Sin Optimización 
-
-Veamos como se comporta el window scalind sin optimización 
-
-![](/wp-content/uploads/2025/04/router1-tcp-opt-disabled.png)
-
-Nota como el _window size_ se mantuvo estable alrededor de 1,000,000 Bytes después de aproximadamente 5 segundos
-
-### Window Scaling Con Optimización
-
-Veamos la misma información pero con la optimización activa. 
-
-![](/wp-content/uploads/2025/04/router1-tcp-opt-enabled.png)
-
-Nota como el _window size_ estuvo en constante cambio a lo largo de la sesión, recuperándose rápida y agresivamente después de caer. 
-
-Por qué es tan importante este parámetro? Le pedí a ChatGPT que lo explicará de una manera simple y concisa. 
-
-> _La ampliación de ventana (window scaling) es crucial en redes con alta latencia o gran ancho de banda, ya que permite que TCP utilice una ventana de recepción más grande, lo cual impacta directamente en la cantidad de bytes in flight (datos no confirmados) que el emisor puede enviar. Sin esta opción, el tamaño máximo de la ventana es de 65,535 bytes —demasiado pequeño para enlaces de alta velocidad— lo que lleva a una infrautilización del enlace. Con window scaling, la ventana puede crecer hasta varios gigabytes, permitiendo al emisor mantener más datos "en vuelo" y sostener un alto rendimiento incluso con demoras_.
-
-En resumen, la sesión TCP se divide en tres segmentos, donde los routers que optimizan anuncian una mayor ampliación de ventana (window scaling) y gestionan las conexiones con el cliente y el servidor. El tráfico ahora se rige por el algoritmo BBR para maximizar el rendimiento.
+El dominio ZTP está definido en el servidor DHCP, por ejemplo, si el nombre de dominio es **_cisco.com_**, el router intentará resolver ztp.**_cisco.com_**. Para más información puedes consultar la siguiente [documentación de Cisco](https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/sdwan-xe-gs-book/cisco-sd-wan-overlay-network-bringup.html#c_Start_the_Enterprise_ZTP_Server_7841.xml)
 
 ## Configuración
-Para configurar esta funcionalidad, se pueden utilizar _Feature Templates_ o _Configuration Groups_ (con la versión 20.15 o superior). En mi caso utilizaré _Configuration Groups_ y voy a tener _Internal Service Nodes_ en ambos lados
 
-Para empezar, añado la funcionalidad "App QoE" en el _Service Profile_ con la siguiente configuración:
+Necesitamos completar las siguientes tareas para utilizar ZTP on prem
 
-![](/wp-content/uploads/2025/04/tcp-opt-config.png)
+1. Agregar y configurar el servidor ZTP 
+2. Cargar la lista de equipo al servidor ZTP 
+3. Preparar la configuración del equipo en el Manager
+4. Configurar un servidor DHCP y DNS
+5. Lanzar el proceso de PnP
 
-- **Service Node** para hacer aceleración
-- **Forwarder** para actuar como Controller Node
+###  Agregar y configurar el servidor ZTP 
 
-Esta es la configuración que se enviará al equipo:
+El servidor ZTP utiliza la misma imagen que un Validator regular. Sigue el proceso habitual para levantar una nueva máquina virtual con conectividad hacia el Manager.
+
+La siguiente es la configuración mínima necesaria:
 
 ```
-interface VirtualPortGroup2
+vbond# show run system
+system
+ host-name               ztp-server
+ system-ip               10.10.10.194
+ site-id                 5
+ sp-organization-name    SDWAN-LAB123
+ organization-name       SDWAN-LAB123
+ vbond 192.168.200.2 local ztp-server 
+
+vpn 0
+ interface eth0
+  ip dhcp-client
+  ipv6 dhcp-client
   no shutdown
-  ip address 192.168.2.1 255.255.255.0
-  service-insertion appqoe
-!
-service-insertion appnav-controller-group appqoe ACG-APPQOE
-  appnav-controller 192.168.2.1
-!
-service-insertion service-node-group appqoe SNG-APPQOE
-  service-node 192.168.2.2
-!
-service-insertion service-context appqoe/1
-  appnav-controller-group ACG-APPQOE
-  service-node-group      SNG-APPQOE
-  cluster-type            integrated-service-node
-  enable
-  vrf global
-!
-```
-
-El estatus debe ser **"Running"**
-
-
-```
-Lisbon_10-1#show sdwan appqoe tcpopt status 
-==========================================================
-                  TCP-OPT Status
-==========================================================
-
-Status
-------
-TCP OPT Operational State      : RUNNING
-TCP Proxy Operational State    : RUNNING
-```
-
-A continuación, creo una política de datos muy sencilla para hacer match del tráfico entre el cliente y el servidor y selecciono la acción de _AppQoE Optimization_ y selecciono la casilla de _TCP Optimization_.
-
-![](/wp-content/uploads/2025/04/policy-config.png)
-
-```
-vsmart_1# show running-config policy 
-policy
- data-policy _VPN_10_AppQoE
-  vpn-list VPN_10
-   sequence 1
-    match
-     source-data-prefix-list      BR10_172_16_10_0
-     destination-data-prefix-list DC_100_172_16_100_0
-    !
-    action accept
-     tcp-optimization
-     service-node-group SNG-APPQOE
-    !
-   !
-   sequence 11
-    match
-     source-data-prefix-list      DC_100_172_16_100_0
-     destination-data-prefix-list BR10_172_16_10_0
-    !
-    action accept
-     tcp-optimization
-     service-node-group SNG-APPQOE
-    !
-   !
-   default-action accept
-  !
  !
- ```
-**Nota** la dirección en la cual se debe aplicar la política es _ALL_
-
-```
-vsmart_1# show running-config apply-policy 
-apply-policy
- site-list BR_10
-  data-policy _VPN_10_AppQoE all
+ interface ge0/0
+  ip address 192.168.200.3/24
+  no shutdown
  !
- site-list DC_100
-  data-policy _VPN_10_AppQoE all
- !
+ ip route 0.0.0.0/0 192.168.200.253
 !
  ```
-## Verificando la Optimización TCP
 
-Para verificar que el tráfico está siendo optimizado, podemos habilitar On-Demand Troubleshooting y seleccionar un periodo de tiempo. 
+Nota el sufijo **_ztp-server_**, esto indicará al dispositivo que actuará como servidor ZTP.
 
-![](/wp-content/uploads/2025/04/odt-tcp.png)
+Desde el Manager, agrega el servidor ZTP a la lista de Controladores:
 
-También, con la información en tiempo real podemos sacar la lista de flows que están siendo optimizados
+![](/wp-content/uploads/2025/05/ztp1.png)
 
-![](/wp-content/uploads/2025/04/rt-tcp.png)
+Dependiendo del método de autenticación del Controlador, genera y firma el CSR.
 
-La columna de _Services_ indica que la Optimización TCP se está aplicando a esos flujos
+Si estás utilizando certificados Enterprise, necesitarás instalar el certificado raíz y el certificado firmado.
 
- ## Probando el rendimiento de la Optimization TCP
+Por ejemplo:
 
-Para evaluar el impacto de la Optimización TCP, ejecuté pruebas con iperf utilizando diferentes valores de latencia para observar en qué condiciones la función ofrece mayores beneficios. Aunque no se trata de un entorno de laboratorio profesional, proporciona información valiosa sobre cómo se comporta la optimización en la práctica.
+```
+ztp-server# request root-cert-chain install home/admin/root-ca.crt
+ztp-server# request certificate install home/admin/ztp.crt
+```
+**Nota**: El servidor ZTP no tiene ninguna conexión de control con el Manager ni con ningún otro controlador.
 
-**Nota**  Mi tráfico de iperf no está encriptado. No es posible optimizar tráfico encriptado sin antes desencriptarlo a través de TLS/SSL Decryption
+### Cargar la lista de equipo al servidor ZTP 
 
-Algunos detalles adicionales:
+Ahora que el servidor ZTP está instalado, es necesario cargar la lista de equipo que se conectarán a él.
 
-- El ancho de banda está topado a **250 Mbps** en los routers.
-- Utilizo **4 flujos en paralelo**, cada uno simulando una descarga de **100 MB**:
+La manera más sencilla es obtener el archivo _serialFile.viptela_ desde el portal PnP y copiarlo localmente en el equipo.
 
-> iperf -c 172.16.100.11 -n 100MB -P 4 -i 15 -R
+```
+ztp-server:~$ ls -l | grep serial
+-rw-r--r-- 1 admin admin  2364 Apr 24 21:41 serialFile.viptela
+```
+Luego es necesario ejecutar el siguiente comando
 
-Para mantener consistencia, corro cada prueba 5 veces, descarto el resultado más alto y más bajo y al final saco un promedio de los tres restantes.
+```
+ztp-server# request device-upload chassis-file home/admin/serialFile.viptela 
+Uploading chassis numbers via VPN 0
+Copying ... /home/admin/serialFile.viptela via VPN 0
+file:  /tmp/tmp.CbUWf8GnSN/viptela_serial_file
+PnP
+Verifying public key received from PnP against production root cert
+is_public_key_ok against production root ca:  OK
+Signature verified for viptela_serial_file
+final file:  /tmp/tmp.CbUWf8GnSN/viptela_serial_file
+Signature verification Suceeded.
+Success: Serial file is /tmp/tmp.CbUWf8GnSN/viptela_serial_file
+INFO: Input File specified was '/usr/share/viptela/chassis_numbers.tmp'
+INFO: # of complete chassis entries written: 12
+Json to CSV conversion succeeded!
+Successfully loaded the chassis numbers file to the database.
+```
+Para verificar que la lista se cargó correctamente
 
-La siguiente tabla muestra los resultados obtenidos:
+```
+ztp-server# show ztp entries 
+                                                                                                                                                  ROOT     
+                                                                                                                           VBOND  ORGANIZATION    CERT     
+INDEX  CHASSIS NUMBER                                   SERIAL NUMBER                             VALIDITY  VBOND IP       PORT   NAME            PATH     
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+...
+23     ASR1001-HX-XXXXXXXXXXX                           XXXXXXXX                                  valid     192.168.200.1  12346  SDWAN-LAB123  default   
+```
+### Preparar la configuración del equipo en el Manager
 
-| Delay | TCP Opt | BW (Mbps) | Time (s) |
-|-------|---------|-----------|----------|
-| 0     |Disabled | 248       |   ~ 13   |
-| 0     |Enabled  | 121,6     |   ~ 27   |
-| 50    |Disabled | 99,7      |   ~ 33   |
-| 50    |Enabled  | 124       |   ~ 26   |
-| 100   |Disabled | 71        |   ~ 46   |
-| 100   |Enabled  | 131       |   ~ 25   |
-| 150   |Disabled | 66        |   ~ 49   |
-| 150   |Enabled  | 125       |   ~ 26   |
-| 200   |Disabled | 59        |   ~ 56   |
-| 200   |Enabled  | 131       |   ~ 25   |
-| 250   |Disabled | 63        |   ~ 52   |
-| 250   |Enabled  | 126       |   ~ 26   |
+Para logar esto, utilizaré un _Configuration Group_, pero se puede logar con _Templates_ igualmente
 
-Aquí hay una representación visual de la misma información
+![](/wp-content/uploads/2025/05/ztp2.png)
 
-![](/wp-content/uploads/2025/04/charts.png)
+Creo la configuración y la envío al equipo. Como está offline, la terea queda como "Scheduled"
 
-Lo que puedo concluir de los resultados:
+![](/wp-content/uploads/2025/05/ztp3.png)
 
-1. Con un delay de 0 ms, la optimización reduce el rendimiento (121 Mbps frente a 248 Mbps), debido al procesamiento que introduce esta funcionalidad.
+### Configurar un servidor DHCP y DNS
 
-2. A medida que aumenta el delay, la optimización mejora el rendimiento y reduce el tiempo de transferencia, lo cual ya es evidente a partir de un delay de 50 ms.
+Para hacer sencillo, configuro un switch intermedio como servidor DHCP y DNS con la siguiente configuración:
 
-3. El rendimiento disminuye significativamente sin optimización TCP. El ancho de banda baja de 248 Mbps a 0 ms a ~59–63 Mbps con retrasos de 200–250 ms. El tiempo también aumenta proporcionalmente.
+```
+ip dhcp pool ASR
+ vrf MPLS
+ network 192.168.11.4 255.255.255.252
+ default-router 192.168.11.6 
+ dns-server 192.168.11.6 
+ domain-name cisco.com
 
-4. El rendimiento se mantiene estable a través de diferentes valores de delay con optimización TCP. El rendimiento se mantiene alrededor de 125–131 Mbps incluso con retrasos altos. El tiempo de transferencia también es consistente, alrededor de ~26s.
+ip host vrf MPLS ztp.cisco.com 192.168.200.3
+ip host vrf MPLS devicehelper.cisco.com 192.168.200.3
+```
+Ok, estamos listos para lanzar el proceso PnP
 
-## Conclusión
+### Lanzar el proceso de PnP
 
-La optimización TCP es altamente efectiva para mitigar el impacto de la latencia en el rendimiento de TCP. Si bien introduce algo de sobrecarga en condiciones de baja latencia, sus beneficios se vuelven más evidentes a medida que aumenta el retraso. En escenarios con retrasos de 100 ms o más, la optimización puede ayudar a duplicar el rendimiento y reducir el tiempo de transferencia. Si estás pensando en habilitarla, ten en cuenta que, dependiendo del modelo de router, obtendrás rendimientos diferentes.
+Para activar el proceso de PnP, el dispositivo debe tener una configuración en blanco. Voy a usar el siguiente comando para restablecer la configuración y activar el proceso.
 
-Además, esta función no debe habilitarse para todo el tráfico, sino que debe activarse para una aplicación específica o un conjunto de aplicaciones que necesiten aceleración. Finalmente, esta función ofrece mayores beneficios en líneas intercontinentales, transportes satelitales o enlaces de alta latencia similares.
+```
+Router#request platform software sdwan config reset 
 
-¡Espero que esta publicación haya sido útil y nos vemos en la próxima!
+%WARNING: Bootstrap file doesn't exist and absence 
+of it can cause loss of connectivity to the controller.
+For saving bootstrap config, use:
+request platform software sdwan bootstrap-config save
+Proceed to reset anyway? [confirm]
 
+Backup of running config is saved under /bootflash/sdwan/backup.cfg
+Config reset requested from a console session.
+Waiting for up to 60 seconds for IOS to initiate reload or report failure.
+IOS return status: "cfgreset_proceed"
+Config reset is raised successfully, device will reload shortly.
+```
+
+Para ver los siguientes logs es necesario acceso por consola: 
+
+El equipo arranca y comienza el proceso de PnP
+
+```
+*May  4 04:18:42.659: %PNP-6-PNP_DISCOVERY_STARTED: PnP Discovery started
+```
+El equipo obtiene una dirección ip, router por defecto y un nombre de dominio
+
+```
+Autoinstall trying DHCPv4 on GigabitEthernet0/0/0,GigabitEthernet0/0/1,GigabitEthernet0/0/2,GigabitEthernet0
+...
+*May  4 04:19:44.999: %PKI-2-NON_AUTHORITATIVE_CLOCK: PKI functions can not be initialized until an authoritative time source, like NTP, can be obtained.
+Acquired IPv4 address 192.168.11.5 on Interface GigabitEthernet0/0/1
+Received following DHCPv4 options:
+        domain-name     : cisco.com
+        dns-server-ip   : 192.168.11.6
+
+```
+
+El equipo intenta resolver los dominos y es redirigido a _ztp.cisco.com_
+```
+*May  4 04:20:08.694: %PNP-3-PNP_CCO_SERVER_IP_UNRESOLVED: CCO server (devicehelper.cisco.com.) can't be resolved (1/5) by (pid=619, pname=PnP Agent Discovery, time=04:20:08 UTC Sun May 4 2025)
+...
+*May  4 04:20:20.696: %IOSXE_SDWAN_CONFIG-5-PNP_REDIRECT: PnP Redirect Msg: Org name "" Host "ztp.cisco.com." port 0 intf GigabitEthernet0/0/1
+*May  4 04:20:42.010: %PNP-6-PNP_REDIRECTION_DONE: PnP Redirection done (1) by (pid=619, pname=PnP Agent Discovery)
+*May  4 04:20:42.010: %PNP-6-PNP_SDWAN_STARTED: PnP SDWAN started (1) via (pnp-sdwan-vbond-ztp-discovery) by (pid=619, pname=PnP Agent Discovery)
+*May  4 04:20:42.811: %PNP-6-PNP_DISCOVERY_DONE: PnP Discovery done successfully (PnP-VBOND-ONPREM-ZTP-IPV4) profile (pnp-zero-touch) 
+```
+Podemos confirmar que la resolución DNA para _ztp.cisco.com_ ocurrió de manera correctamente
+```
+ASR1K-2#show pnp trace | i  ztp
+[05/04/25 04:20:10.695 UTC B7 619] 1: VBOND_ONPRIME_ZTP hostname ztp.cisco.com. resolved to 192.168.11.6 on interface GigabitEthernet0/0/1
+[05/04/25 04:20:10.695 UTC B8 619] host_name is ztp.cisco.com. vbond_ipv4_address is 192.168.11.6, interface is GigabitEthernet0/0/1
+```
+Enseguida, el eouter se conecta al servidor ZTP y es redirigido al Validator
+```
+*May  4 04:21:17.991: %Cisco-SDWAN-Router-vdaemon-6-INFO-1400002: Notification: 5/4/2025 4:21:17 control-connection-state-change severity-level:major host-name:"Router" system-ip::: personality:vedge peer-type:vbond peer-system-ip::: peer-vmanage-system-ip:0.0.0.0 public-ip:192.168.200.3 public-port:12346 src-color:default remote-color:default uptime:"0:00:00:00" new-state:up
+...
+*May  4 04:21:19.242: %Cisco-SDWAN-Router-vdaemon-6-INFO-1400002: Notification: 5/4/2025 4:21:19 org-name-change severity-level:minor host-name:"Router" system-ip::: old-organization-name:"" new-organization-name:"SDWAN-LAB123"
+*May  4 04:21:21.597: %Cisco-SDWAN-Router-vdaemon-6-INFO-1400002: Notification: 5/4/2025 4:21:21 control-connection-state-change severity-level:major host-name:"Router" system-ip::: personality:vedge peer-type:vbond peer-system-ip::: peer-vmanage-system-ip:0.0.0.0 public-ip:192.168.200.1 public-port:12346 src-color:default remote-color:default uptime:"0:00:00:00" new-state:up
+```
+Eventualmente, el equipo se conecta al MAnager y al Controller y obtiene su configuración
+```
+*May  4 04:21:23.924: %Cisco-SDWAN-Router-vdaemon-6-INFO-1400002: Notification: 5/4/2025 4:21:23 control-connection-state-change severity-level:major host-name:"Router" system-ip::: personality:vedge peer-type:vmanage peer-system-ip:10.10.10.2 peer-vmanage-system-ip:0.0.0.0 public-ip:192.168.100.1 public-port:12746 src-color:default remote-color:biz-internet uptime:"0:00:00:00" new-state:up
+*May  4 04:21:24.299: %Cisco-SDWAN-CSS-SDWAN-POD1-ASR1K-2-OMPD-5-NTCE-400003: Operational state changed to UP
+*May  4 04:21:43.981: %DMI-5-AUTH_PASSED: R0/0: dmiauthd: User 'vmanage-admin' authenticated successfully from 10.10.10.2:42962  for netconf over ssh.
+```
+![](/wp-content/uploads/2025/05/ztp4.png)
+
+```
+ASR1K-2#show sdwan control connections | i up
+vsmart  dtls 10.10.10.3      5          1      192.168.100.2                           12346 192.168.100.2                           12346 SDWAN-LAB123          mpls            No    up     0:02:02:51 0           
+vbond   dtls 0.0.0.0         0          0      192.168.200.1                           12346 192.168.200.1                           12346 SDWAN-LAB123          mpls            -     up     0:02:02:54 0           
+vmanage dtls 10.10.10.2      5          0      192.168.100.1                           12946 192.168.100.1                           12946 SDWAN-LAB123          mpls            No    up     0:02:02:49 0           
+```
+
+## Conclusion
+
+El servidor ZTP On-Prem amplía la capacidad de incorporar dispositivos físicos en aquellas redes donde el acceso a internet está restringido.
+
+Automatizar la incorporación de routers con ZTP On-Prem es una excelente alternativa para las organizaciones que necesitan tener control total sobre su proceso de aprovisionamiento o que operan en entornos aislados (air-gapped). Al replicar localmente el proceso de Plug and Play, eliminas la necesidad de configuraciones manuales en sitios remotos mientras mantienes aislados los entornos sensibles.
+
+Con la configuración adecuada, incorporar nuevos sitios se convierte en un proceso sencillo y repetible que ahorra tiempo valioso, reduce errores humanos y escala las implementaciones de SD-WAN.
+
+👉 ¿Te interesa configurar ZTP On-Prem para tu red? Déjame un comentario o contáctame; ¡me encantaría ayudarte o responder tus preguntas!
 
