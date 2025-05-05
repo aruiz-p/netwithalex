@@ -134,13 +134,13 @@ Para logar esto, utilizaré un _Configuration Group_, pero se puede logar con _T
 
 ![](/wp-content/uploads/2025/05/ztp2.png)
 
-Creo la configuración y la envío al equipo. Como está offline, la terea queda como "Scheduled"
+Creo la configuración y la envío al equipo. Como está offline, la tarea queda como "Scheduled"
 
 ![](/wp-content/uploads/2025/05/ztp3.png)
 
 ### Configurar un servidor DHCP y DNS
 
-Para hacer sencillo, configuro un switch intermedio como servidor DHCP y DNS con la siguiente configuración:
+Para hacerlo sencillo, configuro un switch intermedio como servidor DHCP y DNS con la siguiente configuración:
 
 ```
 ip dhcp pool ASR

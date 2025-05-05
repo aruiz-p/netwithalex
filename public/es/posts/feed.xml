@@ -6,8 +6,15 @@
     <description>Recent content in Posts on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>es</language>
-    <lastBuildDate>Tue, 01 Apr 2025 14:20:31 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 May 2025 14:20:31 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/es/posts/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cisco SD-WAN ZTP On-Prem: Automatizando el onboarding de los routers</title>
+      <link>http://localhost:1313/ztp-on-prem-es/</link>
+      <pubDate>Mon, 05 May 2025 14:20:31 +0000</pubDate>
+      <guid>http://localhost:1313/ztp-on-prem-es/</guid>
+      <description>Plug and Play (PnP) te permite agregar dispositivos SD-WAN automáticamente a través de la nube de Cisco. Esta publicación explica cómo lograr Zero-Touch Provisioning (ZTP) en un entorno aislado y local (on-premises).</description>
+    </item>
     <item>
       <title>Serie AppQoE: Optimización TCP</title>
       <link>http://localhost:1313/appqoe-opt-tcp/</link>
