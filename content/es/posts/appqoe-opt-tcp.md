@@ -4,7 +4,7 @@ category:
   - sdwan
   - appqoe
 draft: false
-date: "2025-04-01T14:20:31+00:00"
+date: "2025-04-22T14:20:31+00:00"
 title: "Serie AppQoE: Optimización TCP"
 description: Descubre cómo SD-WAN mejora el rendimiento de TCP. Conoce las principales técnicas de optimización que aumentan el rendimiento de las aplicaciones y mejoran la experiencia del usuario.
 summary: Descubre cómo SD-WAN mejora el rendimiento de TCP. Conoce las principales técnicas de optimización que aumentan el rendimiento de las aplicaciones y mejoran la experiencia del usuario.
@@ -21,7 +21,7 @@ tag:
 
 En este primer post, exploraremos la Optimización TCP: cómo funciona, cuándo utilizarla y por qué puede marcar una gran diferencia para tus usuarios, especialmente en conexiones con alta latencia.
 
-## Descripción de la Solución
+## Qué es la optimización TCP?
 
 El objetivo de la Optimización TCP es ajustar finamente las conexiones TCP para mejorar su rendimiento. Esto es especialmente útil cuando hay enlaces con alta latencia involucrados.
 

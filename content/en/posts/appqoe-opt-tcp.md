@@ -4,7 +4,7 @@ category:
   - sdwan
   - appqoe
 draft: false
-date: "2025-04-01T14:20:31+00:00"
+date: "2025-04-22T14:20:31+00:00"
 title: "AppQoe Series: TCP Optimization"
 summary: Discover how SD-WAN enhances TCP performance. Learn about key optimization techniques that improve application reliability and user experience.
 description: Discover how SD-WAN enhances TCP performance. Learn about key optimization techniques that improve application reliability and user experience.
@@ -21,7 +21,7 @@ The good news? Cisco SD-WAN includes a suite of powerful technologies designed t
 
 In this first post, we’ll explore TCP Optimization - how it works, when to use it, and why it can be a game-changer for your users, especially over high-delay connections.
 
-## Solution Overview
+## What is TCP Optimization?
 
 The goal of TCP Optimization is to fine tune TCP connections to improve the performance. This is especially useful when there are long-latency links involved. 
 

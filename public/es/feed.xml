@@ -18,7 +18,7 @@
     <item>
       <title>Serie AppQoE: Optimización TCP</title>
       <link>http://localhost:1313/appqoe-opt-tcp/</link>
-      <pubDate>Tue, 01 Apr 2025 14:20:31 +0000</pubDate>
+      <pubDate>Tue, 22 Apr 2025 14:20:31 +0000</pubDate>
        <guid isPermaLink="false">http://localhost:1313/appqoe-opt-tcp/</guid> 
       <description>Descubre cómo SD-WAN mejora el rendimiento de TCP. Conoce las principales técnicas de optimización que aumentan el rendimiento de las aplicaciones y mejoran la experiencia del usuario.</description>
     </item>
@@ -31,9 +31,9 @@
     </item>
     <item>
       <title>Enhanced App Aware Routing</title>
-      <link>http://localhost:1313/mejorado-aar/</link>
+      <link>http://localhost:1313/aar-mejorado/</link>
       <pubDate>Sun, 05 Jan 2025 14:20:31 +0000</pubDate>
-       <guid isPermaLink="false">http://localhost:1313/mejorado-aar/</guid> 
+       <guid isPermaLink="false">http://localhost:1313/aar-mejorado/</guid> 
       <description>Aprende los beneficios de EAAR y cómo implementarlo en tu red</description>
     </item>
     <item>

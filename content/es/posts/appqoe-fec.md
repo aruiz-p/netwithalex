@@ -3,233 +3,191 @@ author: Alex
 category:
   - sdwan
   - appqoe
-draft: true
-date: "2025-04-22T14:20:31+00:00"
-title: "Serie AppQoE: Forward Error Correction (FEC)"
-description: Descubre cómo SD-WAN mejora el rendimiento de aplicaciones expuestas a transportes irregulares y con pérdidas de paquetes.  
-summary: Descubre cómo SD-WAN mejora el rendimiento de aplicaciones expuestas a transportes irregulares y con pérdidas de paquetes.  
-url: /appqoe-opt-tcp/
+draft: false
+date: "2025-05-19T14:20:31+00:00"
+title: "Serie AppQoe: Forward Error Correction (FEC)"
+description: Aprende cómo funciona Forward Error Correction (FEC) en Cisco SD-WAN para mejorar el rendimiento de las aplicaciones en enlaces con pérdida de paquetes. Explora casos de uso, configuración y resultados de pruebas.
+summary: Aprende cómo funciona Forward Error Correction (FEC) en Cisco SD-WAN para mejorar el rendimiento de las aplicaciones en enlaces con pérdida de paquetes. Explora casos de uso, configuración y resultados de pruebas.
+url: /appqoe-fec/
 tag:
-  - TCP
-  - optimizacion
+  - Loss Correction
 ---
-## Introduction
+## Introducción
 
-¿Alguna vez has usado una aplicación que se siente demasiado lenta? Tal vez las videollamadas se congelan o un portal web tarda una eternidad en cargar. Estos (y otros) son signos de que tu red WAN podría estar teniendo problemas.
+Ofrecer un rendimiento de aplicación consistente sobre enlaces congestionados o poco confiables es un desafío constante para la mayoría de las redes. Incluso con funciones avanzadas como [Enhanced Application-Aware Routing](/aar-mejorado/) u [Optimización TCP](/appqoe-opt-tcp/), hay condiciones en los enlaces que van más allá de lo que el failover, el balanceo de carga o la optimización pueden resolver.
 
-¿La buena noticia? Cisco SD-WAN incluye un conjunto de tecnologías diseñadas para mejorar el rendimiento en enlaces poco confiables o con alta latencia. En esta serie, desglosaremos tres funciones clave que pueden mejorar significativamente la experiencia de las aplicaciones en tu red: **_Optimización TCP, Forward Error Correction (FEC) y Duplicación de Paquetes**_.
+Al agregar un mecanismo de recuperación a nivel de paquete, FEC permite que Cisco SD-WAN enmascare la pérdida de paquetes y mantenga el rendimiento de las aplicaciones sin depender de retransmisiones.
 
-En este primer post, exploraremos la Optimización TCP: cómo funciona, cuándo utilizarla y por qué puede marcar una gran diferencia para tus usuarios, especialmente en conexiones con alta latencia.
+En este post, exploraremos qué tan efectivo puede ser FEC en un entorno SD-WAN, simulando condiciones con pérdida de paquetes y midiendo las tasas de recuperación.
 
-## Descripción de la Solución
+Si estás evaluando FEC para tu despliegue o simplemente tienes curiosidad sobre cómo funciona, este artículo te llevará por la teoría y la práctica.
 
-El objetivo de la Optimización TCP es ajustar finamente las conexiones TCP para mejorar su rendimiento. Esto es especialmente útil cuando hay enlaces con alta latencia involucrados.
+Vamos allá!
 
-Los routers SD-WAN actuarán como proxies, lo que significa que interceptarán las conexiones TCP y las ajustarán para obtener un mejor desempeño. Veamos un ejemplo visual.
+## Qué es Forward Error Correction (FEC)?
 
-![](/wp-content/uploads/2025/04/tcp-opt-topo.png)
+Forward Error Correction (FEC) es una técnica que mejora la confiabilidad de la transmisión de datos añadiendo información redundante a los paquetes antes de enviarlos por la red. En lugar de esperar retransmisiones cuando se pierden paquetes, el receptor utiliza esa redundancia para reconstruir los datos faltantes en tiempo real.
 
-Sin la optimización TCP, el cliente y el servidor establecerán una sesión TCP directamente entre ellos.
+En la implementación de Cisco SD-WAN, FEC agrupa 4 paquetes de datos y agrega 1 _paquete de paridad_. Si **uno** de esos 4 paquetes se pierde en el camino, el receptor puede reconstruirlo utilizando el paquete de paridad mediante una operación XOR.
 
-Cuando se utiliza la Optimización TCP, el Router 1 interceptará y terminará la conexión TCP proveniente del cliente y establecerá una sesión TCP optimizada con el Router 2. De igual manera, el Router 2 creará una sesión TCP con el servidor.
+Veámoslo en un diagrama:
 
-**Nota** Todo este proceso es transparente para el cliente y el servidor, y los datos serán almacenados en caché en los routers para mantener activas las sesiones.
+![](/wp-content/uploads/2025/05/fec1.png)
 
-Los equipos IOS-XE SD-WAN usan el algoritmo BBR el cual utiliza información sobre RTT (Round Trip Time) and ancho de banda disponible para optimizar la conexión. Si te gustaría profundizar en el tema te recomiendo ver [este vídeo](https://www.youtube.com/watch?v=VIX45zMMZG8&t=1607s) de Neal Cardwell. 
+El remitente transmite la información al receptor, pero el paquete 3 se pierde en tránsito. El receptor puede usar el paquete de paridad para reconstruir el paquete 3 y así evitar retransmisiones y retrasos que afectarían la experiencia de las aplicaciones.
 
-La implementación actual de Optimization TCP tiene definidos dos roles:
+Es importante notar que si se pierden más de 1 paquete, incluyendo el de paridad, no es posible reconstruir la información. El tamaño del bloque es siempre de 4 paquetes de datos + 1 de paridad y no puede modificarse. Un bloque puede contener paquetes de diferentes flujos.
 
-- **Controller Node:** Equipo que intercepta y distribuye el trafico al _Service Node_.
-- **Service Node:** Motores de optimización para la aceleración del tráfico.
+> **Nota** El hecho de que FEC agregue 1 paquete de paridad por cada bloque de 4 incrementa el consumo de ancho de banda.
 
-En un escenario de la vida real, la recomendación es tener servicios de optimización en las sedes y en los Data Centers. Hay requerimientos diferentes basados en el volumen de tráfico que los equipos van a procesar. Te sugiero leer la [Documentación de Cisco](https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/appqoe/ios-xe-17/appqoe-book-xe/m-tcp-optimization.html) para informarte sobre los requerimientos de hardware y más.
+Hay dos modos de operación: 
+- **Always**: Se aplica FEC a todo el tráfico que haga match a la política, sin importar la cantidad de pérdida de paquetes en el transporte.
+- **Adaptive**: Permite definir un _threshold_ de pérdida de paquetes antes de empezar a aplicar FEC. Por ejemplo, si hay 2% o más pérdida de paquetes, se debe aplicar FEC al tráfico. El porcentaje de pérdida de paquetes se saca con los [paquetes BFD](/simplificando-aar-1-3-las-bases/#bfd/). 
 
-En las sedes pequeñas, es común utilizar un _Integrated Service Node_, es decir, un solo equipo puede interceptar, distribuir y optimizar el tráfico. Por otro lado, en el Data Cetner, un cluster de [External Service Nodes](https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/appqoe/ios-xe-17/appqoe-book-xe/m-support-for-multiple-appqoe-service-nodes.html) es necesario para para lograr un mayor rendimiento y distribuir volúmenes más altos de tráfico entre los miembros del cluster.
+FEC es especialmente útil en aplicaciones en tiempo real como voz, video o sesiones interactivas, donde esperar retransmisiones provocaría retrasos severos.
 
-En general, la Optimización TCP es un proceso intensivo para los dispositivos, por lo que es crucial confirmar los requisitos de la plataforma. Por ejemplo, mi entorno de demostración cuenta con dos Catalyst 8000V con 8 CPUs y 16 GB de RAM, requisitos adecuados para una implementación pequeña.
+Un punto importante es que FEC opera entre los dispositivos edge de SD-WAN, lo que lo hace completamente transparente para las aplicaciones: no es necesario modificar el comportamiento de clientes o servidores. Sin embargo, solo funciona cuando se utiliza encapsulación IPSec; **no está soportado sobre túneles GRE.**
 
-Veamos en la práctica qué efecto tiene la optimización TCP en el tráfico. Para demostrarlo, voy a tomar una captura de paquetes en el lado WAN con y sin optimización. 
-
-### Window Scaling Sin Optimización 
-
-Veamos como se comporta el window scalind sin optimización 
-
-![](/wp-content/uploads/2025/04/router1-tcp-opt-disabled.png)
-
-Nota como el _window size_ se mantuvo estable alrededor de 1,000,000 Bytes después de aproximadamente 5 segundos
-
-### Window Scaling Con Optimización
-
-Veamos la misma información pero con la optimización activa. 
-
-![](/wp-content/uploads/2025/04/router1-tcp-opt-enabled.png)
-
-Nota como el _window size_ estuvo en constante cambio a lo largo de la sesión, recuperándose rápida y agresivamente después de caer. 
-
-Por qué es tan importante este parámetro? Le pedí a ChatGPT que lo explicará de una manera simple y concisa. 
-
-> _La ampliación de ventana (window scaling) es crucial en redes con alta latencia o gran ancho de banda, ya que permite que TCP utilice una ventana de recepción más grande, lo cual impacta directamente en la cantidad de bytes in flight (datos no confirmados) que el emisor puede enviar. Sin esta opción, el tamaño máximo de la ventana es de 65,535 bytes —demasiado pequeño para enlaces de alta velocidad— lo que lleva a una infrautilización del enlace. Con window scaling, la ventana puede crecer hasta varios gigabytes, permitiendo al emisor mantener más datos "en vuelo" y sostener un alto rendimiento incluso con demoras_.
-
-En resumen, la sesión TCP se divide en tres segmentos, donde los routers que optimizan anuncian una mayor ampliación de ventana (window scaling) y gestionan las conexiones con el cliente y el servidor. El tráfico ahora se rige por el algoritmo BBR para maximizar el rendimiento.
+Un detalle crítico de implementación es el tamaño de los paquetes: si los paquetes son demasiado grandes y terminan siendo fragmentados, la capacidad de FEC para reconstruirlos se reduce considerablemente. Para aprovechar al máximo FEC, asegúrate de que el _payload_ se mantenga por debajo del MTU del _path MTU_ para evitar la fragmentación.
 
 ## Configuración
-Para configurar esta funcionalidad, se pueden utilizar _Feature Templates_ o _Configuration Groups_ (con la versión 20.15 o superior). En mi caso utilizaré _Configuration Groups_ y voy a tener _Internal Service Nodes_ en ambos lados
 
-Para empezar, añado la funcionalidad "App QoE" en el _Service Profile_ con la siguiente configuración:
+Utilizando _Policy Groups_, podemos configurar FEC a través de política de datos que hagan match al tráfico y apliquen la acción _Loss Correction_
 
-![](/wp-content/uploads/2025/04/tcp-opt-config.png)
+![](/wp-content/uploads/2025/05/fec2.png)
 
-- **Service Node** para hacer aceleración
-- **Forwarder** para actuar como Controller Node
+En mi caso, hice match a a todo el tráfico entre 172.16.10.0/24 y 172.16.100.0/24. Nota que se tienen los dos modos de operación: _Always y Adaptive_
 
-Esta es la configuración que se enviará al equipo:
+Si se selecciona FEC Adaptive, el _threshold_ tiene que estar entre 1% y 5% pérdida de paquetes.
 
-```
-interface VirtualPortGroup2
-  no shutdown
-  ip address 192.168.2.1 255.255.255.0
-  service-insertion appqoe
-!
-service-insertion appnav-controller-group appqoe ACG-APPQOE
-  appnav-controller 192.168.2.1
-!
-service-insertion service-node-group appqoe SNG-APPQOE
-  service-node 192.168.2.2
-!
-service-insertion service-context appqoe/1
-  appnav-controller-group ACG-APPQOE
-  service-node-group      SNG-APPQOE
-  cluster-type            integrated-service-node
-  enable
-  vrf global
-!
-```
-
-El estatus debe ser **"Running"**
-
-
-```
-Lisbon_10-1#show sdwan appqoe tcpopt status 
-==========================================================
-                  TCP-OPT Status
-==========================================================
-
-Status
-------
-TCP OPT Operational State      : RUNNING
-TCP Proxy Operational State    : RUNNING
-```
-
-A continuación, creo una política de datos muy sencilla para hacer match del tráfico entre el cliente y el servidor y selecciono la acción de _AppQoE Optimization_ y selecciono la casilla de _TCP Optimization_.
-
-![](/wp-content/uploads/2025/04/policy-config.png)
+Está es la configuración completa de mi política:
 
 ```
 vsmart_1# show running-config policy 
 policy
- data-policy _VPN_10_AppQoE
-  vpn-list VPN_10
+ data-policy data_all_FEC
+  vpn-list vpn_Corporate_Users
    sequence 1
     match
-     source-data-prefix-list      BR10_172_16_10_0
-     destination-data-prefix-list DC_100_172_16_100_0
+     source-ip      172.16.100.0/24
+     destination-ip 172.16.10.0/24
     !
     action accept
-     tcp-optimization
-     service-node-group SNG-APPQOE
+     loss-protect fec-always
+     loss-protection forward-error-correction always
     !
    !
    sequence 11
     match
-     source-data-prefix-list      DC_100_172_16_100_0
-     destination-data-prefix-list BR10_172_16_10_0
+     source-ip      172.16.10.0/24
+     destination-ip 172.16.100.0/24
     !
     action accept
-     tcp-optimization
-     service-node-group SNG-APPQOE
+     loss-protect fec-always
+     loss-protection forward-error-correction always
     !
    !
    default-action accept
   !
  !
- ```
-**Nota** la dirección en la cual se debe aplicar la política es _ALL_
-
-```
-vsmart_1# show running-config apply-policy 
-apply-policy
- site-list BR_10
-  data-policy _VPN_10_AppQoE all
+ lists
+  vpn-list vpn_Corporate_Users
+   vpn 10
+  !
+  site-list site_10_100
+   site-id 10
+   site-id 100
+  !
  !
- site-list DC_100
-  data-policy _VPN_10_AppQoE all
+ apply-policy
+ site-list site_10_100
+  data-policy data_all_FEC from-service
  !
 !
- ```
-## Verificando la Optimización TCP
+!
+```
 
-Para verificar que el tráfico está siendo optimizado, podemos habilitar On-Demand Troubleshooting y seleccionar un periodo de tiempo. 
+## Verificación de FEC
 
-![](/wp-content/uploads/2025/04/odt-tcp.png)
+No hay muchos comandos relacionados a FEC, pero podemos confirmar que FEC está operando con el siguiente comando:
 
-También, con la información en tiempo real podemos sacar la lista de flows que están siendo optimizados
+```
+Munich_DC100-1#show sdwan tunnel statistics fec 
+tunnel stats ipsec 21.101.0.2 21.11.0.2 12346 12346
+ fec-rx-data-pkts     16243
+ fec-rx-parity-pkts   4075
+ fec-tx-data-pkts     7
+ fec-tx-parity-pkts   1
+ fec-reconstruct-pkts 935
+ fec-capable          true
+ fec-dynamic          false
+```
+El _fec-reconstruct-pkts_ indica que se recuperaron 935 paquetes
 
-![](/wp-content/uploads/2025/04/rt-tcp.png)
+Nota también que podemos fácilmente ver la cantidad de paquetes de paridad que se enviaron y recibieron siendo aproximadamente 1/4 del total de paquetes de datos enviados/recibidos. 
 
-La columna de _Services_ indica que la Optimización TCP se está aplicando a esos flujos
+La misma información está también disponible a través de la interfaz gráfica del Manager, en la opción de _real time_
 
- ## Probando el rendimiento de la Optimization TCP
+![](/wp-content/uploads/2025/05/fec3.png)
 
-Para evaluar el impacto de la Optimización TCP, ejecuté pruebas con iperf utilizando diferentes valores de latencia para observar en qué condiciones la función ofrece mayores beneficios. Aunque no se trata de un entorno de laboratorio profesional, proporciona información valiosa sobre cómo se comporta la optimización en la práctica.
+## Probando FEC
 
-**Nota**  Mi tráfico de iperf no está encriptado. No es posible optimizar tráfico encriptado sin antes desencriptarlo a través de TLS/SSL Decryption
+A bandwidth of 450k is **around** 5 VoIP calls and using a payload of 361 bytes. 
 
-Algunos detalles adicionales:
+In this case, I am running unidirectional tests, but keep in mind FEC works in both directions.
 
-- El ancho de banda está topado a **250 Mbps** en los routers.
-- Utilizo **4 flujos en paralelo**, cada uno simulando una descarga de **100 MB**:
+Vamos a realizar algunas pruebas para ver FEC en acción y analizar la cantidad de pérdida de paquetes que puede recuperar. Mostraré distintos resultados para entender en qué condiciones FEC ofrece mejores beneficios.
 
-> iperf -c 172.16.100.11 -n 100MB -P 4 -i 15 -R
+**Nota** existe cierta pérdida de paquetes fuera de los routers SD-WAN que no puedo controlar. Por eso, para obtener resultados más precisos, primero tuve que encontrar una tasa de transmisión con la que obtuviera 0% de pérdida la **mayor parte del tiempo** en mis resultados con iperf3, y a partir de ahí comencé a introducir pérdida de manera controlada.
 
-Para mantener consistencia, corro cada prueba 5 veces, descarto el resultado más alto y más bajo y al final saco un promedio de los tres restantes.
+> iperf -c 172.16.100.11 -u -b 450k -t 30 -l 361 --dscp ef 
 
-La siguiente tabla muestra los resultados obtenidos:
+Un ancho de banda de 450 kbps equivale aproximadamente a 5 llamadas VoIP, utilizando un _payload_ de 361 bytes.
 
-| Delay | TCP Opt | BW (Mbps) | Time (s) |
-|-------|---------|-----------|----------|
-| 0     |Disabled | 248       |   ~ 13   |
-| 0     |Enabled  | 121,6     |   ~ 27   |
-| 50    |Disabled | 99,7      |   ~ 33   |
-| 50    |Enabled  | 124       |   ~ 26   |
-| 100   |Disabled | 71        |   ~ 46   |
-| 100   |Enabled  | 131       |   ~ 25   |
-| 150   |Disabled | 66        |   ~ 49   |
-| 150   |Enabled  | 125       |   ~ 26   |
-| 200   |Disabled | 59        |   ~ 56   |
-| 200   |Enabled  | 131       |   ~ 25   |
-| 250   |Disabled | 63        |   ~ 52   |
-| 250   |Enabled  | 126       |   ~ 26   |
+En este caso, estoy realizando pruebas unidireccionales, pero ten en cuenta que FEC funciona en ambos sentidos.
 
-Aquí hay una representación visual de la misma información
+|% Pérdida|Total Paquetes enviados|Total Paquetes recibidos |Paquetes recuperados|% efectivo de pérdida|
+|-----------------|------------------|----------------------|-----------------|---------------|
+|1                |4693              |4639                  |54               |0              |
+|2                |4694              |4588                  |96               |0,24           |
+|3                |4693              |4558                  |111              |0,58           |
+|4                |4694              |4524                  |147              |0,51           |
+|5                |4693              |4448                  |195              |0,68           |
+|6                |4693              |4401                  |231              |1,3            |
+|7                |4693              |4374                  |238              |1,8            |
+|8                |4693              |4331                  |283              |1,8            |
+|9                |4693              |4292                  |297              |2,2            |
+|10               |4693              |4215                  |304              |3,8            |
+|12               |4693              |4122                  |348              |3,8            |
+|15               |4695              |3941                  |382              |8              |
+|18               |4696              |3815                  |356              |11             |
+|20               |4696              |3731                  |368              |13             |
 
-![](/wp-content/uploads/2025/04/charts.png)
+Veamos unas gráficas interesantes:
 
-Lo que puedo concluir de los resultados:
+![](/wp-content/uploads/2025/05/fec4.png)
+![](/wp-content/uploads/2025/05/fec5.png)
+![](/wp-content/uploads/2025/05/fec6.png)
 
-1. Con un delay de 0 ms, la optimización reduce el rendimiento (121 Mbps frente a 248 Mbps), debido al procesamiento que introduce esta funcionalidad.
+A medida que aumenta la pérdida de paquetes, también crece el número de paquetes recuperados, hasta cierto punto. Esto es esperable: FEC agrega redundancia, y cuanto más se pierde, más se necesita recuperar. Sin embargo, esta capacidad tiene un límite natural: si se pierden dos o más paquetes dentro del mismo bloque FEC —incluyendo el paquete de paridad— la recuperación ya no es posible y la pérdida efectiva comienza a aumentar.
 
-2. A medida que aumenta el delay, la optimización mejora el rendimiento y reduce el tiempo de transferencia, lo cual ya es evidente a partir de un delay de 50 ms.
+También es importante destacar que FEC es una función **utiliza muchos recursos**, por lo que se recomienda activarla solo para tráfico crítico y, preferentemente, en combinación con un _threshold_ de pérdida de paquetes, en lugar de mantenerla activa permanentemente.
 
-3. El rendimiento disminuye significativamente sin optimización TCP. El ancho de banda baja de 248 Mbps a 0 ms a ~59–63 Mbps con retrasos de 200–250 ms. El tiempo también aumenta proporcionalmente.
+Aunque este laboratorio no replica a la perfección un entorno de producción, los resultados son bastante reveladores. FEC logró recuperar prácticamente todos los paquetes perdidos con hasta un 5% de pérdida introducida, y continuó recuperando cerca del 70% de los paquetes a aproximadamente 9% de pérdida. A partir de ahí, la eficiencia de recuperación empieza a disminuir. Dicho esto, no es común ver pérdidas constantes superiores al 10% en enlaces WAN de producción, y menos aún en ambas direcciones.
 
-4. El rendimiento se mantiene estable a través de diferentes valores de delay con optimización TCP. El rendimiento se mantiene alrededor de 125–131 Mbps incluso con retrasos altos. El tiempo de transferencia también es consistente, alrededor de ~26s.
+Por último, aunque las pruebas fueron unidireccionales, vale la pena mencionar que FEC puede aplicarse de forma independiente en cada dirección. Esto significa que, con una implementación bien ajustada, se podría tolerar cerca de un 5% de pérdida de paquetes por dirección sin afectar significativamente el rendimiento.
 
-## Conclusión
+## Conclusion
 
-La optimización TCP es altamente efectiva para mitigar el impacto de la latencia en el rendimiento de TCP. Si bien introduce algo de sobrecarga en condiciones de baja latencia, sus beneficios se vuelven más evidentes a medida que aumenta el retraso. En escenarios con retrasos de 100 ms o más, la optimización puede ayudar a duplicar el rendimiento y reducir el tiempo de transferencia. Si estás pensando en habilitarla, ten en cuenta que, dependiendo del modelo de router, obtendrás rendimientos diferentes.
+Forward Error Correction (FEC) es una técnica proactiva que agrega redundancia antes de la transmisión de paquetes, permitiendo que el receptor recupere ciertas pérdidas sin necesidad de retransmisiones. Esto la hace especialmente valiosa para aplicaciones en tiempo real como voz o video, donde esperar retransmisiones generaría retrasos perjudiciales.
 
-Además, esta función no debe habilitarse para todo el tráfico, sino que debe activarse para una aplicación específica o un conjunto de aplicaciones que necesiten aceleración. Finalmente, esta función ofrece mayores beneficios en líneas intercontinentales, transportes satelitales o enlaces de alta latencia similares.
+Recuerda que habilitar FEC viene con un costo: introduce carga adicional. El edge de SD-WAN que recibe los paquetes necesita usar capacidad de procesamiento adicional para reconstruir los que se perdieron. Por eso, es recomendable activarlo solo para tráfico crítico y, en lo posible, hacerlo condicionado a un _threshold_ de pérdida de paquetes.
 
-¡Espero que esta publicación haya sido útil y nos vemos en la próxima!
+FEC no reemplaza la necesidad de corregir enlaces de red defectuosos. Más bien, actúa como una capa de mitigación inteligente que ayuda a suavizar pérdidas moderadas o transitorias, manteniendo una experiencia de usuario consistente incluso cuando la red no es perfecta.
 
+En resumen, cuando se implementa correctamente, FEC puede ser una herramienta muy poderosa en tu arquitectura SD-WAN, ayudando a garantizar un rendimiento de aplicaciones constante sobre redes imperfectas.
 
+💭 ¿Qué opinas sobre el uso de Forward Error Correction en SD-WAN? ¿Lo has utilizado antes? ¿Tienes dudas sobre cómo funciona o cuándo activarlo?
+
+Déjame tus comentarios, preguntas o experiencias. Me encantaría saber cómo están abordando esta función en sus despliegues reales.
+¡Aprendamos entre todos!
