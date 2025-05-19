@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto">
+<html lang="es" dir="auto">
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>AppQoe Series: Forward Error Correction (FEC) | NetWithAlex</title>
+<title>Serie AppQoe: Forward Error Correction (FEC) | NetWithAlex</title>
 <meta name="keywords" content="">
-<meta name="description" content="Learn how Forward Error Correction (FEC) works in Cisco SD-WAN to improve application performance over lossy links. Explore use cases, configuration insights, and testing results.">
+<meta name="description" content="Aprende cómo funciona Forward Error Correction (FEC) en Cisco SD-WAN para mejorar el rendimiento de las aplicaciones en enlaces con pérdida de paquetes. Explora casos de uso, configuración y resultados de pruebas.">
 <meta name="author" content="Alex">
 <link rel="canonical" href="http://localhost:1313/appqoe-fec/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
@@ -19,6 +19,7 @@
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <link rel="alternate" hreflang="en" href="http://localhost:1313/appqoe-fec/">
+<link rel="alternate" hreflang="es" href="http://localhost:1313/appqoe-fec/">
 <noscript>
     <style>
         #theme-toggle,
@@ -95,16 +96,16 @@
     
 <meta property="og:url" content="http://localhost:1313/appqoe-fec/">
   <meta property="og:site_name" content="NetWithAlex">
-  <meta property="og:title" content="AppQoe Series: Forward Error Correction (FEC)">
-  <meta property="og:description" content="Learn how Forward Error Correction (FEC) works in Cisco SD-WAN to improve application performance over lossy links. Explore use cases, configuration insights, and testing results.">
-  <meta property="og:locale" content="en">
+  <meta property="og:title" content="Serie AppQoe: Forward Error Correction (FEC)">
+  <meta property="og:description" content="Aprende cómo funciona Forward Error Correction (FEC) en Cisco SD-WAN para mejorar el rendimiento de las aplicaciones en enlaces con pérdida de paquetes. Explora casos de uso, configuración y resultados de pruebas.">
+  <meta property="og:locale" content="es">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-05-05T14:20:31+00:00">
-    <meta property="article:modified_time" content="2025-05-05T14:20:31+00:00">
+    <meta property="article:published_time" content="2025-05-19T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-05-19T00:00:00+00:00">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AppQoe Series: Forward Error Correction (FEC)">
-<meta name="twitter:description" content="Learn how Forward Error Correction (FEC) works in Cisco SD-WAN to improve application performance over lossy links. Explore use cases, configuration insights, and testing results.">
+<meta name="twitter:title" content="Serie AppQoe: Forward Error Correction (FEC)">
+<meta name="twitter:description" content="Aprende cómo funciona Forward Error Correction (FEC) en Cisco SD-WAN para mejorar el rendimiento de las aplicaciones en enlaces con pérdida de paquetes. Explora casos de uso, configuración y resultados de pruebas.">
 
 
 <script type="application/ld+json">
@@ -116,12 +117,12 @@
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "http://localhost:1313/posts/"
+      "item": "http://localhost:1313/es/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "AppQoe Series: Forward Error Correction (FEC)",
+      "name": "Serie AppQoe: Forward Error Correction (FEC)",
       "item": "http://localhost:1313/appqoe-fec/"
     }
   ]
@@ -131,17 +132,17 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "AppQoe Series: Forward Error Correction (FEC)",
-  "name": "AppQoe Series: Forward Error Correction (FEC)",
-  "description": "Learn how Forward Error Correction (FEC) works in Cisco SD-WAN to improve application performance over lossy links. Explore use cases, configuration insights, and testing results.",
+  "headline": "Serie AppQoe: Forward Error Correction (FEC)",
+  "name": "Serie AppQoe: Forward Error Correction (FEC)",
+  "description": "Aprende cómo funciona Forward Error Correction (FEC) en Cisco SD-WAN para mejorar el rendimiento de las aplicaciones en enlaces con pérdida de paquetes. Explora casos de uso, configuración y resultados de pruebas.",
   "keywords": [
     
   ],
-  "articleBody": "Introduction Delivering consistent application performance over unreliable or congested links is a constant challenge for most networks. Even with great features like Enhanced Application Aware Routing or TCP Optimization, there are link conditions that go beyond what failover, load balancing or optimization can solve.\nBy adding a recovery mechanism at the packet level, FEC allows Cisco SD-WAN to mask packet loss and maintain application performance without relying on retransmissions.\nIn this post, we will explore how effective FEC can be in SD-WAN. By simulating lossy conditions, and measuring recovery rates.\nIf you evaluating FEC for your deployment or just curious about how it works, this post will walk you through both the theory and practice.\nLet’s go!\nWhat is Forward Error Correction (FEC)? Forward Error Correction (FEC) is a technique that improves data transmission reliability by adding redundant information to packets before they’re sent across the network. Instead of waiting for retransmissions when packets are lost, the receiver uses this redundancy to reconstruct missing data on the fly.\nIn the Cisco SD-WAN implementation, FEC creates blocks of 4 data packets + 1 parity packet. If one of those 4 packets is lost along the way, the receiver can fill in the gaps using the parity packet by performing an XOR operation.\nLet’s see it in a diagram\nThe sender transmits information to the receiver, but packet 3 is lost in transit. The receiver can use the parity packet to reconstruct packet 3 and avoid retransmissions and delays that would impact application experience.\nNotice that if more than 1 packet is lost, including the parity packet, the reconstruction is not possible. The block size is always 4 and it cannot be changed. Blocks can contain packets from multiple flows.\nNote The fact that FEC adds 1 parity packet for every block of 4 packets increases BW consumption.\nThere are 2 modes of operation\nAlways: FEC will be applied to all traffic matching the policy sequence regardless of packet loss levels. Adaptive: Set a packet loss threshold to start using FEC. For example, with 2% or more packet loss start applying FEC to the traffic. Loss percent is computed with BFD packets. FEC is particularly useful in real-time applications like voice, video, or interactive sessions, where waiting for retransmissions would cause severe delays.\nImportantly, FEC operates between SD-WAN edge devices, making it completely transparent to the applications, there’s no need to modify client or server behavior. However, it only works when using IPSec encapsulation; it’s not supported over GRE tunnels.\nOne critical implementation detail is packet size: if packets are too large and end up being fragmented, FEC’s ability to reconstruct them is significantly reduced. To get the most out of FEC, make sure the payload size stays below the path MTU to avoid fragmentation.\nConfiguration Using Policy Groups, we can configure FEC through a data policy that matches interesting traffic and applies an action of Loss Correction\nIn my case, I matched all the traffic between 172.16.10.0/24 and 172.16.100.0/24. Notice we have the two modes of operations available: Always and Adaptive\nIf FEC Adaptive is selected, the available thresholds are between 1%-5% loss.\nHere is the full configuration of my policy:\nvsmart_1# show running-config policy policy data-policy data_all_FEC vpn-list vpn_Corporate_Users sequence 1 match source-ip 172.16.100.0/24 destination-ip 172.16.10.0/24 ! action accept loss-protect fec-always loss-protection forward-error-correction always ! ! sequence 11 match source-ip 172.16.10.0/24 destination-ip 172.16.100.0/24 ! action accept loss-protect fec-always loss-protection forward-error-correction always ! ! default-action accept ! ! lists vpn-list vpn_Corporate_Users vpn 10 ! site-list site_10_100 site-id 10 site-id 100 ! ! apply-policy site-list site_10_100 data-policy data_all_FEC from-service ! ! ! Verifying FEC There aren’t a lot of commands, we can confirm FEC is operational with the following command:\nMunich_DC100-1#show sdwan tunnel statistics fec tunnel stats ipsec 21.101.0.2 21.11.0.2 12346 12346 fec-rx-data-pkts 16243 fec-rx-parity-pkts 4075 fec-tx-data-pkts 7 fec-tx-parity-pkts 1 fec-reconstruct-pkts 935 fec-capable true fec-dynamic false The fec-reconstruct-pkts indicate that 935 packets have been recovered.\nAlso, notice that we can easily see how many parity packets are sent and received which are roughly 1/4 of total sent/received data packets.\nThe same information is also available through the real-time information on the Manager’s UI\nTesting FEC Let’s run some tests to see FEC in action and the amount of packet loss that can be recovered. I will show different results to understand where FEC delivers better results.\nNote there is loss outside of the SD-WAN routers I cannot control so in order to have more precise results I had to found the rate at which I got 0% packet loss most of the time with my iperf3 results and start introducing controlled loss from there.\niperf -c 172.16.100.11 -u -b 450k -t 30 -l 361 –dscp ef\nA bandwidth of 450k is around 5 VoIP calls and using a payload of 361 bytes.\nIn this case, I am running unidirectional tests, but keep in mind FEC works in both directions.\nLoss% introduced Total Sent Packets Total Received Packets Recovered Packets Effective Loss % 1 4693 4639 54 0 2 4694 4588 96 0,24 3 4693 4558 111 0,58 4 4694 4524 147 0,51 5 4693 4448 195 0,68 6 4693 4401 231 1,3 7 4693 4374 238 1,8 8 4693 4331 283 1,8 9 4693 4292 297 2,2 10 4693 4215 304 3,8 12 4693 4122 348 3,8 15 4695 3941 382 8 18 4696 3815 356 11 20 4696 3731 368 13 Let’s see some interesting visuals:\nAs packet loss increases, the number of recovered packets also grows - up to a certain point. This is expected: FEC adds redundancy, and the more packets are lost, the more recovery is needed. However, there’s a natural limit to this capability. If two or more packets within the same FEC block are lost, including the parity packet, recovery becomes impossible, and effective loss starts to climb.\nIt’s also important to note that FEC is a resource intensive feature, hence it should be activated for critical traffic and ideally using a packet loss threshold rather than always.\nWhile this lab setup isn’t a perfect replica of real-world conditions, the results are still insightful. FEC was able to recover nearly all lost packets with up to 5% introduced loss and continued to recover around 70% of packets at ~9% loss. Beyond that, recovery efficiency starts to drop. That said, it’s uncommon to see consistent 10%+ loss in production WAN transports and even more so in both directions.\nFinally, although these tests were unidirectional, it’s worth noting that FEC can be applied independently on each direction. This means a well-tuned deployment could tolerate about 5% packet loss per direction while maintaining good performance.\nConclusion Forward Error Correction (FEC) is a proactive technique that adds redundancy before packet transmission, allowing the receiver to recover from certain losses without needing retransmissions. This makes it especially valuable for real-time applications like voice and video, where waiting for retries would introduce harmful delays.\nRemember that FEC isn’t free as it introduces overhead. The receiving SD-WAN edge must use additional processing power to reconstruct lost packets, use it for critical traffic and ideally after a specified packet loss threshold.\nFEC is not a replacement for fixing poor network links. Instead, it acts as a smart mitigation layer that helps smooth over transient or moderate packet loss, keeping user experience consistent even when the network isn’t perfect.\nOverall, when deployed correctly, FEC can be a powerful tool in your SD-WAN toolbox — helping ensure consistent application performance over imperfect networks.\n💭 What’s your take on Forward Error Correction in SD-WAN? Have you used it before? Do you have questions about how it works or when to enable it?\nDrop your thoughts or doubts in the comments! I’d love to hear how others are approaching FEC in real world deployments. Let’s learn from each other!\n",
-  "wordCount" : "1301",
-  "inLanguage": "en",
-  "datePublished": "2025-05-05T14:20:31Z",
-  "dateModified": "2025-05-05T14:20:31Z",
+  "articleBody": "Introducción Ofrecer un rendimiento de aplicación consistente sobre enlaces congestionados o poco confiables es un desafío constante para la mayoría de las redes. Incluso con funciones avanzadas como Enhanced Application-Aware Routing u Optimización TCP, hay condiciones en los enlaces que van más allá de lo que el failover, el balanceo de carga o la optimización pueden resolver.\nAl agregar un mecanismo de recuperación a nivel de paquete, FEC permite que Cisco SD-WAN enmascare la pérdida de paquetes y mantenga el rendimiento de las aplicaciones sin depender de retransmisiones.\nEn este post, exploraremos qué tan efectivo puede ser FEC en un entorno SD-WAN, simulando condiciones con pérdida de paquetes y midiendo las tasas de recuperación.\nSi estás evaluando FEC para tu despliegue o simplemente tienes curiosidad sobre cómo funciona, este artículo te llevará por la teoría y la práctica.\nVamos allá!\nQué es Forward Error Correction (FEC)? Forward Error Correction (FEC) es una técnica que mejora la confiabilidad de la transmisión de datos añadiendo información redundante a los paquetes antes de enviarlos por la red. En lugar de esperar retransmisiones cuando se pierden paquetes, el receptor utiliza esa redundancia para reconstruir los datos faltantes en tiempo real.\nEn la implementación de Cisco SD-WAN, FEC agrupa 4 paquetes de datos y agrega 1 paquete de paridad. Si uno de esos 4 paquetes se pierde en el camino, el receptor puede reconstruirlo utilizando el paquete de paridad mediante una operación XOR.\nVeámoslo en un diagrama:\nEl remitente transmite la información al receptor, pero el paquete 3 se pierde en tránsito. El receptor puede usar el paquete de paridad para reconstruir el paquete 3 y así evitar retransmisiones y retrasos que afectarían la experiencia de las aplicaciones.\nEs importante notar que si se pierden más de 1 paquete, incluyendo el de paridad, no es posible reconstruir la información. El tamaño del bloque es siempre de 4 paquetes de datos + 1 de paridad y no puede modificarse. Un bloque puede contener paquetes de diferentes flujos.\nNota El hecho de que FEC agregue 1 paquete de paridad por cada bloque de 4 incrementa el consumo de ancho de banda.\nHay dos modos de operación:\nAlways: Se aplica FEC a todo el tráfico que haga match a la política, sin importar la cantidad de pérdida de paquetes en el transporte. Adaptive: Permite definir un threshold de pérdida de paquetes antes de empezar a aplicar FEC. Por ejemplo, si hay 2% o más pérdida de paquetes, se debe aplicar FEC al tráfico. El porcentaje de pérdida de paquetes se saca con los paquetes BFD. FEC es especialmente útil en aplicaciones en tiempo real como voz, video o sesiones interactivas, donde esperar retransmisiones provocaría retrasos severos.\nUn punto importante es que FEC opera entre los dispositivos edge de SD-WAN, lo que lo hace completamente transparente para las aplicaciones: no es necesario modificar el comportamiento de clientes o servidores. Sin embargo, solo funciona cuando se utiliza encapsulación IPSec; no está soportado sobre túneles GRE.\nUn detalle crítico de implementación es el tamaño de los paquetes: si los paquetes son demasiado grandes y terminan siendo fragmentados, la capacidad de FEC para reconstruirlos se reduce considerablemente. Para aprovechar al máximo FEC, asegúrate de que el payload se mantenga por debajo del MTU del path MTU para evitar la fragmentación.\nConfiguración Utilizando Policy Groups, podemos configurar FEC a través de política de datos que hagan match al tráfico y apliquen la acción Loss Correction\nEn mi caso, hice match a a todo el tráfico entre 172.16.10.0/24 y 172.16.100.0/24. Nota que se tienen los dos modos de operación: Always y Adaptive\nSi se selecciona FEC Adaptive, el threshold tiene que estar entre 1% y 5% pérdida de paquetes.\nEstá es la configuración completa de mi política:\nvsmart_1# show running-config policy policy data-policy data_all_FEC vpn-list vpn_Corporate_Users sequence 1 match source-ip 172.16.100.0/24 destination-ip 172.16.10.0/24 ! action accept loss-protect fec-always loss-protection forward-error-correction always ! ! sequence 11 match source-ip 172.16.10.0/24 destination-ip 172.16.100.0/24 ! action accept loss-protect fec-always loss-protection forward-error-correction always ! ! default-action accept ! ! lists vpn-list vpn_Corporate_Users vpn 10 ! site-list site_10_100 site-id 10 site-id 100 ! ! apply-policy site-list site_10_100 data-policy data_all_FEC from-service ! ! ! Verificación de FEC No hay muchos comandos relacionados a FEC, pero podemos confirmar que FEC está operando con el siguiente comando:\nMunich_DC100-1#show sdwan tunnel statistics fec tunnel stats ipsec 21.101.0.2 21.11.0.2 12346 12346 fec-rx-data-pkts 16243 fec-rx-parity-pkts 4075 fec-tx-data-pkts 7 fec-tx-parity-pkts 1 fec-reconstruct-pkts 935 fec-capable true fec-dynamic false El fec-reconstruct-pkts indica que se recuperaron 935 paquetes\nNota también que podemos fácilmente ver la cantidad de paquetes de paridad que se enviaron y recibieron siendo aproximadamente 1/4 del total de paquetes de datos enviados/recibidos.\nLa misma información está también disponible a través de la interfaz gráfica del Manager, en la opción de real time\nProbando FEC A bandwidth of 450k is around 5 VoIP calls and using a payload of 361 bytes.\nIn this case, I am running unidirectional tests, but keep in mind FEC works in both directions.\nVamos a realizar algunas pruebas para ver FEC en acción y analizar la cantidad de pérdida de paquetes que puede recuperar. Mostraré distintos resultados para entender en qué condiciones FEC ofrece mejores beneficios.\nNota existe cierta pérdida de paquetes fuera de los routers SD-WAN que no puedo controlar. Por eso, para obtener resultados más precisos, primero tuve que encontrar una tasa de transmisión con la que obtuviera 0% de pérdida la mayor parte del tiempo en mis resultados con iperf3, y a partir de ahí comencé a introducir pérdida de manera controlada.\niperf -c 172.16.100.11 -u -b 450k -t 30 -l 361 –dscp ef\nUn ancho de banda de 450 kbps equivale aproximadamente a 5 llamadas VoIP, utilizando un payload de 361 bytes.\nEn este caso, estoy realizando pruebas unidireccionales, pero ten en cuenta que FEC funciona en ambos sentidos.\n% Pérdida Total Paquetes enviados Total Paquetes recibidos Paquetes recuperados % efectivo de pérdida 1 4693 4639 54 0 2 4694 4588 96 0,24 3 4693 4558 111 0,58 4 4694 4524 147 0,51 5 4693 4448 195 0,68 6 4693 4401 231 1,3 7 4693 4374 238 1,8 8 4693 4331 283 1,8 9 4693 4292 297 2,2 10 4693 4215 304 3,8 12 4693 4122 348 3,8 15 4695 3941 382 8 18 4696 3815 356 11 20 4696 3731 368 13 Veamos unas gráficas interesantes:\nA medida que aumenta la pérdida de paquetes, también crece el número de paquetes recuperados, hasta cierto punto. Esto es esperable: FEC agrega redundancia, y cuanto más se pierde, más se necesita recuperar. Sin embargo, esta capacidad tiene un límite natural: si se pierden dos o más paquetes dentro del mismo bloque FEC —incluyendo el paquete de paridad— la recuperación ya no es posible y la pérdida efectiva comienza a aumentar.\nTambién es importante destacar que FEC es una función utiliza muchos recursos, por lo que se recomienda activarla solo para tráfico crítico y, preferentemente, en combinación con un threshold de pérdida de paquetes, en lugar de mantenerla activa permanentemente.\nAunque este laboratorio no replica a la perfección un entorno de producción, los resultados son bastante reveladores. FEC logró recuperar prácticamente todos los paquetes perdidos con hasta un 5% de pérdida introducida, y continuó recuperando cerca del 70% de los paquetes a aproximadamente 9% de pérdida. A partir de ahí, la eficiencia de recuperación empieza a disminuir. Dicho esto, no es común ver pérdidas constantes superiores al 10% en enlaces WAN de producción, y menos aún en ambas direcciones.\nPor último, aunque las pruebas fueron unidireccionales, vale la pena mencionar que FEC puede aplicarse de forma independiente en cada dirección. Esto significa que, con una implementación bien ajustada, se podría tolerar cerca de un 5% de pérdida de paquetes por dirección sin afectar significativamente el rendimiento.\nConclusion Forward Error Correction (FEC) es una técnica proactiva que agrega redundancia antes de la transmisión de paquetes, permitiendo que el receptor recupere ciertas pérdidas sin necesidad de retransmisiones. Esto la hace especialmente valiosa para aplicaciones en tiempo real como voz o video, donde esperar retransmisiones generaría retrasos perjudiciales.\nRecuerda que habilitar FEC viene con un costo: introduce carga adicional. El edge de SD-WAN que recibe los paquetes necesita usar capacidad de procesamiento adicional para reconstruir los que se perdieron. Por eso, es recomendable activarlo solo para tráfico crítico y, en lo posible, hacerlo condicionado a un threshold de pérdida de paquetes.\nFEC no reemplaza la necesidad de corregir enlaces de red defectuosos. Más bien, actúa como una capa de mitigación inteligente que ayuda a suavizar pérdidas moderadas o transitorias, manteniendo una experiencia de usuario consistente incluso cuando la red no es perfecta.\nEn resumen, cuando se implementa correctamente, FEC puede ser una herramienta muy poderosa en tu arquitectura SD-WAN, ayudando a garantizar un rendimiento de aplicaciones constante sobre redes imperfectas.\n💭 ¿Qué opinas sobre el uso de Forward Error Correction en SD-WAN? ¿Lo has utilizado antes? ¿Tienes dudas sobre cómo funciona o cuándo activarlo?\nDéjame tus comentarios, preguntas o experiencias. Me encantaría saber cómo están abordando esta función en sus despliegues reales. ¡Aprendamos entre todos!\n",
+  "wordCount" : "1510",
+  "inLanguage": "es",
+  "datePublished": "2025-05-19T00:00:00Z",
+  "dateModified": "2025-05-19T00:00:00Z",
   "author":{
     "@type": "Person",
     "name": "Alex"
@@ -177,7 +178,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <a href="http://localhost:1313/es/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -201,35 +202,35 @@
                 </button>
                 <ul class="lang-switch"><li>|</li>
                     <li>
-                        <a href="http://localhost:1313/es/" title="Español"
-                            aria-label="Español">Es</a>
+                        <a href="http://localhost:1313/" title="English"
+                            aria-label="English">En</a>
                     </li>
                 </ul>
             </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/" title="Home">
-                    <span>Home</span>
+                <a href="http://localhost:1313/es/" title="Inicio">
+                    <span>Inicio</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/archives/" title="Archive">
-                    <span>Archive</span>
+                <a href="http://localhost:1313/es/archives/" title="Archivo">
+                    <span>Archivo</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/category/" title="Categories">
-                    <span>Categories</span>
+                <a href="http://localhost:1313/es/category/" title="Categorías">
+                    <span>Categorías</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/about/" title="About me.">
-                    <span>About me.</span>
+                <a href="http://localhost:1313/es/sobre-mi/" title="Sobre mí">
+                    <span>Sobre mí</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="🔍">
+                <a href="http://localhost:1313/es/search/" title="🔍">
                     <span>🔍</span>
                 </a>
             </li>
@@ -240,33 +241,38 @@
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="http://localhost:1313/es/">Inicio</a>&nbsp;»&nbsp;<a href="http://localhost:1313/es/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
-      AppQoe Series: Forward Error Correction (FEC)
+      Serie AppQoe: Forward Error Correction (FEC)
     </h1>
     <div class="post-description">
-      Learn how Forward Error Correction (FEC) works in Cisco SD-WAN to improve application performance over lossy links. Explore use cases, configuration insights, and testing results.
+      Aprende cómo funciona Forward Error Correction (FEC) en Cisco SD-WAN para mejorar el rendimiento de las aplicaciones en enlaces con pérdida de paquetes. Explora casos de uso, configuración y resultados de pruebas.
     </div>
-    <div class="post-meta"><span title='2025-05-05 14:20:31 +0000 +0000'>May 5, 2025</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Alex
+    <div class="post-meta"><span title='2025-05-19 00:00:00 +0000 +0000'>mayo 19, 2025</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Alex&nbsp;|&nbsp;Traducciones:
+<ul class="i18n_list">
+    <li>
+        <a href="http://localhost:1313/appqoe-fec/">En</a>
+    </li>
+</ul>
 
 </div>
   </header> <div class="toc">
     <details  open>
         <summary accesskey="c" title="(Alt + C)">
-            <span class="details">Table of Contents</span>
+            <span class="details">Tabla de Contenidos</span>
         </summary>
 
         <div class="inner"><ul>
                 <li>
-                    <a href="#introduction" aria-label="Introduction">Introduction</a></li>
+                    <a href="#introducci%c3%b3n" aria-label="Introducción">Introducción</a></li>
                 <li>
-                    <a href="#what-is-forward-error-correction-fec" aria-label="What is Forward Error Correction (FEC)?">What is Forward Error Correction (FEC)?</a></li>
+                    <a href="#qu%c3%a9-es-forward-error-correction-fec" aria-label="Qué es Forward Error Correction (FEC)?">Qué es Forward Error Correction (FEC)?</a></li>
                 <li>
-                    <a href="#configuration" aria-label="Configuration">Configuration</a></li>
+                    <a href="#configuraci%c3%b3n" aria-label="Configuración">Configuración</a></li>
                 <li>
-                    <a href="#verifying-fec" aria-label="Verifying FEC">Verifying FEC</a></li>
+                    <a href="#verificaci%c3%b3n-de-fec" aria-label="Verificación de FEC">Verificación de FEC</a></li>
                 <li>
-                    <a href="#testing-fec" aria-label="Testing FEC">Testing FEC</a></li>
+                    <a href="#probando-fec" aria-label="Probando FEC">Probando FEC</a></li>
                 <li>
                     <a href="#conclusion" aria-label="Conclusion">Conclusion</a>
                 </li>
@@ -275,36 +281,36 @@
     </details>
 </div>
 
-  <div class="post-content"><h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
-<p>Delivering consistent application performance over unreliable or congested links is a constant challenge for most networks. Even with great features like <a href="/enhanced-aar/">Enhanced Application Aware Routing</a> or <a href="/appqoe-tcp-opt/">TCP Optimization</a>, there are link conditions that go beyond what failover, load balancing or optimization can solve.</p>
-<p>By adding a recovery mechanism at the packet level, FEC allows Cisco SD-WAN to mask packet loss and maintain application performance without relying on retransmissions.</p>
-<p>In this post, we will explore how effective FEC can be in SD-WAN. By simulating lossy conditions, and measuring recovery rates.</p>
-<p>If you evaluating FEC for your deployment or just curious about how it works, this post will walk you through both the theory and practice.</p>
-<p>Let&rsquo;s go!</p>
-<h2 id="what-is-forward-error-correction-fec">What is Forward Error Correction (FEC)?<a hidden class="anchor" aria-hidden="true" href="#what-is-forward-error-correction-fec">#</a></h2>
-<p>Forward Error Correction (FEC) is a technique that improves data transmission reliability by adding redundant information to packets before they’re sent across the network. Instead of waiting for retransmissions when packets are lost, the receiver uses this redundancy to reconstruct missing data on the fly.</p>
-<p>In the Cisco SD-WAN implementation, FEC creates blocks of 4 data packets + 1 <em>parity packet</em>. If <em><strong>one</strong></em> of those 4 packets is lost along the way, the receiver can fill in the gaps using the parity packet by performing an XOR operation.</p>
-<p>Let&rsquo;s see it in a diagram</p>
+  <div class="post-content"><h2 id="introducción">Introducción<a hidden class="anchor" aria-hidden="true" href="#introducción">#</a></h2>
+<p>Ofrecer un rendimiento de aplicación consistente sobre enlaces congestionados o poco confiables es un desafío constante para la mayoría de las redes. Incluso con funciones avanzadas como <a href="/aar-mejorado/">Enhanced Application-Aware Routing</a> u <a href="/appqoe-opt-tcp/">Optimización TCP</a>, hay condiciones en los enlaces que van más allá de lo que el failover, el balanceo de carga o la optimización pueden resolver.</p>
+<p>Al agregar un mecanismo de recuperación a nivel de paquete, FEC permite que Cisco SD-WAN enmascare la pérdida de paquetes y mantenga el rendimiento de las aplicaciones sin depender de retransmisiones.</p>
+<p>En este post, exploraremos qué tan efectivo puede ser FEC en un entorno SD-WAN, simulando condiciones con pérdida de paquetes y midiendo las tasas de recuperación.</p>
+<p>Si estás evaluando FEC para tu despliegue o simplemente tienes curiosidad sobre cómo funciona, este artículo te llevará por la teoría y la práctica.</p>
+<p>Vamos allá!</p>
+<h2 id="qué-es-forward-error-correction-fec">Qué es Forward Error Correction (FEC)?<a hidden class="anchor" aria-hidden="true" href="#qué-es-forward-error-correction-fec">#</a></h2>
+<p>Forward Error Correction (FEC) es una técnica que mejora la confiabilidad de la transmisión de datos añadiendo información redundante a los paquetes antes de enviarlos por la red. En lugar de esperar retransmisiones cuando se pierden paquetes, el receptor utiliza esa redundancia para reconstruir los datos faltantes en tiempo real.</p>
+<p>En la implementación de Cisco SD-WAN, FEC agrupa 4 paquetes de datos y agrega 1 <em>paquete de paridad</em>. Si <strong>uno</strong> de esos 4 paquetes se pierde en el camino, el receptor puede reconstruirlo utilizando el paquete de paridad mediante una operación XOR.</p>
+<p>Veámoslo en un diagrama:</p>
 <p><img loading="lazy" src="/wp-content/uploads/2025/05/fec1.png"></p>
-<p>The sender transmits information to the receiver, but packet 3 is lost in transit. The receiver can use the parity packet to reconstruct packet 3 and avoid retransmissions and delays that would impact application experience.</p>
-<p>Notice that if more than 1 packet is lost, including the parity packet, the reconstruction is not possible. The block size is always 4 and it cannot be changed. Blocks can contain packets from multiple flows.</p>
+<p>El remitente transmite la información al receptor, pero el paquete 3 se pierde en tránsito. El receptor puede usar el paquete de paridad para reconstruir el paquete 3 y así evitar retransmisiones y retrasos que afectarían la experiencia de las aplicaciones.</p>
+<p>Es importante notar que si se pierden más de 1 paquete, incluyendo el de paridad, no es posible reconstruir la información. El tamaño del bloque es siempre de 4 paquetes de datos + 1 de paridad y no puede modificarse. Un bloque puede contener paquetes de diferentes flujos.</p>
 <blockquote>
-<p><strong>Note</strong> The fact that FEC adds 1 parity packet for every block of 4 packets increases BW consumption.</p>
+<p><strong>Nota</strong> El hecho de que FEC agregue 1 paquete de paridad por cada bloque de 4 incrementa el consumo de ancho de banda.</p>
 </blockquote>
-<p>There are 2 modes of operation</p>
+<p>Hay dos modos de operación:</p>
 <ul>
-<li><strong>Always</strong>: FEC will be applied to all traffic matching the policy sequence regardless of packet loss levels.</li>
-<li><strong>Adaptive</strong>: Set a packet loss threshold to start using FEC. For example, with 2% or more packet loss  start applying FEC to the traffic. Loss percent is computed with <a href="/demystifying-aar-1-3-the-foundations/#bfd">BFD packets</a>.</li>
+<li><strong>Always</strong>: Se aplica FEC a todo el tráfico que haga match a la política, sin importar la cantidad de pérdida de paquetes en el transporte.</li>
+<li><strong>Adaptive</strong>: Permite definir un <em>threshold</em> de pérdida de paquetes antes de empezar a aplicar FEC. Por ejemplo, si hay 2% o más pérdida de paquetes, se debe aplicar FEC al tráfico. El porcentaje de pérdida de paquetes se saca con los <a href="/simplificando-aar-1-3-las-bases/#bfd/">paquetes BFD</a>.</li>
 </ul>
-<p>FEC is particularly useful in real-time applications like voice, video, or interactive sessions, where waiting for retransmissions would cause severe delays.</p>
-<p>Importantly, FEC operates between SD-WAN edge devices, making it completely transparent to the applications, there&rsquo;s no need to modify client or server behavior. However, it only works when using IPSec encapsulation; it&rsquo;s <strong>not supported over GRE tunnels</strong>.</p>
-<p>One critical implementation detail is packet size: if packets are too large and end up being fragmented, FEC&rsquo;s ability to reconstruct them is significantly reduced. To get the most out of FEC, make sure the payload size stays below the path MTU to avoid fragmentation.</p>
-<h2 id="configuration">Configuration<a hidden class="anchor" aria-hidden="true" href="#configuration">#</a></h2>
-<p>Using Policy Groups, we can configure FEC through a data policy that matches interesting traffic and applies an action of <em>Loss Correction</em></p>
+<p>FEC es especialmente útil en aplicaciones en tiempo real como voz, video o sesiones interactivas, donde esperar retransmisiones provocaría retrasos severos.</p>
+<p>Un punto importante es que FEC opera entre los dispositivos edge de SD-WAN, lo que lo hace completamente transparente para las aplicaciones: no es necesario modificar el comportamiento de clientes o servidores. Sin embargo, solo funciona cuando se utiliza encapsulación IPSec; <strong>no está soportado sobre túneles GRE.</strong></p>
+<p>Un detalle crítico de implementación es el tamaño de los paquetes: si los paquetes son demasiado grandes y terminan siendo fragmentados, la capacidad de FEC para reconstruirlos se reduce considerablemente. Para aprovechar al máximo FEC, asegúrate de que el <em>payload</em> se mantenga por debajo del MTU del <em>path MTU</em> para evitar la fragmentación.</p>
+<h2 id="configuración">Configuración<a hidden class="anchor" aria-hidden="true" href="#configuración">#</a></h2>
+<p>Utilizando <em>Policy Groups</em>, podemos configurar FEC a través de política de datos que hagan match al tráfico y apliquen la acción <em>Loss Correction</em></p>
 <p><img loading="lazy" src="/wp-content/uploads/2025/05/fec2.png"></p>
-<p>In my case, I matched all the traffic between 172.16.10.0/24 and 172.16.100.0/24. Notice we have the two modes of operations available: <em>Always and Adaptive</em></p>
-<p>If FEC Adaptive is selected, the available thresholds are between 1%-5% loss.</p>
-<p>Here is the full configuration of my policy:</p>
+<p>En mi caso, hice match a a todo el tráfico entre 172.16.10.0/24 y 172.16.100.0/24. Nota que se tienen los dos modos de operación: <em>Always y Adaptive</em></p>
+<p>Si se selecciona FEC Adaptive, el <em>threshold</em> tiene que estar entre 1% y 5% pérdida de paquetes.</p>
+<p>Está es la configuración completa de mi política:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>vsmart_1# show running-config policy 
 </span></span><span style="display:flex;"><span>policy
 </span></span><span style="display:flex;"><span> data-policy data_all_FEC
@@ -347,8 +353,8 @@
 </span></span><span style="display:flex;"><span> !
 </span></span><span style="display:flex;"><span>!
 </span></span><span style="display:flex;"><span>!
-</span></span></code></pre></div><h2 id="verifying-fec">Verifying FEC<a hidden class="anchor" aria-hidden="true" href="#verifying-fec">#</a></h2>
-<p>There aren&rsquo;t a lot of commands, we can confirm FEC is operational with the following command:</p>
+</span></span></code></pre></div><h2 id="verificación-de-fec">Verificación de FEC<a hidden class="anchor" aria-hidden="true" href="#verificación-de-fec">#</a></h2>
+<p>No hay muchos comandos relacionados a FEC, pero podemos confirmar que FEC está operando con el siguiente comando:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span>Munich_DC100<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#75715e">#show sdwan tunnel statistics fec </span>
 </span></span><span style="display:flex;"><span>tunnel stats ipsec <span style="color:#ae81ff">21.101</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0.2</span> <span style="color:#ae81ff">21.11</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0.2</span> <span style="color:#ae81ff">12346</span> <span style="color:#ae81ff">12346</span>
 </span></span><span style="display:flex;"><span> fec<span style="color:#f92672">-</span>rx<span style="color:#f92672">-</span>data<span style="color:#f92672">-</span>pkts     <span style="color:#ae81ff">16243</span>
@@ -358,26 +364,28 @@
 </span></span><span style="display:flex;"><span> fec<span style="color:#f92672">-</span>reconstruct<span style="color:#f92672">-</span>pkts <span style="color:#ae81ff">935</span>
 </span></span><span style="display:flex;"><span> fec<span style="color:#f92672">-</span>capable          true
 </span></span><span style="display:flex;"><span> fec<span style="color:#f92672">-</span>dynamic          false
-</span></span></code></pre></div><p>The <em>fec-reconstruct-pkts</em> indicate that 935 packets have been recovered.</p>
-<p>Also, notice that we can easily see how many parity packets are sent and received which are roughly 1/4 of total sent/received data packets.</p>
-<p>The same information is also available through the <em>real-time</em> information on the Manager&rsquo;s UI</p>
+</span></span></code></pre></div><p>El <em>fec-reconstruct-pkts</em> indica que se recuperaron 935 paquetes</p>
+<p>Nota también que podemos fácilmente ver la cantidad de paquetes de paridad que se enviaron y recibieron siendo aproximadamente 1/4 del total de paquetes de datos enviados/recibidos.</p>
+<p>La misma información está también disponible a través de la interfaz gráfica del Manager, en la opción de <em>real time</em></p>
 <p><img loading="lazy" src="/wp-content/uploads/2025/05/fec3.png"></p>
-<h2 id="testing-fec">Testing FEC<a hidden class="anchor" aria-hidden="true" href="#testing-fec">#</a></h2>
-<p>Let&rsquo;s run some tests to see FEC in action and the amount of packet loss that can be recovered. I will show different results to understand where FEC delivers better results.</p>
-<p><strong>Note</strong> there is loss outside of the SD-WAN routers I cannot control so in order to have more precise results I had to found the rate at which I got 0% packet loss <strong>most of the time</strong> with my iperf3 results and start introducing controlled loss from there.</p>
+<h2 id="probando-fec">Probando FEC<a hidden class="anchor" aria-hidden="true" href="#probando-fec">#</a></h2>
+<p>A bandwidth of 450k is <strong>around</strong> 5 VoIP calls and using a payload of 361 bytes.</p>
+<p>In this case, I am running unidirectional tests, but keep in mind FEC works in both directions.</p>
+<p>Vamos a realizar algunas pruebas para ver FEC en acción y analizar la cantidad de pérdida de paquetes que puede recuperar. Mostraré distintos resultados para entender en qué condiciones FEC ofrece mejores beneficios.</p>
+<p><strong>Nota</strong> existe cierta pérdida de paquetes fuera de los routers SD-WAN que no puedo controlar. Por eso, para obtener resultados más precisos, primero tuve que encontrar una tasa de transmisión con la que obtuviera 0% de pérdida la <strong>mayor parte del tiempo</strong> en mis resultados con iperf3, y a partir de ahí comencé a introducir pérdida de manera controlada.</p>
 <blockquote>
 <p>iperf -c 172.16.100.11 -u -b 450k -t 30 -l 361 &ndash;dscp ef</p>
 </blockquote>
-<p>A bandwidth of 450k is <strong>around</strong> 5 VoIP calls and using a payload of 361 bytes.</p>
-<p>In this case, I am running unidirectional tests, but keep in mind FEC works in both directions.</p>
+<p>Un ancho de banda de 450 kbps equivale aproximadamente a 5 llamadas VoIP, utilizando un <em>payload</em> de 361 bytes.</p>
+<p>En este caso, estoy realizando pruebas unidireccionales, pero ten en cuenta que FEC funciona en ambos sentidos.</p>
 <table>
   <thead>
       <tr>
-          <th>Loss% introduced</th>
-          <th>Total Sent Packets</th>
-          <th>Total Received Packets</th>
-          <th>Recovered Packets</th>
-          <th>Effective Loss %</th>
+          <th>% Pérdida</th>
+          <th>Total Paquetes enviados</th>
+          <th>Total Paquetes recibidos</th>
+          <th>Paquetes recuperados</th>
+          <th>% efectivo de pérdida</th>
       </tr>
   </thead>
   <tbody>
@@ -481,21 +489,22 @@
       </tr>
   </tbody>
 </table>
-<p>Let&rsquo;s see some interesting visuals:</p>
+<p>Veamos unas gráficas interesantes:</p>
 <p><img loading="lazy" src="/wp-content/uploads/2025/05/fec4.png">
 <img loading="lazy" src="/wp-content/uploads/2025/05/fec5.png">
 <img loading="lazy" src="/wp-content/uploads/2025/05/fec6.png"></p>
-<p>As packet loss increases, the number of recovered packets also grows - up to a certain point. This is expected: FEC adds redundancy, and the more packets are lost, the more recovery is needed. However, there&rsquo;s a natural limit to this capability. If two or more packets within the same FEC block are lost, including the parity packet, recovery becomes impossible, and <em>effective loss</em> starts to climb.</p>
-<p>It&rsquo;s also important to note that FEC is a <strong>resource intensive</strong> feature, hence it should be activated for critical traffic and ideally using a packet loss threshold rather than always.</p>
-<p>While this lab setup isn’t a perfect replica of real-world conditions, the results are still insightful. FEC was able to recover nearly all lost packets with up to 5% introduced loss and continued to recover around 70% of packets at ~9% loss. Beyond that, recovery efficiency starts to drop. That said, it’s uncommon to see consistent 10%+ loss in production WAN transports and even more so in both directions.</p>
-<p>Finally, although these tests were unidirectional, it’s worth noting that FEC can be applied independently on each direction. This means a well-tuned deployment could tolerate about 5% packet loss per direction while maintaining good performance.</p>
+<p>A medida que aumenta la pérdida de paquetes, también crece el número de paquetes recuperados, hasta cierto punto. Esto es esperable: FEC agrega redundancia, y cuanto más se pierde, más se necesita recuperar. Sin embargo, esta capacidad tiene un límite natural: si se pierden dos o más paquetes dentro del mismo bloque FEC —incluyendo el paquete de paridad— la recuperación ya no es posible y la pérdida efectiva comienza a aumentar.</p>
+<p>También es importante destacar que FEC es una función <strong>utiliza muchos recursos</strong>, por lo que se recomienda activarla solo para tráfico crítico y, preferentemente, en combinación con un <em>threshold</em> de pérdida de paquetes, en lugar de mantenerla activa permanentemente.</p>
+<p>Aunque este laboratorio no replica a la perfección un entorno de producción, los resultados son bastante reveladores. FEC logró recuperar prácticamente todos los paquetes perdidos con hasta un 5% de pérdida introducida, y continuó recuperando cerca del 70% de los paquetes a aproximadamente 9% de pérdida. A partir de ahí, la eficiencia de recuperación empieza a disminuir. Dicho esto, no es común ver pérdidas constantes superiores al 10% en enlaces WAN de producción, y menos aún en ambas direcciones.</p>
+<p>Por último, aunque las pruebas fueron unidireccionales, vale la pena mencionar que FEC puede aplicarse de forma independiente en cada dirección. Esto significa que, con una implementación bien ajustada, se podría tolerar cerca de un 5% de pérdida de paquetes por dirección sin afectar significativamente el rendimiento.</p>
 <h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
-<p>Forward Error Correction (FEC) is a proactive technique that adds redundancy before packet transmission, allowing the receiver to recover from certain losses without needing retransmissions. This makes it especially valuable for real-time applications like voice and video, where waiting for retries would introduce harmful delays.</p>
-<p>Remember that FEC isn&rsquo;t free as it introduces overhead. The receiving SD-WAN edge must use additional processing power to reconstruct lost packets, use it for critical traffic and ideally after a specified packet loss threshold.</p>
-<p>FEC is not a replacement for fixing poor network links. Instead, it acts as a smart mitigation layer that helps smooth over transient or moderate packet loss, keeping user experience consistent even when the network isn’t perfect.</p>
-<p>Overall, when deployed correctly, FEC can be a powerful tool in your SD-WAN toolbox — helping ensure consistent application performance over imperfect networks.</p>
-<p>💭 What’s your take on Forward Error Correction in SD-WAN? Have you used it before? Do you have questions about how it works or when to enable it?</p>
-<p>Drop your thoughts or doubts in the comments! I’d love to hear how others are approaching FEC in real world deployments. Let’s learn from each other!</p>
+<p>Forward Error Correction (FEC) es una técnica proactiva que agrega redundancia antes de la transmisión de paquetes, permitiendo que el receptor recupere ciertas pérdidas sin necesidad de retransmisiones. Esto la hace especialmente valiosa para aplicaciones en tiempo real como voz o video, donde esperar retransmisiones generaría retrasos perjudiciales.</p>
+<p>Recuerda que habilitar FEC viene con un costo: introduce carga adicional. El edge de SD-WAN que recibe los paquetes necesita usar capacidad de procesamiento adicional para reconstruir los que se perdieron. Por eso, es recomendable activarlo solo para tráfico crítico y, en lo posible, hacerlo condicionado a un <em>threshold</em> de pérdida de paquetes.</p>
+<p>FEC no reemplaza la necesidad de corregir enlaces de red defectuosos. Más bien, actúa como una capa de mitigación inteligente que ayuda a suavizar pérdidas moderadas o transitorias, manteniendo una experiencia de usuario consistente incluso cuando la red no es perfecta.</p>
+<p>En resumen, cuando se implementa correctamente, FEC puede ser una herramienta muy poderosa en tu arquitectura SD-WAN, ayudando a garantizar un rendimiento de aplicaciones constante sobre redes imperfectas.</p>
+<p>💭 ¿Qué opinas sobre el uso de Forward Error Correction en SD-WAN? ¿Lo has utilizado antes? ¿Tienes dudas sobre cómo funciona o cuándo activarlo?</p>
+<p>Déjame tus comentarios, preguntas o experiencias. Me encantaría saber cómo están abordando esta función en sus despliegues reales.
+¡Aprendamos entre todos!</p>
 
 
   </div>
@@ -515,7 +524,7 @@
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="http://localhost:1313/">NetWithAlex</a></span> · 
+        <span>&copy; 2025 <a href="http://localhost:1313/es/">NetWithAlex</a></span> · 
 
     <span>
         Powered by
@@ -589,12 +598,12 @@
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerHTML = 'copy';
+        copybutton.innerHTML = 'copiar';
 
         function copyingDone() {
-            copybutton.innerHTML = 'copied!';
+            copybutton.innerHTML = '¡copiado!';
             setTimeout(() => {
-                copybutton.innerHTML = 'copy';
+                copybutton.innerHTML = 'copiar';
             }, 2000);
         }
 

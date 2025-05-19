@@ -4,7 +4,7 @@ category:
   - sdwan
   - appqoe
 draft: false
-date: "2025-05-19T14:20:31+00:00"
+date: "2025-05-19T00:00:00+00:00"
 title: "Serie AppQoe: Forward Error Correction (FEC)"
 description: Aprende cómo funciona Forward Error Correction (FEC) en Cisco SD-WAN para mejorar el rendimiento de las aplicaciones en enlaces con pérdida de paquetes. Explora casos de uso, configuración y resultados de pruebas.
 summary: Aprende cómo funciona Forward Error Correction (FEC) en Cisco SD-WAN para mejorar el rendimiento de las aplicaciones en enlaces con pérdida de paquetes. Explora casos de uso, configuración y resultados de pruebas.
