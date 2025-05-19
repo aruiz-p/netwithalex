@@ -6,8 +6,15 @@
     <description>Recent content in Posts on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 05 May 2025 14:20:31 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 19 May 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AppQoe Series: Forward Error Correction (FEC)</title>
+      <link>http://localhost:1313/appqoe-fec/</link>
+      <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/appqoe-fec/</guid>
+      <description>Learn how Forward Error Correction (FEC) works in Cisco SD-WAN to improve application performance over lossy links. Explore use cases, configuration insights, and testing results.</description>
+    </item>
     <item>
       <title>Cisco SD-WAN On-Prem ZTP: Automating Router Onboarding</title>
       <link>http://localhost:1313/ztp-on-prem-en/</link>

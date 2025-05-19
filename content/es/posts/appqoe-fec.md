@@ -132,10 +132,6 @@ La misma información está también disponible a través de la interfaz gráfic
 
 ## Probando FEC
 
-A bandwidth of 450k is **around** 5 VoIP calls and using a payload of 361 bytes. 
-
-In this case, I am running unidirectional tests, but keep in mind FEC works in both directions.
-
 Vamos a realizar algunas pruebas para ver FEC en acción y analizar la cantidad de pérdida de paquetes que puede recuperar. Mostraré distintos resultados para entender en qué condiciones FEC ofrece mejores beneficios.
 
 **Nota** existe cierta pérdida de paquetes fuera de los routers SD-WAN que no puedo controlar. Por eso, para obtener resultados más precisos, primero tuve que encontrar una tasa de transmisión con la que obtuviera 0% de pérdida la **mayor parte del tiempo** en mis resultados con iperf3, y a partir de ahí comencé a introducir pérdida de manera controlada.
