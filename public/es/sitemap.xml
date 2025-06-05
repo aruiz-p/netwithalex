@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/es/category/appqoe/</loc>
-    <lastmod>2025-05-19T00:00:00+00:00</lastmod>
+    <lastmod>2025-06-03T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -16,7 +16,7 @@
                 />
   </url><url>
     <loc>http://localhost:1313/es/category/</loc>
-    <lastmod>2025-05-19T00:00:00+00:00</lastmod>
+    <lastmod>2025-06-03T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -26,6 +26,71 @@
                 rel="alternate"
                 hreflang="es"
                 href="http://localhost:1313/es/category/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/tag/packet-duplication/</loc>
+    <lastmod>2025-06-03T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/tag/packet-duplication/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/tag/packet-duplication/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/posts/</loc>
+    <lastmod>2025-06-03T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/posts/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/category/sdwan/</loc>
+    <lastmod>2025-06-03T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/category/sdwan/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/category/sdwan/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/appqoe-pkt-dup-es/</loc>
+    <lastmod>2025-06-03T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/appqoe-pkt-dup-en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/appqoe-pkt-dup-es/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/tag/</loc>
+    <lastmod>2025-06-03T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/tag/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/tag/"
                 />
   </url><url>
     <loc>http://localhost:1313/es/tag/loss-correction/</loc>
@@ -41,45 +106,6 @@
                 href="http://localhost:1313/es/tag/loss-correction/"
                 />
   </url><url>
-    <loc>http://localhost:1313/es/tag/packet-duplication/</loc>
-    <lastmod>2025-05-19T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/tag/packet-duplication/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/tag/packet-duplication/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/es/posts/</loc>
-    <lastmod>2025-05-19T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/posts/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/es/category/sdwan/</loc>
-    <lastmod>2025-05-19T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/category/sdwan/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/category/sdwan/"
-                />
-  </url><url>
     <loc>http://localhost:1313/appqoe-fec-es/</loc>
     <lastmod>2025-05-19T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -91,32 +117,6 @@
                 rel="alternate"
                 hreflang="es"
                 href="http://localhost:1313/appqoe-fec-es/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/appqoe-pkt-dup-es/</loc>
-    <lastmod>2025-05-19T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/appqoe-pkt-dup-en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/appqoe-pkt-dup-es/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/es/tag/</loc>
-    <lastmod>2025-05-19T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/tag/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/tag/"
                 />
   </url><url>
     <loc>http://localhost:1313/ztp-on-prem-es/</loc>
