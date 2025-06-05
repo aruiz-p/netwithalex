@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Serie AppQoe: Packet Duplication | NetWithAlex</title>
+<meta name="keywords" content="">
+<meta name="description" content="Descubre cómo packet duplication utiliza múltiples transportes para minimizar el riesgo de pérdida de paquetes sobre transportes inestables, manteniendo la calidad de las aplicaciones más importantes para cumplir con los objetivos del negocio.">
+<meta name="author" content="Alex">
+<link rel="canonical" href="http://localhost:1313/appqoe-pkt-dup-es/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/appqoe-pkt-dup-en/">
+<link rel="alternate" hreflang="es" href="http://localhost:1313/appqoe-pkt-dup-es/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="preconnect" href="https://plausible.io">
+    
+        <!-- Dev mode : We do not load plausible script to avoid bloating your stats -->
+
+<!-- If you are using Content-Security-Policy, do not forget to add this code to your CSP : 
+  script-src 'unsafe-inline' https://plausible.io
+  connect-src 'unsafe-inline' https://plausible.io
+  or just add the partial 'plausible_csp.html' to those 2 csp directives in your 'index.headers' file
+-->
+
+
+
+    
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+    <script>
+         
+         
+         
+    </script>
+
+    
+<meta property="og:url" content="http://localhost:1313/appqoe-pkt-dup-es/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="Serie AppQoe: Packet Duplication">
+  <meta property="og:description" content="Descubre cómo packet duplication utiliza múltiples transportes para minimizar el riesgo de pérdida de paquetes sobre transportes inestables, manteniendo la calidad de las aplicaciones más importantes para cumplir con los objetivos del negocio.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-05-19T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-05-19T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Serie AppQoe: Packet Duplication">
+<meta name="twitter:description" content="Descubre cómo packet duplication utiliza múltiples transportes para minimizar el riesgo de pérdida de paquetes sobre transportes inestables, manteniendo la calidad de las aplicaciones más importantes para cumplir con los objetivos del negocio.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/es/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Serie AppQoe: Packet Duplication",
+      "item": "http://localhost:1313/appqoe-pkt-dup-es/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Serie AppQoe: Packet Duplication",
+  "name": "Serie AppQoe: Packet Duplication",
+  "description": "Descubre cómo packet duplication utiliza múltiples transportes para minimizar el riesgo de pérdida de paquetes sobre transportes inestables, manteniendo la calidad de las aplicaciones más importantes para cumplir con los objetivos del negocio.",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introducción En mi post anterior hablé sobre FEC, una técnica para combatir la pérdida de paquetes enviando un paquete de paridad que permite reconstruir los datos perdidos. En esta publicación, exploraremos otra potente funcionalidad de SD-WAN diseñada para enfrentar transportes con pérdida: Packet Duplication. Aunque ambas funciones buscan mejorar la confiabilidad, lo hacen de formas muy diferentes.\nVamos a verlo:\n¿Qué es Packet Duplication? Como su nombre indica, Packet Duplication consiste en enviar paquetes idénticos a través de múltiples rutas de transporte para aumentar la probabilidad de entrega exitosa. Si una ruta experimenta pérdida transitoria o es inherentemente inestable, el paquete duplicado enviado por un segundo transporte más confiable puede compensarlo, manteniendo la experiencia del usuario sin interrupciones.\nVisualmente:\nEl emisor utiliza ambos transportes, bronze y gold, para enviar la información duplicada. La ruta bronze sufre pérdida de paquetes, mientras que la ruta gold entrega todos los paquetes con éxito. El receptor descarta los duplicados y reenvía solo la copia que llega primero al destino, eliminando efectivamente la pérdida desde la perspectiva del usuario, sin importar qué ruta tomó el paquete.\nAntes de duplicar un paquete, el WAN Edge compara su tamaño con el Path Maximum Transmission Unit (PMUT), si la longitud del paquete es menor que el PMUT, este se duplica.\nNota: A partir de la versión 17.15.1a, los paquetes pueden duplicarse incluso si su tamaño es mayor al PMUT, utilizando VRF and Underlay Fragmentation.\nDesde la versión 16.12.1b esta funcionalidad aplica para:\nTráfico IPv4 sobre túneles IPv4. Y a partir de la 17.15.1a se amplía el soporte a:\nTráfico IPv4 sobre túneles IPv6 Tráfico IPv6 sobre túneles IPv4 Tráfico IPv6 sobre túneles IPv6 Consideraciones Aquí algunos puntos clave a tener en cuenta al habilitar Packet Duplication:\nPara que funcione, debe haber al menos dos transportes disponibles; no es una solución viable para sitios con un solo transporte. La cantidad de tráfico se duplica, tenlo en cuenta según la capacidad de tus transportes. El receptor necesita almacenar en búfer y descartar paquetes, lo que añade carga de procesamiento. Debe habilitarse solo para tráfico crítico, considerando los puntos anteriores. Configuración Utilizando Policy Groups, podemos configurar Packet Duplication mediante una data policy que haga match con el tráfico deseado y aplique la acción Loss Correction seleccionando Packet Duplication.\nEsta configuración debe aplicarse en ambas direcciones, por lo que la política completa se ve así:\ndata-policy data_service_Packet-Duplication vpn-list vpn_Corporate_Users sequence 1 match source-ip 172.16.100.0/24 destination-ip 172.16.10.0/24 ! action accept loss-protect pkt-dup loss-protection packet-duplication ! ! sequence 11 match source-ip 172.16.10.0/24 destination-ip 172.16.100.0/24 ! action accept loss-protect pkt-dup loss-protection packet-duplication ! ! default-action accept ! ! ! apply-policy site-list site_10_100 data-policy data_service_Packet-Duplication from-service ! ! Nota: Packet Duplication no es compatible con las siguientes acciones dentro de una data policy:\nlocal tloc remote_tloc Puedes consultar la guía de configuración para más información sobre restricciones y casos de uso.\nVerificación Para asegurar que Packet Duplication está funcionando, hay algunas validaciones que podemos hacer.\nDesde el dispositivo se puede ejecutar:\nLisbon_10-1#show sdwan tunnel statistics pkt-dup Generating output, this might take time, please wait ... tunnel stats gre 21.11.0.2 21.101.0.2 0 0 pktdup-rx 4844 pktdup-rx-other 1 pktdup-rx-this 4844 pktdup-tx 8710 pktdup-tx-other 4693 pktdup-capable true tunnel stats gre 31.11.0.2 31.101.0.2 0 0 pktdup-rx 1 pktdup-rx-other 4844 pktdup-rx-this 1 pktdup-tx 4693 pktdup-tx-other 8710 pktdup-capable true pktdup-rx: paquetes originales recibidos por el túnel primario pktdup-rx-other: paquetes duplicados recibidos por el segundo túnel pktdup-tx: paquetes duplicados enviados por el túnel primario pktdup-tx-other: paquetes duplicados enviados por el túnel secundario pktdup-capable: indica si se realizó intercambio de capacidades con el otro dispositivo Esta misma información está disponible en la sección de Real Time del Manager:\nAdemás, se puede añadir un contador a la política para confirmar que la secuencia está siendo aplicada.\nProbando Packet Duplication En mi laboratorio tengo dos túneles activos entre los dispositivos SD-WAN: uno sobre MPLS y otro sobre Biz-Internet.\nPara probar Packet Duplication, introduciré pérdida de paquetes en el transporte MPLS y ejecutaré una prueba básica de iperf entre dos clientes para observar cómo se comporta.\nEl comando de prueba utilizado fue:\niperf3 -c 172.16.100.11 -u -b 1M -t 20 –dscp ef\nEste comando inicia una prueba UDP de 20 segundos, con un ancho de banda de 1 Mbps y marcado DSCP EF.\nNota: No me enfoco en el porcentaje exacto de pérdida en MPLS. La idea no es medir cuánto puede recuperar Packet Duplication, sino observar cómo actúa la funcionalidad. En teoría, incluso con una pérdida del 100% en un transporte, el tráfico debería llegar por el otro, siempre y cuando Packet Duplication esté correctamente configurado.\nEl emisor utiliza biz-internet como transporte primario:\nLisbon_10-1#show sdwan policy service-path vpn 10 interface gigabitEthernet 2 source-ip 172.16.10.11 dest-ip 172.16.100.11 protocol 17 dscp 46 all Number of possible next hops: 1 Next Hop: GRE Source: 31.11.0.2 Destination: 31.101.0.2 Local Color: biz-internet Remote Color: biz-internet Remote System IP: 1.1.100.1 MPLS tiene un 80% de pérdida y los resultados de iperf fueron los siguientes:\n[ ID] Interval Transfer Bitrate Jitter Lost/Total Datagrams [ 5] 0.00-20.00 sec 2.38 MBytes 1.00 Mbits/sec 0.000 ms 0/4188 (0%) emisor [ 5] 0.00-20.04 sec 2.38 MBytes 998 Kbits/sec 0.255 ms 0/4188 (0.0%) receiver Vamos a revisar las estadísticas de Packet Duplication tanto en el emisor como en el receptor:\nEmisor\nLisbon_10-1#show sdwan tunnel statistics pkt-dup Generating output, this might take time, please wait ... tunnel stats gre 21.11.0.2 21.101.0.2 0 0 pktdup-rx 14 pktdup-rx-other 0 pktdup-rx-this 14 pktdup-tx 0 pktdup-tx-other 4206 pktdup-capable true tunnel stats gre 31.11.0.2 31.101.0.2 0 0 pktdup-rx 0 pktdup-rx-other 14 pktdup-rx-this 0 pktdup-tx 4206 pktdup-tx-other 0 pktdup-capable true Observa lo siguiente:\nRol Paquetes enviados primario Paquetes duplicados secundario Emisor 4206 4206 Se transmitió exactamente la misma cantidad de paquetes por los transportes MPLS y Biz-Internet.\nReceptor\nMunich_DC100-1#show sdwan tunnel statistics pkt-dup Generating output, this might take time, please wait ... tunnel stats gre 21.101.0.2 21.11.0.2 0 0 pktdup-rx 0 pktdup-rx-other 758 pktdup-rx-this 0 pktdup-tx 14 pktdup-tx-other 0 pktdup-capable true tunnel stats gre 31.101.0.2 31.11.0.2 0 0 pktdup-rx 4206 pktdup-rx-other 0 pktdup-rx-this 758 pktdup-tx 0 pktdup-tx-other 14 pktdup-capable true Rol Paquetes recibidos primario Paquetes recibidos secundario Receptor 4206 758 Como el transporte secundario experimentaba una pérdida severa, solo el 18% de los paquetes fueron recibidos por él. Sin embargo, esto no representó un problema ya que el transporte primario entregó el 100% de los paquetes.\nSi el escenario se invirtiera, es decir, si la ruta primaria sufriera pérdida y la secundaria permaneciera estable, los roles simplemente se intercambiarían. El primario entregaría el 18% y el secundario el 100%, y nuevamente, el usuario final no experimentaría ninguna pérdida de paquetes.\nConclusión Packet Duplication es una funcionalidad simple pero poderosa en Cisco SD-WAN que mejora significativamente la confiabilidad del tráfico. Al enviar paquetes idénticos por múltiples rutas de transporte, garantiza que, incluso si una ruta falla, el rendimiento de la aplicación no se vea afectado.\nAunque conlleva un mayor uso de ancho de banda y procesamiento adicional, puede marcar una gran diferencia para tráfico crítico como voz, video o sesiones remotas, especialmente en entornos con circuitos poco confiables.\nComo con cualquier funcionalidad de SD-WAN, la clave es usarla de manera estratégica: activarla para el tráfico correcto, monitorear los resultados y ajustar las políticas según el comportamiento de tu red. ¿Has utilizado Packet Duplication en producción? Cuéntame tu experiencia en los comentarios o conéctate conmigo en LinkedIn para conversar sobre temas avanzados de SD-WAN.\n",
+  "wordCount" : "1227",
+  "inLanguage": "es",
+  "datePublished": "2025-05-19T00:00:00Z",
+  "dateModified": "2025-05-19T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Alex"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/appqoe-pkt-dup-es/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/assets/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/es/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="http://localhost:1313/" title="English"
+                            aria-label="English">En</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/es/" title="Inicio">
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/archives/" title="Archivo">
+                    <span>Archivo</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/category/" title="Categorías">
+                    <span>Categorías</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/sobre-mi/" title="Sobre mí">
+                    <span>Sobre mí</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/search/" title="🔍">
+                    <span>🔍</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/es/">Inicio</a>&nbsp;»&nbsp;<a href="http://localhost:1313/es/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Serie AppQoe: Packet Duplication
+    </h1>
+    <div class="post-description">
+      Descubre cómo packet duplication utiliza múltiples transportes para minimizar el riesgo de pérdida de paquetes sobre transportes inestables, manteniendo la calidad de las aplicaciones más importantes para cumplir con los objetivos del negocio.
+    </div>
+    <div class="post-meta"><span title='2025-05-19 00:00:00 +0000 +0000'>mayo 19, 2025</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Alex&nbsp;|&nbsp;Traducciones:
+<ul class="i18n_list">
+    <li>
+        <a href="http://localhost:1313/appqoe-pkt-dup-en/">En</a>
+    </li>
+</ul>
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Tabla de Contenidos</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#introducci%c3%b3n" aria-label="Introducción">Introducción</a></li>
+                <li>
+                    <a href="#qu%c3%a9-es-packet-duplication" aria-label="¿Qué es Packet Duplication?">¿Qué es Packet Duplication?</a></li>
+                <li>
+                    <a href="#consideraciones" aria-label="Consideraciones">Consideraciones</a></li>
+                <li>
+                    <a href="#configuraci%c3%b3n" aria-label="Configuración">Configuración</a></li>
+                <li>
+                    <a href="#verificaci%c3%b3n" aria-label="Verificación">Verificación</a></li>
+                <li>
+                    <a href="#probando-packet-duplication" aria-label="Probando Packet Duplication">Probando Packet Duplication</a></li>
+                <li>
+                    <a href="#conclusi%c3%b3n" aria-label="Conclusión">Conclusión</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="introducción">Introducción<a hidden class="anchor" aria-hidden="true" href="#introducción">#</a></h2>
+<p>En mi <a href="/appqoe-fec-es/">post anterior</a> hablé sobre FEC, una técnica para combatir la pérdida de paquetes enviando un paquete de paridad que permite reconstruir los datos perdidos. En esta publicación, exploraremos otra potente funcionalidad de SD-WAN diseñada para enfrentar transportes con pérdida: Packet Duplication. Aunque ambas funciones buscan mejorar la confiabilidad, lo hacen de formas muy diferentes.</p>
+<p>Vamos a verlo:</p>
+<h2 id="qué-es-packet-duplication">¿Qué es Packet Duplication?<a hidden class="anchor" aria-hidden="true" href="#qué-es-packet-duplication">#</a></h2>
+<p>Como su nombre indica, <em>Packet Duplication</em> consiste en enviar paquetes idénticos a través de múltiples rutas de transporte para aumentar la probabilidad de entrega exitosa. Si una ruta experimenta pérdida transitoria o es inherentemente inestable, el paquete duplicado enviado por un segundo transporte más confiable puede compensarlo, manteniendo la experiencia del usuario sin interrupciones.</p>
+<p>Visualmente:</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/05/pkt-dup1.png"></p>
+<p>El <em>emisor</em> utiliza <strong>ambos</strong> transportes, bronze y gold, para enviar la información duplicada. La ruta bronze sufre pérdida de paquetes, mientras que la ruta gold entrega todos los paquetes con éxito. El receptor descarta los duplicados y reenvía solo la copia que llega primero al destino, eliminando efectivamente la pérdida desde la perspectiva del usuario, sin importar qué ruta tomó el paquete.</p>
+<p>Antes de duplicar un paquete, el <em>WAN Edge</em> compara su tamaño con el <em>Path Maximum Transmission Unit (PMUT)</em>, si la longitud del paquete es menor que el PMUT, este se duplica.</p>
+<p>Nota: A partir de la versión 17.15.1a, los paquetes pueden duplicarse incluso si su tamaño es mayor al PMUT, utilizando <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/system-interface/ios-xe-17/systems-interfaces-book-xe-sdwan/configure-interfaces.html#g-fht-vfr-underlay-fragmentation" target="_blank" rel="nofollow noopener noreferrer">VRF and Underlay Fragmentation</a>.</p>
+<p>Desde la versión 16.12.1b esta funcionalidad aplica para:</p>
+<ul>
+<li>Tráfico IPv4 sobre túneles IPv4.</li>
+</ul>
+<p>Y a partir de la 17.15.1a se amplía el soporte a:</p>
+<ul>
+<li>Tráfico IPv4 sobre túneles IPv6</li>
+<li>Tráfico IPv6 sobre túneles IPv4</li>
+<li>Tráfico IPv6 sobre túneles IPv6</li>
+</ul>
+<h2 id="consideraciones">Consideraciones<a hidden class="anchor" aria-hidden="true" href="#consideraciones">#</a></h2>
+<p>Aquí algunos puntos clave a tener en cuenta al habilitar Packet Duplication:</p>
+<ul>
+<li>Para que funcione, debe haber al menos dos transportes disponibles; no es una solución viable para sitios con un solo transporte.</li>
+<li>La cantidad de tráfico se duplica, tenlo en cuenta según la capacidad de tus transportes.</li>
+<li>El receptor necesita almacenar en búfer y descartar paquetes, lo que añade carga de procesamiento.</li>
+<li>Debe habilitarse solo para tráfico crítico, considerando los puntos anteriores.</li>
+</ul>
+<h2 id="configuración">Configuración<a hidden class="anchor" aria-hidden="true" href="#configuración">#</a></h2>
+<p>Utilizando Policy Groups, podemos configurar Packet Duplication mediante una data policy que haga match con el tráfico deseado y aplique la acción <em>Loss Correction</em> seleccionando <em>Packet Duplication</em>.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/05/pkt-dup2.png"></p>
+<p>Esta configuración debe aplicarse en ambas direcciones, por lo que la política completa se ve así:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span> data-policy data_service_Packet-Duplication
+</span></span><span style="display:flex;"><span>  vpn-list vpn_Corporate_Users
+</span></span><span style="display:flex;"><span>   sequence 1
+</span></span><span style="display:flex;"><span>    match
+</span></span><span style="display:flex;"><span>     source-ip      172.16.100.0/24
+</span></span><span style="display:flex;"><span>     destination-ip 172.16.10.0/24
+</span></span><span style="display:flex;"><span>    !
+</span></span><span style="display:flex;"><span>    action accept
+</span></span><span style="display:flex;"><span>     loss-protect pkt-dup
+</span></span><span style="display:flex;"><span>     loss-protection packet-duplication
+</span></span><span style="display:flex;"><span>    !
+</span></span><span style="display:flex;"><span>   !
+</span></span><span style="display:flex;"><span>   sequence 11
+</span></span><span style="display:flex;"><span>    match
+</span></span><span style="display:flex;"><span>     source-ip      172.16.10.0/24
+</span></span><span style="display:flex;"><span>     destination-ip 172.16.100.0/24
+</span></span><span style="display:flex;"><span>    !
+</span></span><span style="display:flex;"><span>    action accept
+</span></span><span style="display:flex;"><span>     loss-protect pkt-dup
+</span></span><span style="display:flex;"><span>     loss-protection packet-duplication
+</span></span><span style="display:flex;"><span>    !
+</span></span><span style="display:flex;"><span>   !
+</span></span><span style="display:flex;"><span>   default-action accept
+</span></span><span style="display:flex;"><span>  !
+</span></span><span style="display:flex;"><span> !
+</span></span><span style="display:flex;"><span>!
+</span></span><span style="display:flex;"><span>apply-policy
+</span></span><span style="display:flex;"><span> site-list site_10_100
+</span></span><span style="display:flex;"><span>  data-policy data_service_Packet-Duplication from-service
+</span></span><span style="display:flex;"><span> !
+</span></span><span style="display:flex;"><span>!
+</span></span></code></pre></div><p><strong>Nota</strong>: Packet Duplication no es compatible con las siguientes acciones dentro de una data policy:</p>
+<ul>
+<li>local tloc</li>
+<li>remote_tloc</li>
+</ul>
+<p>Puedes consultar la <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/packet-duplication.html" target="_blank" rel="nofollow noopener noreferrer">guía de configuración</a> para más información sobre restricciones y casos de uso.</p>
+<h2 id="verificación">Verificación<a hidden class="anchor" aria-hidden="true" href="#verificación">#</a></h2>
+<p>Para asegurar que Packet Duplication está funcionando, hay algunas validaciones que podemos hacer.</p>
+<p>Desde el dispositivo se puede ejecutar:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Lisbon_10-1#show sdwan tunnel statistics pkt-dup 
+</span></span><span style="display:flex;"><span>Generating output, this might take time, please wait ...
+</span></span><span style="display:flex;"><span>tunnel stats gre 21.11.0.2 21.101.0.2 0 0
+</span></span><span style="display:flex;"><span> pktdup-rx       4844
+</span></span><span style="display:flex;"><span> pktdup-rx-other 1
+</span></span><span style="display:flex;"><span> pktdup-rx-this  4844
+</span></span><span style="display:flex;"><span> pktdup-tx       8710
+</span></span><span style="display:flex;"><span> pktdup-tx-other 4693
+</span></span><span style="display:flex;"><span> pktdup-capable  true
+</span></span><span style="display:flex;"><span>tunnel stats gre 31.11.0.2 31.101.0.2 0 0
+</span></span><span style="display:flex;"><span> pktdup-rx       1
+</span></span><span style="display:flex;"><span> pktdup-rx-other 4844
+</span></span><span style="display:flex;"><span> pktdup-rx-this  1
+</span></span><span style="display:flex;"><span> pktdup-tx       4693
+</span></span><span style="display:flex;"><span> pktdup-tx-other 8710
+</span></span><span style="display:flex;"><span> pktdup-capable  true
+</span></span></code></pre></div><ul>
+<li>pktdup-rx: paquetes originales recibidos por el túnel primario</li>
+<li>pktdup-rx-other: paquetes duplicados recibidos por el segundo túnel</li>
+<li>pktdup-tx: paquetes duplicados enviados por el túnel primario</li>
+<li>pktdup-tx-other: paquetes duplicados enviados por el túnel secundario</li>
+<li>pktdup-capable: indica si se realizó intercambio de capacidades con el otro dispositivo</li>
+</ul>
+<p>Esta misma información está disponible en la sección de <em>Real Time</em> del Manager:</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/05/pkt-dup3.png"></p>
+<p>Además, se puede añadir un contador a la política para confirmar que la secuencia está siendo aplicada.</p>
+<h2 id="probando-packet-duplication">Probando Packet Duplication<a hidden class="anchor" aria-hidden="true" href="#probando-packet-duplication">#</a></h2>
+<p>En mi laboratorio tengo dos túneles activos entre los dispositivos SD-WAN: uno sobre MPLS y otro sobre Biz-Internet.</p>
+<p>Para probar Packet Duplication, introduciré pérdida de paquetes en el transporte MPLS y ejecutaré una prueba básica de iperf entre dos clientes para observar cómo se comporta.</p>
+<p>El comando de prueba utilizado fue:</p>
+<blockquote>
+<p>iperf3 -c 172.16.100.11 -u -b 1M -t 20 &ndash;dscp ef</p>
+</blockquote>
+<p>Este comando inicia una prueba UDP de 20 segundos, con un ancho de banda de 1 Mbps y marcado DSCP EF.</p>
+<p><strong>Nota</strong>: No me enfoco en el porcentaje exacto de pérdida en MPLS. La idea no es medir cuánto puede recuperar Packet Duplication, sino observar cómo actúa la funcionalidad. En teoría, incluso con una pérdida del 100% en un transporte, el tráfico debería llegar por el otro, siempre y cuando Packet Duplication esté correctamente configurado.</p>
+<p>El <em>emisor</em> utiliza biz-internet como transporte primario:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Lisbon_10-1#show sdwan policy service-path vpn 10 interface gigabitEthernet 2 source-ip 172.16.10.11 dest-ip 172.16.100.11 protocol 17 dscp 46 all            
+</span></span><span style="display:flex;"><span>Number of possible next hops: 1
+</span></span><span style="display:flex;"><span>Next Hop: GRE
+</span></span><span style="display:flex;"><span>  Source: 31.11.0.2 Destination: 31.101.0.2 Local Color: biz-internet Remote Color: biz-internet Remote System IP: 1.1.100.1
+</span></span></code></pre></div><p>MPLS tiene un 80% de pérdida y los resultados de iperf fueron los siguientes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>[ ID] Interval           Transfer     Bitrate         Jitter    Lost/Total Datagrams
+</span></span><span style="display:flex;"><span>[  5]   0.00-20.00  sec  2.38 MBytes  1.00 Mbits/sec  0.000 ms  0/4188 (0%)  emisor
+</span></span><span style="display:flex;"><span>[  5]   0.00-20.04  sec  2.38 MBytes   998 Kbits/sec  0.255 ms  0/4188 (0.0%)  receiver
+</span></span></code></pre></div><p>Vamos a revisar las estadísticas de Packet Duplication tanto en el emisor como en el receptor:</p>
+<p>Emisor</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Lisbon_10-1#show sdwan tunnel statistics pkt-dup
+</span></span><span style="display:flex;"><span>Generating output, this might take time, please wait ...
+</span></span><span style="display:flex;"><span>tunnel stats gre 21.11.0.2 21.101.0.2 0 0
+</span></span><span style="display:flex;"><span> pktdup-rx       14
+</span></span><span style="display:flex;"><span> pktdup-rx-other 0
+</span></span><span style="display:flex;"><span> pktdup-rx-this  14
+</span></span><span style="display:flex;"><span> pktdup-tx       0
+</span></span><span style="display:flex;"><span> pktdup-tx-other 4206
+</span></span><span style="display:flex;"><span> pktdup-capable  true
+</span></span><span style="display:flex;"><span>tunnel stats gre 31.11.0.2 31.101.0.2 0 0
+</span></span><span style="display:flex;"><span> pktdup-rx       0
+</span></span><span style="display:flex;"><span> pktdup-rx-other 14
+</span></span><span style="display:flex;"><span> pktdup-rx-this  0
+</span></span><span style="display:flex;"><span> pktdup-tx       4206
+</span></span><span style="display:flex;"><span> pktdup-tx-other 0
+</span></span><span style="display:flex;"><span> pktdup-capable  true
+</span></span></code></pre></div><p>Observa lo siguiente:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Rol</th>
+          <th>Paquetes enviados primario</th>
+          <th>Paquetes duplicados secundario</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Emisor</td>
+          <td>4206</td>
+          <td>4206</td>
+      </tr>
+  </tbody>
+</table>
+<p>Se transmitió exactamente la misma cantidad de paquetes por los transportes MPLS y Biz-Internet.</p>
+<p>Receptor</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Munich_DC100-1#show sdwan tunnel statistics pkt-dup
+</span></span><span style="display:flex;"><span>Generating output, this might take time, please wait ...
+</span></span><span style="display:flex;"><span>tunnel stats gre 21.101.0.2 21.11.0.2 0 0
+</span></span><span style="display:flex;"><span> pktdup-rx       0
+</span></span><span style="display:flex;"><span> pktdup-rx-other 758
+</span></span><span style="display:flex;"><span> pktdup-rx-this  0
+</span></span><span style="display:flex;"><span> pktdup-tx       14
+</span></span><span style="display:flex;"><span> pktdup-tx-other 0
+</span></span><span style="display:flex;"><span> pktdup-capable  true
+</span></span><span style="display:flex;"><span>tunnel stats gre 31.101.0.2 31.11.0.2 0 0
+</span></span><span style="display:flex;"><span> pktdup-rx       4206
+</span></span><span style="display:flex;"><span> pktdup-rx-other 0
+</span></span><span style="display:flex;"><span> pktdup-rx-this  758
+</span></span><span style="display:flex;"><span> pktdup-tx       0
+</span></span><span style="display:flex;"><span> pktdup-tx-other 14
+</span></span><span style="display:flex;"><span> pktdup-capable  true
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>Rol</th>
+          <th>Paquetes recibidos primario</th>
+          <th>Paquetes recibidos secundario</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Receptor</td>
+          <td>4206</td>
+          <td>758</td>
+      </tr>
+  </tbody>
+</table>
+<p>Como el transporte secundario experimentaba una pérdida severa, solo el 18% de los paquetes fueron recibidos por él. Sin embargo, esto no representó un problema ya que el transporte primario entregó el 100% de los paquetes.</p>
+<p>Si el escenario se invirtiera, es decir, si la ruta primaria sufriera pérdida y la secundaria permaneciera estable, los roles simplemente se intercambiarían. El primario entregaría el 18% y el secundario el 100%, y nuevamente, el usuario final no experimentaría ninguna pérdida de paquetes.</p>
+<h2 id="conclusión">Conclusión<a hidden class="anchor" aria-hidden="true" href="#conclusión">#</a></h2>
+<p>Packet Duplication es una funcionalidad simple pero poderosa en Cisco SD-WAN que mejora significativamente la confiabilidad del tráfico. Al enviar paquetes idénticos por múltiples rutas de transporte, garantiza que, incluso si una ruta falla, el rendimiento de la aplicación no se vea afectado.</p>
+<p>Aunque conlleva un mayor uso de ancho de banda y procesamiento adicional, puede marcar una gran diferencia para tráfico crítico como voz, video o sesiones remotas, especialmente en entornos con circuitos poco confiables.</p>
+<p>Como con cualquier funcionalidad de SD-WAN, la clave es usarla de manera <strong>estratégica</strong>: activarla para el tráfico correcto, monitorear los resultados y ajustar las políticas según el comportamiento de tu red. ¿Has utilizado Packet Duplication en producción? Cuéntame tu experiencia en los comentarios o conéctate conmigo en <a href="https://www.linkedin.com/in/alexruizs/" target="_blank" rel="nofollow noopener noreferrer">LinkedIn</a> para conversar sobre temas avanzados de SD-WAN.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer><script src="https://utteranc.es/client.js"
+        repo="aruiz-p/netwithalex"
+        issue-term="title"
+        label="comments"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/es/">NetWithAlex</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copiar';
+
+        function copyingDone() {
+            copybutton.innerHTML = '¡copiado!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copiar';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

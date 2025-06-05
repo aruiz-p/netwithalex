@@ -10,10 +10,17 @@
     <atom:link href="http://localhost:1313/es/category/sdwan/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Serie AppQoe: Forward Error Correction (FEC)</title>
-      <link>http://localhost:1313/appqoe-fec/</link>
+      <link>http://localhost:1313/appqoe-fec-es/</link>
       <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/appqoe-fec/</guid>
+      <guid>http://localhost:1313/appqoe-fec-es/</guid>
       <description>Aprende cómo funciona Forward Error Correction (FEC) en Cisco SD-WAN para mejorar el rendimiento de las aplicaciones en enlaces con pérdida de paquetes. Explora casos de uso, configuración y resultados de pruebas.</description>
+    </item>
+    <item>
+      <title>Serie AppQoe: Packet Duplication</title>
+      <link>http://localhost:1313/appqoe-pkt-dup-es/</link>
+      <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/appqoe-pkt-dup-es/</guid>
+      <description>Descubre cómo packet duplication utiliza múltiples transportes para minimizar el riesgo de pérdida de paquetes sobre transportes inestables, manteniendo la calidad de las aplicaciones más importantes para cumplir con los objetivos del negocio.</description>
     </item>
     <item>
       <title>Cisco SD-WAN ZTP On-Prem: Automatizando el onboarding de los routers</title>

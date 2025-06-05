@@ -41,6 +41,19 @@
                 href="http://localhost:1313/es/tag/loss-correction/"
                 />
   </url><url>
+    <loc>http://localhost:1313/es/tag/packet-duplication/</loc>
+    <lastmod>2025-05-19T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/tag/packet-duplication/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/tag/packet-duplication/"
+                />
+  </url><url>
     <loc>http://localhost:1313/es/posts/</loc>
     <lastmod>2025-05-19T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -67,17 +80,30 @@
                 href="http://localhost:1313/es/category/sdwan/"
                 />
   </url><url>
-    <loc>http://localhost:1313/appqoe-fec/</loc>
+    <loc>http://localhost:1313/appqoe-fec-es/</loc>
     <lastmod>2025-05-19T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/appqoe-fec/"
+                href="http://localhost:1313/appqoe-fec-en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/appqoe-fec/"
+                href="http://localhost:1313/appqoe-fec-es/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/appqoe-pkt-dup-es/</loc>
+    <lastmod>2025-05-19T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/appqoe-pkt-dup-en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/appqoe-pkt-dup-es/"
                 />
   </url><url>
     <loc>http://localhost:1313/es/tag/</loc>
