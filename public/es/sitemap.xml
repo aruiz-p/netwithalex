@@ -2,6 +2,97 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/es/tag/api/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/tag/api/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/tag/api/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/category/automation/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/category/automation/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/category/automation/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/category/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/category/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/category/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/posts/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/posts/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/automation-intro-es/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/automation-intro-en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/automation-intro-es/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/category/sdwan/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/category/sdwan/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/category/sdwan/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/tag/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/tag/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/tag/"
+                />
+  </url><url>
     <loc>http://localhost:1313/es/category/appqoe/</loc>
     <lastmod>2025-06-03T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -13,19 +104,6 @@
                 rel="alternate"
                 hreflang="es"
                 href="http://localhost:1313/es/category/appqoe/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/es/category/</loc>
-    <lastmod>2025-06-03T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/category/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/category/"
                 />
   </url><url>
     <loc>http://localhost:1313/es/tag/packet-duplication/</loc>
@@ -41,32 +119,6 @@
                 href="http://localhost:1313/es/tag/packet-duplication/"
                 />
   </url><url>
-    <loc>http://localhost:1313/es/posts/</loc>
-    <lastmod>2025-06-03T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/posts/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/es/category/sdwan/</loc>
-    <lastmod>2025-06-03T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/category/sdwan/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/category/sdwan/"
-                />
-  </url><url>
     <loc>http://localhost:1313/appqoe-pkt-dup-es/</loc>
     <lastmod>2025-06-03T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -78,19 +130,6 @@
                 rel="alternate"
                 hreflang="es"
                 href="http://localhost:1313/appqoe-pkt-dup-es/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/es/tag/</loc>
-    <lastmod>2025-06-03T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/tag/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/tag/"
                 />
   </url><url>
     <loc>http://localhost:1313/es/tag/loss-correction/</loc>
