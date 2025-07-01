@@ -2,59 +2,59 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Sd-Wan on NetWithAlex</title>
-    <link>http://localhost:1313/category/sd-wan/</link>
+    <link>https://netwithalex.blog/category/sd-wan/</link>
     <description>Recent content in Sd-Wan on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en</language>
     <lastBuildDate>Sun, 28 Jul 2024 14:56:45 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/category/sd-wan/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://netwithalex.blog/category/sd-wan/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Improving my SD-WAN Assistant - Multiple agents</title>
-      <link>http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/</link>
+      <link>https://netwithalex.blog/improving-my-sd-wan-assistant-multiple-agents/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/</guid>
+      <guid>https://netwithalex.blog/improving-my-sd-wan-assistant-multiple-agents/</guid>
       <description>Learn how an LLM agentic approach can be used to troubleshoot your SD-WAN network</description>
     </item>
     <item>
       <title>Building my first SD-WAN AI Assistant with LangChain</title>
-      <link>http://localhost:1313/building-my-first-sd-wan-ai-assistant-with-langchain/</link>
+      <link>https://netwithalex.blog/building-my-first-sd-wan-ai-assistant-with-langchain/</link>
       <pubDate>Wed, 10 Jul 2024 18:51:08 +0000</pubDate>
-      <guid>http://localhost:1313/building-my-first-sd-wan-ai-assistant-with-langchain/</guid>
+      <guid>https://netwithalex.blog/building-my-first-sd-wan-ai-assistant-with-langchain/</guid>
       <description>Discover how LLMs can be integrated with Cisco SD-WAN to troubleshoot your network in a simple and stress-free way</description>
     </item>
     <item>
       <title>Tracking SD-WAN incidents with Service Now</title>
-      <link>http://localhost:1313/tracking-sd-wan-incidents-with-service-now/</link>
+      <link>https://netwithalex.blog/tracking-sd-wan-incidents-with-service-now/</link>
       <pubDate>Fri, 15 Mar 2024 18:06:34 +0000</pubDate>
-      <guid>http://localhost:1313/tracking-sd-wan-incidents-with-service-now/</guid>
+      <guid>https://netwithalex.blog/tracking-sd-wan-incidents-with-service-now/</guid>
       <description>Learn how to integrate Cisco SD-WAN with ServiceNow and automate your incident management</description>
     </item>
     <item>
       <title>Simplifying AAR: 3/3 Fallback to best path</title>
-      <link>http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/</link>
+      <link>https://netwithalex.blog/simplifying-aar-3-3-fallback-to-best-path/</link>
       <pubDate>Sun, 11 Feb 2024 12:11:06 +0000</pubDate>
-      <guid>http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/</guid>
+      <guid>https://netwithalex.blog/simplifying-aar-3-3-fallback-to-best-path/</guid>
       <description>Learn how AAR can help improve the application user experience with Cisco SD-WAN</description>
     </item>
     <item>
       <title>Simplifying AAR: 2/3 Understanding different scenarios</title>
-      <link>http://localhost:1313/demystifying-aar-understanding-different-scenarios/</link>
+      <link>https://netwithalex.blog/demystifying-aar-understanding-different-scenarios/</link>
       <pubDate>Wed, 07 Feb 2024 20:27:37 +0000</pubDate>
-      <guid>http://localhost:1313/demystifying-aar-understanding-different-scenarios/</guid>
+      <guid>https://netwithalex.blog/demystifying-aar-understanding-different-scenarios/</guid>
       <description>Learn how AAR can help improve the application user experience with Cisco SD-WAN</description>
     </item>
     <item>
       <title>Simplifying AAR:  1/3 The Foundations</title>
-      <link>http://localhost:1313/demystifying-aar-1-3-the-foundations/</link>
+      <link>https://netwithalex.blog/demystifying-aar-1-3-the-foundations/</link>
       <pubDate>Thu, 01 Feb 2024 16:25:27 +0000</pubDate>
-      <guid>http://localhost:1313/demystifying-aar-1-3-the-foundations/</guid>
+      <guid>https://netwithalex.blog/demystifying-aar-1-3-the-foundations/</guid>
       <description>Learn how AAR can help improve the application user experience with Cisco SD-WAN</description>
     </item>
     <item>
       <title>Cisco SD-WAN Network Wide Path Insights (NWPI)</title>
-      <link>http://localhost:1313/network-wide-path-insights-an-introduction/</link>
+      <link>https://netwithalex.blog/network-wide-path-insights-an-introduction/</link>
       <pubDate>Thu, 25 Jan 2024 20:34:14 +0000</pubDate>
-      <guid>http://localhost:1313/network-wide-path-insights-an-introduction/</guid>
+      <guid>https://netwithalex.blog/network-wide-path-insights-an-introduction/</guid>
       <description>Learn how to use the most advanced troubleshooting tool for your Cisco SD-WAN Network.</description>
     </item>
   </channel>

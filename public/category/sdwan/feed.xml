@@ -2,59 +2,66 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Sdwan on NetWithAlex</title>
-    <link>http://localhost:1313/category/sdwan/</link>
+    <link>https://netwithalex.blog/category/sdwan/</link>
     <description>Recent content in Sdwan on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 16 Jun 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/category/sdwan/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://netwithalex.blog/category/sdwan/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control Policies vs Data Policies in Cisco SD-WAN: Key Differences</title>
+      <link>https://netwithalex.blog/policies-intro-en/</link>
+      <pubDate>Tue, 01 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://netwithalex.blog/policies-intro-en/</guid>
+      <description>Learn the key differences between Cisco SD-WAN control and data policies, when to use each, and how they impact routing and traffic forwarding</description>
+    </item>
     <item>
       <title>Getting Started with SD-WAN Automation</title>
-      <link>http://localhost:1313/automation-intro-en/</link>
+      <link>https://netwithalex.blog/automation-intro-en/</link>
       <pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/automation-intro-en/</guid>
+      <guid>https://netwithalex.blog/automation-intro-en/</guid>
       <description>Learn the fundamentals of SD-WAN automation and how to get started with scripting and APIs to streamline your network operations.</description>
     </item>
     <item>
       <title>AppQoe Series: Packet Duplication</title>
-      <link>http://localhost:1313/appqoe-pkt-dup-en/</link>
+      <link>https://netwithalex.blog/appqoe-pkt-dup-en/</link>
       <pubDate>Tue, 03 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/appqoe-pkt-dup-en/</guid>
+      <guid>https://netwithalex.blog/appqoe-pkt-dup-en/</guid>
       <description>Learn how Packet Duplication can help you reliably transmit critical traffic over unreliable transports to making sure your application.</description>
     </item>
     <item>
       <title>AppQoe Series: Forward Error Correction (FEC)</title>
-      <link>http://localhost:1313/appqoe-fec-en/</link>
+      <link>https://netwithalex.blog/appqoe-fec-en/</link>
       <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/appqoe-fec-en/</guid>
+      <guid>https://netwithalex.blog/appqoe-fec-en/</guid>
       <description>Learn how Forward Error Correction (FEC) works in Cisco SD-WAN to improve application performance over lossy links. Explore use cases, configuration insights, and testing results.</description>
     </item>
     <item>
       <title>Cisco SD-WAN On-Prem ZTP: Automating Router Onboarding</title>
-      <link>http://localhost:1313/ztp-on-prem-en/</link>
+      <link>https://netwithalex.blog/ztp-on-prem-en/</link>
       <pubDate>Mon, 05 May 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/ztp-on-prem-en/</guid>
+      <guid>https://netwithalex.blog/ztp-on-prem-en/</guid>
       <description>Plug and Play (PnP) lets you onboard SD-WAN devices automatically via Cisco Cloud. This post explains how to achieve zero-touch provisioning (ZTP) in an airgapped, on-premises environment.</description>
     </item>
     <item>
       <title>AppQoe Series: TCP Optimization</title>
-      <link>http://localhost:1313/appqoe-tcp-opt/</link>
+      <link>https://netwithalex.blog/appqoe-tcp-opt/</link>
       <pubDate>Tue, 22 Apr 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/appqoe-tcp-opt/</guid>
+      <guid>https://netwithalex.blog/appqoe-tcp-opt/</guid>
       <description>Discover how SD-WAN enhances TCP performance. Learn about key optimization techniques that improve application reliability and user experience.</description>
     </item>
     <item>
       <title>Securing the Edge with Cisco SD-WAN and Secure Access</title>
-      <link>http://localhost:1313/sdwan-sse-integration/</link>
+      <link>https://netwithalex.blog/sdwan-sse-integration/</link>
       <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/sdwan-sse-integration/</guid>
+      <guid>https://netwithalex.blog/sdwan-sse-integration/</guid>
       <description>Discover how Cisco SD-WAN and Cisco Secure Access work together to enhance network performance and security in an internet first world.</description>
     </item>
     <item>
       <title>Enhanced Application Aware Routing</title>
-      <link>http://localhost:1313/enhanced-aar/</link>
+      <link>https://netwithalex.blog/enhanced-aar/</link>
       <pubDate>Sun, 05 Jan 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/enhanced-aar/</guid>
+      <guid>https://netwithalex.blog/enhanced-aar/</guid>
       <description>Learn the benefits of enhanced app aware routing and how to implement it on your network</description>
     </item>
   </channel>

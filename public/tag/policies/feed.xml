@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Policies on NetWithAlex</title>
+    <link>https://netwithalex.blog/tag/policies/</link>
+    <description>Recent content in Policies on NetWithAlex</description>
+    <generator>Hugo -- 0.140.2</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 01 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://netwithalex.blog/tag/policies/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control Policies vs Data Policies in Cisco SD-WAN: Key Differences</title>
+      <link>https://netwithalex.blog/policies-intro-en/</link>
+      <pubDate>Tue, 01 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://netwithalex.blog/policies-intro-en/</guid>
+      <description>Learn the key differences between Cisco SD-WAN control and data policies, when to use each, and how they impact routing and traffic forwarding</description>
+    </item>
+  </channel>
+</rss>

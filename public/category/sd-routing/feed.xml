@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Sd-Routing on NetWithAlex</title>
-    <link>http://localhost:1313/category/sd-routing/</link>
+    <link>https://netwithalex.blog/category/sd-routing/</link>
     <description>Recent content in Sd-Routing on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en</language>
     <lastBuildDate>Sat, 24 Feb 2024 12:06:47 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/category/sd-routing/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://netwithalex.blog/category/sd-routing/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A New Chapter: SD-Routing&#39;s Revolution in Network Management</title>
-      <link>http://localhost:1313/a-new-chapter-sd-routings-revolution-in-network-management/</link>
+      <link>https://netwithalex.blog/a-new-chapter-sd-routings-revolution-in-network-management/</link>
       <pubDate>Sat, 24 Feb 2024 12:06:47 +0000</pubDate>
-      <guid>http://localhost:1313/a-new-chapter-sd-routings-revolution-in-network-management/</guid>
+      <guid>https://netwithalex.blog/a-new-chapter-sd-routings-revolution-in-network-management/</guid>
       <description>Explore how SD-Routing can simply and effectively help you manage and monitor your WAN network.</description>
     </item>
   </channel>

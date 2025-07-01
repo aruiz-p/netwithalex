@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Control Policies vs Data Policies in Cisco SD-WAN: Key Differences | NetWithAlex</title>
+<meta name="keywords" content="">
+<meta name="description" content="Learn the key differences between Cisco SD-WAN control and data policies, when to use each, and how they impact routing and traffic forwarding">
+<meta name="author" content="Alex">
+<link rel="canonical" href="https://netwithalex.blog/policies-intro-en/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://netwithalex.blog/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://netwithalex.blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://netwithalex.blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://netwithalex.blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://netwithalex.blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://netwithalex.blog/policies-intro-en/">
+<link rel="alternate" hreflang="es" href="https://netwithalex.blog/policies-intro-es/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="preconnect" href="https://plausible.io">
+    
+        
+            
+            <script defer  data-domain="netwithalex.blog" src="https://plausible.io/js/script.js" ></script>
+
+<!-- If you are using Content-Security-Policy, do not forget to add this code to your CSP : 
+  script-src 'unsafe-inline' https://plausible.io
+  connect-src 'unsafe-inline' https://plausible.io
+  or just add the partial 'plausible_csp.html' to those 2 csp directives in your 'index.headers' file
+-->
+
+
+
+    
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+    <script>
+         
+         
+         
+    </script>
+
+    
+<meta property="og:url" content="https://netwithalex.blog/policies-intro-en/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="Control Policies vs Data Policies in Cisco SD-WAN: Key Differences">
+  <meta property="og:description" content="Learn the key differences between Cisco SD-WAN control and data policies, when to use each, and how they impact routing and traffic forwarding">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-01T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Control Policies vs Data Policies in Cisco SD-WAN: Key Differences">
+<meta name="twitter:description" content="Learn the key differences between Cisco SD-WAN control and data policies, when to use each, and how they impact routing and traffic forwarding">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://netwithalex.blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Control Policies vs Data Policies in Cisco SD-WAN: Key Differences",
+      "item": "https://netwithalex.blog/policies-intro-en/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Control Policies vs Data Policies in Cisco SD-WAN: Key Differences",
+  "name": "Control Policies vs Data Policies in Cisco SD-WAN: Key Differences",
+  "description": "Learn the key differences between Cisco SD-WAN control and data policies, when to use each, and how they impact routing and traffic forwarding",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introduction Cisco SD-WAN provides with powerful tools to shape both routing behavior and how traffic flows through the overlay. At the core of this flexibility are two key policy types: Control Policies and Data Policies. Understanding the difference between them is crucial for designing scalable and optimized SD-WAN deployments.\nIn this post, we’ll explore down what each policy type does, how they differ, and when to use one over the other.\nCentralized and Localized Polices Policies are categorized based on where they are configured and applied, they could be Centralized and Localized policies. The Manager uses netconf/yang to send policy configuration.\nCentralized Policies\nConfigured on the Controller (vSmart) and pushed to a selected group of SD-WAN routers through Overlay Management Protocol (OMP). Includes:\nControl policies Data policies App-aware routing policies Localized Policies\nConfigured directly on the SD-WAN routers and only affect that specific device. Includes:\nLocal ACLs Route policies QoS settings What Are Control Policies? Control policies in Cisco SD-WAN are applied on the control plane - specifically, they define how routing information is exchanged between Controllers and SD-WAN routers.\nKey characteristics:\nApplied on Controllers Influence route advertisements and TLOC propagation Define what routes are accepted, modified, or rejected Typical use cases:\nCreate topologies (hub/spoke, partial mesh, etc) Controlling route leaks between VPNs Filtering or tagging OMP routes Think of control policies as a way to shape the SD-WAN topology itself by deciding which routes exist and where they are allowed to go.\nWhat Are Data Policies? Data policies, on the other hand, operate on the data plane. They define how actual traffic is handled.\nKey characteristics:\nAlso configured on the Controllers but applied on SD-WAN routers Operate at forwarding level, not related to route advertisements Can match on various fields: source/destination IPs, ports, applications, etc. Typical use cases:\nApplication-aware traffic steering Applying QoS classes Blocking certain types of traffic (for example, using ACL-style rules) Using an analogy: Control policies are the city planners deciding where roads are built, data policies are the traffic rules that govern how vehicles move through them.\nKey Differences at a Glance Feature Control Policy Data Policy Plane Control plane Data plane Applied on Controller Wan Edge Affects Route advertisements Actual traffic forwarding Common Use Cases Route filtering, TLOC mapping Traffic steering, QoS, ACLs Directionality Between controllers From controller to edge routers Policy Execution Order The following steps happen when a packet is passing through a WAN Edge router:\nLocal ingress policies, such as interface level ACLs and QoS settings, are applied first. These can filter packets and apply marking or re-marking for QoS.\nCentralized Application-Aware Routing is evaluated next. It makes forwarding decisions only between equal-cost paths already present in the routing table.\nThen, the centralized data policy is evaluated. It has the ability to override any forwarding decisions made by AAR.\nOnce policies are applied, the system performs routing and forwarding lookups to identify the appropriate egress interface.\nQueueing and scheduling mechanisms are applied to shape traffic according to QoS settings.\nFinally, the local egress policy is applied before the packet is placed on the wire.\nUnderstanding this order is key to avoiding misconfigurations and ensuring your policies behave as expected. A common mistake is unintentionally overriding an AAR routing decision by applying a centralized data policy that matches the same traffic and redirects it elsewhere.\nWhen to Use What Choosing between control and data policies depends on what problem you’re solving:\nWant to limit which routes are shared between sites? → Use a control policy. Need to steer certain applications over MPLS or DIA? → That’s a data policy job. Trying to prevent route advertisement loops or control inter-VPN leakage? → Control policy. Looking to prioritize VoIP traffic or drop peer-to-peer file sharing? → Data policy. In many designs, both are used together. For example, a control policy might ensure only selected prefixes are reachable between sites, while a data policy handles how the matching traffic is prioritized and forwarded.\nConclusion Control and data policies serve distinct but complementary purposes in Cisco SD-WAN. One governs the topology and routing decisions, the other shapes how traffic moves through that topology.\nUnderstanding these differences allows you to build smarter and more efficient SD-WAN environments. Want to go deeper? Check out Cisco’s official docs on Control Policies and Data Policies.\nAlso, check out my deep dive on Application-Aware Routing, and learn how SD-WAN can automatically move traffic to best performing paths and guarantee a good user experience.\n",
+  "wordCount" : "742",
+  "inLanguage": "en",
+  "datePublished": "2025-07-01T00:00:00Z",
+  "dateModified": "2025-07-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Alex"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://netwithalex.blog/policies-intro-en/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://netwithalex.blog/assets/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://netwithalex.blog/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="https://netwithalex.blog/es/" title="Español"
+                            aria-label="Español">Es</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://netwithalex.blog/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://netwithalex.blog/archives/" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://netwithalex.blog/category/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://netwithalex.blog/about/" title="About me.">
+                    <span>About me.</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://netwithalex.blog/search/" title="🔍">
+                    <span>🔍</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://netwithalex.blog/">Home</a>&nbsp;»&nbsp;<a href="https://netwithalex.blog/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Control Policies vs Data Policies in Cisco SD-WAN: Key Differences
+    </h1>
+    <div class="post-description">
+      Learn the key differences between Cisco SD-WAN control and data policies, when to use each, and how they impact routing and traffic forwarding
+    </div>
+    <div class="post-meta"><span title='2025-07-01 00:00:00 +0000 +0000'>July 1, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Alex&nbsp;|&nbsp;Translations:
+<ul class="i18n_list">
+    <li>
+        <a href="https://netwithalex.blog/policies-intro-es/">Es</a>
+    </li>
+</ul>
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#introduction" aria-label="Introduction">Introduction</a></li>
+                <li>
+                    <a href="#centralized-and-localized-polices" aria-label="Centralized and Localized Polices">Centralized and Localized Polices</a></li>
+                <li>
+                    <a href="#what-are-control-policies" aria-label="What Are Control Policies?">What Are Control Policies?</a></li>
+                <li>
+                    <a href="#what-are-data-policies" aria-label="What Are Data Policies?">What Are Data Policies?</a></li>
+                <li>
+                    <a href="#key-differences-at-a-glance" aria-label="Key Differences at a Glance">Key Differences at a Glance</a></li>
+                <li>
+                    <a href="#policy-execution-order" aria-label="Policy Execution Order">Policy Execution Order</a></li>
+                <li>
+                    <a href="#when-to-use-what" aria-label="When to Use What">When to Use What</a></li>
+                <li>
+                    <a href="#conclusion" aria-label="Conclusion">Conclusion</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
+<p>Cisco SD-WAN provides with powerful tools to shape both routing behavior and how traffic flows through the overlay. At the core of this flexibility are two key policy types: <strong>Control Policies</strong> and <strong>Data Policies</strong>. Understanding the difference between them is crucial for designing scalable and optimized SD-WAN deployments.</p>
+<p>In this post, we’ll explore down what each policy type does, how they differ, and when to use one over the other.</p>
+<h2 id="centralized-and-localized-polices">Centralized and Localized Polices<a hidden class="anchor" aria-hidden="true" href="#centralized-and-localized-polices">#</a></h2>
+<p>Policies are categorized based on where they are configured and applied, they could be <em>Centralized</em> and <em>Localized</em> policies. The Manager uses <strong>netconf/yang</strong> to send policy configuration.</p>
+<p><strong>Centralized Policies</strong></p>
+<p>Configured on the Controller (vSmart) and pushed to a <strong>selected group</strong> of SD-WAN routers through Overlay Management Protocol (<strong>OMP</strong>). Includes:</p>
+<ul>
+<li>Control policies</li>
+<li>Data policies</li>
+<li>App-aware routing policies</li>
+</ul>
+<p><strong>Localized Policies</strong></p>
+<p>Configured directly on the SD-WAN routers and <strong>only affect that specific device</strong>. Includes:</p>
+<ul>
+<li>Local ACLs</li>
+<li>Route policies</li>
+<li>QoS settings</li>
+</ul>
+<p><img loading="lazy" src="/wp-content/uploads/2025/06/policies1.png"></p>
+<h2 id="what-are-control-policies">What Are Control Policies?<a hidden class="anchor" aria-hidden="true" href="#what-are-control-policies">#</a></h2>
+<p>Control policies in Cisco SD-WAN are applied <strong>on the control plane</strong> - specifically, they define how routing information is exchanged between Controllers and SD-WAN routers.</p>
+<p><strong>Key characteristics:</strong></p>
+<ul>
+<li><strong>Applied on Controllers</strong></li>
+<li>Influence route advertisements and TLOC propagation</li>
+<li>Define what routes are accepted, modified, or rejected</li>
+</ul>
+<p><strong>Typical use cases:</strong></p>
+<ul>
+<li>Create topologies (hub/spoke, partial mesh, etc)</li>
+<li>Controlling route leaks between VPNs</li>
+<li>Filtering or tagging OMP routes</li>
+</ul>
+<p>Think of control policies as a way to shape the SD-WAN topology itself by deciding which routes exist and where they are allowed to go.</p>
+<h2 id="what-are-data-policies">What Are Data Policies?<a hidden class="anchor" aria-hidden="true" href="#what-are-data-policies">#</a></h2>
+<p>Data policies, on the other hand, operate on the <strong>data plane</strong>. They define how actual traffic is handled.</p>
+<p><strong>Key characteristics:</strong></p>
+<ul>
+<li>Also configured on the Controllers but <strong>applied on SD-WAN routers</strong></li>
+<li>Operate at forwarding level, not related to route advertisements</li>
+<li>Can match on various fields: source/destination IPs, ports, applications, etc.</li>
+</ul>
+<p><strong>Typical use cases:</strong></p>
+<ul>
+<li>Application-aware traffic steering</li>
+<li>Applying QoS classes</li>
+<li>Blocking certain types of traffic (for example, using ACL-style rules)</li>
+</ul>
+<p>Using an analogy: Control policies are the city planners deciding where roads are built, data policies are the traffic rules that govern how vehicles move through them.</p>
+<h2 id="key-differences-at-a-glance">Key Differences at a Glance<a hidden class="anchor" aria-hidden="true" href="#key-differences-at-a-glance">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>Feature</th>
+          <th>Control Policy</th>
+          <th>Data Policy</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Plane</strong></td>
+          <td>Control plane</td>
+          <td>Data plane</td>
+      </tr>
+      <tr>
+          <td><strong>Applied on</strong></td>
+          <td>Controller</td>
+          <td>Wan Edge</td>
+      </tr>
+      <tr>
+          <td><strong>Affects</strong></td>
+          <td>Route advertisements</td>
+          <td>Actual traffic forwarding</td>
+      </tr>
+      <tr>
+          <td><strong>Common Use Cases</strong></td>
+          <td>Route filtering, TLOC mapping</td>
+          <td>Traffic steering, QoS, ACLs</td>
+      </tr>
+      <tr>
+          <td><strong>Directionality</strong></td>
+          <td>Between controllers</td>
+          <td>From controller to edge routers</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="policy-execution-order">Policy Execution Order<a hidden class="anchor" aria-hidden="true" href="#policy-execution-order">#</a></h2>
+<p>The following steps happen when a packet is passing through a WAN Edge router:</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/06/policies2.png"></p>
+<p><strong>Local ingress policies</strong>, such as interface level ACLs and QoS settings, are applied first. These can filter packets and apply marking or re-marking for QoS.</p>
+<p><strong>Centralized Application-Aware Routing</strong> is evaluated next. It makes forwarding decisions only between equal-cost paths already present in the routing table.</p>
+<p>Then, the <strong>centralized data policy</strong> is evaluated. It has the ability to override any forwarding decisions made by AAR.</p>
+<p>Once policies are applied, the system performs <strong>routing and forwarding</strong> lookups to identify the appropriate egress interface.</p>
+<p><strong>Queueing and scheduling</strong> mechanisms are applied to shape traffic according to QoS settings.</p>
+<p>Finally, the <strong>local egress policy</strong> is applied before the packet is placed on the wire.</p>
+<p>Understanding this order is key to avoiding misconfigurations and ensuring your policies behave as expected. A common mistake is unintentionally overriding an AAR routing decision by applying a centralized data policy that matches the same traffic and redirects it elsewhere.</p>
+<h2 id="when-to-use-what">When to Use What<a hidden class="anchor" aria-hidden="true" href="#when-to-use-what">#</a></h2>
+<p>Choosing between control and data policies depends on <strong>what problem you’re solving</strong>:</p>
+<ul>
+<li>Want to <strong>limit which routes are shared</strong> between sites? → Use a <strong>control policy</strong>.</li>
+<li>Need to <strong>steer certain applications</strong> over MPLS or DIA? → That’s a <strong>data policy</strong> job.</li>
+<li>Trying to <strong>prevent route advertisement loops</strong> or control inter-VPN leakage? → Control policy.</li>
+<li>Looking to <strong>prioritize VoIP traffic</strong> or drop peer-to-peer file sharing? → Data policy.</li>
+</ul>
+<p>In many designs, both are used together. For example, a control policy might ensure only selected prefixes are reachable between sites, while a data policy handles how the matching traffic is prioritized and forwarded.</p>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<p>Control and data policies serve distinct but complementary purposes in Cisco SD-WAN. One governs the <strong>topology and routing decisions</strong>, the other shapes <strong>how traffic moves</strong> through that topology.</p>
+<p>Understanding these differences allows you to build smarter and more efficient SD-WAN environments. Want to go deeper? Check out Cisco’s official docs on <a href="https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/policies/ios-xe-17/policies-book-xe/policy-overview.html" target="_blank" rel="nofollow noopener noreferrer">Control Policies and Data Policies</a>.</p>
+<p>Also, check out my deep dive on <a href="/demystifying-aar-1-3-the-foundations/">Application-Aware Routing</a>, and learn how SD-WAN can automatically move traffic to best performing paths and guarantee a good user experience.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer><script src="https://utteranc.es/client.js"
+        repo="aruiz-p/netwithalex"
+        issue-term="title"
+        label="comments"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://netwithalex.blog/">NetWithAlex</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

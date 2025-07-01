@@ -2,129 +2,136 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tag on NetWithAlex</title>
-    <link>http://localhost:1313/es/tag/</link>
+    <link>https://netwithalex.blog/es/tag/</link>
     <description>Recent content in Tag on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>es</language>
-    <lastBuildDate>Mon, 16 Jun 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/es/tag/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://netwithalex.blog/es/tag/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Policies</title>
+      <link>https://netwithalex.blog/es/tag/policies/</link>
+      <pubDate>Tue, 01 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://netwithalex.blog/es/tag/policies/</guid>
+      <description></description>
+    </item>
     <item>
       <title>API</title>
-      <link>http://localhost:1313/es/tag/api/</link>
+      <link>https://netwithalex.blog/es/tag/api/</link>
       <pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/api/</guid>
+      <guid>https://netwithalex.blog/es/tag/api/</guid>
       <description></description>
     </item>
     <item>
       <title>Packet Duplication</title>
-      <link>http://localhost:1313/es/tag/packet-duplication/</link>
+      <link>https://netwithalex.blog/es/tag/packet-duplication/</link>
       <pubDate>Tue, 03 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/packet-duplication/</guid>
+      <guid>https://netwithalex.blog/es/tag/packet-duplication/</guid>
       <description></description>
     </item>
     <item>
       <title>Loss Correction</title>
-      <link>http://localhost:1313/es/tag/loss-correction/</link>
+      <link>https://netwithalex.blog/es/tag/loss-correction/</link>
       <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/loss-correction/</guid>
+      <guid>https://netwithalex.blog/es/tag/loss-correction/</guid>
       <description></description>
     </item>
     <item>
       <title>Onboarding</title>
-      <link>http://localhost:1313/es/tag/onboarding/</link>
+      <link>https://netwithalex.blog/es/tag/onboarding/</link>
       <pubDate>Mon, 05 May 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/onboarding/</guid>
+      <guid>https://netwithalex.blog/es/tag/onboarding/</guid>
       <description></description>
     </item>
     <item>
       <title>ZTP</title>
-      <link>http://localhost:1313/es/tag/ztp/</link>
+      <link>https://netwithalex.blog/es/tag/ztp/</link>
       <pubDate>Mon, 05 May 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/ztp/</guid>
+      <guid>https://netwithalex.blog/es/tag/ztp/</guid>
       <description></description>
     </item>
     <item>
       <title>Optimizacion</title>
-      <link>http://localhost:1313/es/tag/optimizacion/</link>
+      <link>https://netwithalex.blog/es/tag/optimizacion/</link>
       <pubDate>Tue, 22 Apr 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/optimizacion/</guid>
+      <guid>https://netwithalex.blog/es/tag/optimizacion/</guid>
       <description></description>
     </item>
     <item>
       <title>TCP</title>
-      <link>http://localhost:1313/es/tag/tcp/</link>
+      <link>https://netwithalex.blog/es/tag/tcp/</link>
       <pubDate>Tue, 22 Apr 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/tcp/</guid>
+      <guid>https://netwithalex.blog/es/tag/tcp/</guid>
       <description></description>
     </item>
     <item>
       <title>Sdwan</title>
-      <link>http://localhost:1313/es/tag/sdwan/</link>
+      <link>https://netwithalex.blog/es/tag/sdwan/</link>
       <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/sdwan/</guid>
+      <guid>https://netwithalex.blog/es/tag/sdwan/</guid>
       <description></description>
     </item>
     <item>
       <title>Seguridad</title>
-      <link>http://localhost:1313/es/tag/seguridad/</link>
+      <link>https://netwithalex.blog/es/tag/seguridad/</link>
       <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/seguridad/</guid>
+      <guid>https://netwithalex.blog/es/tag/seguridad/</guid>
       <description></description>
     </item>
     <item>
       <title>Sse</title>
-      <link>http://localhost:1313/es/tag/sse/</link>
+      <link>https://netwithalex.blog/es/tag/sse/</link>
       <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/sse/</guid>
+      <guid>https://netwithalex.blog/es/tag/sse/</guid>
       <description></description>
     </item>
     <item>
       <title>Eaar</title>
-      <link>http://localhost:1313/es/tag/eaar/</link>
+      <link>https://netwithalex.blog/es/tag/eaar/</link>
       <pubDate>Sun, 05 Jan 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/eaar/</guid>
+      <guid>https://netwithalex.blog/es/tag/eaar/</guid>
       <description></description>
     </item>
     <item>
       <title>Genai</title>
-      <link>http://localhost:1313/es/tag/genai/</link>
+      <link>https://netwithalex.blog/es/tag/genai/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/genai/</guid>
+      <guid>https://netwithalex.blog/es/tag/genai/</guid>
       <description></description>
     </item>
     <item>
       <title>Langchain</title>
-      <link>http://localhost:1313/es/tag/langchain/</link>
+      <link>https://netwithalex.blog/es/tag/langchain/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/langchain/</guid>
+      <guid>https://netwithalex.blog/es/tag/langchain/</guid>
       <description></description>
     </item>
     <item>
       <title>Langgraph</title>
-      <link>http://localhost:1313/es/tag/langgraph/</link>
+      <link>https://netwithalex.blog/es/tag/langgraph/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/langgraph/</guid>
+      <guid>https://netwithalex.blog/es/tag/langgraph/</guid>
       <description></description>
     </item>
     <item>
       <title>Llm</title>
-      <link>http://localhost:1313/es/tag/llm/</link>
+      <link>https://netwithalex.blog/es/tag/llm/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/llm/</guid>
+      <guid>https://netwithalex.blog/es/tag/llm/</guid>
       <description></description>
     </item>
     <item>
       <title>Openai</title>
-      <link>http://localhost:1313/es/tag/openai/</link>
+      <link>https://netwithalex.blog/es/tag/openai/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/openai/</guid>
+      <guid>https://netwithalex.blog/es/tag/openai/</guid>
       <description></description>
     </item>
     <item>
       <title>Webex</title>
-      <link>http://localhost:1313/es/tag/webex/</link>
+      <link>https://netwithalex.blog/es/tag/webex/</link>
       <pubDate>Wed, 10 Jul 2024 18:51:08 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/webex/</guid>
+      <guid>https://netwithalex.blog/es/tag/webex/</guid>
       <description></description>
     </item>
   </channel>

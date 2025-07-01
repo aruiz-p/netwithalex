@@ -2,115 +2,122 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on NetWithAlex</title>
-    <link>http://localhost:1313/es/posts/</link>
+    <link>https://netwithalex.blog/es/posts/</link>
     <description>Recent content in Posts on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>es</language>
-    <lastBuildDate>Mon, 16 Jun 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/es/posts/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://netwithalex.blog/es/posts/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Políticas de Control vs Política de Datos en Cisco SD-WAN: Diferencias Clave</title>
+      <link>https://netwithalex.blog/policies-intro-es/</link>
+      <pubDate>Tue, 01 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://netwithalex.blog/policies-intro-es/</guid>
+      <description>Aprende las diferencias clave entre las control y data policies en Cisco SD-WAN, cuándo usar cada una y cómo impactan en el enrutamiento y el reenvío del tráfico.</description>
+    </item>
     <item>
       <title>Primeros pasos con la automatización en SD-WAN</title>
-      <link>http://localhost:1313/automation-intro-es/</link>
+      <link>https://netwithalex.blog/automation-intro-es/</link>
       <pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/automation-intro-es/</guid>
+      <guid>https://netwithalex.blog/automation-intro-es/</guid>
       <description>Aprende los fundamentos de la automatización en SD-WAN y cómo comenzar a usar scripts y APIs para optimizar tus operaciones de red.</description>
     </item>
     <item>
       <title>Serie AppQoe: Packet Duplication</title>
-      <link>http://localhost:1313/appqoe-pkt-dup-es/</link>
+      <link>https://netwithalex.blog/appqoe-pkt-dup-es/</link>
       <pubDate>Tue, 03 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/appqoe-pkt-dup-es/</guid>
+      <guid>https://netwithalex.blog/appqoe-pkt-dup-es/</guid>
       <description>Descubre cómo packet duplication utiliza múltiples transportes para minimizar el riesgo de pérdida de paquetes sobre transportes inestables, manteniendo la calidad de las aplicaciones más importantes para cumplir con los objetivos del negocio.</description>
     </item>
     <item>
       <title>Serie AppQoe: Forward Error Correction (FEC)</title>
-      <link>http://localhost:1313/appqoe-fec-es/</link>
+      <link>https://netwithalex.blog/appqoe-fec-es/</link>
       <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/appqoe-fec-es/</guid>
+      <guid>https://netwithalex.blog/appqoe-fec-es/</guid>
       <description>Aprende cómo funciona Forward Error Correction (FEC) en Cisco SD-WAN para mejorar el rendimiento de las aplicaciones en enlaces con pérdida de paquetes. Explora casos de uso, configuración y resultados de pruebas.</description>
     </item>
     <item>
       <title>Cisco SD-WAN ZTP On-Prem: Automatizando el onboarding de los routers</title>
-      <link>http://localhost:1313/ztp-on-prem-es/</link>
+      <link>https://netwithalex.blog/ztp-on-prem-es/</link>
       <pubDate>Mon, 05 May 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/ztp-on-prem-es/</guid>
+      <guid>https://netwithalex.blog/ztp-on-prem-es/</guid>
       <description>Plug and Play (PnP) te permite agregar dispositivos SD-WAN automáticamente a través de la nube de Cisco. Esta publicación explica cómo lograr Zero-Touch Provisioning (ZTP) en un entorno aislado y local (on-premises).</description>
     </item>
     <item>
       <title>Serie AppQoE: Optimización TCP</title>
-      <link>http://localhost:1313/appqoe-opt-tcp/</link>
+      <link>https://netwithalex.blog/appqoe-opt-tcp/</link>
       <pubDate>Tue, 22 Apr 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/appqoe-opt-tcp/</guid>
+      <guid>https://netwithalex.blog/appqoe-opt-tcp/</guid>
       <description>Descubre cómo SD-WAN mejora el rendimiento de TCP. Conoce las principales técnicas de optimización que aumentan el rendimiento de las aplicaciones y mejoran la experiencia del usuario.</description>
     </item>
     <item>
       <title>Asegurando el borde con Cisco SD-WAN y Secure Access</title>
-      <link>http://localhost:1313/sdwan-sse-integracion/</link>
+      <link>https://netwithalex.blog/sdwan-sse-integracion/</link>
       <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/sdwan-sse-integracion/</guid>
+      <guid>https://netwithalex.blog/sdwan-sse-integracion/</guid>
       <description>Descubre cómo Cisco SD-WAN y Cisco Secure Access trabajan juntos para mejorar el rendimiento y la seguridad de los usuarios en internet.</description>
     </item>
     <item>
       <title>Enhanced App Aware Routing</title>
-      <link>http://localhost:1313/aar-mejorado/</link>
+      <link>https://netwithalex.blog/aar-mejorado/</link>
       <pubDate>Sun, 05 Jan 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/aar-mejorado/</guid>
+      <guid>https://netwithalex.blog/aar-mejorado/</guid>
       <description>Aprende los beneficios de EAAR y cómo implementarlo en tu red</description>
     </item>
     <item>
       <title>Mejora de mi asistente de SD-WAN - Múltiples agentes</title>
-      <link>http://localhost:1313/mejorando-mi-asistente-sd-wan-multiples-agentes/</link>
+      <link>https://netwithalex.blog/mejorando-mi-asistente-sd-wan-multiples-agentes/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>http://localhost:1313/mejorando-mi-asistente-sd-wan-multiples-agentes/</guid>
+      <guid>https://netwithalex.blog/mejorando-mi-asistente-sd-wan-multiples-agentes/</guid>
       <description>Aprende cómo utilizar un enfoque &amp;#34;agentic&amp;#34; para hacer troubleshooting de tu red SD-WAN con LLMs</description>
     </item>
     <item>
       <title>Creando mi primer asistente de AI SD-WAN con Langchain</title>
-      <link>http://localhost:1313/creando-mi-primer-asistente-ai-con-langchain/</link>
+      <link>https://netwithalex.blog/creando-mi-primer-asistente-ai-con-langchain/</link>
       <pubDate>Wed, 10 Jul 2024 18:51:08 +0000</pubDate>
-      <guid>http://localhost:1313/creando-mi-primer-asistente-ai-con-langchain/</guid>
+      <guid>https://netwithalex.blog/creando-mi-primer-asistente-ai-con-langchain/</guid>
       <description>Descubre cómo los LLMs se pueden integrar con Cisco SD-WAN para hacer troubleshooting de manera sencilla y sin estrés</description>
     </item>
     <item>
       <title>Seguimiento de incidentes SD-WAN con ServiceNow</title>
-      <link>http://localhost:1313/rastreando-incidentes-de-sdwan-con-servicenow/</link>
+      <link>https://netwithalex.blog/rastreando-incidentes-de-sdwan-con-servicenow/</link>
       <pubDate>Fri, 15 Mar 2024 18:06:34 +0000</pubDate>
-      <guid>http://localhost:1313/rastreando-incidentes-de-sdwan-con-servicenow/</guid>
+      <guid>https://netwithalex.blog/rastreando-incidentes-de-sdwan-con-servicenow/</guid>
       <description>Aprenda a integrar Cisco SD-WAN con ServiceNow y automatiza la gestión de incidentes</description>
     </item>
     <item>
       <title>Un nuevo capítulo: SD-Routing revoluciona la gestión de red</title>
-      <link>http://localhost:1313/sd-routing-revoluciona-la-gestion-de-red/</link>
+      <link>https://netwithalex.blog/sd-routing-revoluciona-la-gestion-de-red/</link>
       <pubDate>Sat, 24 Feb 2024 12:06:47 +0000</pubDate>
-      <guid>http://localhost:1313/sd-routing-revoluciona-la-gestion-de-red/</guid>
+      <guid>https://netwithalex.blog/sd-routing-revoluciona-la-gestion-de-red/</guid>
       <description>Explora cómo SD-Ruting puede ayudarte de manera simple y efectiva a administrar y monitorear equipos autónomos (IOX-XE regular, sin SD-WAN).</description>
     </item>
     <item>
       <title>Simplificando AAR: 3/3 Fallback to Best Path</title>
-      <link>http://localhost:1313/simplificando-aar-3-3-fallback-to-best-path/</link>
+      <link>https://netwithalex.blog/simplificando-aar-3-3-fallback-to-best-path/</link>
       <pubDate>Sun, 11 Feb 2024 12:11:06 +0000</pubDate>
-      <guid>http://localhost:1313/simplificando-aar-3-3-fallback-to-best-path/</guid>
+      <guid>https://netwithalex.blog/simplificando-aar-3-3-fallback-to-best-path/</guid>
       <description>Aprende cómo AAR puede ayudarte a mejorar la experiencia del usuario y aplicación con Cisco SD-WAN</description>
     </item>
     <item>
       <title>Simplificando AAR: 2/3 Analizando diferentes escenarios</title>
-      <link>http://localhost:1313/simplificando-aar-analizando-diferentes-escenarios/</link>
+      <link>https://netwithalex.blog/simplificando-aar-analizando-diferentes-escenarios/</link>
       <pubDate>Wed, 07 Feb 2024 20:27:37 +0000</pubDate>
-      <guid>http://localhost:1313/simplificando-aar-analizando-diferentes-escenarios/</guid>
+      <guid>https://netwithalex.blog/simplificando-aar-analizando-diferentes-escenarios/</guid>
       <description>Aprende cómo AAR puede ayudarte a mejorar la experiencia del usuario y aplicación con Cisco SD-WAN</description>
     </item>
     <item>
       <title>Simplificando AAR: 1/3 Las bases</title>
-      <link>http://localhost:1313/simplificando-aar-1-3-las-bases/</link>
+      <link>https://netwithalex.blog/simplificando-aar-1-3-las-bases/</link>
       <pubDate>Thu, 01 Feb 2024 16:25:27 +0000</pubDate>
-      <guid>http://localhost:1313/simplificando-aar-1-3-las-bases/</guid>
+      <guid>https://netwithalex.blog/simplificando-aar-1-3-las-bases/</guid>
       <description>Aprende cómo AAR puede ayudarte a mejorar la experiencia del usuario y aplicación con Cisco SD-WAN</description>
     </item>
     <item>
       <title>Cisco SD-WAN Network Wide Path Insights (NWPI)</title>
-      <link>http://localhost:1313/introduccion-network-wide-path-insights/</link>
+      <link>https://netwithalex.blog/introduccion-network-wide-path-insights/</link>
       <pubDate>Thu, 25 Jan 2024 20:34:14 +0000</pubDate>
-      <guid>http://localhost:1313/introduccion-network-wide-path-insights/</guid>
+      <guid>https://netwithalex.blog/introduccion-network-wide-path-insights/</guid>
       <description>Aprende a usar la herramienta de troubleshooting más avanzada para tu red Cisco SD-WAN.</description>
     </item>
   </channel>

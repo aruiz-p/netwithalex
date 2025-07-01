@@ -2,624 +2,660 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/tag/api/</loc>
-    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <loc>https://netwithalex.blog/category/</loc>
+    <lastmod>2025-07-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/api/"
+                href="https://netwithalex.blog/es/category/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/api/"
+                href="https://netwithalex.blog/category/"
                 />
   </url><url>
-    <loc>http://localhost:1313/category/automation/</loc>
-    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <loc>https://netwithalex.blog/policies-intro-en/</loc>
+    <lastmod>2025-07-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/category/automation/"
+                href="https://netwithalex.blog/policies-intro-es/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/category/automation/"
+                href="https://netwithalex.blog/policies-intro-en/"
                 />
   </url><url>
-    <loc>http://localhost:1313/category/</loc>
-    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <loc>https://netwithalex.blog/tag/policies/</loc>
+    <lastmod>2025-07-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/category/"
+                href="https://netwithalex.blog/es/tag/policies/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/category/"
+                href="https://netwithalex.blog/tag/policies/"
                 />
   </url><url>
-    <loc>http://localhost:1313/automation-intro-en/</loc>
-    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <loc>https://netwithalex.blog/category/policies/</loc>
+    <lastmod>2025-07-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/automation-intro-es/"
+                href="https://netwithalex.blog/es/category/policies/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/automation-intro-en/"
+                href="https://netwithalex.blog/category/policies/"
                 />
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <loc>https://netwithalex.blog/posts/</loc>
+    <lastmod>2025-07-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/posts/"
+                href="https://netwithalex.blog/es/posts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/posts/"
+                href="https://netwithalex.blog/posts/"
                 />
   </url><url>
-    <loc>http://localhost:1313/category/sdwan/</loc>
-    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <loc>https://netwithalex.blog/category/sdwan/</loc>
+    <lastmod>2025-07-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/category/sdwan/"
+                href="https://netwithalex.blog/es/category/sdwan/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/category/sdwan/"
+                href="https://netwithalex.blog/category/sdwan/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/</loc>
-    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <loc>https://netwithalex.blog/tag/</loc>
+    <lastmod>2025-07-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/"
+                href="https://netwithalex.blog/es/tag/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/"
+                href="https://netwithalex.blog/tag/"
                 />
   </url><url>
-    <loc>http://localhost:1313/category/appqoe/</loc>
+    <loc>https://netwithalex.blog/tag/api/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://netwithalex.blog/es/tag/api/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://netwithalex.blog/tag/api/"
+                />
+  </url><url>
+    <loc>https://netwithalex.blog/category/automation/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://netwithalex.blog/es/category/automation/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://netwithalex.blog/category/automation/"
+                />
+  </url><url>
+    <loc>https://netwithalex.blog/automation-intro-en/</loc>
+    <lastmod>2025-06-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://netwithalex.blog/automation-intro-es/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://netwithalex.blog/automation-intro-en/"
+                />
+  </url><url>
+    <loc>https://netwithalex.blog/category/appqoe/</loc>
     <lastmod>2025-06-03T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/category/appqoe/"
+                href="https://netwithalex.blog/es/category/appqoe/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/category/appqoe/"
+                href="https://netwithalex.blog/category/appqoe/"
                 />
   </url><url>
-    <loc>http://localhost:1313/appqoe-pkt-dup-en/</loc>
+    <loc>https://netwithalex.blog/appqoe-pkt-dup-en/</loc>
     <lastmod>2025-06-03T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/appqoe-pkt-dup-es/"
+                href="https://netwithalex.blog/appqoe-pkt-dup-es/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/appqoe-pkt-dup-en/"
+                href="https://netwithalex.blog/appqoe-pkt-dup-en/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/packet-duplication/</loc>
+    <loc>https://netwithalex.blog/tag/packet-duplication/</loc>
     <lastmod>2025-06-03T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/packet-duplication/"
+                href="https://netwithalex.blog/es/tag/packet-duplication/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/packet-duplication/"
+                href="https://netwithalex.blog/tag/packet-duplication/"
                 />
   </url><url>
-    <loc>http://localhost:1313/appqoe-fec-en/</loc>
+    <loc>https://netwithalex.blog/appqoe-fec-en/</loc>
     <lastmod>2025-05-19T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/appqoe-fec-es/"
+                href="https://netwithalex.blog/appqoe-fec-es/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/appqoe-fec-en/"
+                href="https://netwithalex.blog/appqoe-fec-en/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/loss-correction/</loc>
+    <loc>https://netwithalex.blog/tag/loss-correction/</loc>
     <lastmod>2025-05-19T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/loss-correction/"
+                href="https://netwithalex.blog/es/tag/loss-correction/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/loss-correction/"
+                href="https://netwithalex.blog/tag/loss-correction/"
                 />
   </url><url>
-    <loc>http://localhost:1313/ztp-on-prem-en/</loc>
+    <loc>https://netwithalex.blog/ztp-on-prem-en/</loc>
     <lastmod>2025-05-05T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/ztp-on-prem-es/"
+                href="https://netwithalex.blog/ztp-on-prem-es/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/ztp-on-prem-en/"
+                href="https://netwithalex.blog/ztp-on-prem-en/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/onboarding/</loc>
+    <loc>https://netwithalex.blog/tag/onboarding/</loc>
     <lastmod>2025-05-05T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/onboarding/"
+                href="https://netwithalex.blog/es/tag/onboarding/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/onboarding/"
+                href="https://netwithalex.blog/tag/onboarding/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/ztp/</loc>
+    <loc>https://netwithalex.blog/tag/ztp/</loc>
     <lastmod>2025-05-05T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/ztp/"
+                href="https://netwithalex.blog/es/tag/ztp/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/ztp/"
+                href="https://netwithalex.blog/tag/ztp/"
                 />
   </url><url>
-    <loc>http://localhost:1313/appqoe-tcp-opt/</loc>
+    <loc>https://netwithalex.blog/appqoe-tcp-opt/</loc>
     <lastmod>2025-04-22T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/appqoe-opt-tcp/"
+                href="https://netwithalex.blog/appqoe-opt-tcp/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/appqoe-tcp-opt/"
+                href="https://netwithalex.blog/appqoe-tcp-opt/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/optimization/</loc>
+    <loc>https://netwithalex.blog/tag/optimization/</loc>
     <lastmod>2025-04-22T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tag/tcp/</loc>
+    <loc>https://netwithalex.blog/tag/tcp/</loc>
     <lastmod>2025-04-22T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/tcp/"
+                href="https://netwithalex.blog/es/tag/tcp/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/tcp/"
+                href="https://netwithalex.blog/tag/tcp/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/sdwan/</loc>
+    <loc>https://netwithalex.blog/tag/sdwan/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/sdwan/"
+                href="https://netwithalex.blog/es/tag/sdwan/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/sdwan/"
+                href="https://netwithalex.blog/tag/sdwan/"
                 />
   </url><url>
-    <loc>http://localhost:1313/category/secure-access/</loc>
+    <loc>https://netwithalex.blog/category/secure-access/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/category/secure-access/"
+                href="https://netwithalex.blog/es/category/secure-access/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/category/secure-access/"
+                href="https://netwithalex.blog/category/secure-access/"
                 />
   </url><url>
-    <loc>http://localhost:1313/sdwan-sse-integration/</loc>
+    <loc>https://netwithalex.blog/sdwan-sse-integration/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/sdwan-sse-integracion/"
+                href="https://netwithalex.blog/sdwan-sse-integracion/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/sdwan-sse-integration/"
+                href="https://netwithalex.blog/sdwan-sse-integration/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/security/</loc>
+    <loc>https://netwithalex.blog/tag/security/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/category/security/</loc>
+    <loc>https://netwithalex.blog/category/security/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tag/sse/</loc>
+    <loc>https://netwithalex.blog/tag/sse/</loc>
     <lastmod>2025-02-05T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/sse/"
+                href="https://netwithalex.blog/es/tag/sse/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/sse/"
+                href="https://netwithalex.blog/tag/sse/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/eaar/</loc>
+    <loc>https://netwithalex.blog/tag/eaar/</loc>
     <lastmod>2025-01-05T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/eaar/"
+                href="https://netwithalex.blog/es/tag/eaar/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/eaar/"
+                href="https://netwithalex.blog/tag/eaar/"
                 />
   </url><url>
-    <loc>http://localhost:1313/enhanced-aar/</loc>
+    <loc>https://netwithalex.blog/enhanced-aar/</loc>
     <lastmod>2025-01-05T14:20:31+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/aar-mejorado/"
+                href="https://netwithalex.blog/aar-mejorado/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/enhanced-aar/"
+                href="https://netwithalex.blog/enhanced-aar/"
                 />
   </url><url>
-    <loc>http://localhost:1313/category/networking/</loc>
+    <loc>https://netwithalex.blog/category/networking/</loc>
     <lastmod>2025-01-05T14:20:31+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/category/ai/</loc>
+    <loc>https://netwithalex.blog/category/ai/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/category/ai/"
+                href="https://netwithalex.blog/es/category/ai/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/category/ai/"
+                href="https://netwithalex.blog/category/ai/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/genai/</loc>
+    <loc>https://netwithalex.blog/tag/genai/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/genai/"
+                href="https://netwithalex.blog/es/tag/genai/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/genai/"
+                href="https://netwithalex.blog/tag/genai/"
                 />
   </url><url>
-    <loc>http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/</loc>
+    <loc>https://netwithalex.blog/improving-my-sd-wan-assistant-multiple-agents/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/mejorando-mi-asistente-sd-wan-multiples-agentes/"
+                href="https://netwithalex.blog/mejorando-mi-asistente-sd-wan-multiples-agentes/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/improving-my-sd-wan-assistant-multiple-agents/"
+                href="https://netwithalex.blog/improving-my-sd-wan-assistant-multiple-agents/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/langchain/</loc>
+    <loc>https://netwithalex.blog/tag/langchain/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/langchain/"
+                href="https://netwithalex.blog/es/tag/langchain/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/langchain/"
+                href="https://netwithalex.blog/tag/langchain/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/langgraph/</loc>
+    <loc>https://netwithalex.blog/tag/langgraph/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/langgraph/"
+                href="https://netwithalex.blog/es/tag/langgraph/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/langgraph/"
+                href="https://netwithalex.blog/tag/langgraph/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/llm/</loc>
+    <loc>https://netwithalex.blog/tag/llm/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/llm/"
+                href="https://netwithalex.blog/es/tag/llm/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/llm/"
+                href="https://netwithalex.blog/tag/llm/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/openai/</loc>
+    <loc>https://netwithalex.blog/tag/openai/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/openai/"
+                href="https://netwithalex.blog/es/tag/openai/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/openai/"
+                href="https://netwithalex.blog/tag/openai/"
                 />
   </url><url>
-    <loc>http://localhost:1313/category/sd-wan/</loc>
+    <loc>https://netwithalex.blog/category/sd-wan/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/category/sd-wan/"
+                href="https://netwithalex.blog/es/category/sd-wan/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/category/sd-wan/"
+                href="https://netwithalex.blog/category/sd-wan/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/slm/</loc>
+    <loc>https://netwithalex.blog/tag/slm/</loc>
     <lastmod>2024-07-28T14:56:45+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/building-my-first-sd-wan-ai-assistant-with-langchain/</loc>
+    <loc>https://netwithalex.blog/building-my-first-sd-wan-ai-assistant-with-langchain/</loc>
     <lastmod>2024-07-10T18:51:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/creando-mi-primer-asistente-ai-con-langchain/"
+                href="https://netwithalex.blog/creando-mi-primer-asistente-ai-con-langchain/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/building-my-first-sd-wan-ai-assistant-with-langchain/"
+                href="https://netwithalex.blog/building-my-first-sd-wan-ai-assistant-with-langchain/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/webex/</loc>
+    <loc>https://netwithalex.blog/tag/webex/</loc>
     <lastmod>2024-07-10T18:51:08+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/webex/"
+                href="https://netwithalex.blog/es/tag/webex/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/webex/"
+                href="https://netwithalex.blog/tag/webex/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tracking-sd-wan-incidents-with-service-now/</loc>
+    <loc>https://netwithalex.blog/tracking-sd-wan-incidents-with-service-now/</loc>
     <lastmod>2024-03-15T18:06:34+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/rastreando-incidentes-de-sdwan-con-servicenow/"
+                href="https://netwithalex.blog/rastreando-incidentes-de-sdwan-con-servicenow/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tracking-sd-wan-incidents-with-service-now/"
+                href="https://netwithalex.blog/tracking-sd-wan-incidents-with-service-now/"
                 />
   </url><url>
-    <loc>http://localhost:1313/a-new-chapter-sd-routings-revolution-in-network-management/</loc>
+    <loc>https://netwithalex.blog/a-new-chapter-sd-routings-revolution-in-network-management/</loc>
     <lastmod>2024-02-24T12:06:47+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/sd-routing-revoluciona-la-gestion-de-red/"
+                href="https://netwithalex.blog/sd-routing-revoluciona-la-gestion-de-red/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/a-new-chapter-sd-routings-revolution-in-network-management/"
+                href="https://netwithalex.blog/a-new-chapter-sd-routings-revolution-in-network-management/"
                 />
   </url><url>
-    <loc>http://localhost:1313/category/sd-routing/</loc>
+    <loc>https://netwithalex.blog/category/sd-routing/</loc>
     <lastmod>2024-02-24T12:06:47+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/category/sd-routing/"
+                href="https://netwithalex.blog/es/category/sd-routing/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/category/sd-routing/"
+                href="https://netwithalex.blog/category/sd-routing/"
                 />
   </url><url>
-    <loc>http://localhost:1313/category/aar/</loc>
+    <loc>https://netwithalex.blog/category/aar/</loc>
     <lastmod>2024-02-11T12:11:06+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/category/aar/"
+                href="https://netwithalex.blog/es/category/aar/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/category/aar/"
+                href="https://netwithalex.blog/category/aar/"
                 />
   </url><url>
-    <loc>http://localhost:1313/category/policies/</loc>
-    <lastmod>2024-02-11T12:11:06+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/</loc>
+    <loc>https://netwithalex.blog/simplifying-aar-3-3-fallback-to-best-path/</loc>
     <lastmod>2024-02-11T12:11:06+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/simplificando-aar-3-3-fallback-to-best-path/"
+                href="https://netwithalex.blog/simplificando-aar-3-3-fallback-to-best-path/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/simplifying-aar-3-3-fallback-to-best-path/"
+                href="https://netwithalex.blog/simplifying-aar-3-3-fallback-to-best-path/"
                 />
   </url><url>
-    <loc>http://localhost:1313/demystifying-aar-understanding-different-scenarios/</loc>
+    <loc>https://netwithalex.blog/demystifying-aar-understanding-different-scenarios/</loc>
     <lastmod>2024-02-07T20:27:37+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/simplificando-aar-analizando-diferentes-escenarios/"
+                href="https://netwithalex.blog/simplificando-aar-analizando-diferentes-escenarios/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/demystifying-aar-understanding-different-scenarios/"
+                href="https://netwithalex.blog/demystifying-aar-understanding-different-scenarios/"
                 />
   </url><url>
-    <loc>http://localhost:1313/demystifying-aar-1-3-the-foundations/</loc>
+    <loc>https://netwithalex.blog/demystifying-aar-1-3-the-foundations/</loc>
     <lastmod>2024-02-01T16:25:27+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/simplificando-aar-1-3-las-bases/"
+                href="https://netwithalex.blog/simplificando-aar-1-3-las-bases/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/demystifying-aar-1-3-the-foundations/"
+                href="https://netwithalex.blog/demystifying-aar-1-3-the-foundations/"
                 />
   </url><url>
-    <loc>http://localhost:1313/network-wide-path-insights-an-introduction/</loc>
+    <loc>https://netwithalex.blog/network-wide-path-insights-an-introduction/</loc>
     <lastmod>2024-01-25T20:34:14+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/introduccion-network-wide-path-insights/"
+                href="https://netwithalex.blog/introduccion-network-wide-path-insights/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/network-wide-path-insights-an-introduction/"
+                href="https://netwithalex.blog/network-wide-path-insights-an-introduction/"
                 />
   </url><url>
-    <loc>http://localhost:1313/category/troubleshooting/</loc>
+    <loc>https://netwithalex.blog/category/troubleshooting/</loc>
     <lastmod>2024-01-25T20:34:14+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/category/visibility/</loc>
+    <loc>https://netwithalex.blog/category/visibility/</loc>
     <lastmod>2024-01-25T20:34:14+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://netwithalex.blog/about/</loc>
     <lastmod>2024-01-10T18:58:35+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/sobre-mi/"
+                href="https://netwithalex.blog/es/sobre-mi/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/about/"
+                href="https://netwithalex.blog/about/"
                 />
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://netwithalex.blog/</loc>
     <lastmod>2024-01-10T18:58:35+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/"
+                href="https://netwithalex.blog/es/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/"
+                href="https://netwithalex.blog/"
                 />
   </url><url>
-    <loc>http://localhost:1313/pages/</loc>
+    <loc>https://netwithalex.blog/pages/</loc>
     <lastmod>2024-01-10T18:58:35+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/pages/"
+                href="https://netwithalex.blog/es/pages/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/pages/"
+                href="https://netwithalex.blog/pages/"
                 />
   </url><url>
-    <loc>http://localhost:1313/archives/</loc>
+    <loc>https://netwithalex.blog/archives/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/archives/"
+                href="https://netwithalex.blog/es/archives/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/archives/"
+                href="https://netwithalex.blog/archives/"
                 />
   </url><url>
-    <loc>http://localhost:1313/search/</loc>
+    <loc>https://netwithalex.blog/search/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/search/"
+                href="https://netwithalex.blog/es/search/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/search/"
+                href="https://netwithalex.blog/search/"
                 />
   </url>
 </urlset>

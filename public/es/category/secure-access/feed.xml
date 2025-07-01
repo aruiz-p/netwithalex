@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Secure Access on NetWithAlex</title>
-    <link>http://localhost:1313/es/category/secure-access/</link>
+    <link>https://netwithalex.blog/es/category/secure-access/</link>
     <description>Recent content in Secure Access on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>es</language>
     <lastBuildDate>Wed, 05 Feb 2025 14:20:31 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/es/category/secure-access/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://netwithalex.blog/es/category/secure-access/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Asegurando el borde con Cisco SD-WAN y Secure Access</title>
-      <link>http://localhost:1313/sdwan-sse-integracion/</link>
+      <link>https://netwithalex.blog/sdwan-sse-integracion/</link>
       <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/sdwan-sse-integracion/</guid>
+      <guid>https://netwithalex.blog/sdwan-sse-integracion/</guid>
       <description>Descubre cómo Cisco SD-WAN y Cisco Secure Access trabajan juntos para mejorar el rendimiento y la seguridad de los usuarios en internet.</description>
     </item>
   </channel>
