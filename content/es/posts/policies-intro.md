@@ -5,7 +5,7 @@ category:
   - policies
 draft: false
 date: "2025-07-01T00:00:00+00:00"
-title: "Políticas de Control vs Política de Datos en Cisco SD-WAN: Diferencias Clave"
+title: "Guía Rápida: Control vs Data Policies en Cisco SD-WAN"
 description: Aprende las diferencias clave entre las control y data policies en Cisco SD-WAN, cuándo usar cada una y cómo impactan en el enrutamiento y el reenvío del tráfico.
 summary: Aprende las diferencias clave entre las control y data policies en Cisco SD-WAN, cuándo usar cada una y cómo impactan en el enrutamiento y el reenvío del tráfico.
 url: /policies-intro-es/

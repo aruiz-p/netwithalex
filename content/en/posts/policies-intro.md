@@ -5,7 +5,7 @@ category:
   - policies
 draft: false
 date: "2025-07-01T00:00:00+00:00"
-title: "Control Policies vs Data Policies in Cisco SD-WAN: Key Differences"
+title: "Quick Guide: Control vs Data Policies in Cisco SD-WAN"
 description: Learn the key differences between Cisco SD-WAN control and data policies, when to use each, and how they impact routing and traffic forwarding 
 summary: Learn the key differences between Cisco SD-WAN control and data policies, when to use each, and how they impact routing and traffic forwarding
 url: /policies-intro-en/

@@ -15,6 +15,19 @@
                 href="https://netwithalex.blog/es/category/"
                 />
   </url><url>
+    <loc>https://netwithalex.blog/policies-intro-es/</loc>
+    <lastmod>2025-07-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://netwithalex.blog/policies-intro-en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://netwithalex.blog/policies-intro-es/"
+                />
+  </url><url>
     <loc>https://netwithalex.blog/es/tag/policies/</loc>
     <lastmod>2025-07-01T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -39,19 +52,6 @@
                 rel="alternate"
                 hreflang="es"
                 href="https://netwithalex.blog/es/category/policies/"
-                />
-  </url><url>
-    <loc>https://netwithalex.blog/policies-intro-es/</loc>
-    <lastmod>2025-07-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://netwithalex.blog/policies-intro-en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://netwithalex.blog/policies-intro-es/"
                 />
   </url><url>
     <loc>https://netwithalex.blog/es/posts/</loc>
