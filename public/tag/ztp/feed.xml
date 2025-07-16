@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>ZTP on NetWithAlex</title>
-    <link>https://netwithalex.blog/tag/ztp/</link>
+    <link>http://localhost:1313/tag/ztp/</link>
     <description>Recent content in ZTP on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en</language>
     <lastBuildDate>Mon, 05 May 2025 14:20:31 +0000</lastBuildDate>
-    <atom:link href="https://netwithalex.blog/tag/ztp/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tag/ztp/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cisco SD-WAN On-Prem ZTP: Automating Router Onboarding</title>
-      <link>https://netwithalex.blog/ztp-on-prem-en/</link>
+      <link>http://localhost:1313/ztp-on-prem-en/</link>
       <pubDate>Mon, 05 May 2025 14:20:31 +0000</pubDate>
-      <guid>https://netwithalex.blog/ztp-on-prem-en/</guid>
+      <guid>http://localhost:1313/ztp-on-prem-en/</guid>
       <description>Plug and Play (PnP) lets you onboard SD-WAN devices automatically via Cisco Cloud. This post explains how to achieve zero-touch provisioning (ZTP) in an airgapped, on-premises environment.</description>
     </item>
   </channel>

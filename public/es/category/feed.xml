@@ -2,101 +2,101 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Category on NetWithAlex</title>
-    <link>https://netwithalex.blog/es/category/</link>
+    <link>http://localhost:1313/es/category/</link>
     <description>Recent content in Category on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>es</language>
-    <lastBuildDate>Tue, 01 Jul 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://netwithalex.blog/es/category/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/category/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Policies</title>
-      <link>https://netwithalex.blog/es/category/policies/</link>
-      <pubDate>Tue, 01 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>https://netwithalex.blog/es/category/policies/</guid>
+      <title>Sdwan</title>
+      <link>http://localhost:1313/es/category/sdwan/</link>
+      <pubDate>Tue, 15 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/es/category/sdwan/</guid>
       <description></description>
     </item>
     <item>
-      <title>Sdwan</title>
-      <link>https://netwithalex.blog/es/category/sdwan/</link>
+      <title>Policies</title>
+      <link>http://localhost:1313/es/category/policies/</link>
       <pubDate>Tue, 01 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>https://netwithalex.blog/es/category/sdwan/</guid>
+      <guid>http://localhost:1313/es/category/policies/</guid>
       <description></description>
     </item>
     <item>
       <title>Automation</title>
-      <link>https://netwithalex.blog/es/category/automation/</link>
+      <link>http://localhost:1313/es/category/automation/</link>
       <pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>https://netwithalex.blog/es/category/automation/</guid>
+      <guid>http://localhost:1313/es/category/automation/</guid>
       <description></description>
     </item>
     <item>
       <title>Appqoe</title>
-      <link>https://netwithalex.blog/es/category/appqoe/</link>
+      <link>http://localhost:1313/es/category/appqoe/</link>
       <pubDate>Tue, 03 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>https://netwithalex.blog/es/category/appqoe/</guid>
+      <guid>http://localhost:1313/es/category/appqoe/</guid>
       <description></description>
     </item>
     <item>
       <title>Secure Access</title>
-      <link>https://netwithalex.blog/es/category/secure-access/</link>
+      <link>http://localhost:1313/es/category/secure-access/</link>
       <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>https://netwithalex.blog/es/category/secure-access/</guid>
+      <guid>http://localhost:1313/es/category/secure-access/</guid>
       <description></description>
     </item>
     <item>
       <title>Seguridad</title>
-      <link>https://netwithalex.blog/es/category/seguridad/</link>
+      <link>http://localhost:1313/es/category/seguridad/</link>
       <pubDate>Wed, 05 Feb 2025 14:20:31 +0000</pubDate>
-      <guid>https://netwithalex.blog/es/category/seguridad/</guid>
+      <guid>http://localhost:1313/es/category/seguridad/</guid>
       <description></description>
     </item>
     <item>
       <title>AI</title>
-      <link>https://netwithalex.blog/es/category/ai/</link>
+      <link>http://localhost:1313/es/category/ai/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>https://netwithalex.blog/es/category/ai/</guid>
+      <guid>http://localhost:1313/es/category/ai/</guid>
       <description></description>
     </item>
     <item>
       <title>SD-WAN</title>
-      <link>https://netwithalex.blog/es/category/sd-wan/</link>
+      <link>http://localhost:1313/es/category/sd-wan/</link>
       <pubDate>Sun, 28 Jul 2024 14:56:45 +0000</pubDate>
-      <guid>https://netwithalex.blog/es/category/sd-wan/</guid>
+      <guid>http://localhost:1313/es/category/sd-wan/</guid>
       <description></description>
     </item>
     <item>
       <title>Automatización</title>
-      <link>https://netwithalex.blog/es/category/automatizaci%C3%B3n/</link>
+      <link>http://localhost:1313/es/category/automatizaci%C3%B3n/</link>
       <pubDate>Fri, 15 Mar 2024 18:06:34 +0000</pubDate>
-      <guid>https://netwithalex.blog/es/category/automatizaci%C3%B3n/</guid>
+      <guid>http://localhost:1313/es/category/automatizaci%C3%B3n/</guid>
       <description></description>
     </item>
     <item>
       <title>Sd-Routing</title>
-      <link>https://netwithalex.blog/es/category/sd-routing/</link>
+      <link>http://localhost:1313/es/category/sd-routing/</link>
       <pubDate>Sat, 24 Feb 2024 12:06:47 +0000</pubDate>
-      <guid>https://netwithalex.blog/es/category/sd-routing/</guid>
+      <guid>http://localhost:1313/es/category/sd-routing/</guid>
       <description></description>
     </item>
     <item>
       <title>AAR</title>
-      <link>https://netwithalex.blog/es/category/aar/</link>
+      <link>http://localhost:1313/es/category/aar/</link>
       <pubDate>Sun, 11 Feb 2024 12:11:06 +0000</pubDate>
-      <guid>https://netwithalex.blog/es/category/aar/</guid>
+      <guid>http://localhost:1313/es/category/aar/</guid>
       <description></description>
     </item>
     <item>
       <title>Políticas</title>
-      <link>https://netwithalex.blog/es/category/pol%C3%ADticas/</link>
+      <link>http://localhost:1313/es/category/pol%C3%ADticas/</link>
       <pubDate>Sun, 11 Feb 2024 12:11:06 +0000</pubDate>
-      <guid>https://netwithalex.blog/es/category/pol%C3%ADticas/</guid>
+      <guid>http://localhost:1313/es/category/pol%C3%ADticas/</guid>
       <description></description>
     </item>
     <item>
       <title>Visibilidad</title>
-      <link>https://netwithalex.blog/es/category/visibilidad/</link>
+      <link>http://localhost:1313/es/category/visibilidad/</link>
       <pubDate>Thu, 25 Jan 2024 20:34:14 +0000</pubDate>
-      <guid>https://netwithalex.blog/es/category/visibilidad/</guid>
+      <guid>http://localhost:1313/es/category/visibilidad/</guid>
       <description></description>
     </item>
   </channel>

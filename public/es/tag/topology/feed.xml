@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Topology on NetWithAlex</title>
+    <link>http://localhost:1313/es/tag/topology/</link>
+    <description>Recent content in Topology on NetWithAlex</description>
+    <generator>Hugo -- 0.140.2</generator>
+    <language>es</language>
+    <lastBuildDate>Tue, 15 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tag/topology/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Simplificando la gestión de túneles con Tunnel Groups en Cisco SD-WAN</title>
+      <link>http://localhost:1313/tunnel-groups-es/</link>
+      <pubDate>Tue, 15 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tunnel-groups-es/</guid>
+      <description>Descubre cómo los Tunnel Groups en Cisco SD-WAN simplifican la gestión de túneles a gran escala. Aprende cómo funcionan, en qué se diferencian de las políticas de control y cuándo usarlos con ejemplos del mundo real.</description>
+    </item>
+  </channel>
+</rss>

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>API on NetWithAlex</title>
-    <link>https://netwithalex.blog/tag/api/</link>
+    <link>http://localhost:1313/tag/api/</link>
     <description>Recent content in API on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en</language>
     <lastBuildDate>Mon, 16 Jun 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://netwithalex.blog/tag/api/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tag/api/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Getting Started with SD-WAN Automation</title>
-      <link>https://netwithalex.blog/automation-intro-en/</link>
+      <link>http://localhost:1313/automation-intro-en/</link>
       <pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>https://netwithalex.blog/automation-intro-en/</guid>
+      <guid>http://localhost:1313/automation-intro-en/</guid>
       <description>Learn the fundamentals of SD-WAN automation and how to get started with scripting and APIs to streamline your network operations.</description>
     </item>
   </channel>

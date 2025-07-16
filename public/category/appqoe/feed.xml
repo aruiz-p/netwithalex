@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Appqoe on NetWithAlex</title>
-    <link>https://netwithalex.blog/category/appqoe/</link>
+    <link>http://localhost:1313/category/appqoe/</link>
     <description>Recent content in Appqoe on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en</language>
     <lastBuildDate>Tue, 03 Jun 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://netwithalex.blog/category/appqoe/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/category/appqoe/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AppQoe Series: Packet Duplication</title>
-      <link>https://netwithalex.blog/appqoe-pkt-dup-en/</link>
+      <link>http://localhost:1313/appqoe-pkt-dup-en/</link>
       <pubDate>Tue, 03 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>https://netwithalex.blog/appqoe-pkt-dup-en/</guid>
+      <guid>http://localhost:1313/appqoe-pkt-dup-en/</guid>
       <description>Learn how Packet Duplication can help you reliably transmit critical traffic over unreliable transports to making sure your application.</description>
     </item>
     <item>
       <title>AppQoe Series: Forward Error Correction (FEC)</title>
-      <link>https://netwithalex.blog/appqoe-fec-en/</link>
+      <link>http://localhost:1313/appqoe-fec-en/</link>
       <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://netwithalex.blog/appqoe-fec-en/</guid>
+      <guid>http://localhost:1313/appqoe-fec-en/</guid>
       <description>Learn how Forward Error Correction (FEC) works in Cisco SD-WAN to improve application performance over lossy links. Explore use cases, configuration insights, and testing results.</description>
     </item>
     <item>
       <title>AppQoe Series: TCP Optimization</title>
-      <link>https://netwithalex.blog/appqoe-tcp-opt/</link>
+      <link>http://localhost:1313/appqoe-tcp-opt/</link>
       <pubDate>Tue, 22 Apr 2025 14:20:31 +0000</pubDate>
-      <guid>https://netwithalex.blog/appqoe-tcp-opt/</guid>
+      <guid>http://localhost:1313/appqoe-tcp-opt/</guid>
       <description>Discover how SD-WAN enhances TCP performance. Learn about key optimization techniques that improve application reliability and user experience.</description>
     </item>
   </channel>

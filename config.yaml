@@ -39,6 +39,9 @@ params:
   assets:
     favicon: "/assets/favicon.ico"
     disableHLJS: true
+assets:
+  css:
+    - css/custom.css
 markup:
   highlight:
     codeFences: true
