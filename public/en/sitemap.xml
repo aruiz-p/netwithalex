@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/tag/bfd/</loc>
-    <lastmod>2025-07-15T00:00:00+00:00</lastmod>
+    <lastmod>2025-08-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -16,7 +16,7 @@
                 />
   </url><url>
     <loc>http://localhost:1313/category/</loc>
-    <lastmod>2025-07-15T00:00:00+00:00</lastmod>
+    <lastmod>2025-08-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -29,7 +29,7 @@
                 />
   </url><url>
     <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2025-07-15T00:00:00+00:00</lastmod>
+    <lastmod>2025-08-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -41,21 +41,21 @@
                 href="http://localhost:1313/posts/"
                 />
   </url><url>
-    <loc>http://localhost:1313/study-case-en/</loc>
-    <lastmod>2025-07-15T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/case-study-en/</loc>
+    <lastmod>2025-08-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/study-case-es/"
+                href="http://localhost:1313/case-study-es/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/study-case-en/"
+                href="http://localhost:1313/case-study-en/"
                 />
   </url><url>
     <loc>http://localhost:1313/category/sdwan/</loc>
-    <lastmod>2025-07-15T00:00:00+00:00</lastmod>
+    <lastmod>2025-08-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -65,6 +65,32 @@
                 rel="alternate"
                 hreflang="en"
                 href="http://localhost:1313/category/sdwan/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/tag/</loc>
+    <lastmod>2025-08-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/tag/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/tag/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/tag/topology/</loc>
+    <lastmod>2025-08-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/tag/topology/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/tag/topology/"
                 />
   </url><url>
     <loc>http://localhost:1313/tunnel-groups-en/</loc>
@@ -78,32 +104,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="http://localhost:1313/tunnel-groups-en/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/tag/</loc>
-    <lastmod>2025-07-15T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/tag/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/tag/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/tag/topology/</loc>
-    <lastmod>2025-07-15T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/tag/topology/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/tag/topology/"
                 />
   </url><url>
     <loc>http://localhost:1313/tag/policies/</loc>
