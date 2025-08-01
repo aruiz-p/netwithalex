@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Reload vs Upgrade: A Case Study | NetWithAlex</title>
+<meta name="keywords" content="">
+<meta name="description" content="Through this case study we will explore an interesting behavior observed when we upgrade devices through the SD-WAN Manager that could cause potential traffic issues. We will also see how to mitigate this risk using BFD.">
+<meta name="author" content="Alex">
+<link rel="canonical" href="http://localhost:1313/posts/study-case/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/study-case/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="preconnect" href="https://plausible.io">
+    
+        <!-- Dev mode : We do not load plausible script to avoid bloating your stats -->
+
+<!-- If you are using Content-Security-Policy, do not forget to add this code to your CSP : 
+  script-src 'unsafe-inline' https://plausible.io
+  connect-src 'unsafe-inline' https://plausible.io
+  or just add the partial 'plausible_csp.html' to those 2 csp directives in your 'index.headers' file
+-->
+
+
+
+    
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+    <script>
+         
+         
+         
+    </script>
+
+    
+
+<link rel="stylesheet" href="/assets/css/custom.css">
+<meta property="og:url" content="http://localhost:1313/posts/study-case/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="Reload vs Upgrade: A Case Study">
+  <meta property="og:description" content="Through this case study we will explore an interesting behavior observed when we upgrade devices through the SD-WAN Manager that could cause potential traffic issues. We will also see how to mitigate this risk using BFD.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-15T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-15T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Reload vs Upgrade: A Case Study">
+<meta name="twitter:description" content="Through this case study we will explore an interesting behavior observed when we upgrade devices through the SD-WAN Manager that could cause potential traffic issues. We will also see how to mitigate this risk using BFD.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Reload vs Upgrade: A Case Study",
+      "item": "http://localhost:1313/posts/study-case/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Reload vs Upgrade: A Case Study",
+  "name": "Reload vs Upgrade: A Case Study",
+  "description": "Through this case study we will explore an interesting behavior observed when we upgrade devices through the SD-WAN Manager that could cause potential traffic issues. We will also see how to mitigate this risk using BFD.",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introduction The idea of writing this post came after witnessing an unexpected behavior in how SD-WAN routers handle different operations that make the router reboot. In fact this was discovered “by accident” while performing software upgrades on a couple of SD-WAN routers and was not caught during failover testing. In today’s post I am going to compare how reloading a router through the “reload” command is treated differently than a reload triggered by a software upgrade.\nSetup A traditional dual-router SD-WAN setup, running BGP towards an external router on the service side providing connectivity to other sites. Something simple like this:\nThe BGP configuration is super simple and enough to exemplify this behavior. The SD-WAN routers have identical configurations.\nGateway#show run | s r b router bgp 64002 bgp log-neighbor-changes neighbor 172.16.1.1 remote-as 64001 neighbor 172.16.1.2 remote-as 64001 BR1-1#sh run | s r b router bgp 64001 bgp log-neighbor-changes ! address-family ipv4 vrf 1 network 172.16.2.0 mask 255.255.255.0 neighbor 172.16.1.15 remote-as 64002 neighbor 172.16.1.15 activate neighbor 172.16.1.15 send-community both distance bgp 20 200 20 exit-address-family At a routing level, the Gateway router has two available entries to reach the web server, both equal and coming from BGP. With the current configuration, the Gateway picks BR1-1 as primary and BR1-2 will remain as backup.\nGateway# sh ip route | b Gateway Gateway of last resort is not set 172.16.0.0/16 is variably subnetted, 3 subnets, 2 masks C 172.16.1.0/24 is directly connected, Ethernet0/0 L 172.16.1.15/32 is directly connected, Ethernet0/0 B 172.16.2.0/24 [20/1000] via 172.16.1.1, 02:48:02 Gateway# sh ip bgp BGP table version is 3, local router ID is 192.168.1.15 Status codes: s suppressed, d damped, h history, * valid, \u003e best, i - internal, r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter, x best-external, a additional-path, c RIB-compressed, t secondary path, L long-lived-stale, Origin codes: i - IGP, e - EGP, ? - incomplete RPKI validation codes: V valid, I invalid, N Not found Network Next Hop Metric LocPrf Weight Path * 172.16.2.0/24 172.16.1.2 1000 0 64001 i *\u003e 172.16.1.1 1000 0 64001 i Behavior when using the reload command Let’s start examining what the SD-WAN routers do when going down for reload. I will reload BR1-1 as it’s the primary router.\n*18:08:35.380 UTC Wed Jul 30 2025 BR1-1#reload Proceed with reload? [confirm] I will start a ping from the gateway router to verify is connectivity is affected\nGateway#sh clock *18:08:42.345 UTC Wed Jul 30 2025 Gateway#ping 172.16.2.2 rep 10000 Type escape sequence to abort. Sending 10000, 100-byte ICMP Echos to 172.16.2.2, timeout is 2 seconds: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \u003c...\u003e !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! *Jul 30 18:09:01.490: %BGP-5-NBR_RESET: Neighbor 172.16.1.1 reset (Peer closed the session) *Jul 30 18:09:01.490: %BGP-5-ADJCHANGE: neighbor 172.16.1.1 Down Peer closed the session *Jul 30 18:09:01.490: %BGP_SESSION-5-ADJCHANGE: neighbor 172.16.1.1 IPv4 Unicast topology base removed from session Peer closed the session \u003c...\u003e !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Success rate is 100 percent (10000/10000), round-trip min/avg/max = 1/1/32 ms Gateway#sh ip route | b Gateway Gateway of last resort is not set 172.16.0.0/16 is variably subnetted, 3 subnets, 2 masks C 172.16.1.0/24 is directly connected, Ethernet0/0 L 172.16.1.15/32 is directly connected, Ethernet0/0 B 172.16.2.0/24 [20/1000] via 172.16.1.2, 00:02:42 Gateway#sh ip bgp all sum | b Nei Neighbor V AS MsgRcvd MsgSent TblVer InQ OutQ Up/Down State/PfxRcd 172.16.1.1 4 64001 0 0 1 0 0 00:00:19 Active 172.16.1.2 4 64001 193 197 4 0 0 02:51:15 1 We can see that the BGP session to BR1-1 was closed and the ping continued without issues through BR1-2.\nLooking at the packet level, BR1-1 closed the BGP session right before reloading, preventing any connectivity issues.\nThis is the usual expected behavior and the way most of the failover testing is conducted.\nBehavior when router reloads due to upgrade After that first reload, BR1-2 is now marked as primary path.\nBGP#sh ip route | b Gateway Gateway of last resort is not set 172.16.0.0/16 is variably subnetted, 3 subnets, 2 masks C 172.16.1.0/24 is directly connected, Ethernet0/0 L 172.16.1.15/32 is directly connected, Ethernet0/0 B 172.16.2.0/24 [20/1000] via 172.16.1.2, 00:28:48 This time I will use the Manager to upgrade BR1-2 to see what happens.\nPing from the Gateway router fails once BR1-2 goes down for reload.\nGateway# ping 172.16.2.2 rep 1000000 Type escape sequence to abort. Sending 1000000, 100-byte ICMP Echos to 172.16.2.2, timeout is 2 seconds: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!............................................ Interestingly, the BGP neighbor is still up and, as a consequence, the route is still pointing to BR1-2 that is no longer available!\nGateway# sh ip route | b Gate Gateway of last resort is not set 172.16.0.0/16 is variably subnetted, 3 subnets, 2 masks C 172.16.1.0/24 is directly connected, Ethernet0/0 L 172.16.1.15/32 is directly connected, Ethernet0/0 B 172.16.2.0/24 [20/1000] via 172.16.1.2, 00:35:09 Traffic is blackholed for the entire duration of the BGP hold time\nGateway# ping 172.16.2.2 rep 5 Type escape sequence to abort. Sending 10, 100-byte ICMP Echos to 172.16.2.2, timeout is 2 seconds: ..... *Jul 30 15:17:10.575: %BGP-3-NOTIFICATION: sent to neighbor 172.16.1.2 4/0 (hold time expired) 0 bytes Success rate is 50 percent (5/10), round-trip min/avg/max = 1/1/2 ms *Jul 30 15:17:10.575: %BGP-5-NBR_RESET: Neighbor 172.16.1.2 reset (BGP Notification sent) *Jul 30 15:17:10.575: %BGP-5-ADJCHANGE: neighbor 172.16.1.2 Down BGP Notification sent *Jul 30 15:17:10.575: %BGP_SESSION-5-ADJCHANGE: neighbor 172.16.1.2 IPv4 Unicast topology base removed from session BGP Notification sent Gateway#ping 172.16.2.2 rep 5 Type escape sequence to abort. Sending 5, 100-byte ICMP Echos to 172.16.2.2, timeout is 2 seconds: !!!!! Success rate is 100 percent (5/5), round-trip min/avg/max = 1/2/3 ms Common Misconceptions One common misconceptions in network operations is that all forms of reboot behave the same. It’s easy to assume that whether a router reboots because of a reload command, power cycle, or software upgrade, the result should be consistent: BGP session drops, routes get withdrawn, traffic fails over.\nThis case study proves otherwise.\nIn Cisco SD-WAN, a reload initiated through the Manager during an image upgrade does not gracefully close control plane sessions like BGP. Unlike a CLI-based reload where the router sends TCP FIN packets to terminate sessions cleanly, the upgrade-triggered reload skips that step — keeping the BGP session “alive” on the peer side, even when the router is already offline.\nThis subtle behavior is rarely documented, and even less frequently tested. Many engineers rely solely on reload or interface flap tests to validate failover behavior. As a result, they may believe their setup is resilient, when in fact it’s vulnerable to specific upgrade workflows.\nBeing aware of this distinction is key to designing a more robust and predictable network.\nAnalysis Inspecting the Manager’s log we can see the following netconf command getting applied to BR1-2.\n30-Jul-2025 19:34:51,103 UTC INFO [6a486f9b-e3d8-42f7-982b-89701bfeab58] [Manager01] [ChangePartitionActionProcessor] (device-action-change_partition-1) || Change partition request XML change_partition-fc8b8de6-5f34-470d-b8a0-40e0f6513686%C8K-D4CE7174-5261-7E6F-91EA-4926BCF4C2DD%1800000 17.15.03a.0.176 The SD-WAN equivalent of the command is:\nrequest platform software sdwan activate So, in reality, this is not an apple to apple comparison, but it’s natural to expect the BGP session being closed just as it happened with the reload.\nSolution To overcome this situation, we can simply configure BFD and tie it to the BGP session:\nOn the SD-WAN devices we should use a CLI add-on. Config on the Gateway:\nbfd-template single-hop t1 interval min-tx 250 min-rx 250 multiplier 3 interface eth0/0 bfd template t1 router bgp 64002 bgp log-neighbor-changes neighbor 172.16.1.1 remote-as 64001 neighbor 172.16.1.1 fall-over bfd neighbor 172.16.1.2 remote-as 64001 neighbor 172.16.1.2 fall-over bfd By doing so, the BGP session is tracked and issues can be detected in less than a second, preventing black holing the traffic when upgrading the device.\nTesting with BFD configured, only one ping is lost\nGateway#ping 172.16.2.2 rep 10000000 Type escape sequence to abort. Sending 10000000, 100-byte ICMP Echos to 172.16.2.2, timeout is 2 seconds: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! *Aug 1 09:50:08.876: %BFDFSM-6-BFD_SESS_DOWN: BFD-SYSLOG: BFD session ld:1 handle:1,is going Down Reason: DETECT TIMER EXPIRED *Aug 1 09:50:08.876: %BGP-5-NBR_RESET: Neighbor 172.16.1.2 reset (BFD adjacency down) *Aug 1 09:50:08.876: %BGP-5-ADJCHANGE: neighbor 172.16.1.2 Down BFD adjacency down *Aug 1 09:50:08.876: %BGP_SESSION-5-ADJCHANGE: neighbor 172.16.1.2 IPv4 Unicast topology base removed from session BFD adjacency down.!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! *Aug 1 09:50:08.876: %BFD-6-BFD_SESS_DESTROYED: BFD-SYSLOG: bfd_session_destroyed, ld:1 neigh proc:BGP, idb:Ethernet0/0 handle:1 active!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \u003c...\u003e Success rate is 99 percent (22877/22878), round-trip min/avg/max = 1/1/70 ms CLI vs Manager Behavior Summary Here’s a quick comparison of what happens when a router reloads via CLI vs when it’s upgraded through the SD-WAN Manager:\nBehavior CLI reload SD-WAN Manager Upgrade BGP Session Handling Session closed gracefully (TCP FIN) Session remains open until timeout Route Withdrawal on Peer Router Immediate Delayed (until BGP hold timer expires Impact on Traffic Minimal (instant failover) High (traffic blackholed) Seen During Traditional Testing? Yes Often overlooked Can Be Mitigated with BFD? Optional Strongly recommended Time to Convergence (w/o BFD) Seconds\tMinutes Time to Convergence (with BFD) Sub-second This table highlights why BFD is not just a “nice-to-have” but a critical part of SD-WAN deployments—especially when relying on automated workflows for maintenance.|\nConclusion The reload command and upgrading the image on SD-WAN devices have different behaviors at the OS level. I did additional testing in autonomous mode and the results were the same. Being aware of this difference is important when configuring and testing failover scenarios. BFD is an additional feature used for fast failure detection and it’s a must if we want to have fast failover.\n",
+  "wordCount" : "1551",
+  "inLanguage": "en",
+  "datePublished": "2025-07-15T00:00:00Z",
+  "dateModified": "2025-07-15T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Alex"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/study-case/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/assets/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="http://localhost:1313/es/" title="Español"
+                            aria-label="Español">Es</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/category/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="About me.">
+                    <span>About me.</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="🔍">
+                    <span>🔍</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Reload vs Upgrade: A Case Study
+    </h1>
+    <div class="post-description">
+      Through this case study we will explore an interesting behavior observed when we upgrade devices through the SD-WAN Manager that could cause potential traffic issues. We will also see how to mitigate this risk using BFD.
+    </div>
+    <div class="post-meta"><span title='2025-07-15 00:00:00 +0000 +0000'>July 15, 2025</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Alex
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#introduction" aria-label="Introduction">Introduction</a></li>
+                <li>
+                    <a href="#setup" aria-label="Setup">Setup</a></li>
+                <li>
+                    <a href="#behavior-when-using-the-_reload_-command" aria-label="Behavior when using the reload command">Behavior when using the reload command</a></li>
+                <li>
+                    <a href="#behavior-when-router-reloads-due-to-upgrade" aria-label="Behavior when router reloads due to upgrade">Behavior when router reloads due to upgrade</a></li>
+                <li>
+                    <a href="#common-misconceptions" aria-label="Common Misconceptions">Common Misconceptions</a><ul>
+                        
+                <li>
+                    <a href="#analysis" aria-label="Analysis">Analysis</a></li></ul>
+                </li>
+                <li>
+                    <a href="#solution" aria-label="Solution">Solution</a></li>
+                <li>
+                    <a href="#cli-vs-manager-behavior-summary" aria-label="CLI vs Manager Behavior Summary">CLI vs Manager Behavior Summary</a></li>
+                <li>
+                    <a href="#conclusion" aria-label="Conclusion">Conclusion</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
+<p>The idea of writing this post came after witnessing an unexpected behavior in how SD-WAN routers handle different operations that make the router reboot. In fact this was discovered &ldquo;by accident&rdquo; while performing software upgrades on a couple of SD-WAN routers and was not caught during failover testing. In today&rsquo;s post I am going to compare how reloading a router through the &ldquo;reload&rdquo; command is treated differently than a reload triggered by a software upgrade.</p>
+<h2 id="setup">Setup<a hidden class="anchor" aria-hidden="true" href="#setup">#</a></h2>
+<p>A traditional dual-router SD-WAN setup, running BGP towards an external router on the service side providing connectivity to other sites. Something simple like this:</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/07/cs-1.png"></p>
+<p>The BGP configuration is super simple and enough to exemplify this behavior. The SD-WAN routers have identical configurations.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Gateway#show run | s r b
+</span></span><span style="display:flex;"><span>router bgp 64002
+</span></span><span style="display:flex;"><span> bgp log-neighbor-changes
+</span></span><span style="display:flex;"><span> neighbor 172.16.1.1 remote-as 64001
+</span></span><span style="display:flex;"><span> neighbor 172.16.1.2 remote-as 64001
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>BR1-1#sh run | s r b
+</span></span><span style="display:flex;"><span>router bgp 64001
+</span></span><span style="display:flex;"><span> bgp log-neighbor-changes
+</span></span><span style="display:flex;"><span> !
+</span></span><span style="display:flex;"><span> address-family ipv4 vrf 1
+</span></span><span style="display:flex;"><span>  network 172.16.2.0 mask 255.255.255.0
+</span></span><span style="display:flex;"><span>  neighbor 172.16.1.15 remote-as 64002
+</span></span><span style="display:flex;"><span>  neighbor 172.16.1.15 activate
+</span></span><span style="display:flex;"><span>  neighbor 172.16.1.15 send-community both
+</span></span><span style="display:flex;"><span>  distance bgp 20 200 20
+</span></span><span style="display:flex;"><span> exit-address-family
+</span></span></code></pre></div><p>At a routing level, the Gateway router has two available entries to reach the web server, both equal and coming from BGP. With the current configuration, the Gateway picks BR1-1 as primary and BR1-2 will remain as backup.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span>Gateway<span style="color:#75715e"># sh ip route | b Gateway</span>
+</span></span><span style="display:flex;"><span>Gateway of last resort is <span style="color:#f92672">not</span> set
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0.0</span><span style="color:#f92672">/</span><span style="color:#ae81ff">16</span> is variably subnetted, <span style="color:#ae81ff">3</span> subnets, <span style="color:#ae81ff">2</span> masks
+</span></span><span style="display:flex;"><span>C        <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.0</span><span style="color:#f92672">/</span><span style="color:#ae81ff">24</span> is directly connected, Ethernet0<span style="color:#f92672">/</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>L        <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.15</span><span style="color:#f92672">/</span><span style="color:#ae81ff">32</span> is directly connected, Ethernet0<span style="color:#f92672">/</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>B        <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2.0</span><span style="color:#f92672">/</span><span style="color:#ae81ff">24</span> [<span style="color:#ae81ff">20</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>] via <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.1</span>, <span style="color:#ae81ff">02</span>:<span style="color:#ae81ff">48</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Gateway<span style="color:#75715e"># sh ip bgp                 </span>
+</span></span><span style="display:flex;"><span>BGP table version is <span style="color:#ae81ff">3</span>, local router ID is <span style="color:#ae81ff">192.168</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.15</span>
+</span></span><span style="display:flex;"><span>Status codes: s suppressed, d damped, h history, <span style="color:#f92672">*</span> valid, <span style="color:#f92672">&gt;</span> best, i <span style="color:#f92672">-</span> internal, 
+</span></span><span style="display:flex;"><span>              r RIB<span style="color:#f92672">-</span>failure, S Stale, m multipath, b backup<span style="color:#f92672">-</span>path, f RT<span style="color:#f92672">-</span>Filter, 
+</span></span><span style="display:flex;"><span>              x best<span style="color:#f92672">-</span>external, a additional<span style="color:#f92672">-</span>path, c RIB<span style="color:#f92672">-</span>compressed, 
+</span></span><span style="display:flex;"><span>              t secondary path, L long<span style="color:#f92672">-</span>lived<span style="color:#f92672">-</span>stale,
+</span></span><span style="display:flex;"><span>Origin codes: i <span style="color:#f92672">-</span> IGP, e <span style="color:#f92672">-</span> EGP, <span style="color:#960050;background-color:#1e0010">?</span> <span style="color:#f92672">-</span> incomplete
+</span></span><span style="display:flex;"><span>RPKI validation codes: V valid, I invalid, N Not found
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>     Network          Next Hop            Metric LocPrf Weight <span style="color:#a6e22e">Path</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">*</span>    <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2.0</span><span style="color:#f92672">/</span><span style="color:#ae81ff">24</span>    <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.2</span>            <span style="color:#ae81ff">1000</span>             <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">64001</span> i
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">*&gt;</span>                    <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.1</span>            <span style="color:#ae81ff">1000</span>             <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">64001</span> i
+</span></span></code></pre></div><h2 id="behavior-when-using-the-_reload_-command">Behavior when using the <em>reload</em> command<a hidden class="anchor" aria-hidden="true" href="#behavior-when-using-the-_reload_-command">#</a></h2>
+<p>Let&rsquo;s start examining what the SD-WAN routers do when going down for reload. I will reload BR1-1 as it&rsquo;s the primary router.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#f92672">*</span><span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">08</span>:<span style="color:#ae81ff">35.380</span> UTC Wed Jul <span style="color:#ae81ff">30</span> <span style="color:#ae81ff">2025</span>
+</span></span><span style="display:flex;"><span>BR1<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#75715e">#reload  </span>
+</span></span><span style="display:flex;"><span>Proceed with reload<span style="color:#960050;background-color:#1e0010">?</span> [confirm]
+</span></span></code></pre></div><p>I will start a ping from the gateway router to verify is connectivity is affected</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span>Gateway<span style="color:#75715e">#sh clock                  </span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span><span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">08</span>:<span style="color:#ae81ff">42.345</span> UTC Wed Jul <span style="color:#ae81ff">30</span> <span style="color:#ae81ff">2025</span>
+</span></span><span style="display:flex;"><span>Gateway<span style="color:#75715e">#ping 172.16.2.2 rep 10000 </span>
+</span></span><span style="display:flex;"><span>Type escape sequence to abort<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>Sending <span style="color:#ae81ff">10000</span>, <span style="color:#ae81ff">100</span><span style="color:#f92672">-</span>byte ICMP Echos to <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2.2</span>, timeout is <span style="color:#ae81ff">2</span> seconds:
+</span></span><span style="display:flex;"><span><span style="color:#f92672">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;...&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>Jul <span style="color:#ae81ff">30</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">09</span>:<span style="color:#ae81ff">01.490</span>: <span style="color:#f92672">%</span>BGP<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span><span style="color:#f92672">-</span>NBR_RESET: Neighbor <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.1</span> reset (Peer closed the session)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>Jul <span style="color:#ae81ff">30</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">09</span>:<span style="color:#ae81ff">01.490</span>: <span style="color:#f92672">%</span>BGP<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span><span style="color:#f92672">-</span>ADJCHANGE: neighbor <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.1</span> Down Peer closed the session
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>Jul <span style="color:#ae81ff">30</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">09</span>:<span style="color:#ae81ff">01.490</span>: <span style="color:#f92672">%</span>BGP_SESSION<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span><span style="color:#f92672">-</span>ADJCHANGE: neighbor <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.1</span> IPv4 Unicast topology base removed from session  Peer closed the session
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;...&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+</span></span><span style="display:flex;"><span>Success rate is <span style="color:#ae81ff">100</span> percent (<span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">10000</span>), round<span style="color:#f92672">-</span>trip min<span style="color:#f92672">/</span>avg<span style="color:#f92672">/</span>max <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">32</span> ms
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Gateway<span style="color:#75715e">#sh ip route | b Gateway</span>
+</span></span><span style="display:flex;"><span>Gateway of last resort is <span style="color:#f92672">not</span> set
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0.0</span><span style="color:#f92672">/</span><span style="color:#ae81ff">16</span> is variably subnetted, <span style="color:#ae81ff">3</span> subnets, <span style="color:#ae81ff">2</span> masks
+</span></span><span style="display:flex;"><span>C        <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.0</span><span style="color:#f92672">/</span><span style="color:#ae81ff">24</span> is directly connected, Ethernet0<span style="color:#f92672">/</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>L        <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.15</span><span style="color:#f92672">/</span><span style="color:#ae81ff">32</span> is directly connected, Ethernet0<span style="color:#f92672">/</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>B        <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2.0</span><span style="color:#f92672">/</span><span style="color:#ae81ff">24</span> [<span style="color:#ae81ff">20</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>] via <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.2</span>, <span style="color:#ae81ff">00</span>:<span style="color:#ae81ff">02</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Gateway<span style="color:#75715e">#sh ip bgp all sum | b Nei</span>
+</span></span><span style="display:flex;"><span>Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up<span style="color:#f92672">/</span>Down  State<span style="color:#f92672">/</span>PfxRcd
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.1</span>      <span style="color:#ae81ff">4</span>        <span style="color:#ae81ff">64001</span>       <span style="color:#ae81ff">0</span>       <span style="color:#ae81ff">0</span>        <span style="color:#ae81ff">1</span>    <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">00</span>:<span style="color:#ae81ff">00</span>:<span style="color:#ae81ff">19</span> Active
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.2</span>      <span style="color:#ae81ff">4</span>        <span style="color:#ae81ff">64001</span>     <span style="color:#ae81ff">193</span>     <span style="color:#ae81ff">197</span>        <span style="color:#ae81ff">4</span>    <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">02</span>:<span style="color:#ae81ff">51</span>:<span style="color:#ae81ff">15</span>        <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>We can see that the BGP session to BR1-1 was closed and the ping continued without issues through BR1-2.</p>
+<p>Looking at the packet level, BR1-1 closed the BGP session right before reloading, preventing any connectivity issues.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/07/cs-2.png"></p>
+<p>This is the usual expected behavior and the way most of the failover testing is conducted.</p>
+<h2 id="behavior-when-router-reloads-due-to-upgrade">Behavior when router reloads due to upgrade<a hidden class="anchor" aria-hidden="true" href="#behavior-when-router-reloads-due-to-upgrade">#</a></h2>
+<p>After that first reload, BR1-2 is now marked as primary path.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span>BGP<span style="color:#75715e">#sh ip route | b Gateway</span>
+</span></span><span style="display:flex;"><span>Gateway of last resort is <span style="color:#f92672">not</span> set
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0.0</span><span style="color:#f92672">/</span><span style="color:#ae81ff">16</span> is variably subnetted, <span style="color:#ae81ff">3</span> subnets, <span style="color:#ae81ff">2</span> masks
+</span></span><span style="display:flex;"><span>C        <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.0</span><span style="color:#f92672">/</span><span style="color:#ae81ff">24</span> is directly connected, Ethernet0<span style="color:#f92672">/</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>L        <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.15</span><span style="color:#f92672">/</span><span style="color:#ae81ff">32</span> is directly connected, Ethernet0<span style="color:#f92672">/</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>B        <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2.0</span><span style="color:#f92672">/</span><span style="color:#ae81ff">24</span> [<span style="color:#ae81ff">20</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>] via <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.2</span>, <span style="color:#ae81ff">00</span>:<span style="color:#ae81ff">28</span>:<span style="color:#ae81ff">48</span>
+</span></span></code></pre></div><p>This time I will use the Manager to upgrade BR1-2 to see what happens.</p>
+<p><img loading="lazy" src="/wp-content/uploads/2025/07/cs-3.png"></p>
+<p>Ping from the Gateway router fails once BR1-2 goes down for reload.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Gateway# ping 172.16.2.2 rep 1000000
+</span></span><span style="display:flex;"><span>Type escape sequence to abort.
+</span></span><span style="display:flex;"><span>Sending 1000000, 100-byte ICMP Echos to 172.16.2.2, timeout is 2 seconds:
+</span></span><span style="display:flex;"><span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</span></span><span style="display:flex;"><span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</span></span><span style="display:flex;"><span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</span></span><span style="display:flex;"><span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</span></span><span style="display:flex;"><span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</span></span><span style="display:flex;"><span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</span></span><span style="display:flex;"><span>!!!!!!!!!!!!!!!!!!!!!!!!!!............................................
+</span></span></code></pre></div><p>Interestingly, the BGP neighbor is still up and, as a consequence, the route is still pointing to BR1-2 that is no longer available!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span>Gateway<span style="color:#75715e"># sh ip route | b Gate</span>
+</span></span><span style="display:flex;"><span>Gateway of last resort is <span style="color:#f92672">not</span> set
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0.0</span><span style="color:#f92672">/</span><span style="color:#ae81ff">16</span> is variably subnetted, <span style="color:#ae81ff">3</span> subnets, <span style="color:#ae81ff">2</span> masks
+</span></span><span style="display:flex;"><span>C        <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.0</span><span style="color:#f92672">/</span><span style="color:#ae81ff">24</span> is directly connected, Ethernet0<span style="color:#f92672">/</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>L        <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.15</span><span style="color:#f92672">/</span><span style="color:#ae81ff">32</span> is directly connected, Ethernet0<span style="color:#f92672">/</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>B        <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2.0</span><span style="color:#f92672">/</span><span style="color:#ae81ff">24</span> [<span style="color:#ae81ff">20</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>] via <span style="color:#ae81ff">172.16</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1.2</span>, <span style="color:#ae81ff">00</span>:<span style="color:#ae81ff">35</span>:<span style="color:#ae81ff">09</span>
+</span></span></code></pre></div><p>Traffic is blackholed for the entire duration of the BGP hold time</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Gateway# ping 172.16.2.2 rep 5
+</span></span><span style="display:flex;"><span>Type escape sequence to abort.
+</span></span><span style="display:flex;"><span>Sending 10, 100-byte ICMP Echos to 172.16.2.2, timeout is 2 seconds:
+</span></span><span style="display:flex;"><span>.....
+</span></span><span style="display:flex;"><span>*Jul 30 15:17:10.575: %BGP-3-NOTIFICATION: sent to neighbor 172.16.1.2 4/0 (hold time expired) 0 bytes
+</span></span><span style="display:flex;"><span>Success rate is 50 percent (5/10), round-trip min/avg/max = 1/1/2 ms
+</span></span><span style="display:flex;"><span>*Jul 30 15:17:10.575: %BGP-5-NBR_RESET: Neighbor 172.16.1.2 reset (BGP Notification sent)
+</span></span><span style="display:flex;"><span>*Jul 30 15:17:10.575: %BGP-5-ADJCHANGE: neighbor 172.16.1.2 Down BGP Notification sent
+</span></span><span style="display:flex;"><span>*Jul 30 15:17:10.575: %BGP_SESSION-5-ADJCHANGE: neighbor 172.16.1.2 IPv4 Unicast topology base removed from session  BGP Notification sent
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Gateway#ping 172.16.2.2 rep 5
+</span></span><span style="display:flex;"><span>Type escape sequence to abort.
+</span></span><span style="display:flex;"><span>Sending 5, 100-byte ICMP Echos to 172.16.2.2, timeout is 2 seconds:
+</span></span><span style="display:flex;"><span>!!!!!
+</span></span><span style="display:flex;"><span>Success rate is 100 percent (5/5), round-trip min/avg/max = 1/2/3 ms
+</span></span></code></pre></div><h2 id="common-misconceptions">Common Misconceptions<a hidden class="anchor" aria-hidden="true" href="#common-misconceptions">#</a></h2>
+<p>One common misconceptions in network operations is that all forms of reboot behave the same. It’s easy to assume that whether a router reboots because of a reload command, power cycle, or software upgrade, the result should be consistent: BGP session drops, routes get withdrawn, traffic fails over.</p>
+<p>This case study proves otherwise.</p>
+<p>In Cisco SD-WAN, a reload initiated through the Manager during an image upgrade does not gracefully close control plane sessions like BGP. Unlike a CLI-based reload where the router sends TCP FIN packets to terminate sessions cleanly, the upgrade-triggered reload skips that step — keeping the BGP session “alive” on the peer side, even when the router is already offline.</p>
+<p>This subtle behavior is rarely documented, and even less frequently tested. Many engineers rely solely on reload or interface flap tests to validate failover behavior. As a result, they may believe their setup is resilient, when in fact it&rsquo;s vulnerable to specific upgrade workflows.</p>
+<p>Being aware of this distinction is key to designing a more robust and predictable network.</p>
+<h3 id="analysis">Analysis<a hidden class="anchor" aria-hidden="true" href="#analysis">#</a></h3>
+<p>Inspecting the Manager&rsquo;s log we can see the following netconf command getting applied to BR1-2.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>30-Jul-2025 19:34:51,103 UTC INFO  [6a486f9b-e3d8-42f7-982b-89701bfeab58] [Manager01] [ChangePartitionActionProcessor] (device-action-change_partition-1) || Change partition request XML &lt;activate xmlns=&#34;http://cisco.com/ns/yang/Cisco-IOS-XE-install-rpc&#34;&gt;
+</span></span><span style="display:flex;"><span>  &lt;uuid xmlns=&#34;http://cisco.com/ns/yang/Cisco-IOS-XE-install-rpc&#34;&gt;change_partition-fc8b8de6-5f34-470d-b8a0-40e0f6513686%C8K-D4CE7174-5261-7E6F-91EA-4926BCF4C2DD%1800000&lt;/uuid&gt;
+</span></span><span style="display:flex;"><span>  &lt;version xmlns=&#34;http://cisco.com/ns/yang/Cisco-IOS-XE-install-rpc&#34;&gt;17.15.03a.0.176&lt;/version&gt;
+</span></span><span style="display:flex;"><span>&lt;/activate&gt;
+</span></span></code></pre></div><p>The SD-WAN equivalent of the command is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>request platform software sdwan activate &lt;version&gt;
+</span></span></code></pre></div><p>So, in reality, this is not an apple to apple comparison, but it&rsquo;s natural to expect the BGP session being closed just as it happened with the reload.</p>
+<h2 id="solution">Solution<a hidden class="anchor" aria-hidden="true" href="#solution">#</a></h2>
+<p>To overcome this situation, we can simply configure BFD and tie it to the BGP session:</p>
+<p>On the SD-WAN devices we should use a CLI add-on.
+<img loading="lazy" src="/wp-content/uploads/2025/07/cs-4.png"></p>
+<p>Config on the Gateway:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>bfd-template single-hop t1
+</span></span><span style="display:flex;"><span> interval min-tx 250 min-rx 250 multiplier 3
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>interface eth0/0
+</span></span><span style="display:flex;"><span> bfd template t1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>router bgp 64002
+</span></span><span style="display:flex;"><span> bgp log-neighbor-changes
+</span></span><span style="display:flex;"><span> neighbor 172.16.1.1 remote-as 64001
+</span></span><span style="display:flex;"><span> neighbor 172.16.1.1 fall-over bfd
+</span></span><span style="display:flex;"><span> neighbor 172.16.1.2 remote-as 64001
+</span></span><span style="display:flex;"><span> neighbor 172.16.1.2 fall-over bfd
+</span></span></code></pre></div><p>By doing so, the BGP session is tracked and issues can be detected in less than a second, preventing black holing the traffic when upgrading the device.</p>
+<p>Testing with BFD configured, only one ping is lost</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Gateway#ping 172.16.2.2 rep 10000000
+</span></span><span style="display:flex;"><span>Type escape sequence to abort.
+</span></span><span style="display:flex;"><span>Sending 10000000, 100-byte ICMP Echos to 172.16.2.2, timeout is 2 seconds:
+</span></span><span style="display:flex;"><span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</span></span><span style="display:flex;"><span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</span></span><span style="display:flex;"><span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</span></span><span style="display:flex;"><span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</span></span><span style="display:flex;"><span>*Aug  1 09:50:08.876: %BFDFSM-6-BFD_SESS_DOWN: BFD-SYSLOG: BFD session ld:1 handle:1,is going Down Reason: DETECT TIMER EXPIRED
+</span></span><span style="display:flex;"><span>*Aug  1 09:50:08.876: %BGP-5-NBR_RESET: Neighbor 172.16.1.2 reset (BFD adjacency down)
+</span></span><span style="display:flex;"><span>*Aug  1 09:50:08.876: %BGP-5-ADJCHANGE: neighbor 172.16.1.2 Down BFD adjacency down
+</span></span><span style="display:flex;"><span>*Aug  1 09:50:08.876: %BGP_SESSION-5-ADJCHANGE: neighbor 172.16.1.2 IPv4 Unicast topology base removed from session  BFD adjacency down.!!!!
+</span></span><span style="display:flex;"><span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</span></span><span style="display:flex;"><span>*Aug  1 09:50:08.876: %BFD-6-BFD_SESS_DESTROYED: BFD-SYSLOG: bfd_session_destroyed,  ld:1 neigh proc:BGP, idb:Ethernet0/0 handle:1 active!!!!!!!!!!!!!!!!!!!!!!!!!
+</span></span><span style="display:flex;"><span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</span></span><span style="display:flex;"><span>&lt;...&gt;
+</span></span><span style="display:flex;"><span>Success rate is 99 percent (22877/22878), round-trip min/avg/max = 1/1/70 ms
+</span></span></code></pre></div><h2 id="cli-vs-manager-behavior-summary">CLI vs Manager Behavior Summary<a hidden class="anchor" aria-hidden="true" href="#cli-vs-manager-behavior-summary">#</a></h2>
+<p>Here’s a quick comparison of what happens when a router reloads via CLI vs when it’s upgraded through the SD-WAN Manager:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Behavior</th>
+          <th>CLI reload</th>
+          <th>SD-WAN Manager Upgrade</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>BGP Session Handling</td>
+          <td>Session closed gracefully (TCP FIN)</td>
+          <td>Session remains open until timeout</td>
+      </tr>
+      <tr>
+          <td>Route Withdrawal on Peer Router</td>
+          <td>Immediate</td>
+          <td>Delayed (until BGP hold timer expires</td>
+      </tr>
+      <tr>
+          <td>Impact on Traffic</td>
+          <td>Minimal (instant failover)</td>
+          <td>High (traffic blackholed)</td>
+      </tr>
+      <tr>
+          <td>Seen During Traditional Testing?</td>
+          <td>Yes</td>
+          <td>Often overlooked</td>
+      </tr>
+      <tr>
+          <td>Can Be Mitigated with BFD?</td>
+          <td>Optional</td>
+          <td>Strongly recommended</td>
+      </tr>
+      <tr>
+          <td>Time to Convergence</td>
+          <td>(w/o BFD)</td>
+          <td>Seconds	Minutes</td>
+      </tr>
+      <tr>
+          <td>Time to Convergence</td>
+          <td>(with BFD)</td>
+          <td>Sub-second</td>
+      </tr>
+  </tbody>
+</table>
+<p>This table highlights why BFD is not just a “nice-to-have” but a critical part of SD-WAN deployments—especially when relying on automated workflows for maintenance.|</p>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<p>The reload command and upgrading the image on SD-WAN devices have different behaviors at the OS level. I did additional testing in autonomous mode and the results were the same. Being aware of this difference is important when configuring and testing failover scenarios. BFD is an additional feature used for fast failure detection and it&rsquo;s a must if we want to have fast failover.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer><script src="https://utteranc.es/client.js"
+        repo="aruiz-p/netwithalex"
+        issue-term="title"
+        label="comments"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">NetWithAlex</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

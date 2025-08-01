@@ -9,6 +9,13 @@
     <lastBuildDate>Tue, 15 Jul 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tag/topology/feed.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Reload vs Upgrade: Study Case</title>
+      <link>http://localhost:1313/study-case-en/</link>
+      <pubDate>Tue, 15 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/study-case-en/</guid>
+      <description>Through this case study we will explore an interesting behavior observed when we upgrade devices through the SD-WAN Manager that could cause potential traffic issues. We will also see how to mitigate this risk using BFD.</description>
+    </item>
+    <item>
       <title>Simplifying Tunnel Management with Tunnel Groups in Cisco SD-WAN</title>
       <link>http://localhost:1313/tunnel-groups-en/</link>
       <pubDate>Tue, 15 Jul 2025 00:00:00 +0000</pubDate>

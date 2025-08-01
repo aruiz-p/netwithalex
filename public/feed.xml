@@ -6,8 +6,15 @@
     <description>Recent content in Home on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 15 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 Aug 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reload vs Upgrade: Case Study</title>
+      <link>http://localhost:1313/case-study-en/</link>
+      <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
+       <guid isPermaLink="false">http://localhost:1313/case-study-en/</guid> 
+      <description>Through this case study we will explore an interesting behavior observed when we upgrade devices through the SD-WAN Manager that could cause potential traffic issues. We will also see how to mitigate this risk using BFD.</description>
+    </item>
     <item>
       <title>Simplifying Tunnel Management with Tunnel Groups in Cisco SD-WAN</title>
       <link>http://localhost:1313/tunnel-groups-en/</link>
