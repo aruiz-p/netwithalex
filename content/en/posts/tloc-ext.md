@@ -143,7 +143,7 @@ The subnet 172.17.140/30 needs to be advertised on the MPLS underlay. Typically,
 
 The configuration of interfaces 4,5 and 6 are a mirror of what we just saw. 
 
-## Validation:
+## Validation
 
 Once this configuration is in place, we can validate our control and data plane: 
 
