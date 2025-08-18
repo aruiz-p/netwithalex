@@ -9,8 +9,8 @@ summary: Learn how Cisco SD-WAN TLOC Extension works, its use cases, configurati
 description: Learn how Cisco SD-WAN TLOC Extension works, its use cases, configuration steps, and best practices to improve resiliency and optimize WAN resources..
 url: /tloc-ext-en/
 tag:
-  - bfd
-  - topology
+  - TLOC
+  - design
 ---
 
 ## Introduction
