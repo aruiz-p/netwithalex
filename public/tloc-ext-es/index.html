@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="es" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>TLOC Extension en Cisco SD-WAN: Diseño y Configuración | NetWithAlex</title>
+<meta name="keywords" content="">
+<meta name="description" content="Aprende cómo funciona TLOC Extension en Cisco SD-WAN, sus casos de uso, pasos de configuración y mejores prácticas para mejorar la resiliencia y optimizar los recursos de la WAN.">
+<meta name="author" content="Alex">
+<link rel="canonical" href="http://localhost:1313/tloc-ext-es/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/tloc-ext-en/">
+<link rel="alternate" hreflang="es" href="http://localhost:1313/tloc-ext-es/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="preconnect" href="https://plausible.io">
+    
+        <!-- Dev mode : We do not load plausible script to avoid bloating your stats -->
+
+<!-- If you are using Content-Security-Policy, do not forget to add this code to your CSP : 
+  script-src 'unsafe-inline' https://plausible.io
+  connect-src 'unsafe-inline' https://plausible.io
+  or just add the partial 'plausible_csp.html' to those 2 csp directives in your 'index.headers' file
+-->
+
+
+
+    
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+    <script>
+         
+         
+         
+    </script>
+
+    
+
+<link rel="stylesheet" href="/assets/css/custom.css">
+<meta property="og:url" content="http://localhost:1313/tloc-ext-es/">
+  <meta property="og:site_name" content="NetWithAlex">
+  <meta property="og:title" content="TLOC Extension en Cisco SD-WAN: Diseño y Configuración">
+  <meta property="og:description" content="Aprende cómo funciona TLOC Extension en Cisco SD-WAN, sus casos de uso, pasos de configuración y mejores prácticas para mejorar la resiliencia y optimizar los recursos de la WAN.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-08-15T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-08-15T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TLOC Extension en Cisco SD-WAN: Diseño y Configuración">
+<meta name="twitter:description" content="Aprende cómo funciona TLOC Extension en Cisco SD-WAN, sus casos de uso, pasos de configuración y mejores prácticas para mejorar la resiliencia y optimizar los recursos de la WAN.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/es/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "TLOC Extension en Cisco SD-WAN: Diseño y Configuración",
+      "item": "http://localhost:1313/tloc-ext-es/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "TLOC Extension en Cisco SD-WAN: Diseño y Configuración",
+  "name": "TLOC Extension en Cisco SD-WAN: Diseño y Configuración",
+  "description": "Aprende cómo funciona TLOC Extension en Cisco SD-WAN, sus casos de uso, pasos de configuración y mejores prácticas para mejorar la resiliencia y optimizar los recursos de la WAN.",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introducción En una red Cisco SD-WAN, la resiliencia del transporte y el uso eficiente de los mismos son fundamentales para ofrecer una conectividad confiable. Cada WAN Edge en la red se conecta a una red de transporte, como MPLS, Internet, 4G/5G, etc. La combinación lógica única de System-ip + Color + Encapsulation da lugar a lo que se conoce como Transport Locators (TLOCs).\nSin embargo, en escenarios con dos routers, no todas las sucursales tienen el privilegio de contar con múltiples circuitos WAN conectados a cada router. En algunos casos, un circuito WAN puede terminar en un router, mientras que otro circuito solo está disponible en un segundo router. Aquí es donde entra TLOC Extension, permitiendo que un router aproveche la conexión de transporte de otro router en el mismo sitio, aumentando la redundancia de túneles y la flexibilidad.\nExploremos esto en más detalle.\n¿Qué es TLOC Extension? TLOC Extension en Cisco SD-WAN permite que un router utilice la interfaz de transporte de otro router como si fuera propia. Esto se logra extendiendo el TLOC (Transport Locator) de un router a otro a través de una conexión de capa 2 o capa 3. Su representación física se vería algo así:\nFigura 1 – TLOC Extension de capa 2 En la práctica, esto significa que el Router BR1-1 puede aprovechar los circuitos de transporte del Router BR1-2s (por ejemplo, MPLS o Internet) sin estar directamente conectado a ellos, y viceversa. Este mecanismo asegura que todos los routers del sitio puedan usar plenamente todos los transportes disponibles en la red SD-WAN, incluso si no cuentan con conexiones de transporte dedicadas. La representación lógica se vería así:\nFigura 2 – TLOC extension con dos transportes Ahora, BR1-1 puede usar INET como transporte y BR1-2 puede usar MPLS como transporte disponible.\nAlgunas ventajas de usar TLOC Extension:\nReduce el número de circuitos directos necesarios por router. Aporta resiliencia a nivel de sitio. Simplifica las implementaciones en sucursales donde solo hay un circuito de transporte disponible físicamente. Casos de Uso TLOC Extension resuelve desafíos reales en implementaciones SD-WAN. Algunos casos comunes incluyen:\nSucursales pequeñas con conectividad limitada Una sucursal puede tener solo un enlace de Internet o MPLS. Con TLOC Extension, dos routers aún pueden operar con redundancia compartiendo ese único transporte.\nFigura 3 – TLOC Extension transporte único Optimización de costos En lugar de adquirir múltiples circuitos para cada router, los costos se reducen al tener un circuito por tipo de transporte y compartirlo entre routers.\nFigura 4 – Comparación costo TLOC Extension vs Full Mesh Redundancia de transporte Cuando un sitio tiene diferentes transportes distribuidos en distintos routers (Ejemplo: Internet en Router BR1-1, MPLS en Router BR1-2), TLOC Extension asegura que ambos routers puedan acceder a ambos tipos de transporte.\nFigura 5 – TLOC extension con dos transportes Arquitectura y Funcionamiento En el núcleo de SD-WAN, un TLOC se define por tres elementos:\nSystem IP del router Color (tipo de transporte al que pertenece el enlace. Ejempli: public-internet, mpls, lte) Encapsulation (IPsec/GRE) Con TLOC Extension, un router establece un túnel interno a través de la LAN hacia otro router, lo que le permite anunciar y usar ese TLOC.\nPuntos clave de la arquitectura:\nUna extensión TLOC se construye sobre una interfaz LAN física entre dos routers; comúnmente se usan sub-interfaces y encapsulación dot1Q. TLOC extension de capa 3 está disponible. El router “donante” proporciona acceso a su interfaz de transporte. El router “receptor” puede entonces formar conexiones de plano de control y de datos usando ese transporte. Desde la perspectiva de la red, ambos routers aparecen como si estuvieran independientemente conectados a cada transporte.\nConfiguración de TLOC Extension Aprovecharé Workflows de la UX 2.0 para generar rápidamente una configuración para un sitio con dos routers y TLOC Extension, y luego la revisaremos.\nFigura 6 – UX2.0 Workflow configuración TLOC Extension La configuración resultante tiene las siguientes interfaces en el Feature Profile de Transporte.\nFigura 7 – Interfaces Configurdas a través del Workflow Se crearon seis interfaces diferentes, revisemos las tres primeras para entender cómo se configura TLOC Extension.\nNota Fue necesario eliminar configuración de NAT no requerido en algunas de esas interfaces, aparte de esto, la configuración estaba lista.\nInterfaz #1 - Internet TLOC La primera interfaz se conecta directamente al transporte de Internet, configuración estándar de interfaz y TLOC.\ninterface GigabitEthernet1 description WAN Interface - biz-internet ip address 31.11.0.2 255.255.255.252 ip nat outside sdwan interface GigabitEthernet1 tunnel-interface encapsulation ipsec weight 1 color biz-internet Interfaz #2 - Interfaz “donada” al segundo router La segunda interfaz es necesaria para extender el TLOC de Internet hacia BR1-2, requiere una dirección IP y BR1-2 la usará como gateway por defecto.\ninterface GigabitEthernet4 description WAN Interface - biz-internet ip address 172.17.1.1 255.255.255.252 sdwan interface GigabitEthernet4 tloc-extension GigabitEthernet1 exit Interfaz #3 - MPLS TLOC Esta es una configuración normal de TLOC que usará la dirección IP de BR1-2 como gateway por defecto para que funcione el transporte MPLS.\ninterface GigabitEthernet5 description WAN VPN 0 Interface - MPLS ip address 172.17.1.5 255.255.255.252 ! ip route 0.0.0.0 0.0.0.0 172.17.1.6 sdwan interface GigabitEthernet5 tunnel-interface encapsulation ipsec weight 1 color mpls La subred 172.17.1.4/30 necesita ser anunciada en el underlay de MPLS. Normalmente se usa BGP para este anuncio.\nLa configuración de las interfaces 4, 5 y 6 es un espejo de lo que acabamos de ver.\nValidación Una vez que esta configuración está en su lugar, podemos validar nuestro plano de control y de datos:\nEn BR1-1, nota que hay dos interfaces de SD-WAN, Gig1 and Gig5\nLisbon_10-1#show sdwan control local-properties personality vedge sp-organization-name MYSDWAN-LAB123 organization-name MYSDWAN-LAB123 root-ca-chain-status Installed root-ca-crl-status Not-Installed ... PUBLIC PUBLIC PRIVATE PRIVATE PRIVATE MAX RESTRICT/ LAST SPI TIME NAT VM BIND INTERFACE IPv4 PORT IPv4 IPv6 PORT VS/VM COLOR STATE CNTRL CONTROL/ LR/LB CONNECTION REMAINING TYPE CON REG INTERFACE STUN PRF IDs ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- GigabitEthernet1 31.11.0.2 12386 31.11.0.2 :: 12386 1/1 biz-internet up 2 no/yes/no No/No 0:00:00:10 0:03:06:00 N 5 Default N/A GigabitEthernet5 172.17.1.5 12426 172.17.1.5 :: 12426 1/0 mpls up 2 no/yes/no No/No 0:00:00:15 0:04:19:53 N 5 Default N/A Las conexiones de control funcionan en ambos transportes como se esperaba\nLisbon_10-1#show sdwan control connections PEER PEER CONTROLLER PEER PEER PEER SITE DOMAIN PEER PRIV PEER PUB GROUP TYPE PROT SYSTEM IP ID ID PRIVATE IP PORT PUBLIC IP PORT ORGANIZATION LOCAL COLOR PROXY STATE UPTIME ID ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- vsmart dtls 1.0.0.3 999 1 10.1.0.4 12446 10.1.0.4 12446 MYSDWAN-LAB123 biz-internet No up 0:20:59:37 0 vsmart dtls 1.0.0.3 999 1 10.1.0.4 12446 10.1.0.4 12446 MYSDWAN-LAB123 mpls No up 0:07:45:45 0 vbond dtls 0.0.0.0 0 0 10.1.0.3 12346 10.1.0.3 12346 MYSDWAN-LAB123 biz-internet - up 0:20:59:38 0 vbond dtls 0.0.0.0 0 0 10.1.0.3 12346 10.1.0.3 12346 MYSDWAN-LAB123 mpls - up 0:07:48:46 0 vmanage dtls 1.0.0.1 999 0 10.1.0.1 12646 10.1.0.1 12646 MYSDWAN-LAB123 biz-internet No up 0:20:59:38 0 El plano de datos también se estableció usando MPLS y Biz-internet\nLisbon_10-1#sh sdwan bfd sessions SOURCE TLOC REMOTE TLOC DST PUBLIC DST PUBLIC DETECT TX SYSTEM IP SITE ID STATE COLOR COLOR SOURCE IP IP PORT ENCAP MULTIPLIER INTERVAL(msec UPTIME TRANSITIONS ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 1.1.20.1 20 up biz-internet mpls 31.11.0.2 21.21.0.2 12346 ipsec 7 1000 0:07:48:41 0 1.1.20.2 20 up biz-internet mpls 31.11.0.2 21.22.0.2 12346 ipsec 7 1000 0:07:48:41 0 1.1.200.1 200 up biz-internet mpls 31.11.0.2 21.201.0.2 12346 ipsec 7 1000 0:21:01:36 1 1.1.200.2 200 up biz-internet mpls 31.11.0.2 21.202.0.2 12346 ipsec 7 1000 0:21:01:36 1 ... 1.1.20.1 20 up mpls mpls 172.17.1.5 21.21.0.2 12346 ipsec 7 1000 0:07:47:43 0 1.1.20.2 20 up mpls mpls 172.17.1.5 21.22.0.2 12346 ipsec 7 1000 0:07:47:43 0 1.1.200.1 200 up mpls mpls 172.17.1.5 21.201.0.2 12346 ipsec 7 1000 0:07:47:43 0 1.1.200.2 200 up mpls mpls 172.17.1.5 21.202.0.2 12346 ipsec 7 1000 0:07:47:43 0 Consideraciones Al desplegar TLOC Extension, ten en cuenta lo siguiente:\nUsa conexiones directas siempre que sea posible Un cable directo entre routers es preferible a un switch compartido para minimizar puntos de falla.\nUsa sub-interfaces si no hay suficientes interfaces En situaciones donde los dispositivos no tienen puertos disponibles, puedes usar TLOC extension de capa 2 con sub-interfaces; solo ten presente que el ancho de banda será compartido.\nPlanea para la redundancia Los sitios críticos funcionan mejor con conexiones directas a los transportes disponibles. TLOC Extension ayuda a extender transportes, pero no protege en caso de fallas de dispositivo.\nAnuncia las subredes de TLOC extension Para que tus TLOCs privados extendidos tengan conectividad, la subred local debe ser alcanzable en el transporte privado. Puedes usar BGP, rutas estáticas u otro método de enrutamiento.\nEvita sobrecargar el enlace LAN El enlace entre routers debe dimensionarse adecuadamente, ya que todo el tráfico extendido pasará por él.\nTLOC Extension en Capa 3 TLOC Extension puede configurarse en capa 3 con encapsulación GRE. Esto es especialmente útil cuando dos dispositivos no tienen adyacencia directa en capa 2.\nConclusión TLOC Extension es una función útil en Cisco SD-WAN que mejora la flexibilidad y resiliencia en sucursales. Al permitir que los routers compartan conexiones de transporte, optimiza el uso de recursos, reduce costos y asegura que todos los routers puedan participar plenamente en la red SD-WAN, incluso cuando los enlaces WAN dedicados son limitados.\nUna planificación adecuada, redundancia y monitoreo son esenciales para obtener el máximo valor de esta función. Cuando se implementa correctamente, TLOC Extension puede mejorar significativamente la solidez y rentabilidad de una implementación SD-WAN.\n👉 Nos vemos en el próximo blog, donde seguiremos explorando formas prácticas de fortalecer y optimizar tu diseño de Cisco SD-WAN.\n",
+  "wordCount" : "1564",
+  "inLanguage": "es",
+  "datePublished": "2025-08-15T00:00:00Z",
+  "dateModified": "2025-08-15T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Alex"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/tloc-ext-es/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NetWithAlex",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/assets/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/es/" accesskey="h" title="NetWithAlex (Alt + H)">NetWithAlex</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="http://localhost:1313/" title="English"
+                            aria-label="English">En</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/es/" title="Inicio">
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/archives/" title="Archivo">
+                    <span>Archivo</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/category/" title="Categorías">
+                    <span>Categorías</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/sobre-mi/" title="Sobre mí">
+                    <span>Sobre mí</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/es/search/" title="🔍">
+                    <span>🔍</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/es/">Inicio</a>&nbsp;»&nbsp;<a href="http://localhost:1313/es/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      TLOC Extension en Cisco SD-WAN: Diseño y Configuración
+    </h1>
+    <div class="post-description">
+      Aprende cómo funciona TLOC Extension en Cisco SD-WAN, sus casos de uso, pasos de configuración y mejores prácticas para mejorar la resiliencia y optimizar los recursos de la WAN.
+    </div>
+    <div class="post-meta"><span title='2025-08-15 00:00:00 +0000 +0000'>agosto 15, 2025</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Alex&nbsp;|&nbsp;Traducciones:
+<ul class="i18n_list">
+    <li>
+        <a href="http://localhost:1313/tloc-ext-en/">En</a>
+    </li>
+</ul>
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Tabla de Contenidos</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#introducci%c3%b3n" aria-label="Introducción">Introducción</a></li>
+                <li>
+                    <a href="#qu%c3%a9-es-tloc-extension" aria-label="¿Qué es TLOC Extension?">¿Qué es TLOC Extension?</a></li>
+                <li>
+                    <a href="#casos-de-uso" aria-label="Casos de Uso">Casos de Uso</a><ul>
+                        
+                <li>
+                    <a href="#sucursales-peque%c3%b1as-con-conectividad-limitada" aria-label="Sucursales pequeñas con conectividad limitada">Sucursales pequeñas con conectividad limitada</a></li>
+                <li>
+                    <a href="#optimizaci%c3%b3n-de-costos" aria-label="Optimización de costos">Optimización de costos</a></li>
+                <li>
+                    <a href="#redundancia-de-transporte" aria-label="Redundancia de transporte">Redundancia de transporte</a></li></ul>
+                </li>
+                <li>
+                    <a href="#arquitectura-y-funcionamiento" aria-label="Arquitectura y Funcionamiento">Arquitectura y Funcionamiento</a></li>
+                <li>
+                    <a href="#configuraci%c3%b3n-de-tloc-extension" aria-label="Configuración de TLOC Extension">Configuración de TLOC Extension</a><ul>
+                        
+                <li>
+                    <a href="#interfaz-1---internet-tloc" aria-label="Interfaz #1 - Internet TLOC">Interfaz #1 - Internet TLOC</a></li>
+                <li>
+                    <a href="#interfaz-2---interfaz-donada-al-segundo-router" aria-label="Interfaz #2 - Interfaz &ldquo;donada&rdquo; al segundo router">Interfaz #2 - Interfaz &ldquo;donada&rdquo; al segundo router</a></li>
+                <li>
+                    <a href="#interfaz-3---mpls-tloc" aria-label="Interfaz #3 - MPLS TLOC">Interfaz #3 - MPLS TLOC</a></li></ul>
+                </li>
+                <li>
+                    <a href="#validaci%c3%b3n" aria-label="Validación">Validación</a></li>
+                <li>
+                    <a href="#consideraciones" aria-label="Consideraciones">Consideraciones</a><ul>
+                        
+                <li>
+                    <a href="#usa-conexiones-directas-siempre-que-sea-posible" aria-label="Usa conexiones directas siempre que sea posible">Usa conexiones directas siempre que sea posible</a></li>
+                <li>
+                    <a href="#usa-sub-interfaces-si-no-hay-suficientes-interfaces" aria-label="Usa sub-interfaces si no hay suficientes interfaces">Usa sub-interfaces si no hay suficientes interfaces</a></li>
+                <li>
+                    <a href="#planea-para-la-redundancia" aria-label="Planea para la redundancia">Planea para la redundancia</a></li>
+                <li>
+                    <a href="#anuncia-las-subredes-de-tloc-extension" aria-label="Anuncia las subredes de TLOC extension">Anuncia las subredes de TLOC extension</a></li>
+                <li>
+                    <a href="#evita-sobrecargar-el-enlace-lan" aria-label="Evita sobrecargar el enlace LAN">Evita sobrecargar el enlace LAN</a></li>
+                <li>
+                    <a href="#tloc-extension-en-capa-3" aria-label="TLOC Extension en Capa 3">TLOC Extension en Capa 3</a></li></ul>
+                </li>
+                <li>
+                    <a href="#conclusi%c3%b3n" aria-label="Conclusión">Conclusión</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="introducción">Introducción<a hidden class="anchor" aria-hidden="true" href="#introducción">#</a></h2>
+<p>En una red Cisco SD-WAN, la resiliencia del transporte y el uso eficiente de los mismos son fundamentales para ofrecer una conectividad confiable. Cada WAN Edge en la red se conecta a una red de transporte, como MPLS, Internet, 4G/5G, etc. La combinación lógica única de <em>System-ip + Color + Encapsulation</em> da lugar a lo que se conoce como <strong>Transport Locators (TLOCs)</strong>.</p>
+<p>Sin embargo, en escenarios con dos routers, no todas las sucursales tienen el privilegio de contar con múltiples circuitos WAN conectados a cada router. En algunos casos, un circuito WAN puede terminar en un router, mientras que otro circuito solo está disponible en un segundo router. Aquí es donde entra TLOC Extension, permitiendo que un router aproveche la conexión de transporte de otro router en el mismo sitio, aumentando la redundancia de túneles y la flexibilidad.</p>
+<p>Exploremos esto en más detalle.</p>
+<h2 id="qué-es-tloc-extension">¿Qué es TLOC Extension?<a hidden class="anchor" aria-hidden="true" href="#qué-es-tloc-extension">#</a></h2>
+<p>TLOC Extension en Cisco SD-WAN permite que un router utilice la interfaz de transporte de otro router como si fuera propia. Esto se logra extendiendo el TLOC (Transport Locator) de un router a otro a través de una conexión de capa 2 o capa 3. Su representación física se vería algo así:</p>
+<figure class="custom-figure">
+  <img src="/wp-content/uploads/2025/08/tloc-ex-1.png" alt="">
+  
+  
+  
+    <figcaption>
+      <strong>Figura 1</strong>
+       – 
+      TLOC Extension de capa 2
+    </figcaption>
+  
+</figure>
+
+<p>En la práctica, esto significa que el Router BR1-1 puede aprovechar los circuitos de transporte del Router BR1-2s (por ejemplo, MPLS o Internet) sin estar directamente conectado a ellos, y viceversa. Este mecanismo asegura que todos los routers del sitio puedan usar plenamente todos los transportes disponibles en la red SD-WAN, incluso si no cuentan con conexiones de transporte dedicadas. La representación lógica se vería así:</p>
+<figure class="custom-figure">
+  <img src="/wp-content/uploads/2025/08/tloc-ex-2.png" alt="">
+  
+  
+  
+    <figcaption>
+      <strong>Figura 2</strong>
+       – 
+      TLOC extension con dos transportes
+    </figcaption>
+  
+</figure>
+
+<p>Ahora, <em>BR1-1</em> puede usar <strong>INET</strong> como transporte y <em>BR1-2</em> puede usar <strong>MPLS</strong> como transporte disponible.</p>
+<p>Algunas ventajas de usar TLOC Extension:</p>
+<ul>
+<li>Reduce el número de circuitos directos necesarios por router.</li>
+<li>Aporta resiliencia a nivel de sitio.</li>
+<li>Simplifica las implementaciones en sucursales donde solo hay un circuito de transporte disponible físicamente.</li>
+</ul>
+<h2 id="casos-de-uso">Casos de Uso<a hidden class="anchor" aria-hidden="true" href="#casos-de-uso">#</a></h2>
+<p>TLOC Extension resuelve desafíos reales en implementaciones SD-WAN. Algunos casos comunes incluyen:</p>
+<h3 id="sucursales-pequeñas-con-conectividad-limitada">Sucursales pequeñas con conectividad limitada<a hidden class="anchor" aria-hidden="true" href="#sucursales-pequeñas-con-conectividad-limitada">#</a></h3>
+<p>Una sucursal puede tener solo un enlace de Internet o MPLS. Con TLOC Extension, dos routers aún pueden operar con redundancia compartiendo ese único transporte.</p>
+<figure class="custom-figure">
+  <img src="/wp-content/uploads/2025/08/tloc-ex-3.png" alt="">
+  
+  
+  
+    <figcaption>
+      <strong>Figura 3</strong>
+       – 
+      TLOC Extension transporte único
+    </figcaption>
+  
+</figure>
+
+<h3 id="optimización-de-costos">Optimización de costos<a hidden class="anchor" aria-hidden="true" href="#optimización-de-costos">#</a></h3>
+<p>En lugar de adquirir múltiples circuitos para cada router, los costos se reducen al tener un circuito por tipo de transporte y compartirlo entre routers.</p>
+<figure class="custom-figure">
+  <img src="/wp-content/uploads/2025/08/tloc-ex-4.png" alt="">
+  
+  
+  
+    <figcaption>
+      <strong>Figura 4</strong>
+       – 
+      Comparación costo TLOC Extension vs Full Mesh
+    </figcaption>
+  
+</figure>
+
+<h3 id="redundancia-de-transporte">Redundancia de transporte<a hidden class="anchor" aria-hidden="true" href="#redundancia-de-transporte">#</a></h3>
+<p>Cuando un sitio tiene diferentes transportes distribuidos en distintos routers (Ejemplo: Internet en Router BR1-1, MPLS en Router BR1-2), TLOC Extension asegura que ambos routers puedan acceder a ambos tipos de transporte.</p>
+<figure class="custom-figure">
+  <img src="/wp-content/uploads/2025/08/tloc-ex-2.png" alt="">
+  
+  
+  
+    <figcaption>
+      <strong>Figura 5</strong>
+       – 
+      TLOC extension con dos transportes
+    </figcaption>
+  
+</figure>
+
+<h2 id="arquitectura-y-funcionamiento">Arquitectura y Funcionamiento<a hidden class="anchor" aria-hidden="true" href="#arquitectura-y-funcionamiento">#</a></h2>
+<p>En el núcleo de SD-WAN, un TLOC se define por tres elementos:</p>
+<ul>
+<li>System IP del router</li>
+<li>Color (tipo de transporte al que pertenece el enlace. Ejempli: public-internet, mpls, lte)</li>
+<li>Encapsulation (IPsec/GRE)</li>
+</ul>
+<p>Con TLOC Extension, un router establece un túnel interno a través de la LAN hacia otro router, lo que le permite anunciar y usar ese TLOC.</p>
+<p>Puntos clave de la arquitectura:</p>
+<ul>
+<li>Una extensión TLOC se construye sobre una interfaz LAN física entre dos routers; comúnmente se usan <em>sub-interfaces</em> y encapsulación <em>dot1Q</em>. TLOC extension de capa 3 está disponible.</li>
+<li>El router “donante” proporciona acceso a su interfaz de transporte.</li>
+<li>El router “receptor” puede entonces formar conexiones de plano de control y de datos usando ese transporte.</li>
+</ul>
+<p>Desde la perspectiva de la red, ambos routers aparecen como si estuvieran <strong>independientemente</strong> conectados a cada transporte.</p>
+<h2 id="configuración-de-tloc-extension">Configuración de TLOC Extension<a hidden class="anchor" aria-hidden="true" href="#configuración-de-tloc-extension">#</a></h2>
+<p>Aprovecharé <em>Workflows</em> de la UX 2.0 para generar rápidamente una configuración para un sitio con dos routers y TLOC Extension, y luego la revisaremos.</p>
+<figure class="custom-figure">
+  <img src="/wp-content/uploads/2025/08/tloc-ex-5.png" alt="">
+  
+  
+  
+    <figcaption>
+      <strong>Figura 6</strong>
+       – 
+      UX2.0 Workflow configuración TLOC Extension
+    </figcaption>
+  
+</figure>
+
+<p>La configuración resultante tiene las siguientes interfaces en el <em>Feature Profile de Transporte</em>.</p>
+<figure class="custom-figure">
+  <img src="/wp-content/uploads/2025/08/tloc-ex-6.png" alt="">
+  
+  
+  
+    <figcaption>
+      <strong>Figura 7</strong>
+       – 
+      Interfaces Configurdas a través del Workflow
+    </figcaption>
+  
+</figure>
+
+<p>Se crearon seis interfaces diferentes, revisemos las tres primeras para entender cómo se configura TLOC Extension.</p>
+<p><strong>Nota</strong> Fue necesario eliminar configuración de NAT no requerido en algunas de esas interfaces, aparte de esto, la configuración estaba lista.</p>
+<h3 id="interfaz-1---internet-tloc">Interfaz #1 - Internet TLOC<a hidden class="anchor" aria-hidden="true" href="#interfaz-1---internet-tloc">#</a></h3>
+<p>La primera interfaz se conecta directamente al transporte de Internet, configuración estándar de interfaz y TLOC.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>interface GigabitEthernet1
+</span></span><span style="display:flex;"><span>description WAN Interface - biz-internet
+</span></span><span style="display:flex;"><span>ip address 31.11.0.2 255.255.255.252
+</span></span><span style="display:flex;"><span>ip nat outside
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sdwan
+</span></span><span style="display:flex;"><span>interface GigabitEthernet1
+</span></span><span style="display:flex;"><span>tunnel-interface
+</span></span><span style="display:flex;"><span>encapsulation ipsec weight 1
+</span></span><span style="display:flex;"><span>color biz-internet
+</span></span></code></pre></div><h3 id="interfaz-2---interfaz-donada-al-segundo-router">Interfaz #2 - Interfaz &ldquo;donada&rdquo; al segundo router<a hidden class="anchor" aria-hidden="true" href="#interfaz-2---interfaz-donada-al-segundo-router">#</a></h3>
+<p>La segunda interfaz es necesaria para extender el TLOC de Internet hacia BR1-2, requiere una dirección IP y BR1-2 la usará como gateway por defecto.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>interface GigabitEthernet4
+</span></span><span style="display:flex;"><span>description WAN Interface - biz-internet
+</span></span><span style="display:flex;"><span>ip address 172.17.1.1 255.255.255.252
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sdwan
+</span></span><span style="display:flex;"><span>interface GigabitEthernet4
+</span></span><span style="display:flex;"><span>tloc-extension GigabitEthernet1
+</span></span><span style="display:flex;"><span>exit
+</span></span></code></pre></div><h3 id="interfaz-3---mpls-tloc">Interfaz #3 - MPLS TLOC<a hidden class="anchor" aria-hidden="true" href="#interfaz-3---mpls-tloc">#</a></h3>
+<p>Esta es una configuración normal de TLOC que usará la dirección IP de <em>BR1-2</em> como gateway por defecto para que funcione el transporte MPLS.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>interface GigabitEthernet5
+</span></span><span style="display:flex;"><span>description WAN VPN 0 Interface - MPLS
+</span></span><span style="display:flex;"><span>ip address 172.17.1.5 255.255.255.252
+</span></span><span style="display:flex;"><span>!
+</span></span><span style="display:flex;"><span>ip route 0.0.0.0 0.0.0.0 172.17.1.6
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sdwan
+</span></span><span style="display:flex;"><span>interface GigabitEthernet5
+</span></span><span style="display:flex;"><span>tunnel-interface
+</span></span><span style="display:flex;"><span>encapsulation ipsec weight 1
+</span></span><span style="display:flex;"><span>color mpls
+</span></span></code></pre></div><p>La subred 172.17.1.4/30 necesita ser anunciada en el underlay de MPLS. Normalmente se usa BGP para este anuncio.</p>
+<p>La configuración de las interfaces 4, 5 y 6 es un espejo de lo que acabamos de ver.</p>
+<h2 id="validación">Validación<a hidden class="anchor" aria-hidden="true" href="#validación">#</a></h2>
+<p>Una vez que esta configuración está en su lugar, podemos validar nuestro plano de control y de datos:</p>
+<p>En BR1-1, nota que hay dos interfaces de SD-WAN, Gig1 and Gig5</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Lisbon_10-1#show sdwan control local-properties 
+</span></span><span style="display:flex;"><span>personality                       vedge
+</span></span><span style="display:flex;"><span>sp-organization-name              MYSDWAN-LAB123
+</span></span><span style="display:flex;"><span>organization-name                 MYSDWAN-LAB123
+</span></span><span style="display:flex;"><span>root-ca-chain-status              Installed
+</span></span><span style="display:flex;"><span>root-ca-crl-status                Not-Installed
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>                         PUBLIC          PUBLIC PRIVATE         PRIVATE         PRIVATE                         MAX   RESTRICT/           LAST         SPI TIME    NAT  VM          BIND
+</span></span><span style="display:flex;"><span>INTERFACE                IPv4            PORT   IPv4            IPv6            PORT    VS/VM COLOR       STATE CNTRL CONTROL/     LR/LB  CONNECTION   REMAINING   TYPE CON REG     INTERFACE
+</span></span><span style="display:flex;"><span>                                                                                                                      STUN                                              PRF IDs
+</span></span><span style="display:flex;"><span>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>GigabitEthernet1       31.11.0.2       12386  31.11.0.2       ::                12386    1/1  biz-internet     up     2      no/yes/no   No/No  0:00:00:10   0:03:06:00  N    5  Default N/A                           
+</span></span><span style="display:flex;"><span>GigabitEthernet5       172.17.1.5      12426  172.17.1.5      ::                12426    1/0  mpls             up     2      no/yes/no   No/No  0:00:00:15   0:04:19:53  N    5  Default N/A                           
+</span></span><span style="display:flex;"><span>          
+</span></span></code></pre></div><p>Las conexiones de control funcionan en ambos transportes como se esperaba</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Lisbon_10-1#show sdwan control connections
+</span></span><span style="display:flex;"><span>                                                                                       PEER                                          PEER                                          CONTROLLER 
+</span></span><span style="display:flex;"><span>PEER    PEER PEER            SITE       DOMAIN PEER                                    PRIV  PEER                                    PUB                                           GROUP      
+</span></span><span style="display:flex;"><span>TYPE    PROT SYSTEM IP       ID         ID     PRIVATE IP                              PORT  PUBLIC IP                               PORT  ORGANIZATION            LOCAL COLOR     PROXY STATE UPTIME      ID         
+</span></span><span style="display:flex;"><span>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>vsmart  dtls 1.0.0.3         999        1      10.1.0.4                                12446 10.1.0.4                                12446 MYSDWAN-LAB123          biz-internet    No    up     0:20:59:37 0           
+</span></span><span style="display:flex;"><span>vsmart  dtls 1.0.0.3         999        1      10.1.0.4                                12446 10.1.0.4                                12446 MYSDWAN-LAB123          mpls            No    up     0:07:45:45 0           
+</span></span><span style="display:flex;"><span>vbond   dtls 0.0.0.0         0          0      10.1.0.3                                12346 10.1.0.3                                12346 MYSDWAN-LAB123          biz-internet    -     up     0:20:59:38 0           
+</span></span><span style="display:flex;"><span>vbond   dtls 0.0.0.0         0          0      10.1.0.3                                12346 10.1.0.3                                12346 MYSDWAN-LAB123          mpls            -     up     0:07:48:46 0           
+</span></span><span style="display:flex;"><span>vmanage dtls 1.0.0.1         999        0      10.1.0.1                                12646 10.1.0.1                                12646 MYSDWAN-LAB123          biz-internet    No    up     0:20:59:38 0           
+</span></span></code></pre></div><p>El plano de datos también se estableció usando MPLS y Biz-internet</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Lisbon_10-1#sh sdwan bfd sessions 
+</span></span><span style="display:flex;"><span>                                      SOURCE TLOC      REMOTE TLOC                                      DST PUBLIC                      DST PUBLIC         DETECT      TX                              
+</span></span><span style="display:flex;"><span>SYSTEM IP        SITE ID     STATE       COLOR            COLOR            SOURCE IP                                       IP                                              PORT        ENCAP  MULTIPLIER  INTERVAL(msec  UPTIME          TRANSITIONS   
+</span></span><span style="display:flex;"><span>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>1.1.20.1         20          up          biz-internet     mpls             31.11.0.2                                       21.21.0.2                                       12346       ipsec  7           1000           0:07:48:41      0             
+</span></span><span style="display:flex;"><span>1.1.20.2         20          up          biz-internet     mpls             31.11.0.2                                       21.22.0.2                                       12346       ipsec  7           1000           0:07:48:41      0             
+</span></span><span style="display:flex;"><span>1.1.200.1        200         up          biz-internet     mpls             31.11.0.2                                       21.201.0.2                                      12346       ipsec  7           1000           0:21:01:36      1             
+</span></span><span style="display:flex;"><span>1.1.200.2        200         up          biz-internet     mpls             31.11.0.2                                       21.202.0.2                                      12346       ipsec  7           1000           0:21:01:36      1             
+</span></span><span style="display:flex;"><span>...                  
+</span></span><span style="display:flex;"><span>1.1.20.1         20          up          mpls             mpls             172.17.1.5                                      21.21.0.2                                       12346       ipsec  7           1000           0:07:47:43      0             
+</span></span><span style="display:flex;"><span>1.1.20.2         20          up          mpls             mpls             172.17.1.5                                      21.22.0.2                                       12346       ipsec  7           1000           0:07:47:43      0             
+</span></span><span style="display:flex;"><span>1.1.200.1        200         up          mpls             mpls             172.17.1.5                                      21.201.0.2                                      12346       ipsec  7           1000           0:07:47:43      0             
+</span></span><span style="display:flex;"><span>1.1.200.2        200         up          mpls             mpls             172.17.1.5                                      21.202.0.2                                      12346       ipsec  7           1000           0:07:47:43      0             
+</span></span></code></pre></div><h2 id="consideraciones">Consideraciones<a hidden class="anchor" aria-hidden="true" href="#consideraciones">#</a></h2>
+<p>Al desplegar TLOC Extension, ten en cuenta lo siguiente:</p>
+<h3 id="usa-conexiones-directas-siempre-que-sea-posible">Usa conexiones directas siempre que sea posible<a hidden class="anchor" aria-hidden="true" href="#usa-conexiones-directas-siempre-que-sea-posible">#</a></h3>
+<p>Un cable directo entre routers es preferible a un switch compartido para minimizar puntos de falla.</p>
+<h3 id="usa-sub-interfaces-si-no-hay-suficientes-interfaces">Usa sub-interfaces si no hay suficientes interfaces<a hidden class="anchor" aria-hidden="true" href="#usa-sub-interfaces-si-no-hay-suficientes-interfaces">#</a></h3>
+<p>En situaciones donde los dispositivos no tienen puertos disponibles, puedes usar TLOC extension de capa 2 con sub-interfaces; solo ten presente que el ancho de banda será compartido.</p>
+<h3 id="planea-para-la-redundancia">Planea para la redundancia<a hidden class="anchor" aria-hidden="true" href="#planea-para-la-redundancia">#</a></h3>
+<p>Los sitios críticos funcionan mejor con conexiones directas a los transportes disponibles. TLOC Extension ayuda a extender transportes, pero no protege en caso de fallas de dispositivo.</p>
+<h3 id="anuncia-las-subredes-de-tloc-extension">Anuncia las subredes de TLOC extension<a hidden class="anchor" aria-hidden="true" href="#anuncia-las-subredes-de-tloc-extension">#</a></h3>
+<p>Para que tus TLOCs privados extendidos tengan conectividad, la subred local debe ser alcanzable en el transporte privado. Puedes usar BGP, rutas estáticas u otro método de enrutamiento.</p>
+<h3 id="evita-sobrecargar-el-enlace-lan">Evita sobrecargar el enlace LAN<a hidden class="anchor" aria-hidden="true" href="#evita-sobrecargar-el-enlace-lan">#</a></h3>
+<p>El enlace entre routers debe dimensionarse adecuadamente, ya que todo el tráfico extendido pasará por él.</p>
+<h3 id="tloc-extension-en-capa-3">TLOC Extension en Capa 3<a hidden class="anchor" aria-hidden="true" href="#tloc-extension-en-capa-3">#</a></h3>
+<p>TLOC Extension puede configurarse en capa 3 con encapsulación GRE. Esto es especialmente útil cuando dos dispositivos no tienen adyacencia directa en capa 2.</p>
+<h2 id="conclusión">Conclusión<a hidden class="anchor" aria-hidden="true" href="#conclusión">#</a></h2>
+<p>TLOC Extension es una función útil en Cisco SD-WAN que mejora la flexibilidad y resiliencia en sucursales. Al permitir que los routers compartan conexiones de transporte, optimiza el uso de recursos, reduce costos y asegura que todos los routers puedan participar plenamente en la red SD-WAN, incluso cuando los enlaces WAN dedicados son limitados.</p>
+<p>Una planificación adecuada, redundancia y monitoreo son esenciales para obtener el máximo valor de esta función. Cuando se implementa correctamente, TLOC Extension puede mejorar significativamente la solidez y rentabilidad de una implementación SD-WAN.</p>
+<p>👉 Nos vemos en el próximo blog, donde seguiremos explorando formas prácticas de fortalecer y optimizar tu diseño de Cisco SD-WAN.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer><script src="https://utteranc.es/client.js"
+        repo="aruiz-p/netwithalex"
+        issue-term="title"
+        label="comments"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/es/">NetWithAlex</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copiar';
+
+        function copyingDone() {
+            copybutton.innerHTML = '¡copiado!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copiar';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

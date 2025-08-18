@@ -16,6 +16,13 @@
       <description>En este caso de estudio exploramos un comportamiento interesante observado al actualizar dispositivos mediante el SD-WAN Manager, el cual podría causar problemas de tráfico. También veremos cómo mitigar este riesgo usando BFD.</description>
     </item>
     <item>
+      <title>TLOC Extension en Cisco SD-WAN: Diseño y Configuración</title>
+      <link>http://localhost:1313/case-study-es/</link>
+      <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/case-study-es/</guid>
+      <description>Aprende cómo funciona TLOC Extension en Cisco SD-WAN, sus casos de uso, pasos de configuración y mejores prácticas para mejorar la resiliencia y optimizar los recursos de la WAN.</description>
+    </item>
+    <item>
       <title>Simplificando la gestión de túneles con Tunnel Groups en Cisco SD-WAN</title>
       <link>http://localhost:1313/tunnel-groups-es/</link>
       <pubDate>Tue, 15 Jul 2025 00:00:00 +0000</pubDate>

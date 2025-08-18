@@ -6,8 +6,15 @@
     <description>Recent content in Bfd on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 02 Aug 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tag/bfd/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TLOC Extension in Cisco SD-WAN: Design &amp; Configuration</title>
+      <link>http://localhost:1313/tloc-ext-en/</link>
+      <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tloc-ext-en/</guid>
+      <description>Learn how Cisco SD-WAN TLOC Extension works, its use cases, configuration steps, and best practices to improve resiliency and optimize WAN resources..</description>
+    </item>
     <item>
       <title>Reload vs Upgrade: Case Study</title>
       <link>http://localhost:1313/case-study-en/</link>
