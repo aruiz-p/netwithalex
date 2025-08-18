@@ -6,27 +6,27 @@
     <description>Recent content in Tag on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>es</language>
-    <lastBuildDate>Fri, 01 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 Aug 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/es/tag/feed.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Bfd</title>
-      <link>http://localhost:1313/es/tag/bfd/</link>
-      <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/es/tag/bfd/</guid>
-      <description></description>
-    </item>
     <item>
       <title>Design</title>
       <link>http://localhost:1313/es/tag/design/</link>
-      <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/es/tag/design/</guid>
       <description></description>
     </item>
     <item>
       <title>TLOC</title>
       <link>http://localhost:1313/es/tag/tloc/</link>
-      <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/es/tag/tloc/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Bfd</title>
+      <link>http://localhost:1313/es/tag/bfd/</link>
+      <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/es/tag/bfd/</guid>
       <description></description>
     </item>
     <item>

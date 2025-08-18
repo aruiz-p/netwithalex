@@ -2,6 +2,77 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/es/category/</loc>
+    <lastmod>2025-08-15T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/category/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/category/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/tag/design/</loc>
+    <lastmod>2025-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/es/posts/</loc>
+    <lastmod>2025-08-15T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/posts/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/category/sdwan/</loc>
+    <lastmod>2025-08-15T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/category/sdwan/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/category/sdwan/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/tag/</loc>
+    <lastmod>2025-08-15T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/tag/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/tag/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/tag/tloc/</loc>
+    <lastmod>2025-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tloc-ext-es/</loc>
+    <lastmod>2025-08-15T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/tloc-ext-en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/tloc-ext-es/"
+                />
+  </url><url>
     <loc>http://localhost:1313/es/tag/bfd/</loc>
     <lastmod>2025-08-01T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -15,83 +86,12 @@
                 href="http://localhost:1313/es/tag/bfd/"
                 />
   </url><url>
-    <loc>http://localhost:1313/es/category/</loc>
-    <lastmod>2025-08-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/category/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/category/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/es/tag/design/</loc>
-    <lastmod>2025-08-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/es/posts/</loc>
-    <lastmod>2025-08-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/posts/"
-                />
-  </url><url>
     <loc>http://localhost:1313/case-study-es/</loc>
     <lastmod>2025-08-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
                 href="http://localhost:1313/case-study-en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/case-study-es/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/es/category/sdwan/</loc>
-    <lastmod>2025-08-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/category/sdwan/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/category/sdwan/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/es/tag/</loc>
-    <lastmod>2025-08-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/tag/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/tag/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/es/tag/tloc/</loc>
-    <lastmod>2025-08-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/case-study-es/</loc>
-    <lastmod>2025-08-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/tloc-ext-en/"
                 />
     <xhtml:link
                 rel="alternate"

@@ -6,13 +6,13 @@
     <description>Recent content in TLOC on NetWithAlex</description>
     <generator>Hugo -- 0.140.2</generator>
     <language>es</language>
-    <lastBuildDate>Fri, 01 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 Aug 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/es/tag/tloc/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>TLOC Extension en Cisco SD-WAN: Diseño y Configuración</title>
-      <link>http://localhost:1313/case-study-es/</link>
-      <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/case-study-es/</guid>
+      <link>http://localhost:1313/tloc-ext-es/</link>
+      <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tloc-ext-es/</guid>
       <description>Aprende cómo funciona TLOC Extension en Cisco SD-WAN, sus casos de uso, pasos de configuración y mejores prácticas para mejorar la resiliencia y optimizar los recursos de la WAN.</description>
     </item>
   </channel>
