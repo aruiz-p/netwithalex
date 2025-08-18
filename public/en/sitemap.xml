@@ -2,19 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/tag/bfd/</loc>
-    <lastmod>2025-08-15T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="http://localhost:1313/es/tag/bfd/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/tag/bfd/"
-                />
-  </url><url>
     <loc>http://localhost:1313/category/</loc>
     <lastmod>2025-08-15T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -26,6 +13,19 @@
                 rel="alternate"
                 hreflang="en"
                 href="http://localhost:1313/category/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/tag/design/</loc>
+    <lastmod>2025-08-15T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/tag/design/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/tag/design/"
                 />
   </url><url>
     <loc>http://localhost:1313/posts/</loc>
@@ -67,6 +67,19 @@
                 href="http://localhost:1313/tag/"
                 />
   </url><url>
+    <loc>http://localhost:1313/tag/tloc/</loc>
+    <lastmod>2025-08-15T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/tag/tloc/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/tag/tloc/"
+                />
+  </url><url>
     <loc>http://localhost:1313/tloc-ext-en/</loc>
     <lastmod>2025-08-15T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -80,17 +93,17 @@
                 href="http://localhost:1313/tloc-ext-en/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tag/topology/</loc>
-    <lastmod>2025-08-15T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/tag/bfd/</loc>
+    <lastmod>2025-08-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="http://localhost:1313/es/tag/topology/"
+                href="http://localhost:1313/es/tag/bfd/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tag/topology/"
+                href="http://localhost:1313/tag/bfd/"
                 />
   </url><url>
     <loc>http://localhost:1313/case-study-en/</loc>
@@ -104,6 +117,19 @@
                 rel="alternate"
                 hreflang="en"
                 href="http://localhost:1313/case-study-en/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/tag/topology/</loc>
+    <lastmod>2025-08-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="http://localhost:1313/es/tag/topology/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/tag/topology/"
                 />
   </url><url>
     <loc>http://localhost:1313/tunnel-groups-en/</loc>
