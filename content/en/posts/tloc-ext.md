@@ -23,7 +23,7 @@ Let's explore it in more detail.
 
 ## What is TLOC Extension?
 
-TLOC Extension in Cisco SD-WAN enables a router to use the transport interface of another router as if it were its own. This is done by extending the TLOC (Transport Locator) from one router to another through a Layer 2 or Layer 3 connection. The physical representation could like like this:
+TLOC Extension in Cisco SD-WAN enables a router to use the transport interface of another router as if it were its own. This is done by extending the TLOC (Transport Locator) from one router to another through a Layer 2 or Layer 3 connection. The physical representation looks like this:
 
 {{< figure src="/wp-content/uploads/2025/08/tloc-ex-1.png" title="Figure 1" caption="Layer 2 TLOC Extension" >}}
 
@@ -47,7 +47,7 @@ TLOC Extension addresses real-world challenges in SD-WAN deployments. Some commo
 ### Small Branch Sites with Limited Connectivity
 A branch may only have a single Internet or MPLS link. With TLOC Extension, two routers can still operate with redundancy by sharing that single transport.
 
-{{< figure src="/wp-content/uploads/2025/08/tloc-ex-4.png" title="Figure 3" caption="Single Transport TLOC Extension" >}}
+{{< figure src="/wp-content/uploads/2025/08/tloc-ex-3.png" title="Figure 3" caption="Single Transport TLOC Extension" >}}
 
 ### Cost Optimization
 Instead of purchasing multiple circuits for each router, costs can be reduced by having one circuit per transport type and sharing it across routers.
@@ -87,11 +87,11 @@ The resulting configuration has the following interfaces on the _Transport Featu
 
 {{< figure src="/wp-content/uploads/2025/08/tloc-ex-6.png" title="Figure 7" caption="Interfaces Configured through Workflow" >}}
 
-Six different interfaces were created, let's examine the first three to understand how TLOC extension is configured.
+Six different interfaces were created, let's examine three of them to understand how TLOC extension is configured.
 
 **Note** I needed to remove some unneeded NAT on some of those interfaces, aside from this, configuration was ready. 
 
-### Interface #1 - Internet TLOC
+### Interface #1 - Internet TLOC on BR1-1
 
 The first interface connect directly to the Internet Transport, standard interface and TLOC configuration. 
 
@@ -107,14 +107,14 @@ sdwan
    encapsulation ipsec weight 1
    color biz-internet
 ```
-### Interface #2 - "Donated" interface to the Second Router 
+### Interface #2 - BR1-1´s "Donated" interface to BR1-2 
 
-The second interface is needed to extend Internet TLOC to the BR1-2, it needs an ip address and BR1-2 will use it as a default gateway. 
+The second interface is needed to extend Internet TLOC to BR1-2, it needs an ip address and BR1-2 will use it as a default gateway. 
 
 ```
 interface GigabitEthernet4
  description WAN Interface - biz-internet
- ip address 172.17.1.1 255.255.255.252
+ ip address 172.17.1.6 255.255.255.252
 
 sdwan
 interface GigabitEthernet4
@@ -122,13 +122,13 @@ interface GigabitEthernet4
  exit
  ```
 
-### Interface #3 - MPLS TLOC
+### Interface #6 - Extended Internet TLOC on BR1-2
 
-This is a normal TLOC configuration that will use _BR1-2's IP address_ as default gateway for the MPLS transport to work. 
+This is a normal TLOC configuration that will use _BR1-1's IP address_ as default gateway for the biz-internet transport. 
 
 ```
 interface GigabitEthernet5
- description WAN VPN 0 Interface - MPLS
+ description WAN VPN 0 Interface - biz-internet
  ip address 172.17.1.5 255.255.255.252
 !
 ip route 0.0.0.0 0.0.0.0 172.17.1.6
@@ -137,11 +137,11 @@ sdwan
 interface GigabitEthernet5
   tunnel-interface
    encapsulation ipsec weight 1
-   color mpls
+   color biz-internet
 ```
-The subnet 172.17.140/30 needs to be advertised on the MPLS underlay. Typically, BGP is used to do this advertisement. 
+The subnet 172.17.4.0/30 needs to be advertised on the MPLS underlay. Typically, BGP is used to do this advertisement. 
 
-The configuration of interfaces 4,5 and 6 are a mirror of what we just saw. 
+The configuration of interfaces 3,4 and 5 are a mirror of what we just saw. 
 
 ## Validation
 

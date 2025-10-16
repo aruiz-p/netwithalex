@@ -89,7 +89,7 @@ Se crearon seis interfaces diferentes, revisemos las tres primeras para entender
 
 **Nota** Fue necesario eliminar configuración de NAT no requerido en algunas de esas interfaces, aparte de esto, la configuración estaba lista.
 
-### Interfaz #1 - Internet TLOC
+### Interfaz #1 - Internet TLOC en BR1-1
 
 La primera interfaz se conecta directamente al transporte de Internet, configuración estándar de interfaz y TLOC. 
 
@@ -106,14 +106,14 @@ encapsulation ipsec weight 1
 color biz-internet
 ```
 
-### Interfaz #2 - Interfaz "donada" al segundo router  
+### Interfaz #2 - BR1-1 Interfaz "donada" a BR1-2
 
 La segunda interfaz es necesaria para extender el TLOC de Internet hacia BR1-2, requiere una dirección IP y BR1-2 la usará como gateway por defecto.  
 
 ```
 interface GigabitEthernet4
 description WAN Interface - biz-internet
-ip address 172.17.1.1 255.255.255.252
+ip address 172.17.1.6 255.255.255.252
 
 sdwan
 interface GigabitEthernet4
@@ -121,7 +121,7 @@ tloc-extension GigabitEthernet1
 exit
 ```
 
-### Interfaz #3 - MPLS TLOC
+### Interfaz #6 - INET TLOC en BR1-2
 
 Esta es una configuración normal de TLOC que usará la dirección IP de _BR1-2_ como gateway por defecto para que funcione el transporte MPLS.  
 
@@ -141,7 +141,7 @@ color mpls
 
 La subred 172.17.1.4/30 necesita ser anunciada en el underlay de MPLS. Normalmente se usa BGP para este anuncio.  
 
-La configuración de las interfaces 4, 5 y 6 es un espejo de lo que acabamos de ver.  
+La configuración de las interfaces 3, 4 y 5 es un espejo de lo que acabamos de ver.  
 
 ## Validación
 
