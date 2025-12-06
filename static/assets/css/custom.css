@@ -1,0 +1,24 @@
+.custom-figure {
+  text-align: center;
+  margin: 2em 0;
+}
+
+.custom-figure img {
+  max-width: 100%;
+  height: auto;
+}
+
+.custom-figure .figure-title {
+  font-weight: bold;
+  font-size: 1em;
+  margin-bottom: 0.5em;
+  color: #040404 !important;
+}
+
+.custom-figure figcaption {
+  font-weight: normal !important;
+  font-size: 0.9em !important;
+  color: hsl(0, 0%, 34%) !important;
+  margin-top: 0.5em;
+  font-style: italic;
+}
