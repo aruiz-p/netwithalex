@@ -6,7 +6,7 @@ category:
   - sd-wan
 date: "2024-02-11T12:11:06+00:00"
 guid: https://netwithalex.blog/?p=509
-title: 'Simplifying AAR: 3/3 Fallback to best path'
+title: 'Application Aware Routing: 3/3 Fallback to best path'
 description: Learn how AAR can help improve the application user experience with Cisco SD-WAN
 summary: Learn how AAR can help improve the application user experience with Cisco SD-WAN
 url: /simplifying-aar-3-3-fallback-to-best-path/

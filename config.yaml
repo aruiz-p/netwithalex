@@ -76,13 +76,15 @@ languages:
         - name: Categories
           url: /category/
           weight: 3
+        - name: Resources
+          url: /resources/
+          weight: 3.5
         - name: About me.
           url: /about/
           weight: 4
         - name: "🔍"
           url: /search/
           weight: 5
-
   es:
     languageName: "Español"
     weight: 2

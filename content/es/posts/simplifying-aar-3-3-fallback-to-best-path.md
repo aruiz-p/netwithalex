@@ -5,7 +5,7 @@ category:
   - Políticas
   - SD-WAN
 date: "2024-02-11T12:11:06+00:00"
-title: 'Simplificando AAR: 3/3 Fallback to Best Path'
+title: 'Application Aware Routing (AAR): 3/3 Fallback to Best Path'
 description: Aprende cómo AAR puede ayudarte a mejorar la experiencia del usuario y aplicación con Cisco SD-WAN 
 summary: Aprende cómo AAR puede ayudarte a mejorar la experiencia del usuario y aplicación con Cisco SD-WAN 
 url: /simplificando-aar-3-3-fallback-to-best-path/

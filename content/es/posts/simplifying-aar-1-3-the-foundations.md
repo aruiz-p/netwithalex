@@ -5,7 +5,7 @@ category:
   - Políticas
   - SD-WAN
 date: "2024-02-01T16:25:27+00:00"
-title: 'Simplificando AAR: 1/3 Las bases'
+title: 'Application Aware Routing (AAR): 1/3 Las bases'
 description: Aprende cómo AAR puede ayudarte a mejorar la experiencia del usuario y aplicación con Cisco SD-WAN  
 summary: Aprende cómo AAR puede ayudarte a mejorar la experiencia del usuario y aplicación con Cisco SD-WAN  
 URL: /simplificando-aar-1-3-las-bases/

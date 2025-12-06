@@ -6,7 +6,7 @@ category:
   - sd-wan
 date: "2024-02-01T16:25:27+00:00"
 guid: https://netwithalex.blog/?p=471
-title: 'Simplifying AAR:  1/3 The Foundations'
+title: 'Application Aware Routing:  1/3 The Foundations'
 description: Learn how AAR can help improve the application user experience with Cisco SD-WAN 
 summary: Learn how AAR can help improve the application user experience with Cisco SD-WAN 
 url: /demystifying-aar-1-3-the-foundations/
