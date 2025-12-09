@@ -783,7 +783,7 @@ body {
         <h3>Join the Waitlist</h3>
         <p>Get notified when the course launches in February 2026, lock in the $67 early bird price, and receive exclusive bonus resources.</p>
         <!-- Kit Form Embed -->
-        <script async data-uid="242d71c937" src="https://netwithalex.kit.com/242d71c937/index.js"></script>
+        <script async data-uid="bb5c706e22" src="https://netwithalex.kit.com/bb5c706e22/index.js"></script>
     </div>
 </div>
 
