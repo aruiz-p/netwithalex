@@ -100,9 +100,9 @@ languages:
         - name: Categorías
           url: /es/category/
           weight: 3
-        - name: Course
-          url: /ux2-course/
-          weight: 3.7
+        # - name: Course
+        #   url: /ux2-course/
+        #   weight: 3.7
         - name: Sobre mí
           url: /es/sobre-mi/
           weight: 4
