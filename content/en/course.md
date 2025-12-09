@@ -796,7 +796,7 @@ body {
             <img src="/wp-content/uploads/course-ux/alex-pic.png" alt="Alex - Network Engineer and CCIE" />
         </div>
         <div class="about-content">
-            <h3>Learn from a CCIE-Certified Engineer</h3>
+            <h3>Learn From Real, Everyday Experience</h3>
             <p>
                 Hi, I'm Alex. I'm a CCIE Enterprise certified network engineer with 8+ years in the field, sharing hands-on SD-WAN knowledge with hundreds of engineers worldwide through NetWithAlex.
             </p>
