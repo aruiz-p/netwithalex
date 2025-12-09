@@ -980,7 +980,7 @@ body {
                         <span class="faq-toggle">−</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Cisco SD-WAN UX 2.0 is stable and will be the standard interface going forward. If there are significant updates, I'll add new content to keep the course current — at no additional cost to you.</p>
+                        <p>Cisco SD-WAN UX 2.0 is stable and will be the standard interface going forward. If there are significant updates, I'll add new content to keep the course current at no additional cost to you.</p>
                     </div>
                 </div>
             </div>
