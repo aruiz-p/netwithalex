@@ -5,7 +5,7 @@ category:
   - policies
 draft: false
 date: "2025-12-04T00:00:00+00:00"
-title: "Cisco SD-WAN Policy Guide (2025): UX 2.0 Update"
+title: "Guía de Políticas Cisco SD-WAN (2025): UX 2.0"
 description: "Guía actualizada de políticas SD-WAN: aprende Policy Groups, Topology y Application Catalog en Catalyst SD-WAN UX 2.0."
 summary: "Guía actualizada de políticas SD-WAN: aprende Policy Groups, Topology y Application Catalog en Catalyst SD-WAN UX 2.0."
 url: /policies-update-es/
@@ -102,3 +102,5 @@ El catálogo soporta aplicaciones predeterminadas (Cisco-provided), aplicaciones
 El modelo de políticas en Cisco SD-WAN ha recibido mejoras significativas en la UX 2.0. Estos cambios responden a retroalimentación real proveniente de la industria y buscan simplificar cómo se diseñan, prueban y gestionan las políticas. Aunque toda migración introduce cierta fricción, la herramienta de conversión realiza gran parte del trabajo, dejando sólo los ajustes finales al usuario. En conjunto, los beneficios superan ampliamente el esfuerzo necesario para adoptar UX 2.0.
 
 Si eres nuevo en SD-WAN, recomiendo comenzar directamente con UX 2.0, no te vas a arrepentir 😉
+
+¿Listo para dominar UX 2.0? Revisa [mi curso detallado](/ux2-course/) y únete a la lista de espera hoy mismo para ser de los primeros en acceder y llevar tus habilidades en Cisco SD-WAN al siguiente nivel.

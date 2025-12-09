@@ -106,3 +106,5 @@ The catalog supports default (Cisco-provided) applications, custom apps, and eve
 The policy model in Cisco SD-WAN has undergone significant improvements with UX 2.0. These changes are driven by real field feedback and aim to simplify the way policies are designed, tested, and managed. While any migration introduces some friction, the conversion tool handles most of the heavy lifting, leaving you with only the final adjustments. In the end, the benefits far outweigh the effort required to transition to UX 2.0.
 
 If you're new to SD-WAN, I strongly recommend starting directly with UX 2.0, you won’t regret it 😉
+
+Ready to master UX 2.0? [Check out my detailed course](/ux2-course/) and join the waitlist today to be among the first to get access and level up your Cisco SD-WAN skills!
